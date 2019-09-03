@@ -1,0 +1,13 @@
+{
+  "name": "月上秦少",
+  "short_name": "Kekun",
+  "description": "专注于web前端技术研究！",
+  "icons": [{
+    "src": "../images/avatar.jpg",
+    "type": "image/png",
+    "sizes": "144x144"
+  }],
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "start_url": "index.html"
+}
