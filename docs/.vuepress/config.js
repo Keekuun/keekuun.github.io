@@ -11,23 +11,27 @@ module.exports = {
             lang: 'zh-CN',// 设置语言
         }
     },
-    base: '/blog/',
     // author
     author: '月上秦少',
     theme: 'vuepress-theme-reco',
     head: headConfig,
     themeConfig: {
         type: 'blog',
+        author: '月上秦少',
+        logo: '/images/avatar.png',
+        record: 'MIT License',
+        startYear: '2018',
+        searchMaxSuggestions: 10,
         displayAllHeaders: true, // 默认值：false
         // 博客设置
         blogConfig: {
             // 添加分类和标签
             category: {
-                location: 6,     // 在导航栏菜单中所占的位置，默认2
+                location: 5,     // 在导航栏菜单中所占的位置，默认2
                 text: '分类' // 默认文案 “分类”
             },
             tag: {
-                location: 7,     // 在导航栏菜单中所占的位置，默认3
+                location: 6,     // 在导航栏菜单中所占的位置，默认3
                 text: '标签'      // 默认文案 “标签”
             }
         },
@@ -46,12 +50,17 @@ module.exports = {
             recordIP: true
         },
 
-        sidebarDepth: 2, // 侧边栏显示2级
-        // algolia: {  // 搜索需要提交
-        //     apiKey: '<API_KEY>',
-        //     indexName: '<INDEX_NAME>'
+        sidebarDepth: 3, // 侧边栏显示3级
+        // algolia: {  // algolia搜索
+        //     apiKey: secretKeyConfig.algolia.API_KEY,
+        //     appId: secretKeyConfig.algolia.APPLICATION_ID,
+        //     indexName:secretKeyConfig.algolia.Indices,
+        //     algoliaOptions:{
+        //         hitsPerPage: 10,
+        //         facetFilters: ''
+        //     }
         // },
-        lastUpdated: '上次更新', // string | boolean
+        lastUpdated: '上次更新',
         // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
         repo: 'zkkysqs/blog',
         // 以下为可选的编辑链接选项
@@ -63,7 +72,7 @@ module.exports = {
     },
     markdown: {
         // 为每行代码增加行号
-        lineNumbers: true,
+        // lineNumbers: true,
         anchor: {
             permalink: true, permalinkBefore: true, permalinkSymbol: '🌙'
         },

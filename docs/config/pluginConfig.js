@@ -1,3 +1,4 @@
+const secretKeyConfig = require('../config/secretKeyConfig.js');
 module.exports = {
     // Service Worker 的配置
     '@vuepress/pwa': {
@@ -7,11 +8,19 @@ module.exports = {
             buttonText: "刷新"
         }
     },
-    // '@vuepress/google-analytics': {
-    //     'ga': 'UA-00000000-0' // UA-00000000-0
-    // },
+    // 谷歌分析
+    '@vuepress/google-analytics': {
+        ga: secretKeyConfig.googleAnalytics.ga
+    },
     // 图片放大
-    '@vuepress/medium-zoom': true,
+    '@vuepress/medium-zoom': {
+        selector: 'img',
+        // medium-zoom options here
+        // See: https://github.com/francoischalifour/medium-zoom#options
+        options: {
+            margin: 16
+        },
+    },
     // 流程图
     'flowchart': true,
 };

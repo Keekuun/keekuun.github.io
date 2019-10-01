@@ -1,7 +1,7 @@
 {
   "name": "vuepress-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "每一个不曾起舞的日子，都是对生命的辜负！",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
@@ -9,15 +9,14 @@
     "deploy": "bash deploy.sh"
   },
   "keywords": [],
-  "author": "",
+  "author": "月上秦少",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@vuepress/plugin-pwa": "^1.0.3",
     "markdown-it-plantuml": "^1.4.1",
     "vuepress": "^1.0.3",
-    "vuepress-theme-reco": "^1.0.4"
-  },
-  "devDependencies": {
+    "vuepress-theme-reco": "^1.0.8-alpha.3",
     "@vuepress/plugin-google-analytics": "^1.0.0-rc.1",
     "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
     "vuepress-plugin-flowchart": "^1.4.3"

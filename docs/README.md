@@ -7,6 +7,6 @@ bgImageStyle: {
       background-size: cover,
       overflow: hidden
 }
-faceImage: '/images/avatar.jpg'
-heroImage: /images/avatar.jpg
+faceImage: '/images/avatar.png'
+heroImage: '/images/avatar.jpg'
 ---

@@ -1,7 +1,7 @@
 const utils = require('../../../utils/index.js');
-const css = ['CSS动画Demo', 'CSS布局Demo'];
-const html = ['HTML-canvas', 'HTML-svg'];
-const js = [''];
+const css = [''];
+const html = [''];
+const js = ['JS设计模式学习笔记'];
 
 module.exports = {
     css: [utils.genSiderbar('CSS3技术探究', css)],

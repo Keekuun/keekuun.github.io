@@ -1,9 +1,11 @@
 ---
-title: 【JS】JS学习笔记
-date: 2019-8-28
+title: 【目录】JS学习笔记
+sidebar: false
+isComment: false
 categories: 
-- 前端技术
+- 前端
 tags: 
 - JS
 ---
+
 [[toc]]

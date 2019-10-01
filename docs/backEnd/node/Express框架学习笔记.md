@@ -1,10 +1,10 @@
 ---
-title: 【Nodejs】Express web 开发框架学习笔记
+title: 【Node】Express web 开发框架学习笔记
 date: 2019-8-28
 categories: 
-- 后端技术
+- 后端
 tags: 
-- Nodejs
+- Node
 - JS
 ---
 # Express web 开发框架
