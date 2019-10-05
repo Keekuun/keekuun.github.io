@@ -7,11 +7,13 @@ tags:
 - JS
 ---
 
+# JS设计模式学习笔记
+
 > 本文绝大多数概念是基于ES5之前的，本人认为这些都是学习或者掌握ES6必须要理解的，因为ES6其实就是对ES5之前的方法的包装，理解透彻ES5之前的概念，那么学ES6就极其简单。
 
 ![设计模式](../img/js-pattern.png)
 
-## 1. 初窥
+## 1. 基础
 
 ### 1.1 灵活的JS
 
@@ -1236,7 +1238,7 @@ var singleton = (function(){
 
 ### 6.5 分支技术
 
-**分支（branching）**是一种用来把浏览器见得差异封装到在运行期间进行设置的动态方法中的技术。比如创建XHR对象，大多数浏览器使用`new XMLHttpRequest()`创建，低版本IE确是用` new ActiveXObject("Microsoft.XMLHTTP")`来创建，如果不使用分支技术，每次调用的时候，浏览器都要检测一次。可以利用分支技术，在初始化的时候加载特定的代码，再次调用的时候就不要再次检测了。
+**分支**（branching）是一种用来把浏览器间的差异封装到在运行期间进行设置的动态方法中的技术。比如创建XHR对象，大多数浏览器使用`new XMLHttpRequest()`创建，低版本IE确是用` new ActiveXObject("Microsoft.XMLHTTP")`来创建，如果不使用分支技术，每次调用的时候，浏览器都要检测一次。可以利用分支技术，在初始化的时候加载特定的代码，再次调用的时候就不要再次检测了。
 
 大概逻辑如下：
 
@@ -1419,13 +1421,7 @@ var Market = function(){};
 Market.prototype = {
     getFood: function(name)
         // 这里将成员对象实例化交给抽象类
-        var food = this.createFood(name);
-        
-        food.isHealth();
-        food.isGreen();
-        food.isEdible();
-        
-        return food;
+        return this.createFood(name);
     },
     // 这是一个抽象类，需要子类来实现它
     createFood: function(name){
@@ -1685,7 +1681,7 @@ composite.func2();
 
   
 
-## 10. 门面模式
+## 10. 门面模式（facade）
 
 ### 10.1 门面模式概述
 
@@ -1816,7 +1812,7 @@ setCSS(['foo','bar'], {
 
 + 弊： 门面模式很容易被滥用而造成系统复杂度高。
 
-## 11. 适配器模式
+## 11. 适配器模式（adapter）
 
 ### 11.1 适配器模式初探
 
@@ -1884,3 +1880,795 @@ myEach([1,2,3], function(value) {
 
 + 利：适配器模式利用一个新的接口对现有类的接口进行包装，这样可以避免因修改原有代码的接口而造成客户代码的大量修改。
 + 弊：适配器模式在某一方面来说是一种不必要的开销，完全可以通过重构代码修改API来避免。
+
+## 12 装饰者模式（deractor）
+
+### 12.1 装饰者模式概述
+
+装饰者模式（deractor pattern）可以用来动态的给对象增加功能而不改变原对象。
+
+比如：煎饼果子（JB代替），刚出炉的啥也不放(￥6)，可以再加生菜（lettuce ￥+1），还可以加鸡蛋（egg ￥+1）、火腿(ham ￥+2)、培根(bacon ￥+3)。。。话说，好饿呀！^-^
+
+```js
+var JB = function(){};
+JB.prototype.add = function(){
+    console.log('刚出炉的，啥也没放！')
+}
+JB.prototype.getPrice = function(){
+    return 6;
+}
+
+var JBwithLettuce = function(){};
+JB.prototype.add = function(){
+    console.log('加生菜！')
+}
+JB.prototype.getPrice = function(){
+    return 7;
+}
+
+...
+
+```
+
+这样一来，我们就要新建好多类，如果在组合（加生菜和鸡蛋、加生菜和火腿。。。），呜呼哀哉，崩溃啦！
+
+装饰者可用于为对象增加工鞥，可以用来替代大量的子类。那么怎么实现呢？请看下一节，嘻嘻！
+
+### 12.2 类的装饰者模式
+
+随着人们的口欲提高，刚出炉的煎饼果子已经满足不了啦，但是又不能把刚出炉的煎饼果子回炉重铸，那就装饰一波吧！大概逻辑如下：
+
+```js
+// 啥也不加的煎饼果子
+var jb = new JB();
+jb.getPrice(); // 6
+
+// 在原有基础上，加生菜
+var jbWithLettuce = new LettuceDecorator(jb);
+jbWithLettuce.getPrice();  // 7
+
+// 在原有基础上，加火腿
+var jbWithHam = new HamDecorator(jb);
+jbWithHam.getPrice();  // 8
+
+// 在原有基础上，加生菜，加火腿
+var jbWithLettuceHam = new LettuceHamDecorator(jb);
+jbWithLettuceHam.getPrice();  // 9
+```
+
+很显然，装饰者的类继承了原有类的实现标准，扩展了功能，并且装饰者构造函数需要传入原有类的实例对象。这样我们需要制定一份标准，并且要保证装饰者类来实现它。
+
+也就是说，我们需要两到工序，其一是制造出原汁原味的JB，其二是根据客户口味增加副品。
+
+```js
+// 制定接口标准，所有的类以及派生类都要继承
+var JB = new Interface('JB', ['add', 'getPrice']);
+
+// JB制造者，实现接口标准，怎么保证实现了标准？
+var JBWithNo = function(){}; // 遵循标准
+JBWithNo.prototype = {
+    add: function(){
+        console.log('我是原汁原味的！');
+    },
+    getPrice: function(){
+        return 6;
+    }
+};
+
+// JB装饰者，装饰器类需要继承
+var JBDecorator = function(jb){ // 传入原生类实例对象
+    // 这里保证实现标准
+    Interface.ensureImplements(jb,JB);
+    this.jb = jb;
+}
+LettuceDecorator.prototype = {
+    add: function(){
+        console.log('加什么');
+    },
+    getPrice: function(){
+        return this.jb.getPrice(); // 6
+    }
+};
+
+// 加生菜
+var LettuceDecorator = function(jb){
+    // 调用父类构造函数
+    LettuceDecorator.superclass.constructor.call(this,jb);
+}
+// 继承装饰者
+extend(LettuceDecorator, JBDecorator);
+// 扩展功能
+LettuceDecorator.prototype = {
+    add: function(){
+        console.log('加生菜');
+    },
+    getPrice: function(){
+        return this.jb.getPrice() + 1;
+    }
+};
+
+// 加生菜和火腿
+var LettuceHamDecorator = function(jb){
+    // 调用父类构造函数
+    LettuceDecorator.superclass.constructor.call(this,jb);
+}
+// 继承装饰者
+extend(LettuceHamDecorator, JBDecorator);
+// 扩展功能
+LettuceHamDecorator.prototype = {
+    add: function(){
+        console.log('加生菜和火腿');
+    },
+    getPrice: function(){
+        return this.jb.getPrice() + 1 + 2;
+    }
+};
+
+// 加火腿
+var HamDecorator = function(){}
+...
+```
+
+这样一来，我们实现了上面的逻辑。一切扩展，都是在原生类的基础上进行：
+
+```js
+// 原汁原味JB
+var jb = new JBWithNo();
+jb.getPrice(); // 6
+// 加生菜
+jb = new LettuceDecorator(jb);
+jb.getPrice(); // 7
+// 再加火腿
+jb = new HamDecorator(jb);
+jb.getPrice(); // 9
+```
+
+装饰者模式受益于对接口的使用，接口在这个模式中制定了标准，规定装饰者必须实现的方法，派生类通过继承来实现，有关[接口](#interface)和[继承](#extend)的具体实现，请看前面的章节。
+
+### 12.3 方法的装饰者模式
+
+装饰者还可以对方法进行修改，可以在原方法之前执行操作，也可以在原方法之后执行操作，还可以添加新方法。
+
+AOP(面向切面编程)装饰函数：
+
+```js
+// 在函数调用之前执行beforeFn
+Function.prototype.before = function(beforefn) {
+  var self = this; // 保存原函数的引用
+  return function() {
+    // 返回包含了原函数和新函数的"代理"函数
+    beforefn.apply(this, arguments); // 执行新函数，修正this
+    return self.apply(this, arguments); // 执行原函数
+  };
+};
+// 在函数调用之后执行afterFn
+Function.prototype.after = function(afterfn) {
+  var self = this;
+  return function() {
+    var res = self.apply(this, arguments);
+    afterfn.apply(this, arguments);
+    return res;
+  };
+};
+
+// 使用
+var func = function() {
+  console.log(2);
+};
+// 添加新功能，覆盖原函数
+func = func
+  .before(function() {
+    console.log(1);
+  })
+  .after(function() {
+    console.log(3);
+  });
+func();
+
+```
+
+这种使用AOP 的方式来给函数添加功能，就是装饰者模式实现。
+
+使用上面的方法，实现一个性能分析器，主要功能就是打印方法执行的开始时间、结束时间以及消耗时间：
+
+```js
+var logTime = function(){
+    // 需要被检测的函数（注意：不能测试异步的操作，只能测试同步代码）
+    setTimeout((function(){
+        console.log('测试一下！')
+    })(), 20000)
+    
+    var a=0;
+    for(var i=1; i< 50000;i++){
+        a=a*i;
+    }
+};
+
+logTime.prototype.startTime = 0;
+logTime.prototype.endTime = 0;
+
+logTime = logTime.before(function(){
+    this.startTime = new Date().getTime();
+    console.log('开始时间：' + this.startTime);
+}).after(function(){
+    this.endTime = new Date().getTime();
+    console.log('结束时间：' + this.endTime);
+    console.log('消耗时间：' + (this.endTime - this.startTime))
+});
+
+// 测试
+logTime();
+```
+
+### 12.4 装饰者模式利弊
+
++ 利：通过装饰者，可以在不修改原有对象的基础上为对象动态添加特性或修改方法，而不用创建新的对象来实现这些扩展的功能。这些方法是透明的，还可以被重用到其他对象中。
++ 弊：会增加架构的复杂度，可能不容易被理解。
+
+## 13 享元模式（flyweight）
+
+### 13.1 享元模式概述
+
+享元模式，是一种性能优化的模式，最适合解决因创建大量类似对象而累积性能的问题。通过把大量独立对象转化为少量共享对象，可以降低运行程序所需的资源数量。
+
+享元模式，通过将对象的内部状态划分为内在数据（instrinsic data，类的内部方法所需要的信息）和外在数据（extrinsic data，可以从类上剥离并存储到外部的信息）两类来实现的。然后将**内在状态相同**的所有对象替换为一个**共享对象**，通过工厂来创建这个共享对象。
+
+区分内在数据和外在数据：
+
++ 内部数据储存于对象内部
++ 内部数据可以被一些对象共享
++ 内部数据独立于具体的场景，通常不会改变
++ 外部数据取决于具体的场景，并根据场景而变化，外部状态不能被共享。
+
+### 13.2 享元模式的实现
+
+- 1.将所有的外在数据从目标类剥离
+- 2.创建一个用来控制该类的实例化的工厂
+- 3.创建一个用来保存外在数据的管理器
+
+比如，有一个用户管理系统，有一个User类来创建用户的信息，包括用户类型（type）、用户名（name）以及密码（pwd），每次又新增用户的时候都要使用这个类来创建：
+
+```js
+var User = function(type, id, name, pwd){
+    this.type = type;
+    this.name = name;
+    this.pwd = pwd;
+    this.id = id;
+    this.time = new Date();
+};
+User.prototype = {
+    getName: function() {
+    return this.name;
+  },
+  setName: function(name) {
+    this.name = name;
+    return this;
+  },
+  // 其他setter/getter略
+ // 其他方法
+    getTime: function(){
+        return this.time;
+    },
+}
+
+var a = new User('normal', 'Tom', '123');
+var b = new User('vip', 'Jerry', '123456');
+```
+
++ 1.将所有的外在数据从目标类剥离
+
+其实，用户类型（type）只用两种（normal和vip），而用户名和密码每个用户都不一样。运用享元模式的思维，用户类型（type）就是内在状态，可以剥离出去，创建一个共享对象：
+
+```js
+/*User类，共享对象*/
+var User = function(type){
+    this.type = type;
+}
+User.prototype = {
+    getType: function(){
+        return this.type;
+    },
+    setType: function(type){
+        this.type = type;
+    },
+}
+```
+
+现在用户只分为普通用户和VIP用户，不管你叫张三、李四还是王五，都归为这两类。
+
++ 2.创建一个用来控制该类的实例化的工厂：
+
+下面我们使用工厂类来实现User创建，如果某一类User已经创建就返回，否则就创建新的User，确保了对应于每个唯一的内在状态，只会创建一个实例：
+
+```js
+/* UserFactory 工厂类-单例*/
+var UserFactory = (function(){
+    var userList = {};
+    return {
+        create: function(type){
+            if(userList[type]){
+                return userList[type];
+            }
+            return userList[type] = new User(type);
+        }
+    }
+})()
+```
+
++ 3.创建一个用来保存外在数据的管理器
+
+最后一步，我们需要用差异性信息标识在每个用户上面，否则所有的用户都一样啦，
+
+```js
+/*UserManager类 管理数据-单例*/
+var UserManager = (function(){
+    var userDataset = {};
+    
+    return {
+        add: function(type, id, name, pwd){
+            var user = UserFactory.create(type);
+            // 保存外在数据
+            userDataset[id] = {
+                id: id,
+                name: name,
+                pwd: pwd,
+                time: new Date(),
+            };
+            return user;
+        },
+        // 管理外在数据
+        set: function(id, user){
+            var userData = userDataset[id];
+            for(var i in userData){
+                user[i] = userData[i]
+            }
+            return user;
+        },
+        getName: function(id){
+            return userDataset[id].name
+        },
+        setName: function(id, name){
+            userDataset[id].name = name;
+            return userDataset[id];
+        },
+    }
+})()
+```
+
+享元模式的优化方式复杂度为代价的，原先只有一个类，现在有一个类加两个单体对象。把一个对象的数据保存在两个不同的地方确实不好理解，但是如果解决了性能问题何乐而不为。
+
+外在状态的管理，本例中采用了最简单的方式——管理器对象。还有一种方式是采用组合模式，利用对象自身的层次结构来保存信息，而不需要另外使用一个集中管理的数据对象，组合对象的叶节点全部都可以是享元对象。
+
+### 13.3 享元模式利弊
+
++ 利：通过把大量独立对象转化为少量共享对象，可以降低运行程序所需的资源数量。
++ 弊：增加逻辑复杂度，使代码难以维护。
+
+## 14 代理模式（proxy）
+
+### 14.1 代理模式概述
+
+代理模式(Proxy)就是为一个对象创建一个替身，用来控制对当前对象的访问。目的就是为了在不直接操作对象的前提下对对象进行访问。
+
+ 根据代理类和被代理类的关系来区分的话，可以分为静态代理和动态代理。
+
++ 静态代理：在运行之前，就确定好代理类、被代理类之间的关系。
+
++ 动态代理：在运行时动态的创建一个代理类，实现一个或多个接口，将方法的调用转发到指定的类。
+
+​    根据不同的功用性，可以分为远程代理、虚拟代理、保护代理、缓存代理、写入代理等。
+
++ 远程代理：可以用来访问远程资源的代理；
++ 虚拟代理：为创建开销大的对象提供代理，当对象在创建前和创建中时，由虚拟代理来作为对象的替身，对象创建后，代理就会将请求直接转给对象
++ 保护代理： 主要用于当对象应该有不同的访问权限的时。
+
+代理模式和装饰者模式很像，但是装饰者会对被包装对象的功能进行修改或扩展，而代理仅仅是控制对它的访问。
+
+### 14.2 代理模式示例
+
+用虚拟代理实现图片懒加载：
+
+```js
+var Img = (function() {
+  var img = document.createElement("img");
+  document.body.appendChild(img);
+
+  return {
+    setSrc: function(src) {
+      img.src = src;
+    }
+  };
+})();
+
+// 图片代理
+var imgProxy = (function() {
+  // 获取Image对象
+  var img = new Image();
+  // 加载图片
+  img.onload = function() {
+    Img.setSrc(this.src);
+  };
+  return {
+    setSrc: function(src) {
+      // 添加预览图片
+      Img.setSrc("https://docs.zkkysqs.top/images/avatar.png");
+      img.src = src;
+    }
+  };
+})();
+
+imgProxy.setSrc("https://p5.ssl.qhimgs1.com/bdr/326__/t01628ceb95c99f589f.jpg");
+```
+
+最初直接加载图片可能会显示一段时间的空白，在使用代理之后我们可以在真正图片加载好之前先加载一张本地的图片，可以避免空白。
+
+**缓存代理**可以为一些开销大的运算结果提供暂时的存储，在下次运算时，如果传递进来的参数跟之前一致，则可以直接返回前面存储的运算结果。
+
+```js
+// 计算累乘
+var mult = function() {
+  console.log("开始计算乘积");
+  var a = 1;
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    a = a * arguments[i];
+  }
+  return a;
+};
+mult(2, 3); // 6
+mult(2, 3, 4); // 24
+
+// 使用缓存代理
+var proxyMult = (function() {
+  var cache = {};
+  return function() {
+    var args = Array.prototype.join.call(arguments, ",");
+    if (args in cache) {
+      return cache[args];
+    }
+    return (cache[args] = mult.apply(this, arguments));
+  };
+})();
+proxyMult(1, 2, 3, 4); // 24
+proxyMult(1, 2, 3, 4); // 24
+```
+
+### 14.3 代理模式利弊
+
++ 利：不同类型的代理有着不同的好处。借助远程代理可以访问远程资源当做本地资源。虚拟代理可以替代本体，减少实例化开销。合理运用不同的代理，会大大优化性能。
++ 弊：代理任何时候都可以代替本体，如使用不当会增加项目复杂度，代码难以维护。
+
+## 15 观察者模式（observer）
+
+### 15.1 观察者模式概述
+
+观察者模式，即发布—订阅模式，是一种管理对象及其行为和状态之间的关系的方法。可以用来定义对象间的一种**一对多**的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。存在两个角色，观察者和被观察者，或者发布者和订阅者。
+
+DOM事件监听就是最简单的观察者模式：
+
+```js
+document.body.addEventListener('click', function(){
+    console.log('click! 111');
+}, false);
+
+document.body.addEventListener('click', function(){
+    console.log('click! 222');
+}, false);
+```
+
+我们还可以随意增加或者删除订阅者，增加任何订阅者都不会影响发布者代码的编写。
+
+### 15.1  观察者API的实现
+
++ 1.构建发布者构造函数
+
+```js
+function Publisher(){
+    // 保存观察者
+    this.subscribers = [];
+}
+```
+
++ 2.实现推送方法
+
+```js
+Publisher.prototype.deliver = function(data){
+    this.subscribers.forEach(function(fn){
+        fn(data);
+    });
+    return this; // 可以链式操作
+}
+```
+
++ 3.实现订阅方法
+
+```js
+Function.prototype.subscribe = function(publisher){
+    var self = this;
+    // 判断是否已经存在这个订阅者
+    var alreadyExists = publisher.subscribers.some(function(el) {
+        return el === self;
+    });
+    // 不存在，就添加订阅者
+    if(!alreadyExists){ 
+        publisher.subscribers.push(this);
+    }
+    return this; // 支持链式调用
+}
+```
+
++ 4.实现退订方法
+
+```js
+Function.prototype.unsubscribe = function(publisher) {
+    var self = this;
+    // 将Function从数组中过滤掉
+    publisher.subscribers = publisher.subscribers.filter(function(el){
+        return el !== self;
+    });
+    return this;
+}
+```
+
+下面，测试一下：
+
+```js
+var p1 = new Publisher();
+var p2 = new Publisher();
+var ob1 = function(data){
+    console.log('ob1');
+    console.log(data);
+};
+var ob2 = function(data){
+    console.log('ob2');
+    console.log(data);
+};
+
+// 订阅publisher
+ob1.subscribe(p1);
+ob1.subscribe(p2);
+ob2.subscribe(p1);
+// publisher推送消息
+p1.deliver('p1多谢你的订阅！').deliver('p1第一次发布消息！');
+p2.deliver('p2多谢你的订阅！').deliver('p2第一次发布消息！');
+// observer退订
+ob1.unsubscribe(p1);
+```
+
+当然，发布者对象可以有多个订阅者，订阅者对象也可以订阅多个发布者；不同的订阅者和不同的发布者之间是不会相互影响的。
+
+上述的发布—订阅模式，都是订阅者必须先订阅一个消息，随后才能接收到发布者发布的消息。如果把顺序反过来，发布者先发布一条消息，而在此之前并没有对象来订阅它，这条消息无疑将消失在宇宙中。
+
+### 15.3 观察者模式利弊
+
++ 利：观察者模式通过**推送**和**订阅**的方式，将自身数据状态的改变自动推送给订阅者，订阅者就会自动触发相关事件，而不用自己再去监听观察者的数据状态，从而降低内存消耗，并提高交互效率。
++ 弊：创建多个可观察对象会增加加载时间的开销。但是可以通过惰性加载技术化解。
+
+## 16 命令模式 （command）
+
+### 16.1 命令模式概述
+
+命名模式是一种封装方法调用的方式，可以用来对方法调用进行参数化处理和传递，经过这样处理的方法调用可以随时执行，可以用来消除调用操作的对象和实现操作的对象之间的耦合。
+
+1、发起者：发出调用命令即可，具体如何执行，谁执行并不需要清楚。
+
+2、接受者：有对应的接口处理不同的命令，至于命令是什么，谁发出的，不用关心
+
+3、命令对象：链接发起者和接受者的桥梁就是命令对象。命令对象接受发送者的调用，然后调用接受者的相应接口。
+
+![命令模式](https://images2015.cnblogs.com/blog/790851/201705/790851-20170512222212801-276181778.png)
+
+### 16.2 命令模式示例
+
+有个按钮button，点击之后，调用menu对象的refresh方法，输出‘refresh’的内容:　　　　
+
+```js
+// 发送者
+var setCommand = function(button, fn){
+    button.onclick = function(){
+        fn();
+    }
+};
+// 接受者
+var MenuBtn = {
+    refresh: function(){
+        console.log('刷新菜单页面')
+    }
+};
+// 命令对象
+var Command = function(receiver){
+    return function(){
+        receiver.refresh();
+    }
+}
+
+var c = Command(MenuBar);
+setCommand(btn, c);
+```
+
+ 1、发送者(setCommond)：不关心给哪个button，以及绑定什么事件，只要通过参数传入就好。
+
+ 2、命令对象(Command):只需要接收到接受者的参数，当发送者发出命令时，执行就好。
+
+ 3、接受者(MenuBtn):不用关心在哪里被调用被谁调用，只需要按需执行就好了。
+
+### 16.3 命令模式利弊
+
++ 利：提高程序的模块化和灵活性；实现取消和动态回复等复杂的用用特性非常容易。
++ 弊：增加逻辑复杂度、调试困难。
+
+## 17 职责链模式 （chain of responsibility）
+
+### 17.1 职责链模式概述
+
+**职责链模式**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。DOM中的**事件冒泡**就是典型的职责链模式现象。
+
+### 17.2 职责链模式示例
+
+场景：某电商针对已付过定金的用户有优惠政策，在正式购买后，已经支付过 500 元定金的用户会收到 100 元的优惠券，200 元定金的用户可以收到 50 元优惠券，没有支付过定金的用户只能正常购买。
+
+普通实现如下：
+
+```js
+/**
+ * @param type: 表示订单类型，1：500 元定金用户；2：200 元定金用户；3：普通购买用户
+ * @param isPay: 表示用户是否已经支付定金，true: 已支付；false：未支付
+ * @param stock: 表示当前用于普通购买的手机库存数量，已支付过定金的用户不受此限制
+ */
+function order(type, isPay, stock) {
+    switch (type) {
+        case 1:
+            if (isPay) {
+                console.log('500 元定金预购，得到 100 元优惠券');
+            } else {
+                if (stock > 0) {
+                    console.log('普通购买，无优惠劵');
+                } else {
+                    console.log('库存不足，无法购买');
+                }
+            }
+            break;
+        case 2:
+            if (isPay) {
+                console.log('300 元定金预购，得到 50 元优惠券');
+            } else {
+                if (stock > 0) {
+                    console.log('普通购买，无优惠劵');
+                } else {
+                    console.log('库存不足，无法购买');
+                }
+            }
+            break;
+        default:
+            if (stock > 0) {
+                console.log('普通购买，无优惠券')
+            } else {
+                console.log('库存不够，无法购买')
+            }
+             break;
+    }
+}
+
+order(1, true, 200); // 500 元定金预购，得到 100 元优惠券
+```
+
+使用职责链模式改进：
+
+```js
+var order500 = function(type, isPay, stock) {
+  if ( type === 1 && isPay) {
+    console.log('500 元定金预购，得到 100 元优惠券')
+  } else {
+    order200(type, isPay, stock)
+  }
+};
+
+var order200 = function(type, isPay, stock) {
+  if ( type === 2 && isPay) {
+    console.log('200 元定金预购，得到 50 元优惠券')
+  } else {
+    orderCommon(type, isPay, stock)
+  }
+};
+
+var orderCommon = function(type, isPay, stock) {
+  if (type === 3 && stock > 0) {
+    console.log('普通购买，无优惠券')
+  } else {
+    console.log('库存不够，无法购买')
+  }
+};
+
+order500( 3, true, 500 ) // 普通购买，无优惠券
+```
+
+链路代码和业务代码依然耦合在一起，进一步优化：
+
+```js
+// 业务代码
+var order500 = function(type, isPay, stock) {
+  if ( type === 1 && isPay) {
+    console.log('500 元定金预购，得到 100 元优惠券')
+  } else {
+    return 'next'
+  }
+};
+
+var order200 = function(type, isPay, stock) {
+  if ( type === 2 && isPay) {
+    console.log('200 元定金预购，得到 50 元优惠券')
+  } else {
+     return 'next'
+  }
+};
+
+var orderCommon = function(type, isPay, stock) {
+  if (type === 3 && stock > 0) {
+    console.log('普通购买，无优惠券')
+  } else {
+    console.log('库存不够，无法购买')
+  }
+};
+
+// 链路代码
+var Chain = function(fn) {
+  this.fn = fn
+  this.successor = null
+};
+Chain.prototype.setNext = function(successor) {
+  this.successor = successor
+};
+Chain.prototype.init = function() {
+  var result = this.fn.apply(this, arguments)
+  if (result === 'next') {
+    this.successor.init.apply(this.successor, arguments)
+  }
+};
+
+var order500New = new Chain(order500);
+var order200New = new Chain(order200);
+var orderCommonNew = new Chain(orderCommon);
+// 铁索连横
+order500New.setNext(order200New);
+order200New.setNext(orderCommonNew);
+
+order500New.init( 3, true, 500 ) // 普通购买，无优惠券
+```
+
+另外还可以使用AOP简化一下链路代码：
+
+```js
+// 链路代码
+Function.prototype.after = function(fn) {
+  var self = this;
+  return function() {
+    var result = self.apply(self, arguments);
+    if (result === 'next') {
+      return fn.apply(self, arguments)
+    }
+  }
+};
+// 铁索连横
+var order = order500.after(order200).after(orderCommon);
+
+order( 3, true, 500 ) // 普通购买，无优惠券
+```
+
+### 17.3 职责链模式利弊
+
++ 利：
+
+  1、降低耦合度。它将请求的发送者和接收者解耦。
+
+  2、简化了对象。使得对象不需要知道链的结构。 
+
+  3、增强给对象指派职责的灵活性。通过改变链内的成员或者调动它们的次序，允许动态地新增或者删除责任。 
+
+  4、增加新的请求处理类很方便。
+
++ 弊： 
+
+  1、不能保证请求一定被接收。 
+
+  2、系统性能将受到一定影响，而且在进行代码调试时不太方便，可能会造成循环调用。 
+
+  3、可能不容易观察运行时的特征，有碍于除错。

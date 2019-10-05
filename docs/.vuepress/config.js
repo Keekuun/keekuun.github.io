@@ -22,7 +22,7 @@ module.exports = {
         record: 'MIT License',
         startYear: '2018',
         searchMaxSuggestions: 10,
-        displayAllHeaders: true, // 默认值：false
+        displayAllHeaders: false, // 不显示所有页面的标题链接，只显示当前页面的标题链接
         // 博客设置
         blogConfig: {
             // 添加分类和标签
