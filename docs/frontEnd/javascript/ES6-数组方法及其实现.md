@@ -1,6 +1,6 @@
 ---
 title: 【JS】ES6-数组方法及其实现
-date: 2019-10-05
+date: 2019-10-01
 categories: 
 - 前端
 tags: 

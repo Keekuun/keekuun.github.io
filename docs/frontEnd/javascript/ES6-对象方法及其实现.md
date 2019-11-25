@@ -1,441 +1,584 @@
 ---
-title: 【JS】ES6-数组方法及其实现
-date: 2019-10-06
+title: 【JS】ES6-对象方法及函数
+date: 2019-10-7
 categories: 
 - 前端
 tags: 
 - JS
-- ES6
-- promise
 ---
 
-## 1. 扩展运算符(spread)
+## 1. 对象表示法
 
-扩展运算符（spread）是三个点（`...`）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列。
+### 1.1 属性简洁表示法
 
-### 1.1 替代函数的apply方法
-
-```js
-Math.max(1,2,3); // 3
-Math.max.apply(null, [1,2,3]); // 3
-Math.max(...[1,2,3]);
-```
-
-### 1.2 作为rest参数的逆运算
-
-**..rest 参数必须放到参数列表的末尾**
+在大括号`{变量或函数}`里面，直接写入变量和函数，作为对象的属性和方法
 
 ```js
-function a(...rest){
-    console.log(rest);
-    console.log(...arguments);
+// ES6 属性表示法：
+const name = 'Jax';
+const age = 15;
+const p2= {
+    name,  // 属性简写
+    age,
+    sayHi(){ // 方法简写
+        console.log('hello ' + this.name);
+    }
 }
-a(1,2,3,4); 
-// [1,2,3,4]
-// 1 2 3 4
-
-b = (...rest) => {console.log(rest)};
-b(1,2,3,4) // [1,2,3,4]
 ```
 
-...rest参数和arguments的区别：
+### 1.2 属性名表达式
 
-+ 属性：arguments包括所有的实参，还包含其他属性如callee，rest只包括没有对应形参的实参。
-+ 数组：arguments是类数组，不是真正的数组实例，rest是真正的数组实例。
-+ 位置：arguments存在用`function`申明的所有函数中，**在当前箭头函数中不存在arguments**，rest必须显示申明在函数的形参中，且**...rest必须是最后一个形参**。
-
-### 1.3  作用于数组
-
-#### 1.3.1 合并数组
+把表达式放在方括号内`[表达式]`，作为对象属性名：
 
 ```js
-const a = [1,2,3];
-const b = [4,5,6];
-// es5
-const c = a.concat(b); // [1,2,3,4,5,6]
-// now
-const d = [...a,...b]; // [1,2,3,4,5,6]
+//restful Api
+const method = ['get', 'post', 'put', 'delete'];
+const getData = {
+    [method[0]]() {
+        console.log('GET');
+    },
+    [method[1]]() {
+        console.log('POST');
+    },
+    [method[2]]() {
+        console.log('PUT');
+    },
+    [method[3]]() {
+        console.log('DELETE');
+    },
+    ['hi']: 'HeLLO';
+}
 ```
 
-#### 1.3.2 复制数组
++ 注意，属性名表达式与简洁表示法，不能同时使用，会报错。
 
-浅复制，只能复制一层：
-
-只有一层的话，就是完整的克隆，修改其中一个不会相互影响；
-
-有内层数组的话，内层是引用，修改其中一个内层数组，另一个也会变化；
++ 注意，属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串`[object Object]`
 
 ```js
-const a1 = [1,2,3];
-const b1= [...a1];
-// 或者
-const [...b2] = a1;
+const keyA = {a: 1};
+const keyB = {b: 2};
 
-const a1 = [1,2,[3,4]];
-const b3 = [...a1];
-b3[2].pop();
-a1; // [1,2, [3]]
-```
-
-#### 1.3.3 交换数值
-
-```js
-let x = 1;
-let y = 2;
-[x, y] = [y, x];
-```
-
-#### 1.3.4 数组解构
-
-```js
-const [first, ...rest] = [1, 2, 3, 4, 5];
-first // 1
-rest  // [2, 3, 4, 5]
-
-const [first, ...middle, last] = [1, 2, 3, 4, 5];
-// 报错
-```
-
-如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错。
-
-#### 1.3.5 将字符串转为数组
-
-```js
-[...'hello']
-// ["h", "e", "l", "l", "o"]
-```
-
-#### 1.3.6 作用于Iterator
-
-```js
-// 实现了 Iterator 接口的对象
-let nodeList = document.querySelectorAll('div');
-let array = [...nodeList];
-
-// Map 和 Set 结构
-let map = new Map([
-  [1, 'one'],
-  [2, 'two'],
-  [3, 'three'],
-]);
-
-let arr = [...map.keys()]; // [1, 2, 3]
-
-// Generator 函数
-const go = function*(){
-  yield 1;
-  yield 2;
-  yield 3;
+const myObject = {
+  [keyA]: 'valueA',
+  [keyB]: 'valueB'
 };
 
-[...go()] // [1, 2, 3]
+myObject // Object {[object Object]: "valueB"}
 ```
 
-## 2. 数组方法学习
+所以，属性名表达式的值，必须为基本类型，最好为字符串。
 
-### 2.1 Array.from
+## 2. 对象的属性
 
-+ 语法：`Array.from(arrayLike[, mapFn[, thisArg]])`返回一个新的数组实例
+### 2.1  函数的`name`属性
 
-`Array.from`方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）。[可遍历（iterable）又称可迭代](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Iteration_protocols)
-
-只要是部署了 Iterator 接口的数据结构，`Array.from`都能将其转为数组。
+函数的`name`属性，返回函数名:
 
 ```js
-let arrLike = {
-    '0': 'a',
-    '1': 'b',
-    '2': 'c',
-    length: 3
+const person = {
+  sayName() {
+    console.log('hello!');
+  },
 };
 
-// es5
-var arr1 = [].slice.call(arrLike); // ['a', 'b', 'c'];
-
-// es6
-let arr2 = Array.from(arrLike);
+person.sayName.name   // "sayName"
 ```
 
-`Array.from()` 方法有一个可选参数 `mapFn`，让你可以在最后生成的数组上再执行一次 [`map`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 方法后再返回。也就是说` Array.from(obj, mapFn, thisArg) `就相当于` Array.from(obj).map(mapFn, thisArg)`。
+匿名函数：
 
 ```js
-Array.from([1, 2, 3], x => x + x); //  [2, 4, 6]
-Array.from({length: 5}, (v, i) => i); // [0, 1, 2, 3, 4]
-Array.from([1, , 2, , 3], (n) => n || 0); // [1, 0, 2, 0, 3]
+(function(){console.log(11)}).name; // ''空字符串
+let a = (function(){console.log(11)})();
+a.name; // 'a'
+
+(new Function()).name; // "anonymous"
 ```
 
-对于没有实现`Array.from`方法的浏览器，可以使用[Polyfill](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Polyfill)替代。
-
-### 2.2 Array.of
-
-+ 语法：`Array.of(element0[, element1[, ...[, elementN]]])`
-
-`Array.of`方法用于将一组值，转换为数组。是为了弥补数组构造函数`Array()`的不足，因为参数个数的不同，会导致`Array()`的行为有差异。
+`bind`函数：
 
 ```js
-Array.of(3, 11, 8) // [3,11,8]
-Array.of(3) // [3]
-Array.of(3).length // 1
-
-Array() // []
-Array(3) // [, , ,] ？？
-Array(3, 11, 8) // [3, 11, 8]
+let test = function(){};
+test.bind().name; // "bound test"
 ```
 
-`Array.of`基本上可以用来替代`Array()`或`new Array()`，并且不存在由于参数不同而导致的重载。它的行为非常统一。
+`Symbol`属性名的函数：
 
-`Array.of`方法可以用下面的代码模拟实现。
+如果对象的方法是一个 Symbol 值，那么`name`属性返回的是这个 Symbol 值的描述
+
+```js
+cost key = Symbol('key');
+let gen = {
+    [Symbol.iterator](){
+        return this;
+    },
+    [key](){};
+};
+
+gen[Symbol.iterator].name; // "[Symbol.iterator]"
+gen[key].name; // "[key]"
+```
+
+### 2.2 属性的可枚举性和遍历
+
+```js
+let obj = { foo: 123 };
+Object.getOwnPropertyDescriptor(obj, 'foo')
+//  {
+//    value: 123,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+//  }
+```
+
+描述对象的`enumerable`属性，称为“可枚举性”，如果该属性为`false`，就表示某些操作会忽略当前属性。
+
+目前，有四个操作会忽略`enumerable`为`false`的属性。
+
+- `for...in`循环：只遍历**对象自身**的和**继承的**可枚举的属性。（包含继承）
+- `Object.keys()`：返回**对象自身**的所有可枚举的属性的键名。
+- `JSON.stringify()`：只串行化**对象自身**的可枚举的属性。
+- `Object.assign()`： 忽略`enumerable`为`false`的属性，只拷贝**对象自身**的可枚举的属性。
+
+比如，对象原型的`toString`方法，以及数组的`length`属性，就通过“可枚举性”，从而避免被`for...in`遍历到。
+
+```js
+Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
+// false
+
+Object.getOwnPropertyDescriptor([], 'length').enumerable
+// false
+```
+
+另外，ES6 规定，所有 Class 的原型的方法都是不可枚举的。
+
+```js
+Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
+// false
+```
+
+大多数时候，我们只关心对象自身的属性。所以，尽量不要用`for...in`循环，而用`Object.keys()`代替。
+
+ES6 一共有 5 种方法可以遍历对象的属性。
+
+**（1）for...in**
+
+`for...in`循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+
+**（2）Object.keys(obj)**
+
+`Object.keys`返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+
+**（3）Object.getOwnPropertyNames(obj)**
+
+`Object.getOwnPropertyNames`返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+
+**（4）Object.getOwnPropertySymbols(obj)**
+
+`Object.getOwnPropertySymbols`返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+
+**（5）Reflect.ownKeys(obj)**
+
+`Reflect.ownKeys`返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+
+以上的 5 种方法遍历对象的键名，都遵守同样的属性遍历的次序规则。
+
+- 首先遍历所有**数值**键，按照数值升序排列。
+- 其次遍历所有**字符串**键，按照加入时间升序排列。
+- 最后遍历所有 **Symbol** 键，按照加入时间升序排列。
 
 ```javascript
-if (!Array.of) {
-  Array.of = function() {
-    return Array.prototype.slice.call(arguments);
-  };
-}
+Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 })
+// ['2', '10', 'b', 'a', Symbol()]
 ```
 
-> [`Array.of 和` `Array.from` proposal](https://gist.github.com/rwaldron/1074126) 和 [`Array.of` polyfill实现](https://gist.github.com/rwaldron/3186576)
+上面代码中，`Reflect.ownKeys`方法返回一个数组，包含了参数对象的所有属性。这个数组的属性次序是这样的，首先是数值属性`2`和`10`，其次是字符串属性`b`和`a`，最后是 Symbol 属性。
 
-### 2.3 Array.isArray
+## 3. super关键字
 
-+ 语法：`Array.isArray(obj)`
++ `this`关键字总是指向函数所在的当前对象
 
-**Array.isArray()** 用于确定传递的值是否是一个 [`Array`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Array):
++ `super`指向当前对象的原型对象，**只能用在对象的方法之中**
+
+`Object.setPrototypeOf()`，为现有对象**设置原型**，返回一个新对象 
+接收两个参数：第一个是现有对象，第二是原型对象。 
 
 ```js
-Array.isArray([1, 2, 3]);  
-// true
-Array.isArray({foo: 123}); 
-// false
-Array.isArray("foobar");   
-// false
-Array.isArray(undefined);  
-// false
-```
+const proto = {
+  foo: 'hello'
+};
 
-当检测Array实例时, `Array.isArray` 优于 `instanceof,因为Array.isArray能检测iframes`.
-
-手动实现：
-
-```js
-if (!Array.isArray) {
-  Array.isArray = function(arg) {
-    return Object.prototype.toString.call(arg) === '[object Array]';
-  };
-}
-
-```
-
-### 2.4  Array.prototype.copyWithin
-
-+ 语法：`arr.copyWithin(target[, start[, end]])` 参数 target、start 和 end 必须为整数。
-
-  + target（必需）：0 为基底的索引，复制序列到该位置。如果是负数，`target` 将从末尾开始计算。如果 `target` 大于等于 `arr.length`，将会不发生拷贝。如果 `target` 在 `start` 之后，复制的序列将被修改以符合 `arr.length`。
-
-  + start（可选）：0 为基底的索引，开始复制元素的起始位置。如果是负数，`start` 将从末尾开始计算。
-
-    如果 `start` 被忽略，`copyWithin` 将会从0开始复制。
-
-  + end（可选）：0 为基底的索引，开始复制元素的结束位置。`copyWithin` 将会拷贝到该位置，**但不包括 `end` 这个位置的元素**。如果是负数， `end` 将从末尾开始计算。如果 `end` 被忽略，`copyWithin` 方法将会一直复制至数组结尾（默认为 `arr.length`）。
-
-```js
-let numbers = [1, 2, 3, 4, 5];
-
-numbers.copyWithin(-2);
-// 先复制 		 [1,2,3,4,5]
-// 再替换 [1,2,3,4,5]	
-// 		 [1,2,3,1,2]
-
-numbers.copyWithin(0, 3);
-// 先复制[4,5]
-// 再替换[1,2,3,4,5]
-//       [4,5,3,4,5]
-
-
-numbers.copyWithin(0, 3, 4);
-// 先复制[4]
-// 再替换[1,2,3,4,5]
-// 		[4, 2, 3, 4, 5]
-```
-
-> [Array.prototype.copyWithin方法的 Polyfill](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin#Polyfill)
-
-### 2.5 Array.prototype.find和Array.prototype.findIndex()
-
-+ find语法：`arr.find(callback[, thisArg])`返回数组中满足提供的测试函数的**第一个**元素的值
-
-+ findIndex语法：`arr.findIndex(callback[, thisArg])`返回数组中满足提供的测试函数的第一个元素的**索引**。否则返回-1。
-
-  ```js
-  [1, 4, -5, 10].find((n) => n < 0)
-  // -5
-  [1, 5, 10, 15].find(function(value, index, arr) {
-    return value > 9;
-  }) // 10
-  
-  [1, 5, 10, 15].findIndex(function(value, index, arr) {
-    return value > 9;
-  }) // 2
-  ```
-
-  找出数组中的质数：
-
-  ```js
-  function isPrime(element, index, array) {
-    var start = 2;
-    while (start <= Math.sqrt(element)) {
-      if (element % start++ < 1) {
-        return false;
-      }
-    }
-    return element > 1;
+const obj = {
+  foo: 'world',
+  find() {
+    return super.foo;
   }
-  
-  console.log([4, 6, 8, 12].find(isPrime)); // undefined, not found
-  console.log([4, 5, 8, 12].find(isPrime)); // 5
-  
-  console.log([4, 6, 8, 12].findIndex(isPrime)); // -1, not found
-  console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
-  ```
-
-  可见，两者的参数和`forEach`的参数是一毛一样的。
-
-### 2.6  Array.prototype.fill
-
-+ 语法：`arr.fill(value[, start[, end]])`用一个**固定值(value)填充**一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。
-
-```js
-['a', 'b', 'c'].fill(7)
-// [7, 7, 7]
-
-new Array(3).fill(7)
-// [7, 7, 7]
-
-['a', 'b', 'c'].fill(7, 1, 2)
-// ['a', 7, 'c']
+};
+// 指定原型之前
+obj.__proto__ === proto;//false
+obj.find() // undefined
+// 指定原型之后
+Object.setPrototypeOf(obj, proto);
+obj.__proto__ === proto ;//true
+obj.find() // "hello"
 ```
 
-### 2.7 Array.prototype.entries、keys和values
-
-+ entries语法：`arr.entries()`
-
-  `entries()`方法返回一个新的`Array Iterator`对象，该对象包含数组中每个索引的**键/值**对。
-
-+ values语法：`arr.values()`
-
-  `values`()方法返回一个新的 `Array Iterator`对象，该对象包含数组每个索引的**值**
-
-+ keys语法：`arr.keys()`
-
-  `keys()` 方法返回一个包含数组中每个索引键的`Array Iterator`对象。
+JavaScript 引擎内部，`super.foo`等同于`Object.getPrototypeOf(this).foo`（属性）或`Object.getPrototypeOf(this).foo.call(this)`（方法）。
 
 ```js
-for (let index of ['a', 'b'].keys()) {
-  console.log(index);
+const proto = {
+  x: 'hello',
+  foo() {
+    console.log(this.x);// this会动态绑定
+  },
+};
+
+const obj = {
+  x: 'world',
+  foo() {
+    super.foo(); // proto.foo
+  }
 }
-// 0
-// 1
 
-for (let elem of ['a', 'b'].values()) {
-  console.log(elem);
+Object.setPrototypeOf(obj, proto);
+
+obj.foo() // "world"
+```
+
+上述代码中，`super.foo`指向原型对象`proto`的`foo`方法，但是绑定的`this`却还是当前对象`obj`，因此输出的就是`world`。
+
+`super`在面向对象编程一节会在专门学习。
+
+## 4. 扩展运算符
+
+对象的扩展运算符（`...`）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中。
+
+```js
+let z = { a: 3, b: 4 };
+let n = { ...z };
+n // { a: 3, b: 4 }
+
+let foo = { ...['a', 'b', 'c'] };
+foo
+// {0: "a", 1: "b", 2: "c"}
+
+{...'hello'}
+// {0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
+```
+
+完整克隆一个对象，并拷贝**对象原型**的属性：
+
+扩展运算符的解构赋值，不能复制继承自原型对象的属性
+
+```js
+let obj = {
+    a:1,
+    b:2,
+    c: [1,2]
+};
+let proto = {
+    d:3,
+    e: 4
 }
-// 'a'
-// 'b'
+// 指定原型
+Object.setPrototypeOf(obj, proto);
 
-for (let [index, elem] of ['a', 'b'].entries()) {
-  console.log(index, elem);
+// 写法一：浅拷贝，没有继承原型
+obj1 = {...obj};
+obj1.d; //undefined
+
+// 写法二: 浅拷贝，继承原型
+const clone1 = Object.assign(
+  Object.create(Object.getPrototypeOf(obj)),
+  obj
+);
+clone1.d; // 3
+// 写法三： 浅拷贝，继承原型
+const clone2 = Object.create(
+  Object.getPrototypeOf(obj),
+  Object.getOwnPropertyDescriptors(obj)
+)
+clone2.d; // 3
+```
+
+合并对象：
+
+```js
+let ab = { ...a, ...b };
+// 等同于
+let ab = Object.assign({}, a, b);
+```
+
+## 5. 函数
+
+### 5.1 默认参数
+
+```js
+function log(x, y = 'World') {
+  console.log(x, y);
 }
-// 0 "a"
-// 1 "b"
+
+log('Hello') // Hello World
+log('Hello', 'China') // Hello China
+log('Hello', '') // Hello
 ```
 
-### 2.8  Array.prototype.includes
-
-+ 语法：`arr.includes(valueToFind[, fromIndex])`
-
-用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false。
+注意，参数变量是默认声明的，所以不能用`let`或`const`再次声明。
 
 ```js
-[1, 2, 3].includes(2)     // true
-[1, 2, 3].includes(4)     // false
-[1, 2, NaN].includes(NaN) // true
+function fetch(url, { body = '', method = 'GET', headers = {} } = {}) {
+  console.log(method);
+}
+
+fetch('http://example.com')
+// "GET"
 ```
 
-还可以传入第二个参数表示搜索的起始位置，默认为`0`。
+### 5.2  函数的length属性
 
-如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为`-4`，但数组长度为`3`），则会重置为从`0`开始。
+指定了默认值以后，函数的`length`属性，将返回没有指定默认值的参数个数。也就是说，指定了默认值后，`length`属性将失真。
 
 ```js
-[1, 2, 3].includes(3, 3);  // false
-[1, 2, 3].includes(3, -1); // true
+(function (a) {}).length // 1
+(function (a = 5) {}).length // 0
+(function (a, b, c = 5) {}).length // 2
 ```
 
-用来替代`arr.prototype.indexof()`方法。
-
-### 2.9 Array.prototype.flat()和Array.prototype.flatMap()
-
-俗称 “数组扁平化”处理：
-
-+ flat语法：`var newArray = arr.flat([depth])`,**数组降维**，**摊平**，depth默认值为 1
-
-按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。  
+如果设置了默认值的参数不是尾参数，那么`length`属性也不再计入后面的参数了。rest 参数也不会计入`length`属性
 
 ```js
-[1, 2, [3, 4]].flat()
-// [1, 2, 3, 4]
-
-[1, 2, [3, [4, 5]]].flat(2)
-// [1, 2, 3, 4, 5]
-
-[1, [2, [3]]].flat(Infinity)
-// [1, 2, 3]
+(function (a = 0, b, c) {}).length // 0
+(function (a, b = 1, c) {}).length // 1
+(function(...args) {}).length // 0
 ```
 
+### 5.3 rest参数
 
+rest 参数（形式为`...变量名`），用于获取函数的多余参数，这样就不需要使用`arguments`对象。rest 参数之后不能再有其他参数
 
-+ flatMap语法：
+````js
+// arguments变量的写法
+function sortNumbers() {
+  return Array.prototype.slice.call(arguments).sort();
+}
 
-  ```
-  var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
-      // 返回新数组的元素
-  }[, thisArg])
-  ```
+// rest参数的写法
+const sortNumbers = (...numbers) => numbers.sort();
+sortNumbers([1,2,3,4])
+````
 
-`flatMap()`方法对原数组的每个成员执行一个函数（相当于执行`Array.prototype.map()`），然后对返回值组成的数组执行`flat()`方法。该方法返回一个新数组，不改变原数组。
+ES6规定只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。
+
+### 5.4 箭头函数
+
+ES6 允许使用“箭头”（`=>`）定义函数。
 
 ```js
-// 相当于 [[2, 4], [3, 6], [4, 8]].flat()
-[2, 3, 4].flatMap((x) => [x, x * 2])
-// [2, 4, 3, 6, 4, 8]
-
-// 相当于 [[[2]], [[4]], [[6]], [[8]]].flat()
-[1, 2, 3, 4].flatMap(x => [[x * 2]])
-// [[2], [4], [6], [8]]
+// 箭头函数写法
+[1,2,3].map(x => x * x);
 ```
 
-手动实现flat方法：
+箭头函数有几个使用注意点:
+
++ 函数体内的`this`对象，就是定义时所在的对象，而不是使用时所在的对象。
+
++ 不可以当作构造函数，也就是说，不可以使用`new`命令，否则会抛出一个错误。
+
++ 不可以使用`arguments`对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+
++ 不可以使用`yield`命令，因此箭头函数不能用作 Generator 函数。
 
 ```js
-// depth-扁平层数
-Array.prototype.flattenArr = function(arr, depth=1){
-    let res = [];
-    // 遍历每一项
-    arr.forEach(v => {
-        // 判断子项是否为数组，是否已达到指定深度
-        if(Array.isArray(v) && depth > 0){
-            // 递归调用
-            res.push(...flattenArr(v, --depth)) 
-        }else{
-            res.push(v)
-        }
-    })
-    return res;
+// ES6
+function foo() {
+  setTimeout(() => {
+    console.log('id:', this.id);
+  }, 100);
+}
+
+// ES5
+function foo() {
+  var _this = this;
+
+  setTimeout(function () {
+    console.log('id:', _this.id);
+  }, 100);
 }
 ```
 
+除了`this`，以下三个变量在箭头函数之中也是不存在的，指向外层函数的对应变量：`arguments`、`super`、`new.target`。
 
+```js
+function foo() {
+  setTimeout(() => {
+    console.log('args:', arguments);
+  }, 100);
+}
 
+foo(2, 4, 6, 8)
+// args: [2, 4, 6, 8]
+```
 
+上面代码中，箭头函数内部的变量`arguments`，其实是函数`foo`的`arguments`变量。
 
+另外，由于箭头函数没有自己的`this`，所以当然也就不能用`call()`、`apply()`、`bind()`这些方法去改变`this`的指向。
 
+### 5.5. 函数的尾调用及尾递归
 
+**尾调用**（Tail Call）：指某个函数截止执行的最后一步是`return`另一个函数，且没有其他操作。
+
+```js
+function f(x){
+    // 尾递归即在程序尾部调用自身，注意这里没有其他的运算
+  return g(x);
+}
+
+// 以下不属于尾调用
+// 情况一
+function f(x){
+  let y = g(x);
+  return y;
+}
+
+// 情况二
+function f(x){
+  return g(x) + 1;
+}
+
+// 情况三
+function f(x){
+  g(x);
+}
+```
+
+函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。
+
+如果在函数`A`的内部调用函数`B`，那么在`A`的调用帧上方，还会形成一个`B`的调用帧。等到`B`运行结束，将结果返回到`A`，`B`的调用帧才会消失。如果函数`B`内部还调用函数`C`，那就还有一个`C`的调用帧，以此类推。所有的调用帧，就形成一个“调用栈”（call stack）。
+
+**尾调用优化**（Tail call optimization）：即只保留内层函数的调用帧
+
+注意，只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行“尾调用优化”。
+
+```js
+function addOne(a){
+  var one = 1;
+  function inner(b){
+    return b + one;
+  }
+  return inner(a);
+}
+```
+
+上面的函数不会进行尾调用优化，因为内层函数`inner`用到了外层函数`addOne`的内部变量`one`。
+
+ES6 的尾调用优化只在严格模式下开启，正常模式是无效的。
+
+这是因为在正常模式下，函数内部有两个变量，可以跟踪函数的调用栈。
+
+- `func.arguments`：返回调用时函数的参数。
+- `func.caller`：返回调用当前函数的那个函数。
+
+尾调用优化发生时，函数的调用栈会改写，因此上面两个变量就会失真。严格模式禁用这两个变量，所以**尾调用模式仅在严格模式下生效**。
+
+**尾递归**：函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
+
+```js
+function factorial(n, total = 1) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5) // 120
+```
+
+递归本质上是一种循环操作。
+
+```js
+function sum(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1);
+  } else {
+    return x;
+  }
+}
+
+sum(1, 100000) 
+// Uncaught RangeError: Maximum call stack size exceeded(…)
+```
+
+上面代码中，`sum`是一个递归函数，参数`x`是需要累加的值，参数`y`控制递归次数。一旦指定`sum`递归 100000 次，就会报错，提示超出调用栈的最大次数。
+
+蹦床函数（trampoline）可以将递归执行转为循环执行。
+
+```js
+function trampoline(f) {
+  while (f && f instanceof Function) {
+    f = f();
+  }
+  return f;
+}
+```
+
+```js
+function sum(x, y) {
+  if (y > 0) {
+    return sum.bind(null, x + 1, y - 1);
+  } else {
+    return x;
+  }
+}
+```
+
+现在，使用蹦床函数执行`sum`，就不会发生调用栈溢出:
+
+```js
+trampoline(sum(1, 100000))
+// 100001
+```
+
+蹦床函数并不是真正的**尾递归优化**（Tail Call Optimisation），下面的实现才是:
+
+```js
+function tco(f) {
+  var value;
+  var active = false;
+  var accumulated = [];
+// 闭包
+  return function accumulator() {
+    accumulated.push(arguments);
+    if (!active) {
+      active = true;
+      while (accumulated.length) {
+        value = f.apply(this, accumulated.shift());
+      }
+      active = false;
+      return value;
+    }
+  };
+}
+```
+
+使用上面的函数包装一下：
+
+```js
+
+// sum使用尾递归优化
+var sum = tco(function(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1)
+  }
+  else {
+    return x
+  }
+});
+
+// 没有造成栈溢出
+sum(1, 100000)
+// 100001
+```
+
+上面代码，很巧妙地**将“递归”改成了“循环”**，而后一轮的参数会取代前一轮的参数，保证了调用栈只有一层。这就是尾递归优化。
+
+## 7. Proxy对象
+
+## 8. Reflect对象

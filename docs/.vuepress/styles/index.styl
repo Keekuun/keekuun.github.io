@@ -1,1 +1,17 @@
 //将会被自动应用的全局样式文件，会生成在最终的 CSS 文件结尾，具有比默认样式更高的优先级。
+summary + pre {
+  color: cyan;
+}
+
+::selection {
+  background: lightseagreen;
+  color: cornsilk;
+}
+
+.content__default code {
+  font-size: 1rem !important;
+}
+
+.content__default pre code {
+  font-size: 0.85rem !important;
+}

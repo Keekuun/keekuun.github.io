@@ -1,6 +1,6 @@
 ---
 title: 【JS】ES6-promise学习及手写promise
-date: 2019-10-05
+date: 2019-10-06
 categories: 
 - 前端
 tags: 
