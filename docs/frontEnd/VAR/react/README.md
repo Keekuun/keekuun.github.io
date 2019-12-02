@@ -20,12 +20,12 @@
 
 ## React Router
 
-- [ ] react router基础
-- [ ] react router动态传值
-- [ ] react router重定向
-- [ ] react router路由嵌套
-- [ ] react router路由守卫
-- [ ] react router动态路由
+- [x] react router基础
+- [x] react router动态传值
+- [x] react router重定向
+- [x] react router路由嵌套
+- [x] react router路由守卫
+- [x] react router动态路由
 
 ## Mobx
 

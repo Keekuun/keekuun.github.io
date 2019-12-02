@@ -99,7 +99,7 @@ class Counter extends React.Component {
 
 + 不要直接修改state，应使用`setState()`，这样才能实时渲染，更新视图
 + state更新是独立的，可以通过`setState()`单独更新某个变量
-+ state更新是异步的， React 出于性能考虑，会把多个 `setState()` 调用合并成一个调用，这意味着调用 `setState()` 时，`this.state`（和 `this.props`）并不会被立即更新。 
++ state更新是异步的， React 出于性能考虑，会把多个 `setState()` 调用合并成一个调用，这意味着**调用 `setState()` 时，`this.state`（和 `this.props`）并不会被立即更新。** 
 
 我们之前的 `Counter` 组件是这样使用 `setState` 的，此代码有时可能会无法更新计数器：
 
