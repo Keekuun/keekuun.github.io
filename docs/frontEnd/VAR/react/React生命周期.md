@@ -6,7 +6,6 @@ categories:
 tags: 
 - JS
 - React
-
 ---
 
 在每个react组件中都有以下几个生命周期方法~我们需要在不同阶段进行讨论
@@ -54,7 +53,7 @@ react组件的构造函数在挂载之前被调用。在实现`React.Component`�
 `constructor`中应当做些初始化的动作，如：初始化`state`，将事件处理函数绑定到类实例上，但也不要使用`setState()`。如果没有必要初始化state或绑定方法，则不需要构造`constructor`，或者把这个组件换成纯函数写法。
 
 当然也可以利用`props`初始化`state`，在之后修改`state`不会对props造成任何修改，但仍然建议大家提升状态到父组件中，或使用`redux`统一进行状态管理。
-```js
+```jsx
 constructor(props) {
   super(props);
   this.state = {
