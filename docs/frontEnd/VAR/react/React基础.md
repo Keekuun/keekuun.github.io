@@ -6,7 +6,6 @@ categories:
 tags: 
 - JS
 - React
-
 ---
 
 ## 1. react简介
@@ -44,7 +43,7 @@ React.js是全球最火的前端框架（由facebook推出）**函数式编程**
 
 另外，React 推荐开发者使用特殊的 JSX 语法来编写 UI 代码，对于初学者来讲，尝试 JSX 最快的方法是在页面中引入 `babel-standalone.js` 包：
 
-```js
+```jsx
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +75,7 @@ React 提供了一个官方的命令行工具（CLI）—— `create-react-app`�
 ```bash
 // 前提是安装了node
 npm i create-react-app -g        // 全局安装 create-react-app 脚手架
-create-react-app project-name    // 通过 create-react-app 创建名为 project-name 的项目（项目名称不能使用大写英文）
+create-react-app project-name    // 通过 create-react-app 创建名为 project-name 的项目,项目名称不能使用大写英文
 ```
 
 通过上面命令，构建的项目

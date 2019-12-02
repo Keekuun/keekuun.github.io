@@ -6,7 +6,6 @@ categories:
 tags: 
 - JS
 - React
-学子
 ---
 
 > [React Router API](https://reacttraining.com/react-router/web/api/Hooks)学习笔记
@@ -430,7 +429,7 @@ let routes = (
 ```jsx
 <NavLink strict to="/events/">
   Events
-</NavLink
+</NavLink>
 ```
 
 #### isActive属性
