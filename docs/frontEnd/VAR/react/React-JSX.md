@@ -47,8 +47,6 @@ class App extends Component{
 export default App;
 ```
 
-
-
 ## JSX {JS表达式}
 
 JSX中`{}`内部的JS表达式：
@@ -63,9 +61,9 @@ JSX中`{}`内部的JS表达式：
 | ？a:b         | `<p>{a=0}{a>1?'haha':'hehe'}</p>`                | 0hehe     |
 | function      | `<p>{alert(111)}</p>`                            | 弹出框    |
 
-+  **允许：`number`、`string`、`Array`、`React`元素，其中`Array`会被扁平化，数组的每一项都将作为子节点渲染** 
++ **允许：`number`、`string`、`Array`、`React`元素，其中`Array`会被扁平化，数组的每一项都将作为子节点渲染** 
 + **不允许：普通的 `JavaScript`对象、`function`函数**
-+  **无渲染：`null`、`undefined`、`boolean`、`symbol `** 
++ **无渲染：`null`、`undefined`、`boolean`、`symbol`**
 
 ## JSX注意事项
 
@@ -82,7 +80,7 @@ JSX中`{}`内部的JS表达式：
 
 + **首字母大写的变量是React组件**
 
-```js
+```jsx
 function MyComponent() {
     return (
         <div>
@@ -134,7 +132,6 @@ ReactDOM.render(
   }
   ```
 
-  
 
 + **JSX中所有的标签都必须正确闭合**
 
@@ -177,11 +174,11 @@ ReactDOM.render(
 +  **在表单元素上：**存在 `value` 与 `defaultValue`、`checked` 与 `defaultChecked`，它们有不同的意义 
 
 ```jsx
-import classes form './myCss.css'
+// import classes form './myCss.css'
 {/*JSX 中的注释方式*/}
 
 {/*style属性必须使用 {{}} */}
-<div style={{width: 20px; height=30px}}>
+<div style={{width: "20px", height: "30px"}}>
     { props.text }
 </div>
 
