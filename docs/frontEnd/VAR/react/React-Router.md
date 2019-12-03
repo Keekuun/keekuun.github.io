@@ -10,9 +10,9 @@ tags:
 
 > [React Router API](https://reacttraining.com/react-router/web/api/Hooks)学习笔记
 
-# 快速开始
+# 一、快速开始
 
-## 配置环境
+## 1.配置环境
 
 ```bash
 // 全局安装create-react-app
@@ -27,7 +27,7 @@ npm  start
 npm install react-router-dom --save
 ```
 
-## 简单Demo
+## 2.简单Demo
 
 <p class="codepen" data-height="265" data-theme-id="default" data-default-tab="js,result" data-user="zkkysqs" data-slug-hash="KKwKddp" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="React-router demo1">
   <span>See the Pen <a href="https://codepen.io/zkkysqs/pen/KKwKddp">
@@ -35,23 +35,27 @@ npm install react-router-dom --save
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-> `react-router`是核心部分，是浏览器和原生应用的通用部分 。
+> + `react-router`是核心部分，是浏览器和原生应用的通用部分 。
 >
-> `react-router-dom`提供了**浏览器**使用需要的定制组件。
+> + `react-router-dom`提供了**浏览器**使用需要的定制组件。
 >
-> `react-router-native`则专门提供了在**原生**移动应用中需要用到的部分。所以，如果在浏览器开发环境就只需要安装`react-router-dom`。
+> + `react-router-native`则专门提供了在**原生**移动应用中需要用到的部分。所以，如果在浏览器开发环境就只需要安装`react-router-dom`。
+>
+> 本文主要是学习`react-router-dom`部分。
 
-# React Router组件
+
+
+# 二、React Router组件
 
 React Router组件主要分为三大类：
 
 + **Routers**：如 `<BrowserRouter>`和`<HashRouter>`组件，React Router的父组件，每个React Router组件都是**Routers**组件。
-+ **Route Matchers** ：如 `<`<Route>`和`<Switch>`组件，我称之为**路由出口**，渲染UI部分。
-+ **Navigation**：如 `<`<Link>`、`<NavLink>`和`<Redict>`组件，即**链接跳转**，一般会被渲染为`<a>`标签。
++ **Route Matchers** ：如 `<Route>`和`<Switch>`组件，我称之为**路由出口**，渲染UI部分。
++ **Navigation**：如 `<Link>`、`<NavLink>`和`<Redict>`组件，即**链接跳转**，一般会被渲染为`<a>`标签。
 
-## Routers路由
+## 1.Routers路由
 
-## [hash和history两种模式的区别](https://www.jianshu.com/p/bfffb4b8c9fa)
+### 1.1 [hash和history两种模式的区别](https://www.jianshu.com/p/bfffb4b8c9fa)
 
 Router组件，根据url模式的不同，分为history模式（对应`<BrowserRouter>`）和hash模式（对应`<HashRouter>`）。
 
@@ -64,7 +68,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 | 对后端的影响 | **与后端配合疏松**：<br />hash 虽然出现在 URL 中，不会被包括在 HTTP 请求中，对后端完全没有影响，因此改变 hash **不会重新加载页面**；<br />`hash` 模式下，仅 `hash` 符号之前的内容会被包含在请求中，因此对于后端来说，即使没有做到对路由的全覆盖，也不会返回 404 错误。 | **与后端配合紧密**：<br />`history` 模式下，前端的 URL 必须和实际向后端发起请求的 URL 一致，如 `http://www.abc.com/book/id`。如果后端缺少对 `/book/id` 的路由处理，将返回 404 错误。 |
 | 各自特点     | 1.`hash` 设置的新值必须与原来不一样才会触发动作将记录添加到栈中。<br />2.`hash` 只可修改 `#` 后面的部分，因此只能设置与当前 URL 同文档的 URL`hash` <br />3.只可添加短字符串 | 1.`history.go(-2);`//后退两次 2.`history.go(2);`//前进两次 3.`history.back();` //后退 4.`history.forward(); `//前进<br />5.[`history.pushState()`](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)<br />6.[`history.replaceState()`](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API) |
 
-### BrowserRouter 组件
+### 1.2 BrowserRouter 组件
 
 使用HTML5 history API更新页面，组件API：
 
@@ -128,7 +132,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
   
 
-### HashRouter组件
+### 1.3 HashRouter组件
 
 使用URL的hash部分来更新页面，组件API：
 
@@ -163,13 +167,13 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-## **Route**路由匹配
+## **2.Route**路由匹配
 
-### Route组件
+### 1.Route组件
 
 即路由出口，用来将匹配的URL对应的子组件UI渲染出来。
 
-#### Route路由渲染方式
+#### 1.1 Route路由渲染方式
 
 + [`<Route component>`](https://reacttraining.com/react-router/web/api/Route/component)直接关联组件
 + [`<Route render>`](https://reacttraining.com/react-router/web/api/Route/render-func)调用`render`函数，在路由匹配的时候调用。
@@ -189,7 +193,7 @@ ReactDOM.render(
   <Router>
     <Route path="/hello" component={Hello} />
   </Router>,
-  node
+  document.body
 );
 
 // render方式
@@ -197,7 +201,7 @@ ReactDOM.render(
   <Router>
     <Route path="/hello" render={() => <Home />} />
   </Router>,
-  node
+  document.body
 );
 
 // children方式
@@ -205,11 +209,11 @@ ReactDOM.render(
   <Router>
     <Route path="/hello" children={({ match }) => <Home />} />
   </Router>,
-  node
+  document.body
 );
 ```
 
-#### Route路由匹配规则
+#### 1.2 Route路由匹配规则
 
 + [path:string |  string[]](https://reacttraining.com/react-router/web/api/Route/path-string-string)匹配的URL字符串
 
@@ -283,7 +287,7 @@ ReactDOM.render(
   | `/One`   | `/one`  | `true`      | no       |
   | `/One`   | `/one`  | `false`     | yes      |
 
-### Switch组件
+### 2.Switch组件
 
 渲染第一个匹配的URL对应的 [`<Route>`](https://reacttraining.com/react-router/Route.md) 或 [`<Redirect>`](https://reacttraining.com/react-router/Redirect.md) 
 
@@ -328,9 +332,9 @@ let routes = (
 );
 ```
 
-## **Navigation**路由跳转
+## **3.Navigation**路由跳转
 
-### Link组件
+### 1.Link组件
 
 提供路由跳转的链接，会被渲染为`<a>`标签：
 
@@ -338,7 +342,7 @@ let routes = (
 <Link to="/about">About</Link>
 ```
 
-#### to属性
+#### 1.1 to属性
 
 + [to: string](https://reacttraining.com/react-router/web/api/Link/to-string)直接跟URL字符串：
 
@@ -372,7 +376,7 @@ let routes = (
   ```
 
 
-#### replace属性
+#### 1.2 replace属性
 
 + [replace: bool](https://reacttraining.com/react-router/web/api/Link/replace-bool)当值为true时，将会替换历史记录的当前URL
 
@@ -380,11 +384,11 @@ let routes = (
 <Link to="/courses" replace />
 ```
 
-### NavLink组件
+### 2.NavLink组件
 
 这是`<Link>`组件的升级版，可以给链接加上激活的样式或类名。
 
-#### activeClassName属性
+#### 2.1 activeClassName属性
 
 + [activeClassName: string](https://reacttraining.com/react-router/web/api/NavLink/activeclassname-string)
 
@@ -396,7 +400,7 @@ let routes = (
 </NavLink>
 ```
 
-#### activeStyle属性
+#### 2.2 activeStyle属性
 
 + [activeStyle: object](https://reacttraining.com/react-router/web/api/NavLink/activestyle-object)给激活的URL加上样式：
 
@@ -412,7 +416,7 @@ let routes = (
   </NavLink>
   ```
 
-#### exact属性
+#### 2.3 exact属性
 
 + [exact: bool](https://reacttraining.com/react-router/web/api/NavLink/exact-bool)当为true时，只有精准匹配的时候activeClassName或activeStyle属性才会生效：
 
@@ -422,7 +426,7 @@ let routes = (
 </NavLink>
 ```
 
-#### strict属性
+#### 2.4 strict属性
 
 + [strict: bool](https://reacttraining.com/react-router/web/api/NavLink/strict-bool)当为true时，会严格匹配尾部的斜杠
 
@@ -432,7 +436,7 @@ let routes = (
 </NavLink>
 ```
 
-#### isActive属性
+#### 2.5 isActive属性
 
 + [isActive: func](https://reacttraining.com/react-router/web/api/NavLink/isactive-func)返回布尔值，用来额外判断链接是否是激活的状态：
 
@@ -455,7 +459,7 @@ let routes = (
 
   
 
-### Redirect组件
+### 3.Redirect组件
 
 路由重定向到新的URL，会在历史记录中替换掉当前的URL，和HTTP 3xx表现类似：
 
@@ -465,7 +469,7 @@ let routes = (
 </Route>
 ```
 
-#### to属性
+#### 3.1 to属性
 
 + [to: string](https://reacttraining.com/react-router/web/api/Redirect/to-string)路由重定向到URL：
 
@@ -485,7 +489,7 @@ let routes = (
   />
   ```
 
-#### push属性
+#### 3.2 push属性
 
 + [push: bool](https://reacttraining.com/react-router/web/api/Redirect/push-bool)若为true则会将重定向路由添加到历史记录中而不是替换：
 
@@ -493,7 +497,7 @@ let routes = (
 <Redirect push to="/somewhere/else" />
 ```
 
-#### from属性
+#### 3.3 from属性
 
 + [from: string](https://reacttraining.com/react-router/web/api/Redirect/from-string)
 
@@ -514,20 +518,65 @@ let routes = (
   </Switch>
   ```
 
-Redirect组件也有`strcict`、`sensitive`和`exact`属性，他们和Route组件对应的属性表现一致。
+Redirect组件也有`strict`、`sensitive`和`exact`属性，他们和Route组件对应的属性表现一致。
 
-## Router Hooks
+## 4.Router Hooks
 
-### useHistroy
+通过Hooks函数获取路由状态以及路由相关信息，可以实现在组件内部路由跳转。
 
-### useLocation
+### 4.1 useHistroy
 
-### useParams
+useHistroy提供路由[history](https://reacttraining.com/react-router/web/api/history)历史记录，可以用来跳转历史纪录，前进或回退。
 
-### useRouteMacth
+<iframe height="265" style="width: 100%;" scrolling="no" title="React-router hooks useHistory跳转历史纪录" src="https://codepen.io/zkkysqs/embed/abzbXyO?height=265&theme-id=default&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/zkkysqs/pen/abzbXyO'>React-router hooks useHistory跳转历史纪录</a> by zkkysqs
+  (<a href='https://codepen.io/zkkysqs'>@zkkysqs</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
-## Router练习
+### 4.2 useLocation
 
-### 获取path查询参数
+useLocation获取路由[location](https://reacttraining.com/react-router/web/api/location)相关信息，如可以获取查询参数：
 
-### 获取params查询参数
+```jsx
+// location的实例
+{
+  key: 'ac3df4', // not with HashHistory!
+  pathname: '/somewhere',
+  search: '?some=search-string',
+  hash: '#howdy',
+  state: {
+    [userDefined]: true
+  }
+}
+```
+
+<p class="codepen" data-height="265" data-theme-id="default" data-default-tab="js,result" data-user="zkkysqs" data-slug-hash="xxbxQBj" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="React-router useLocation获取url的location信息">
+  <span>See the Pen <a href="https://codepen.io/zkkysqs/pen/xxbxQBj">
+  React-router useLocation获取url的location信息</a> by zkkysqs (<a href="https://codepen.io/zkkysqs">@zkkysqs</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+### 4.3 useParams
+
+useParams获取路由path（路径参数）的一系列key/value值。
+
+<p class="codepen" data-height="265" data-theme-id="default" data-default-tab="js,result" data-user="zkkysqs" data-slug-hash="GRgRwZY" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="React-router useParams">
+  <span>See the Pen <a href="https://codepen.io/zkkysqs/pen/GRgRwZY">
+  React-router useParams</a> by zkkysqs (<a href="https://codepen.io/zkkysqs">@zkkysqs</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+### 4.4 useRouteMacth
+
+useRouteMacth像`<Route>`方式一样，使用[match](https://reacttraining.com/react-router/web/api/match)匹配当前URL，但是可以不用正真渲染`<route>`UI，就可以获取匹配到的URL数据。
+
+<p class="codepen" data-height="265" data-theme-id="default" data-default-tab="js,result" data-user="zkkysqs" data-slug-hash="MWYWLQM" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="React-router hooks useRouteMatch">
+  <span>See the Pen <a href="https://codepen.io/zkkysqs/pen/MWYWLQM">
+  React-router hooks useRouteMatch</a> by zkkysqs (<a href="https://codepen.io/zkkysqs">@zkkysqs</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>

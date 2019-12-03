@@ -13,7 +13,7 @@ tags:
 **JSX = JS + XML**：JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方便的利用HTML语法来创建虚拟DOM，当遇到`<`，JSX就当作HTML解析，遇到`{`就当JavaScript解析.
 
 ```jsx
-const div = <div> React JXS <div>;
+const div = (<div> React JXS <div>);
 const dom = (
           <div>
               <h1>Hello World!</h1>
@@ -33,10 +33,10 @@ import React from 'react'
 const Component = React.Component
 class App extends Component{
     render(){
-        return ( // 必须使用()包裹
-            // 在<>中写HTML
+        return ( {/*必须使用()包裹*/}
+                {/*在<>中写HTML*/}
             <ul className="my-list">
-            // 在{}中写JS代码
+        		{/*在{}中写JS代码*/}
                 <li>{false?'hello':'hi'}</li>
                 <li>I love React</li>
             </ul>
@@ -55,7 +55,7 @@ JSX中`{}`内部的JS表达式：
 | string/number | `<div> {'hello'}{111} <div>`                     | hello 111 |
 | array         | `<div>{[1,2,3]}</div>`                           | 123       |
 | true/false    | `<div>{true}{false}</div>`                       | 不显示    |
-| object        | `<div style={{width: 20px; height=30px}}></div>` |           |
+| object        | `object = {width:"20px"}` `<div style={object}>` |           |
 | =、+、-、*、/ | `<div>{a=1}{a=a+2}{a=a-1}{a=a*6}{a/2}<div>`      | 132126    |
 | ？a:b         | `<p>{a=0}{a>1?'haha':'hehe'}</p>`                | 0hehe     |
 | function      | `<p>{alert(111)}</p>`                            | 弹出框    |
