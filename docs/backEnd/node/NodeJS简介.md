@@ -10,6 +10,8 @@ tags:
 
 # NodeJS简介
 
+![NodeJS](E:\blog\images\node\nodejs.jpg)
+
 ## NodeJS之父——Ryan Dahl
 
 ![Ryan Dahl](http://5b0988e595225.cdn.sohucs.com/images/20180209/169cc889fd1846dba289e177c84b0312.jpeg) 
