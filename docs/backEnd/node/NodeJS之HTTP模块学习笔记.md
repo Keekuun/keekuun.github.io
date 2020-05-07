@@ -10,6 +10,8 @@ tags:
 
 # NodeJS之HTTP模块学习笔记
 
+![HTTP模块](E:\blog\images\node\http-module.png)
+
 ## 1.简介
 
 NodeJS 中的 HTTP 接口旨在支持传统上难以使用的协议的许多特性。 特别是，大块的、可能块编码的消息。 接口永远不会缓冲整个请求或响应，所以用户能够**流式传输**数据。--- 摘自官网[http（HTTP）](http://nodejs.cn/api/http.html)
@@ -1112,5 +1114,44 @@ req.end();
 - `callback` [<Function>](http://nodejs.cn/s/ceTQa6),可选的 `callback` 参数会作为单次监听器被添加到 [`'response'`](http://nodejs.cn/s/qwaiK8) 事件。
 - 返回: [<http.ClientRequest>](http://nodejs.cn/s/2F5RHd)
 
-> 本文学习笔记大部分是查看官网API，部分是查看nodejs源码，只供参考，不喜勿喷 (#^.^#)。
+## 11. 小结
 
++ 导入http模块
+
+  ```js
+  const http = require('http');
+  ```
+
++ 创建服务并监听端口
+
+  ```js
+  http.createServer((res, req) => {
+      // res: http.ServerResponse类
+      // req: http.ClientRequest类
+      response.setHeader('Content-Type', 'text/html');
+      // 优先于setHeader
+      res.writeHead(200, { 'Content-type': 'text/html;charset=UTF-8' }); 
+      // 必须调用end()方法
+      res.end()
+  }).listen(3000);
+  ```
+
++ 创建get请求
+
+  ```js
+  http.get('http://nodejs.cn/index.json', (res) => {
+      // do what you want
+  }
+  ```
+
+  `http.get`是创建http请求GET方法快捷方式。
+
++ 创建post请求
+
+  ```js
+  http.request({method: 'POST'}, (res) => {})
+  ```
+
+  `http.request`是创建http请求万能方法。
+
+> 本文学习笔记大部分是查看官网API，部分是查看nodejs源码，只供参考，不喜勿喷 (#^.^#)。
