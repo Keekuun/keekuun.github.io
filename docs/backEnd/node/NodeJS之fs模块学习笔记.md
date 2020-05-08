@@ -315,7 +315,7 @@ function writeFile(path, data, options, callback) {
 ### 6.1 `fs.readFile(path[, options], callback)`异步读取文件
 
 - `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<integer>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [](http://nodejs.cn/s/9Tw2bK)
+- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
   - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `null`。字符编码
   - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'r'`。
 - `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
