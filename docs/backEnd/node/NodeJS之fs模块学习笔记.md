@@ -20,6 +20,10 @@ fs全称`file system`,文件系统，是NodeJS中最强大的API之一，提供�
 
 ```js
 const fs = require('fs')
+fs.readFile('hello.txt', (err, data) => {
+    if(err) throw err;
+    console.log(data);
+});
 ```
 
 所有的文件系统操作都具有**同步**（一般以'Sync'结尾的API）和**异步**的形式。

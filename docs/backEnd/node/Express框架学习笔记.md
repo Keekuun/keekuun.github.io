@@ -56,15 +56,28 @@ tags:
 	+ 响应报文头
 		- `res.end` 不会默认设置 `content-type`，（会出现中文乱码）
 		- `res.send` 默认生成更多的响应报文头，包括`content-type`（不会出现中文乱码）
-		
+	
 4. `app.get` 、 `app.use` 和 `app.all` 注册路由的区别
 	+ 请求方法
 		- `app.get`请求方法必须是`GET`;
+		
 		- `app.use`和`app.all`请求方式不限，什么请求方法都可以;
+		
+		  ```js
+	  // http://127.0.0.1:3000/admin/aa/bb/cc/dd
+		  app.use('admin', function(req, res) {
+		      res.write(req.originalUrl + '\n'); // /admin/aa/bb/cc/dd
+		      res.write(req.baseUrl + '\n'); // /admin
+		      res.write(req.path + '\n'); // /aa/bb/cc/dd
+		      res.end();
+		  })
+		  ```
+		
+		  
 	+ 路由匹配
 		- `app.get`和`app.all`请求路径的 `pathname`必须全等于（===）;
 		- `app.use`请求的路径中的第一部分与路由匹配即可，并不要求 `pathname`完全匹配。
-
+	
 5. 获取`path`和`query`路由参数
 	```js
 	// 获取 path 参数;GET /news/2019/8/1
