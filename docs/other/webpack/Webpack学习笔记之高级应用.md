@@ -1389,6 +1389,8 @@ module.exports = merge(baseConfig, devConfig);
 
 ## 16. 单元测试和测试覆盖率
 
+> [前端测试之Jest深入浅出](https://juejin.im/post/5ebdf9c26fb9a04329766c66)
+
 ### 16.1 单元测试
 
 + 技术选型：`Mocha` + `Chai`
@@ -1458,7 +1460,7 @@ module.exports = merge(baseConfig, devConfig);
 
 + 快速发现错误
 + 防止分支大幅偏离主干
-+ 核心措施： 代码集成到主干之前，必须通过自动化测试。只要一个测试用力失败，就不能集成。
++ 核心措施： 代码集成到主干之前，必须通过自动化测试。只要一个测试用例失败，就不能集成。
 
 **2.技术选型**
 
