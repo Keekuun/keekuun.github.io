@@ -1060,8 +1060,9 @@ acorn-dynamic-import@^4.0.0:
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-4.0.0.tgz#482210140582a36b83c3e342e1cfebcaa9240948"
 
 acorn@^6.0.5:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
+  integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
 agentkeepalive@^2.2.0:
   version "2.2.0"
@@ -6630,6 +6631,11 @@ vuepress-plugin-flowchart@^1.4.3:
   resolved "https://registry.yarnpkg.com/vuepress-plugin-flowchart/-/vuepress-plugin-flowchart-1.4.3.tgz#1692807257c9ba02f764ced0caf930c627f65bdb"
   dependencies:
     flowchart.js "^1.11.3"
+
+vuepress-plugin-ribbon@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-ribbon/-/vuepress-plugin-ribbon-0.0.4.tgz#d7e1e3bb78bb0e8db68a0160743dcfaef8a3ccee"
+  integrity sha512-i+i4M5/0tN26fTRmXXrPcGt331ecACOMWiD90FdRWTyFuIwDMqERkTzuaCMnbUn6nQgL8DC7u3NRM/1bqUs3bA==
 
 vuepress-theme-reco@^1.0.8-alpha.3:
   version "1.0.8-alpha.4"
