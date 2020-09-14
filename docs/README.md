@@ -5,8 +5,7 @@ bgImageStyle: {
       height: 450px,
       text-align: center,
       background-size: cover,
-      overflow: hidden
+      overflow: hidden,
+      color: aliceblue,
 }
-faceImage: '/images/avatar.png'
-heroImage: '/images/avatar.jpg'
 ---
