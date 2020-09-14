@@ -2,7 +2,7 @@
 title: 【Algorithm】算法学习笔记
 date: 2020-6-18
 categories: 
-- 其他
+- 算法
 tags: 
 - Algorithm
 ---
