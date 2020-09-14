@@ -16,6 +16,9 @@ module.exports = {
     theme: 'vuepress-theme-reco',
     head: headConfig,
     themeConfig: {
+        // 华为文案
+        huawei: true,
+        authorAvatar: '/images/avatar.png',
         type: 'blog',
         author: '月上秦少',
         logo: '/images/avatar.png',
@@ -23,6 +26,16 @@ module.exports = {
         startYear: '2018',
         searchMaxSuggestions: 10,
         displayAllHeaders: false, // 不显示所有页面的标题链接，只显示当前页面的标题链接
+        // 代码主题配置
+        /**
+         * support for
+         * 'default'
+         * 'funky'
+         * 'okaidia'
+         * 'solarizedlight'
+         * 'tomorrow'
+         */
+        codeTheme: 'tomorrow', // default 'tomorrow'
         // 博客设置
         blogConfig: {
             // 添加分类和标签
@@ -37,7 +50,9 @@ module.exports = {
         },
         // 导航栏
         nav: navConfig,
-        sidebar: sidebarConfig,
+        sidebar: 'auto', //在所有页面中启用自动生成侧栏
+        sidebarDepth: 2, // 侧边栏显示2级
+        // sidebar: sidebarConfig,
         // 评论(valine)
         valineConfig: {
             appId: secretKeyConfig.valineConfig.appId, // your appId
@@ -50,7 +65,6 @@ module.exports = {
             recordIP: true
         },
 
-        sidebarDepth: 3, // 侧边栏显示3级
         // algolia: {  // algolia搜索
         //     apiKey: secretKeyConfig.algolia.API_KEY,
         //     appId: secretKeyConfig.algolia.APPLICATION_ID,
