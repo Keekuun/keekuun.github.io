@@ -6,6 +6,7 @@ categories:
 tags: 
 - CSS
 ---
+
 # CSS揭秘学习笔记
 
 ## 一、序言
@@ -33,47 +34,43 @@ function $$(selector, context=document) {
 
 ### 2.规范文档
 
-[CSS 背景与边框](http://w3.org/TR/css-backgrounds)
+ + [CSS 背景与边框](http://w3.org/TR/css-backgrounds)
 
- [选择符](http://w3.org/TR/selectors)
+ + [选择符](http://w3.org/TR/selectors)
 
- [可缩放矢量图形（SVG）](http://w3.org/TR/SVG)
+ + [可缩放矢量图形（SVG）](http://w3.org/TR/SVG)
 
+ + [CSS 语法](http://w3.org/TR/css-syntax-3)
 
+ + [CSS 层叠与继承](http://w3.org/TR/css-cascade-3)
 
- [CSS 语法](http://w3.org/TR/css-syntax-3)
+ + [CSS 颜色](http://w3.org/TR/css3-color)
 
- [CSS 层叠与继承](http://w3.org/TR/css-cascade-3)
+ + [选择符](http://w3.org/TR/selectors)
 
- [CSS 颜色](http://w3.org/TR/css3-color)
+ + [CSS 背景与边框](http://w3.org/TR/css3-background)
 
- [选择符](http://w3.org/TR/selectors)
+ + [CSS 值与单位](http://w3.org/TR/css-values-3)
 
- [CSS 背景与边框](http://w3.org/TR/css3-background)
+ + [CSS 文本排版](http://w3.org/TR/css-text-3)
 
- [CSS 值与单位](http://w3.org/TR/css-values-3)
+ + [CSS 文本装饰效果](http://w3.org/TR/css-text-decor-3)
 
- [CSS 文本排版](http://w3.org/TR/css-text-3)
+ + [CSS 字体](http://w3.org/TR/css3-fonts)
 
- [CSS 文本装饰效果](http://w3.org/TR/css-text-decor-3)
+ + [CSS 基本 UI 特性](http://w3.org/TR/css3-ui)
 
- [CSS 字体](http://w3.org/TR/css3-fonts)
+ + [CSS 变形](http://w3.org/TR/css-transforms-1)
 
- [CSS 基本 UI 特性](http://w3.org/TR/css3-ui)
+ + [图像混合效果](http://w3.org/TR/compositing-1)
 
+ + [滤镜效果](http://w3.org/TR/filter-effects-1)
 
+ + [CSS 遮罩](http://w3.org/TR/css-masking-1)
 
- [CSS 变形](http://w3.org/TR/css-transforms-1)
+ + [CSS 伸缩盒布局](http://w3.org/TR/css-flexbox-1)
 
- [图像混合效果](http://w3.org/TR/compositing-1)
-
- [滤镜效果](http://w3.org/TR/filter-effects-1)
-
- [CSS 遮罩](http://w3.org/TR/css-masking-1)
-
- [CSS 伸缩盒布局](http://w3.org/TR/css-flexbox-1)
-
- [CSS 网格布局](http://w3.org/TR/css-grid-1)
+ + [CSS 网格布局](http://w3.org/TR/css-grid-1)
 
 ## 二、背景与边框
 
@@ -85,6 +82,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 2.多重边框
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="GRoBaGr" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-多重边框">
@@ -93,6 +91,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 3.背景定位
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="ExPpzBx" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-背景定位">
@@ -101,6 +100,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 4.边框内圆角
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="rNxrExB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-边框内圆角">
@@ -109,6 +109,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.条纹背景
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="NWxBVXw" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-条纹背景">
@@ -117,6 +118,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 6.网格背景
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="dyGqJeg" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-网格背景">
@@ -126,6 +128,7 @@ function $$(selector, context=document) {
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 <iframe src="https://bennettfeely.com/gradients/" height="600px"></iframe>
+
 > https://bennettfeely.com/gradients/
 
 ### 7.伪随机背景
@@ -136,6 +139,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 8.图像边框
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="mdVGxGx" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-图像边框">
@@ -144,6 +148,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## 三、各种形状
 
 ### 1.自适应椭圆
@@ -154,6 +159,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 2.平行四边形
 
 <p class="codepen" data-height="265" data-theme-id="light" data-default-tab="css,result" data-user="keekuun" data-slug-hash="KKVGpOe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-平行四边形">
@@ -162,6 +168,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 3.菱形图片
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="js,result" data-user="keekuun" data-slug-hash="jOWebbK" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-菱形图片">
@@ -170,6 +177,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 4.切角效果
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="wvMYGNe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-切角效果">
@@ -178,6 +186,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.梯形标签页
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="GRoYwVQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-梯形标签页">
@@ -186,6 +195,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 > [外圆角选项卡](https://www.zhangxinxu.com/study/201903/css-idea/shape-hollow.php?aside=0&kind=3)
 
 ### 6.简单的饼图
@@ -196,6 +206,7 @@ function $$(selector, context=document) {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 SVG：
 
 <p class="codepen" data-height="265" data-theme-id="light" data-default-tab="css,result" data-user="keekuun" data-slug-hash="KKVbPvg" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-简单的饼图（SVG）">
@@ -204,6 +215,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## 四、视觉效果
 
 > [CSS创意与视觉表现](https://www.zhangxinxu.com/study/201903/css-idea/)
@@ -216,6 +228,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 2.不规则投影（滤镜）
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="wvMRaaL" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-不规则投影（滤镜）">
@@ -224,6 +237,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 3.染色效果
 
 + 滤镜实现：
@@ -258,6 +272,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.折角效果
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="xxVGYXL" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-折角效果">
@@ -266,6 +281,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## 五、字体排版
 
 ### 1.连字符断行
@@ -276,6 +292,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 2. 插入换行
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="GRZJxaj" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-插入换行">
@@ -284,6 +301,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 3.文本行的斑马条纹
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="XWdbqrO" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-文本行的斑马条纹">
@@ -292,6 +310,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 4.调整tab的宽度
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="LYNVmEY" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-调整Tab的宽度">
@@ -300,6 +319,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.连字
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="LYNVmpE" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-连字">
@@ -308,6 +328,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 6.华丽的&符号
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="VwaLxja" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-华丽的&amp;amp;符号">
@@ -316,6 +337,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 7.自定义下划线
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="XWdbqRL" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-自定义下划线">
@@ -324,6 +346,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 8.现实中的文字效果
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="WNwvJLY" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-现实中的文字效果">
@@ -332,6 +355,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 9.环形文字
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="WNwvJVP" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-环形文字">
@@ -340,6 +364,7 @@ SVG：
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## 六、用户体验
 
 ### 1.选择合适的鼠标光标
@@ -383,6 +408,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 4.通过阴影来弱化背景
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="RwaWWom" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-通过阴影来弱化背景">
@@ -391,6 +417,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.通过模糊来弱化背景
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="html,result" data-user="keekuun" data-slug-hash="QWNjjOd" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-通过模糊来弱化背景">
@@ -399,6 +426,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 6.滚动提示
 
 > https://www.zhangxinxu.com/wordpress/2019/06/better-css-scroll-indicator/
@@ -411,6 +439,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 + 背景渐变效果
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="html,result" data-user="keekuun" data-slug-hash="RwaWdbe" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-滚动提示（背景渐变）">
@@ -419,6 +448,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 + 滚动条效果
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="html,result" data-user="keekuun" data-slug-hash="QWNjoWw" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-滚动提示（滚动条）">
@@ -427,6 +457,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 7.交互式的图片对比控件
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="KKzdERW" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-图片对比（纯CSS控件）">
@@ -441,6 +472,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## 七、结构和布局
 
 ### 1.自适应内部元素
@@ -451,6 +483,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 2.精确控制表格列宽
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="html,result" data-user="keekuun" data-slug-hash="YzqwdZK" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-精确控制表格列宽">
@@ -459,6 +492,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 3.根据兄弟元素的数量设置样式
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="LYNGMzK" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-根据兄弟元素的数量设置样式">
@@ -473,6 +507,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 4.满幅的背景、定宽的内容
 
 <p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="css,result" data-user="keekuun" data-slug-hash="RwarEdG" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS3-满幅的背景、定宽的内容">
@@ -481,6 +516,7 @@ button::before {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ### 5.水平垂直居中
 
 > https://www.jianshu.com/p/c78fa42e6e78
