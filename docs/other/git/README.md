@@ -2,6 +2,7 @@
 title: Git Handbook
 date: 2018-09-16
 categories:
+   - Git
    - 其他
 tags:
    - Git

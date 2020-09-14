@@ -1,7 +1,7 @@
 title: 【Webpack】Webpack学习笔记之高级应用
 date: 2020-5-28
 categories: 
-- 其他
+- webpack
 tags: 
 - webpack
 
@@ -1596,4 +1596,3 @@ module.exports = merge(baseConfig, devConfig);
   }
   ```
 
-  
