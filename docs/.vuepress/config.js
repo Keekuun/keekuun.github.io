@@ -16,6 +16,10 @@ module.exports = {
     theme: 'vuepress-theme-reco',
     head: headConfig,
     themeConfig: {
+        // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
+        nextLinks: true,
+        // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
+        prevLinks: true,
         // 华为文案
         huawei: true,
         authorAvatar: '/images/avatar.png',
@@ -36,6 +40,8 @@ module.exports = {
          * 'tomorrow'
          */
         codeTheme: 'tomorrow', // default 'tomorrow'
+        // 启用页面滚动效果
+        smoothScroll: true,
         // 博客设置
         blogConfig: {
             // 添加分类和标签
@@ -51,7 +57,7 @@ module.exports = {
         // 导航栏
         nav: navConfig,
         sidebar: 'auto', //在所有页面中启用自动生成侧栏
-        sidebarDepth: 2, // 侧边栏显示2级
+        // sidebarDepth: 2, // 侧边栏显示2级
         // sidebar: sidebarConfig,
         // 评论(valine)
         valineConfig: {
