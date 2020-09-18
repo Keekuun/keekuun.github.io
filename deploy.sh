@@ -23,4 +23,12 @@ git commit -m 'deploy'
  git push -f git@github.com:zkkysqs/blog.git master:gh-pages
 #git push -f git@gitee.com:keekuun/blog.git master:gh-pages
 
+
+# coding
+echo 'docs.zkkysqs.top' > CNAME
+git add -A
+git commit -m 'deploy'
+git push -f git@e.coding.net:keekuun/notes/blog.git master # 发布到coding
+
+#回到上级目录
 cd -
