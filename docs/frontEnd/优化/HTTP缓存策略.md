@@ -116,7 +116,7 @@ HTTP缓存分为强缓存和协商缓存。
 ```js
 res.setHeader('max-age': '3600 public')
 res.setHeader(etag: '5c20abbd-e2e8')
-res.setHeader('last-modified': Mon, 24 Sep 2020 09:49:49 GMT)
+res.setHeader('last-modified': 'Mon, 24 Sep 2020 09:49:49 GMT')
 ```
 
 ### 2.2 nginx配置禁用强缓存
