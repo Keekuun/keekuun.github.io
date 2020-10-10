@@ -21,7 +21,7 @@ publish: true
 
 ### 1.1 一般方式
 
-`APP.ts`:
+`APP.tsx`:
 
 ```tsx {2,6}
 import React from 'react';
@@ -47,7 +47,7 @@ export default App;
 
 ### 1.2 使用CSS Module
 
-`APP.ts`:
+`APP.tsx`:
 
 ```tsx {3,8}
 import React from 'react';
@@ -79,7 +79,7 @@ export default App;
 <div class="container--1g20Q"></div>
 ```
 
-上面代码中，我们将样式文件`App.module.scss`输入到`style`对象，然后引用`style.container代表一个`class`。
+上面代码中，我们将样式文件`App.module.scss`输入到`style`对象，然后当做变量的方式引用`style.container`作为`class`类名。
 
 ## 2.CSS Module原理
 
