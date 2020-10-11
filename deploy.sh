@@ -28,7 +28,7 @@ git commit -m 'deploy'
 #echo 'docs.zkkysqs.top' > CNAME
 #git add -A
 #git commit -m 'deploy'
-#git push -f git@e.coding.net:keekuun/notes/blog.git master # 发布到coding
+#git push -f git@e.coding.net:keekuun/notes/blog.git master:gh-pages # 发布到coding
 
 #回到上级目录
 cd -
