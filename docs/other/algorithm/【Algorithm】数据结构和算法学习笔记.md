@@ -255,16 +255,16 @@ class LinkedList {
 
 需要实现的方法：
 
-+ [x] `append(element)` ：向列表尾部添加一个新的项。
-+ [x] insert(position, val) ：向列表的特定位置插入一个新的项。
-+ [x] `remove(val)` ：从列表中移除一项。
-+ [x] `indexOf(val)` ：返回元素在列表中的索引。如果列表中没有该元素则返回 -1 。
-+ [x] `removeAt(position)` ：从列表的特定位置（从0开始，0表示第一个元素）移除一项。
++ [x] `append(element)` ：向链表尾部添加一个新的项。
++ [x] `insert(position, val)` ：向链表的特定位置插入一个新的项。
++ [x] `remove(val)` ：从链表中移除一项。
++ [x] `indexOf(val)` ：返回元素在链表中的索引。如果链表中没有该元素则返回 -1 。
++ [x] `removeAt(position)` ：从链表的特定位置（从0开始，0表示第一个元素）移除一项。
 + [x] `isEmpty()` ：如果链表中不包含任何元素，返回 true ，如果链表长度大于0则返回 false 。
 + [x] `size()` ：返回链表包含的元素个数。与数组的 length 属性类似。
-+ [x] `toString()` ：由于列表项使用了 Node 类，就需要重写继承自JavaScript对象默认的toString 方法，让其只输出元素的值。
-+ [x] `getHead()` ：获取head
-+ [ ] `getTail()`：获取tail
++ [x] `toString()` ：由于链表项使用了 Node 类，就需要重写继承自JavaScript对象默认的toString 方法，让其只输出元素的值。
++ [x] `getHead()` ：获取头结点。
++ [ ] `getTail()`：获取尾节点。
 
 ```js
 // 定义节点类
@@ -278,6 +278,7 @@ class Node {
 class LinkedList {
     constructor(){
         this.head = null;
+        this.tail = null;
         this.length = 0;
     }
     
@@ -297,25 +298,34 @@ class LinkedList {
             //找到最后一项，将其next赋为node，建立链接
             current.next = node;
         }
+        this.tail = node;
         return ++this.length;
     }
     // 从链表中移除第几个元素
     removeAt(position) {
         // 检查越界值
-        if(position > -1 && position < this.length) {
+        if(position >= 0 && position <= this.length -1) {
             let current = this.head;
             let previous = null;
             // 移除第一项
             if(position === 0) {
                 this.head = current.next;
+                if(this.head === null) {
+                    this.tail = null;
+                }
             } else {
                 // 从head顺延找到目标
                 while(position--) {
                    previous = current;
                    current = current.next;
                 }
+                
+                // 如果移除的是最后一项
+                if(current.next === null) {
+                   this.tail = previous;
+                }
                 // 将previous与current的下一项链接起来：跳过current，从而移除它
-                previous.next = current.next
+                previous.next = current.next;
             }
             // 更新size
             this.length--;
@@ -326,33 +336,44 @@ class LinkedList {
     }
     // 向列表的任意位置插入一个新的项
     insert(position, val) {
-        // 检查越界值
-        if(position >= 0 && position <= this.length) {
-            let node = new Node(val);
-            let current = this.head;
-            let previous = null;
-            
-            // 在第一个位置添加
-            if(position === 0) {
-                node.next = current;
-                this.head = node;
-            } else {
-                // 在其他位置添加
-                while(--position) {
-                    previous = current;
-                    current = current.next;
-                }
-                
-                node.next = current;
-                previous.next = node;
-            }
-            this.length++;
-            return true;
+      // 检查越界值
+      if (position >= 0 && position <= this.length) {
+        let node = new Node(val);
+        let current = this.head;
+        let previous = null;
+
+        // 在第一个位置添加
+        if (position === 0) {
+          if (this.head === null) { //新增的
+            this.head = node;
+            this.tail = node;
+          } else {
+            node.next = current;
+            this.head = node;
+          }
         } else {
-           // 更新size
-            return false;
+          // 在其他位置添加
+          while (position--) {
+            previous = current;
+            current = current.next;
+          }
+
+          node.next = current;
+          previous.next = node;
+
+          // 在最后添加
+          if (position === this.length - 1) {
+            this.tail = node;
+          }
         }
+        this.length++;
+        return true;
+      } else {
+        // 更新size
+        return false;
+      }
     }
+
     // toString 方法会把 LinkedList 对象转换成一个字符串
     toString() {
         let current = this.head;
@@ -395,6 +416,12 @@ class LinkedList {
     getHead(){
         return this.head;
     }
+    
+    // getHead获取tail
+    getTail(){
+        return this.head;
+    }
+    
 }
 ```
 
@@ -614,15 +641,93 @@ class DoubleLinkedList {
 
 ### 3.JS实现栈
 
+栈既可以用数组来实现，也可以用链表来实现。用数组实现的栈，我们叫作顺序栈，用链表实现的栈，我们叫作链式栈。
+
++ [x] `Stack()`：构造器
++ [x]  `push(element(s))` ：添加一个（或几个）新元素到栈顶。
++ [x]  `pop()` ：移除栈顶的元素，同时返回被移除的元素。
++ [x] `peek()` ：返回栈顶的元素，不对栈做任何修改（这个方法不会移除栈顶的元素，仅仅返
+  回它）。
++ [x] `isEmpty()` ：如果栈里没有任何元素就返回 true ，否则返回 false 。
++ [x] `clear()` ：移除栈里的所有元素。
++ [x] `size()` ：返回栈里的元素个数。这个方法和数组的 length 属性很类似。
+
+#### 3.1 顺序栈
+
+使用数组来实现：
+
 ```js
 class Stack {
     constructor() {
-        this.length = 0;
+        this.data = [];
     }
     
+    push(element) {
+        this.data.push(element)
+    }
     
+    pop() {
+        return this.data.pop();
+    }
+    
+    peek() {
+        return this.data[this.data.length - 1];
+    }
+    
+    isEmpty() {
+        return this.data.length === 0;
+    }
+    
+    clear() {
+        this.data = [];
+    }
 }
 ```
+
+#### 3.2 链式栈
+
+使用上一节[链表](http://localhost:8080/other/algorithm/%E3%80%90Algorithm%E3%80%91%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html#_6-js实现链表)来实现：
+
+```js
+class Stack {
+    constructor() {
+        this.data = new LinkedList();
+    }
+    
+    push(element) {
+        // 向链表尾部添加一个新的项
+        this.data.append(element)
+    }
+    
+    pop() {
+        // 移除尾部（最后入栈的）
+        return this.data.removeAt(this.data.size() - 1);
+    }
+    
+    peek() {
+        // 返回栈顶的元素-链表尾部最后入栈-栈顶
+        return this.data.getTail();
+    }
+    
+    isEmpty() {
+        return this.data.isEmpty();
+    }
+    
+    clear() {
+        this.data = new LinkedList();
+    }
+    
+    toString() {
+        return this.data.toString();
+    }
+}
+```
+
+
+
+### 4. 栈和深度优先搜索（DFS）
+
+
 
 ## 六、队列
 
@@ -641,6 +746,10 @@ class Stack {
 ### 2.JS实现简单队列
 
 跟栈一样，队列可以用数组来实现，也可以用链表来实现。用数组实现的栈叫作顺序栈，用链表实现的栈叫作链式栈。同样，用数组实现的队列叫作顺序队列，用链表实现的队列叫作链式队列。
+
+#### 2.1 顺序队列
+
+使用数组来实现队列：
 
 ```js
 class Queue {
@@ -662,11 +771,11 @@ class Queue {
 		return false
     }
     // 获取队列头部
-    head() {
+    getHead() {
         return this.data[0];
     }
     // 获取队列尾部
-    tail() {
+    getTail() {
         return this.data[this.data.length - 1];
     }
     // 判空
@@ -680,6 +789,175 @@ class Queue {
 }
 ```
 
-### 3.JS实现循环队列
+#### 2.2 链式队列
+
+使用链表来实现队列：
+
+```js
+class Queue {
+    constructor() {
+        this.data = new LinkedList();
+    }
+    
+    // 入队列
+    enqueue(value) {
+       this.data.append(value);
+       return true;
+    }
+    // 出队列
+    dequeue() {
+        if(this.data.size() > 0) {
+            this.data.removeAt(0);
+        	return true;  
+        }
+		return false
+    }
+    // 获取队列头部
+    getHead() {
+        return this.data.getHead();
+    }
+    // 获取队列尾部
+    getTail() {
+        return this.data.getTail();
+    }
+    // 判空
+    isEmpty() {
+        return this.data.isEmpty();
+    }
+    // 获取长度
+    size() {
+        return this.data.size();
+    }
+    
+    toString() {
+        return this.data.toString();
+    }
+}
+```
+
+
+
+### 3.[JS实现循环队列](https://leetcode-cn.com/problems/design-circular-queue/solution/shu-zu-shi-xian-de-xun-huan-dui-lie-by-liweiwei141/)
 
 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
+
+循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
+
++ [x] `CircularQueue(k)`: 构造器，设置队列长度为 k 。
++ [x] `getHead`: 从队首获取元素。如果队列为空，返回 -1 。
++ [x] `getTail`: 获取队尾元素。如果队列为空，返回 -1 。
++ [x] `enqueue(value)`: 向循环队列插入一个元素。如果成功插入则返回真。
++ [x] `dequeue()`: 从循环队列中删除一个元素。如果成功删除则返回真。
++ [x] `isEmpty()`: 检查循环队列是否为空。
++ [x] `isFull`(): 检查循环队列是否已满。
+
+```js
+class CircularQueue {
+    constructor(k) {
+        this.size = k;
+        this.data = Array(k);
+        // 头部指针(从-1开始是为了减少一个数组空间的浪费)
+        this.head = -1;
+        // 尾部指针
+        this.tail = -1;
+    }
+    getHead() {
+        if(this.isEmpty()) {
+            return -1;
+        }
+        
+        return this.data[this.head];  
+    }
+    
+    getTail() {
+        if(this.isEmpty()) {
+            return -1;
+        }
+        
+        return this.data[this.tail];  
+    }
+    
+    // 入队列时，更新tail
+    enqueue(value) {
+        if(this.isFull()) {
+            return false;
+        }
+        
+        // 只有在队列当为空时，更新head
+        if(this.isEmpty()) {
+            this.head = 0;
+        }
+        
+        this.tail = (this.tail + 1) % this.size;
+        this.data[this.tail] = value;
+        
+        return true;
+    }
+    
+    // 出队列时，更新head
+    dequeue() {
+        if(this.isEmpty()) {
+            return false;
+        }
+        
+        // 出队列时，当首尾相遇时，表示队列为空了，还原head和tail
+        if(this.head === this.tail) {
+            this.head = -1;
+            this.tail = -1;
+            return true;
+        }
+        
+        this.head = (this.head + 1) % this.size;
+        
+        return true;
+    }
+    
+    isEmpty() {
+        // 头部指针指向-1，此时队列为空
+        return this.head === -1;
+    }
+    
+    isFull() {
+        // 尾部指针下一位为头部指针，表示对列满了
+        return ((this.tail + 1) % this.size) === this.head;
+    }
+    
+}
+```
+
+测试一波：
+
+```js
+let circularQueue = new CircularQueue(3); // 设置长度为 3
+circularQueue.enqueue(1);  // 返回 true
+circularQueue.enqueue(2);  // 返回 true
+circularQueue.enqueue(3);  // 返回 true
+circularQueue.enqueue(4);  // 返回 false，队列已满
+circularQueue.getTail();  // 返回 3
+circularQueue.isFull();  // 返回 true
+circularQueue.dequeue();  // 返回 true
+circularQueue.enqueue(4);  // 返回 true
+circularQueue.getTail();  // 返回 4
+```
+
+### 4.JS实现双端队列
+
+### 5.JS实现循环双端队列
+
+> [队列&双端队列&循环队列&双端循环队列](https://www.cnblogs.com/ggnbnb/p/12435479.html)
+
+### 6.队列和广度优先搜索（BFS）
+
+> [完全平方数](https://leetcode-cn.com/problems/perfect-squares/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--51/)
+
+
+
+
+
+
+
+
+
+
+
+> [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
