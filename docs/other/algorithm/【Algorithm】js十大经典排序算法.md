@@ -81,7 +81,7 @@ function selectionSort(data) {
         }
         [data[i], data[minIndex]] = [data[minIndex], data[i]];
     }
-    return data;c
+    return data;
 }
 ```
 
