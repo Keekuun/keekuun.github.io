@@ -988,6 +988,13 @@
     "@leancloud/adapter-utils" "^1.1.0"
     miniprogram-api-typings "^2.10.2"
 
+"@moefe/vue-aplayer@^2.0.0-beta.5":
+  version "2.0.0-beta.5"
+  resolved "http://npm.dev.casstime.com/@moefe%2fvue-aplayer/-/vue-aplayer-2.0.0-beta.5.tgz#f6bbd1802562e8e30ef9106192008a90bed2a354"
+  integrity sha512-ytzp4GStzjftuh7H1rIS/ziqwV1FO67iTLSkDxgN0J2bqlO+rBgDDr83Y+pZKBIgRUc30uu/UZHqmE4QiBHHeg==
+  dependencies:
+    vue "^2.5.17"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -2459,7 +2466,7 @@ cli-boxes@^2.2.0:
   resolved "http://npm.dev.casstime.com/cli-boxes/-/cli-boxes-2.2.1.tgz#ddd5035d25094fce220e9cab40a45840a440318f"
   integrity sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==
 
-clipboard@^2.0.0:
+clipboard@^2.0.0, clipboard@^2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.6.tgz#52921296eec0fdf77ead1749421b21c968647376"
   integrity sha512-g5zbiixBRk/wyKakSwCKd7vQXDjFnAMGHoEyBogG/bw9kTD9GvdAvaoRR1ALcEzt3pVKxZR0pViekPMIS0QyGg==
@@ -8019,7 +8026,7 @@ vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
 
-vue@^2.6.10:
+vue@^2.5.17, vue@^2.6.10:
   version "2.6.12"
   resolved "http://npm.dev.casstime.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
@@ -8041,6 +8048,11 @@ vuepress-html-webpack-plugin@^3.2.0:
     toposort "^1.0.0"
     util.promisify "1.0.0"
 
+vuepress-plugin-boxx@^0.0.7:
+  version "0.0.7"
+  resolved "http://npm.dev.casstime.com/vuepress-plugin-boxx/-/vuepress-plugin-boxx-0.0.7.tgz#8337d27eaf5b3f609eb7befdb3681ce5f0eac17c"
+  integrity sha512-UeBl8ZCSy4wT2uh9lsO0GpIC3QaVI5gcZbs4TZ/2wMNHJ71IRXorisGe9DDSjlTU8q3vNq837tBnC8Jyq3cVXA==
+
 vuepress-plugin-container@^2.0.2:
   version "2.1.5"
   resolved "http://npm.dev.casstime.com/vuepress-plugin-container/-/vuepress-plugin-container-2.1.5.tgz#37fff05662fedbd63ffd3a5463b2592c7a7f3133"
@@ -8055,6 +8067,11 @@ vuepress-plugin-disqus@^0.2.0:
   integrity sha512-kx+AeVzjJ9lx9bufLt1/X35V1VXfnQ1srkDMIzFKD9NyQ3eycsWQRcGO1dFe1HMrY3+7fTu+1/JeUEUEpGZ5tw==
   dependencies:
     vue-disqus "^3.0.5"
+
+vuepress-plugin-dynamic-title@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.dev.casstime.com/vuepress-plugin-dynamic-title/-/vuepress-plugin-dynamic-title-1.0.0.tgz#867e7a8b821ad35ccfaaafc2358bc129817d422f"
+  integrity sha512-CN1wtkPNG3shGzEFgqOa2dzojSle7SeAaf+Cw77Xmkv8jvB3wO5r2zXkIHTjiclQY1c5q5lE8h2A9vQaLdor2Q==
 
 vuepress-plugin-export@^0.2.0:
   version "0.2.0"
@@ -8090,6 +8107,20 @@ vuepress-plugin-mailchimp@^1.4.1:
   dependencies:
     jsonp "^0.2.1"
     query-string "^6.9.0"
+
+vuepress-plugin-meting@^0.1.1:
+  version "0.1.1"
+  resolved "http://npm.dev.casstime.com/vuepress-plugin-meting/-/vuepress-plugin-meting-0.1.1.tgz#1a407ef9ed0f9c5f19bf2ad5edc6bc56ad7f59d0"
+  integrity sha512-mx49a0jYRpVbY2guHbA29ZiQ051+PmiQ5uEKXa4NAJE3rXhr2sJFx757eT2zK1Jyjr8DLVJp1wRk5zhLa35eIQ==
+  dependencies:
+    "@moefe/vue-aplayer" "^2.0.0-beta.5"
+
+vuepress-plugin-nuggets-style-copy@^1.0.3:
+  version "1.0.3"
+  resolved "http://npm.dev.casstime.com/vuepress-plugin-nuggets-style-copy/-/vuepress-plugin-nuggets-style-copy-1.0.3.tgz#3a3bb57c04c7d9ec58afd93ff3db8b6102574bb8"
+  integrity sha512-0v+9i8ZkD0a87nxH/KGioJE6Szeh5ZMBQxRyjEyeUo3B/OSXuuED9ih6+JW2e3LKbsxkza1ZAv8dVXNurKXtFw==
+  dependencies:
+    clipboard "^2.0.4"
 
 vuepress-plugin-ribbon@0.0.4:
   version "0.0.4"

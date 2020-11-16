@@ -1,6 +1,6 @@
 const pluginConfig = require('../config/pluginConfig.js');
 const navConfig = require('../config/navConfig.js');
-const sidebarConfig = require('../config/sideBarConfig/index.js');
+// const sidebarConfig = require('../config/sideBarConfig/index.js');
 const headConfig = require('../config/headConfig.js');
 const secretKeyConfig = require('../config/secretKeyConfig.js');
 module.exports = {
@@ -57,7 +57,7 @@ module.exports = {
         // 导航栏
         nav: navConfig,
         sidebar: 'auto', //在所有页面中启用自动生成侧栏
-        // sidebarDepth: 2, // 侧边栏显示2级
+        sidebarDepth: 3, // 侧边栏显示2级
         // sidebar: sidebarConfig,
         // 评论(valine)
         valineConfig: {

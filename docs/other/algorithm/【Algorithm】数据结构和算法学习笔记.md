@@ -1,11 +1,10 @@
 ---
 title: 【Algorithm】数据结构和算法学习笔记
-date: 2020-6-11
+date: 2020-10-20
 categories: 
 - 算法
 tags: 
 - Algorithm
-
 ---
 
 # 数据结构和算法学习笔记
@@ -36,7 +35,7 @@ tags:
 
 算法的**时间复杂度**（Time complexity）是一个**函数**，用于定性描述算法的运行时间。一般我们我们评估一个算法都是直接评估它的**最坏的复杂度**。
 
-```javascript
+```js
 function sumN(n) {
     let sum = 0;
     let i=1;
@@ -99,7 +98,7 @@ O - 表示代码的执行时间 T(n) 与 f(n) 表达式成正比
 
 分析下面函数的时间复杂度：
 
-```javascript
+```js
 function find(arr, x) {
     let i=0;
     let index = -1;
@@ -256,7 +255,7 @@ class LinkedList {
 需要实现的方法：
 
 + [x] `append(element)` ：向列表尾部添加一个新的项。
-+ [x] `insert(position, val)` ：向列表的特定位置插入一个新的项。
++ [x] insert(position, val) ：向列表的特定位置插入一个新的项。
 + [x] `remove(val)` ：从列表中移除一项。
 + [x] `indexOf(val)` ：返回元素在列表中的索引。如果列表中没有该元素则返回 -1 。
 + [x] `removeAt(position)` ：从列表的特定位置（从0开始，0表示第一个元素）移除一项。
@@ -642,7 +641,6 @@ class Stack {
 
 跟栈一样，队列可以用数组来实现，也可以用链表来实现。用数组实现的栈叫作顺序栈，用链表实现的栈叫作链式栈。同样，用数组实现的队列叫作顺序队列，用链表实现的队列叫作链式队列。
 
-+ 顺序队列：
 ```js
 class Queue {
     constructor() {
@@ -681,30 +679,176 @@ class Queue {
 }
 ```
 
-+ 链式队列：
-```js
-    
+#### 2.2 链式队列
 
+使用链表来实现队列：
+
+```js
+class Queue {
+    constructor() {
+        this.data = new LinkedList();
+    }
+    
+    // 入队列
+    enqueue(value) {
+       this.data.append(value);
+       return true;
+    }
+    // 出队列
+    dequeue() {
+        if(this.data.size() > 0) {
+            this.data.removeAt(0);
+        	return true;  
+        }
+		return false
+    }
+    // 获取队列头部
+    getHead() {
+        return this.data.getHead();
+    }
+    // 获取队列尾部
+    getTail() {
+        return this.data.getTail();
+    }
+    // 判空
+    isEmpty() {
+        return this.data.isEmpty();
+    }
+    // 获取长度
+    size() {
+        return this.data.size();
+    }
+    
+    toString() {
+        return this.data.toString();
+    }
+}
 ```
 
-### 3.JS实现循环队列
+
+
+### 3.[JS实现循环队列](https://leetcode-cn.com/problems/design-circular-queue/solution/shu-zu-shi-xian-de-xun-huan-dui-lie-by-liweiwei141/)
 
 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
 
 循环队列的一个好处是我们可以利用这个队列之前用过的空间。在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
 
 + [x] `CircularQueue(k)`: 构造器，设置队列长度为 k 。
-
-+ [x] `Front`: 从队首获取元素。如果队列为空，返回 -1 。
-
-+ [x] `Rear`: 获取队尾元素。如果队列为空，返回 -1 。
-
-+ [x] `enQueue(value)`: 向循环队列插入一个元素。如果成功插入则返回真。
-
-+ [x] `deQueue()`: 从循环队列中删除一个元素。如果成功删除则返回真。
-
++ [x] `getHead`: 从队首获取元素。如果队列为空，返回 -1 。
++ [x] `getTail`: 获取队尾元素。如果队列为空，返回 -1 。
++ [x] `enqueue(value)`: 向循环队列插入一个元素。如果成功插入则返回真。
++ [x] `dequeue()`: 从循环队列中删除一个元素。如果成功删除则返回真。
 + [x] `isEmpty()`: 检查循环队列是否为空。
++ [x] `isFull`(): 检查循环队列是否已满。
 
-+ [x] `isFull()`: 检查循环队列是否已满。
+```js
+class CircularQueue {
+    constructor(k) {
+        this.size = k;
+        this.data = Array(k);
+        // 头部指针(从-1开始是为了减少一个数组空间的浪费)
+        this.head = -1;
+        // 尾部指针
+        this.tail = -1;
+    }
+    getHead() {
+        if(this.isEmpty()) {
+            return -1;
+        }
+        
+        return this.data[this.head];  
+    }
+    
+    getTail() {
+        if(this.isEmpty()) {
+            return -1;
+        }
+        
+        return this.data[this.tail];  
+    }
+    
+    // 入队列时，更新tail
+    enqueue(value) {
+        if(this.isFull()) {
+            return false;
+        }
+        
+        // 只有在队列当为空时，更新head
+        if(this.isEmpty()) {
+            this.head = 0;
+        }
+        
+        this.tail = (this.tail + 1) % this.size;
+        this.data[this.tail] = value;
+        
+        return true;
+    }
+    
+    // 出队列时，更新head
+    dequeue() {
+        if(this.isEmpty()) {
+            return false;
+        }
+        
+        // 出队列时，当首尾相遇时，表示队列为空了，还原head和tail
+        if(this.head === this.tail) {
+            this.head = -1;
+            this.tail = -1;
+            return true;
+        }
+        
+        this.head = (this.head + 1) % this.size;
+        
+        return true;
+    }
+    
+    isEmpty() {
+        // 头部指针指向-1，此时队列为空
+        return this.head === -1;
+    }
+    
+    isFull() {
+        // 尾部指针下一位为头部指针，表示对列满了
+        return ((this.tail + 1) % this.size) === this.head;
+    }
+    
+}
+```
 
-  
+测试一波：
+
+```js
+let circularQueue = new CircularQueue(3); // 设置长度为 3
+circularQueue.enqueue(1);  // 返回 true
+circularQueue.enqueue(2);  // 返回 true
+circularQueue.enqueue(3);  // 返回 true
+circularQueue.enqueue(4);  // 返回 false，队列已满
+circularQueue.getTail();  // 返回 3
+circularQueue.isFull();  // 返回 true
+circularQueue.dequeue();  // 返回 true
+circularQueue.enqueue(4);  // 返回 true
+circularQueue.getTail();  // 返回 4
+```
+
+### 4.JS实现双端队列
+
+### 5.JS实现循环双端队列
+
+> [队列&双端队列&循环队列&双端循环队列](https://www.cnblogs.com/ggnbnb/p/12435479.html)
+
+### 6.队列和广度优先搜索（BFS）
+
+> [完全平方数](https://leetcode-cn.com/problems/perfect-squares/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--51/)
+
+
+
+
+
+
+
+
+
+
+
+> [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
+>[【LeetCode】代码模板，刷题必会](https://blog.csdn.net/fuxuemingzhu/article/details/101900729)
