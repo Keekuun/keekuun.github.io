@@ -44,6 +44,7 @@ tags:
 [交互式展示：](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
 <iframe src="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" frameborder="0" height=650 width="100%"></iframe>
+
 ## 生命周期函数详解
 ### 1.constructor(props)
 react组件的构造函数在挂载之前被调用。在实现`React.Component`构造函数时，需要先在添加其他内容前，调用`super(props)`，用来将父组件传来的`props`绑定到这个类中，使用`this.props`将会得到。
