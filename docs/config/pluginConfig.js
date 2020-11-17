@@ -27,7 +27,7 @@ module.exports = {
     'flowchart': true,
     'ribbon': {
         size: 66,     // 彩带的宽度，默认为 90
-        opacity: 0.3, // 彩带的不透明度，默认为 0.3
+        opacity: 0.5, // 彩带的不透明度，默认为 0.3
         zIndex: -1    // 彩带的 z-index 属性，默认为 -1
     },
     // PDF
@@ -49,7 +49,7 @@ module.exports = {
             content: "复制成功!"
         }
     },
-    // 音乐插件
+    // 音乐插件 https://github.com/moefyit/vuepress-plugin-meting
     'meting': {
         // 网易
         server: "netease",
@@ -78,5 +78,41 @@ module.exports = {
             // 手机端去掉cover图
             cover: false,
         }
+    },
+    '@vuepress-reco/vuepress-plugin-kan-ban-niang': {
+        theme: ['whiteCat', 'blackCat', 'haru1', 'haru2', 'haruto', 'koharu', 'izumi', 'shizuku', 'wanko', 'miku', 'z16'],
+        clean: false,
+        width: 100,
+        height: 400,
+        message: {
+            welcome: '欢迎进来的小伙伴 🎉🎉🎉',
+            home: '心里的花，我想要带你回家。',
+            theme: '好吧，希望你能喜欢我的其他小伙伴。',
+            close: '你知道我喜欢吃什么吗？痴痴地望着你。'
+        },
+        btnStyle: {
+            left: '300px',
+            bottom: '150px',
+        },
+        messageStyle: {
+            left: '120px',
+            bottom: '440px',
+        },
+        modelStyle: {
+            left: '50px',
+            bottom: '70px',
+        },
+    },
+    // 广告通知
+    '@vuepress-reco/vuepress-plugin-bulletin-popover': {
+        width: '300px', // 默认 260px
+        title: '迁移通知',
+        body: [
+            {
+                type: 'title',
+                content: '博客源码迁移至 gitee 🎉🎉🎉',
+                style: 'text-aligin: center;'
+            },
+        ],
     }
 };

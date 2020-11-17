@@ -29,7 +29,7 @@ module.exports = {
         record: 'MIT License',
         startYear: '2018',
         searchMaxSuggestions: 10,
-        displayAllHeaders: false, // 不显示所有页面的标题链接，只显示当前页面的标题链接
+        displayAllHeaders: true, // 不显示所有页面的标题链接，只显示当前页面的标题链接
         // 代码主题配置
         /**
          * support for
@@ -82,17 +82,17 @@ module.exports = {
         // },
         lastUpdated: '上次更新',
         // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-        repo: 'zkkysqs/blog',
+        repo: 'https://gitee.com/keekuun/blog',
         // 以下为可选的编辑链接选项
         // 假如文档不是放在仓库的根目录下：
         docsDir: 'docs',
         // 默认是 false, 设置为 true 来启用
         editLinks: true,
-        editLinkText: '在 GitHub 上编辑此页',
+        editLinkText: '在 Gitee 上编辑此页',
     },
     markdown: {
         // 为每行代码增加行号
-        // lineNumbers: true,
+        lineNumbers: true,
         anchor: {
             permalink: true, permalinkBefore: true, permalinkSymbol: '🌙'
         },
