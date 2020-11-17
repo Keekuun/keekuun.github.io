@@ -90,16 +90,16 @@ emitter.once('event', () => {
 
 ### 3.2 `emitter.addListener(eventName, listener)`添加监听事件
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
 
 `emitter.on(eventName, listener)` 的别名。
 
 ### 3.3`emitter.emit(eventName[, ...args])`触发监听事件
 
-+ `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
++ `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
 
-+ `...args` [<any>](http://nodejs.cn/s/6sTGdS)
++ `...args` [any](http://nodejs.cn/s/6sTGdS)
 
 按照监听器注册的顺序，同步地调用每个注册到名为 `eventName` 的事件的监听器，并传入提供的参数。
 
@@ -134,23 +134,23 @@ console.log(myEE.eventNames());
 
 ### 3.5`emitter.getMaxListeners()`监听器最大限制数的值
 
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v)
+- 返回: [integer](http://nodejs.cn/s/SXbo1v)
 
 返回 `EventEmitter` 当前的监听器最大限制数的值，该值可以使用 [`emitter.setMaxListeners(n)`](http://nodejs.cn/s/VPJci1) 设置或默认为 [`EventEmitter.defaultMaxListeners`](http://nodejs.cn/s/LwxMek)。
 
 ### 3.6 `emitter.off(eventName, listener)`移除事件监听
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 [`emitter.removeListener()`](http://nodejs.cn/s/wRaKrC) 的别名。
 
 ### 3.7 `emitter.on(eventName, listener)`添加监听事件
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 添加 `listener` 函数到名为 `eventName` 的事件的监听器数组的末尾。 不会检查 `listener` 是否已被添加。 多次调用并传入相同的 `eventName` 与 `listener` 会导致 `listener` 会被添加多次。
 
@@ -176,9 +176,9 @@ myEE.emit('foo');
 
 ### 3.8 `emitter.once(eventName, listener)`只掉一次
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 添加单次监听器 `listener` 到名为 `eventName` 的事件。 当 `eventName` 事件下次触发时，监听器会先被移除，然后再调用。
 
@@ -204,8 +204,8 @@ myEE.emit('foo');
 
 ### 3.9 `emitter.removeAllListeners([eventName])`移除所有监听器
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 移除全部监听器或指定的 `eventName` 事件的监听器。
 
@@ -215,9 +215,9 @@ myEE.emit('foo');
 
 ### 3.10`emitter.removeListener(eventName, listener)`移除监听器
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 从名为 `eventName` 的事件的监听器数组中移除指定的 `listener`。
 
@@ -232,9 +232,9 @@ server.removeListener('connection', callback);
 
 ## 3.11`events.once(emitter, name)`promise方式处理事件
 
-- `eventName` [<string>](http://nodejs.cn/s/9Tw2bK) | [<symbol>](http://nodejs.cn/s/i5E1UH)
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- `eventName` [string](http://nodejs.cn/s/9Tw2bK) | [symbol](http://nodejs.cn/s/i5E1UH)
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 创建一个 `Promise`，当 `EventEmitter` 触发给定的事件时则会被`resolve`，当 `EventEmitter` 触发 `'error'` 时则会被`reject`。 解决 `Promise` 时将会带上触发到给定事件的所有参数的数组。
 
@@ -299,4 +299,3 @@ run();
   eventEmitter.eventNames();
   ```
 
-  

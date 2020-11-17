@@ -35,6 +35,7 @@ npm install react-router-dom --save
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 > + `react-router`是核心部分，是浏览器和原生应用的通用部分 。
 >
 > + `react-router-dom`提供了**浏览器**使用需要的定制组件。
@@ -167,6 +168,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ## **2.Route**路由匹配
 
 ### 1.Route组件

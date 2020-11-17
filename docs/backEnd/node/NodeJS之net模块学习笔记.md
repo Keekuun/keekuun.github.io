@@ -22,15 +22,15 @@ const net = require('net');
 
 ## 2.net.Server 类
 
-- 继承自: [<EventEmitter>](http://nodejs.cn/s/pGAddE)
+- 继承自: [EventEmitter](http://nodejs.cn/s/pGAddE)
 
 此类用于创建 TCP 或 [IPC](http://nodejs.cn/s/rAdYjf) 服务器。
 
 ### 2.1 `new net.Server([options][, connectionListener])`构造函数
 
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) 参见 [`net.createServer([options\][, connectionListener])`](http://nodejs.cn/s/e8cikS)。
-- `connectionListener` [<function>](http://nodejs.cn/s/ceTQa6) 自动设置为 [`'connection'`](http://nodejs.cn/s/4qU2j9) 事件的监听器。
-- 返回: [<net.Server>](http://nodejs.cn/s/gBYjux)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) 参见 [`net.createServer([options\][, connectionListener])`](http://nodejs.cn/s/e8cikS)。
+- `connectionListener` [function](http://nodejs.cn/s/ceTQa6) 自动设置为 [`'connection'`](http://nodejs.cn/s/4qU2j9) 事件的监听器。
+- 返回: [net.Server](http://nodejs.cn/s/gBYjux)
 
 `net.Server` 是一个 [`EventEmitter`](http://nodejs.cn/s/pGAddE)，实现了以下事件:
 
@@ -48,26 +48,26 @@ const net = require('net');
 可能的参数：
 
 - `server.listen(handle[, backlog][, callback])`
-  - `handle` [<object>](http://nodejs.cn/s/jzn6Ao)
-  - `backlog` [<number>](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
-  - `callback` [<funtion>](http://nodejs.cn/s/ceTQa6)
-  - 返回: [<net.server>](http://nodejs.cn/s/gBYjux)
+  - `handle` [object](http://nodejs.cn/s/jzn6Ao)
+  - `backlog` [number](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
+  - `callback` [funtion](http://nodejs.cn/s/ceTQa6)
+  - 返回: [net.server](http://nodejs.cn/s/gBYjux)
 - `server.listen(options[, callback])`option参数：
-  - `port` [<number>](http://nodejs.cn/s/SXbo1v)
-  - `host` [<host>](http://nodejs.cn/s/9Tw2bK)
-  - `path` [<string>](http://nodejs.cn/s/9Tw2bK) 如果指定了 `port` 参数则会被忽略。查看[识别 IPC 连接的路径。](http://nodejs.cn/s/tNVQV4)。
-  - `backlog` [<number>](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
-  - `exclusive` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-  - `readableAll` [<boolean>](http://nodejs.cn/s/jFbvuT) 对于 IPC 服务器，使管道对所有用户都可读。**默认值:** `false`。
-  - `writableAll` [<boolean>](http://nodejs.cn/s/jFbvuT) 对于 IPC 服务器，使管道对所有用户都可写。**默认值:** `false`。
-  - `ipv6Only` [<boolean>](http://nodejs.cn/s/jFbvuT) 对于 TCP 服务器，将 `ipv6Only` 设置为 `true` 将会禁用双栈支持，即绑定到主机 `::` 不会使 `0.0.0.0` 绑定。**默认值:** `false`。
+  - `port` [number](http://nodejs.cn/s/SXbo1v)
+  - `host` [host](http://nodejs.cn/s/9Tw2bK)
+  - `path` [string](http://nodejs.cn/s/9Tw2bK) 如果指定了 `port` 参数则会被忽略。查看[识别 IPC 连接的路径。](http://nodejs.cn/s/tNVQV4)。
+  - `backlog` [number](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
+  - `exclusive` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+  - `readableAll` [boolean](http://nodejs.cn/s/jFbvuT) 对于 IPC 服务器，使管道对所有用户都可读。**默认值:** `false`。
+  - `writableAll` [boolean](http://nodejs.cn/s/jFbvuT) 对于 IPC 服务器，使管道对所有用户都可写。**默认值:** `false`。
+  - `ipv6Only` [boolean](http://nodejs.cn/s/jFbvuT) 对于 TCP 服务器，将 `ipv6Only` 设置为 `true` 将会禁用双栈支持，即绑定到主机 `::` 不会使 `0.0.0.0` 绑定。**默认值:** `false`。
 - `server.listen(path[, backlog][, callback])`用于 [IPC](http://nodejs.cn/s/rAdYjf) 服务器。
-  - `path` [<string>](http://nodejs.cn/s/9Tw2bK) 如果指定了 `port` 参数则会被忽略。查看[识别 IPC 连接的路径。](http://nodejs.cn/s/tNVQV4)。
-  - `backlog` [<number>](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
+  - `path` [string](http://nodejs.cn/s/9Tw2bK) 如果指定了 `port` 参数则会被忽略。查看[识别 IPC 连接的路径。](http://nodejs.cn/s/tNVQV4)。
+  - `backlog` [number](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
 - `server.listen([port[,host[,backlog]]][,callback])` 用于 TCP 服务器。最常用
-  - `port` [<number>](http://nodejs.cn/s/SXbo1v)
-  - `host` [<host>](http://nodejs.cn/s/9Tw2bK)
-  - `backlog` [<number>](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
+  - `port` [number](http://nodejs.cn/s/SXbo1v)
+  - `host` [host](http://nodejs.cn/s/9Tw2bK)
+  - `backlog` [number](http://nodejs.cn/s/SXbo1v) [`server.listen()`](http://nodejs.cn/s/xGksiu) 函数的通用参数。
 
 这个函数是异步的。当服务器开始监听时，会触发 [`'listening'`](http://nodejs.cn/s/gimdsR) 事件。 最后一个参数 `callback` 将被添加为 [`'listening'`](http://nodejs.cn/s/gimdsR) 事件的监听器。
 
@@ -93,7 +93,7 @@ server.on('error', (e) => {
 
 ### 2.3 `server.address()`
 
-- 返回: [<object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC)
+- 返回: [object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC)
 
 如果在 IP socket 上监听，则返回操作系统报告的绑定的 `address`、地址 `family` 名称、以及服务器 `port`（用于查找在获取操作系统分配的地址时分配的端口）：`{ port: 12346, family: 'IPv4', address: '127.0.0.1' }`。
 
@@ -117,14 +117,14 @@ server.listen(() => {
 
 ### 2.4 `server.close([callback])`
 
-- `callback` [<function>](http://nodejs.cn/s/ceTQa6) 当 server 被关闭时调用。
-- 返回: [<net.Server>](http://nodejs.cn/s/gBYjux)
+- `callback` [function](http://nodejs.cn/s/ceTQa6) 当 server 被关闭时调用。
+- 返回: [net.Server](http://nodejs.cn/s/gBYjux)
 
 阻止 server 接受新的连接并保持现有的连接。 该函数是异步的，server 将在所有连接结束后关闭并触发 [`'close'`](http://nodejs.cn/s/3c6jjk) 事件。 可选的 `callback` 将在 `'close'` 事件发生时被调用。 与 `'close'` 事件不同的是，如果 server 在关闭时未打开，回调函数被调用时会传入一个 `Error` 对象作为唯一参数。
 
 ## 3.net.Socket 类
 
-- 继承自: [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+- 继承自: [stream.Duplex](http://nodejs.cn/s/2iRabr)
 
 此类是 TCP 套接字或流式 [IPC](http://nodejs.cn/s/rAdYjf) 端点的抽象（在 Windows 上使用命名管道，否则使用 Unix 域套接字）。 它也是一个 [`EventEmitter`](http://nodejs.cn/s/pGAddE)。
 
@@ -134,12 +134,12 @@ server.listen(() => {
 
 ### 3.1 `new net.Socket([options])`构造函数
 
-- `options` [<object>](http://nodejs.cn/s/jzn6Ao) 可用选项有
-  - `fd` [<number>](http://nodejs.cn/s/SXbo1v) 如果指定了该参数，则使用一个给定的文件描述符包装一个已存在的 socket，否则将创建一个新的 socket。
-  - `allowHalfOpen` [<boolean>](http://nodejs.cn/s/jFbvuT) 指示是否允许半打开的 TCP 连接。详情查看 [`net.createServer()`](http://nodejs.cn/s/e8cikS) 和 [`'end'`](http://nodejs.cn/s/Hxzmh3) 事件。**默认值:** `false`。
-  - `readable` [<boolean>](http://nodejs.cn/s/jFbvuT) 当传递了 `fd` 时允许读取 socket，否则忽略。**默认值:** `false`。
-  - `writable` [<boolean>](http://nodejs.cn/s/jFbvuT) 当传递了 `fd` 时允许写入 socket，否则忽略。**默认值:** `false`。
-- 返回: [<net.Socket>](http://nodejs.cn/s/wsJ1o1)
+- `options` [object](http://nodejs.cn/s/jzn6Ao) 可用选项有
+  - `fd` [number](http://nodejs.cn/s/SXbo1v) 如果指定了该参数，则使用一个给定的文件描述符包装一个已存在的 socket，否则将创建一个新的 socket。
+  - `allowHalfOpen` [boolean](http://nodejs.cn/s/jFbvuT) 指示是否允许半打开的 TCP 连接。详情查看 [`net.createServer()`](http://nodejs.cn/s/e8cikS) 和 [`'end'`](http://nodejs.cn/s/Hxzmh3) 事件。**默认值:** `false`。
+  - `readable` [boolean](http://nodejs.cn/s/jFbvuT) 当传递了 `fd` 时允许读取 socket，否则忽略。**默认值:** `false`。
+  - `writable` [boolean](http://nodejs.cn/s/jFbvuT) 当传递了 `fd` 时允许写入 socket，否则忽略。**默认值:** `false`。
+- 返回: [net.Socket](http://nodejs.cn/s/wsJ1o1)
 
 创建一个 socket 对象。 新创建的 socket 可以是 TCP socket 也可以是 [IPC](http://nodejs.cn/s/rAdYjf) 端点流，取决于它连接 [`connect()`](http://nodejs.cn/s/fGCDDg) 到什么。
 
@@ -159,7 +159,7 @@ server.listen(() => {
 
 ### 3.3 `socket.address()`
 
-- 返回: [<object>](http://nodejs.cn/s/jzn6Ao)
+- 返回: [object](http://nodejs.cn/s/jzn6Ao)
 
 返回操作系统报告的 socket 的 `address`、地址的 `family` 名称、以及 `port`： `{ port: 12346, family: 'IPv4', address: '127.0.0.1' }`。
 
@@ -171,19 +171,19 @@ server.listen(() => {
 
   ​	对于 TCP 连接，可用的 `options` 有：
 
-  - `port` [<number>](http://nodejs.cn/s/SXbo1v) 必须。`socket`要连接的端口。
-  - `host` [<string>](http://nodejs.cn/s/9Tw2bK) `socket`要连接的主机。**默认值:** `'localhost'`。
-  - `localAddress` [<string>](http://nodejs.cn/s/9Tw2bK) `socket`要连接的本地地址。
-  - `localPort` [<number>](http://nodejs.cn/s/SXbo1v) `socket`要连接的本地端口。
-  - `family` [<number>](http://nodejs.cn/s/SXbo1v) IP 栈的版本。必须为 `4`、 `6` 或 `0`。`0` 值表示允许 IPv4 和 IPv6 地址。**默认值:** `0`。
-  - `hints` [<number>](http://nodejs.cn/s/SXbo1v) 可选的 [`dns.lookup()` 提示](http://nodejs.cn/s/WpjMXq)。
-  - `lookup` [<function>](http://nodejs.cn/s/ceTQa6) 自定义的查找函数。**默认值:** [`dns.lookup()`](http://nodejs.cn/s/LJLsTL)。
+  - `port` [number](http://nodejs.cn/s/SXbo1v) 必须。`socket`要连接的端口。
+  - `host` [string](http://nodejs.cn/s/9Tw2bK) `socket`要连接的主机。**默认值:** `'localhost'`。
+  - `localAddress` [string](http://nodejs.cn/s/9Tw2bK) `socket`要连接的本地地址。
+  - `localPort` [number](http://nodejs.cn/s/SXbo1v) `socket`要连接的本地端口。
+  - `family` [number](http://nodejs.cn/s/SXbo1v) IP 栈的版本。必须为 `4`、 `6` 或 `0`。`0` 值表示允许 IPv4 和 IPv6 地址。**默认值:** `0`。
+  - `hints` [number](http://nodejs.cn/s/SXbo1v) 可选的 [`dns.lookup()` 提示](http://nodejs.cn/s/WpjMXq)。
+  - `lookup` [function](http://nodejs.cn/s/ceTQa6) 自定义的查找函数。**默认值:** [`dns.lookup()`](http://nodejs.cn/s/LJLsTL)。
 
 - `socket.connect(path[, connectListener])` 用于 [IPC](http://nodejs.cn/s/rAdYjf) 连接。
 
 - `socket.connect(port[, host\][, connectListener])` 用于 TCP 连接。
 
-- 返回: [<net.Socket>](http://nodejs.cn/s/wsJ1o1) socket 自身。
+- 返回: [net.Socket](http://nodejs.cn/s/wsJ1o1) socket 自身。
 
 该方法是异步的。当连接建立了的时候，[`'connect'`](http://nodejs.cn/s/BwGGNR) 事件将会被触发。如果连接过程中有问题，[`'error'`](http://nodejs.cn/s/v5sbt8) 事件将会代替 [`'connect'`](http://nodejs.cn/s/BwGGNR) 事件被触发，并将错误信息传递给 [`'error'`](http://nodejs.cn/s/v5sbt8) 监听器。 最后一个参数 `connectListener`，如果指定了，将会被添加为 [`'connect'`](http://nodejs.cn/s/BwGGNR) 事件的监听器。
 
@@ -204,17 +204,17 @@ net.connect({
 
 ### 3.5`socket.destroy([error])`
 
-- `error` [<Object>](http://nodejs.cn/s/jzn6Ao)
-- 返回: [<net.Socket>](http://nodejs.cn/s/wsJ1o1)
+- `error` [Object](http://nodejs.cn/s/jzn6Ao)
+- 返回: [net.Socket](http://nodejs.cn/s/wsJ1o1)
 
 确保在此 socket 上不再有 I/O 活动。 销毁流并关闭连接。有关更多详细信息，参见 [`writable.destroy()`](http://nodejs.cn/s/tLkQ7J)。
 
 ### 3.6  `socket.end([data[, encoding]][, callback])`
 
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Unit8Array>](http://nodejs.cn/s/ZbDkpm)
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 仅当 `data` 是字符串时有效。**默认值:** `'utf8'`。
-- `callback` [<function>](http://nodejs.cn/s/ceTQa6) 当 socket 完成时的回调函数。
-- 返回: [<net.Socket>](http://nodejs.cn/s/wsJ1o1) socket 本身。
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Unit8Array](http://nodejs.cn/s/ZbDkpm)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 仅当 `data` 是字符串时有效。**默认值:** `'utf8'`。
+- `callback` [function](http://nodejs.cn/s/ceTQa6) 当 socket 完成时的回调函数。
+- 返回: [net.Socket](http://nodejs.cn/s/wsJ1o1) socket 本身。
 
 半关闭 socket。 例如发送一个 FIN 包。 服务端仍可以发送数据。
 
@@ -222,9 +222,9 @@ net.connect({
 
 ### 3.7 `socket.setKeepAlive([enable][, initialDelay])`
 
-- `enable` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-- `initialDelay` [<number>](http://nodejs.cn/s/SXbo1v) **默认值:** `0`。
-- 返回: [<net.Socket>](http://nodejs.cn/s/wsJ1o1) Socket 本身。
+- `enable` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+- `initialDelay` [number](http://nodejs.cn/s/SXbo1v) **默认值:** `0`。
+- 返回: [net.Socket](http://nodejs.cn/s/wsJ1o1) Socket 本身。
 
 启用/禁用长连接功能， 并且在第一个长连接探针被发送到一个空闲的 socket 之前可选则配置初始延迟。
 
@@ -232,10 +232,10 @@ net.connect({
 
 ### 3.8 `socket.write(data[, encoding][, callback])`
 
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Unit8Array>](http://nodejs.cn/s/ZbDkpm)
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 仅当 `data` 是字符串时有效。**默认值:** `'utf8'`。
-- `callback` [<function>](http://nodejs.cn/s/ceTQa6) 当 socket 完成时的回调函数。
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Unit8Array](http://nodejs.cn/s/ZbDkpm)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 仅当 `data` 是字符串时有效。**默认值:** `'utf8'`。
+- `callback` [function](http://nodejs.cn/s/ceTQa6) 当 socket 完成时的回调函数。
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 在 socket 上发送数据。第二个参数制定了字符串的编码。 默认是 UTF8 编码。
 
@@ -283,21 +283,21 @@ const client = net.createConnection({ path: '/tmp/echo.sock' });
 
 ### 4.1 `net.isIP(input)`
 
-- `input` [<string>](http://nodejs.cn/s/9Tw2bK)
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v)
+- `input` [string](http://nodejs.cn/s/9Tw2bK)
+- 返回: [integer](http://nodejs.cn/s/SXbo1v)
 
 测试输入是否是 IP 地址。无效的字符串则返回 `0`，IPv4 地址则返回 `4`，IPv6 的地址则返回 `6`。
 
 ### 4.2 `net.isIPv4(input)`
 
-- `input` [<string>](http://nodejs.cn/s/9Tw2bK)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `input` [string](http://nodejs.cn/s/9Tw2bK)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果输入是 IPv4 地址则返回 `true`，否则返回 `false`。
 
 ### 4.2 `net.isIPv6(input)`
 
-- `input` [<string>](http://nodejs.cn/s/9Tw2bK)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `input` [string](http://nodejs.cn/s/9Tw2bK)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果输入是 IPv6 地址则返回 `true`，否则返回 `false`。

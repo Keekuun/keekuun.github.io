@@ -8,7 +8,6 @@ tags:
 - React
 - 优化
 publish: true
-
 ---
 
 # 使用CSS Module避免样式污染
@@ -102,7 +101,7 @@ const cssLoaders = [
   "style-loader", 
   "css-loader",
   { 
-      "postcss-loader",
+      loader: "postcss-loader",
       options: [ 
           require('autoprefixer')
       ]
@@ -181,7 +180,7 @@ Loaders解析顺序是从后向前，解析顺序：
 
 注意：`{test: /\.scss$/, exclude: /\.module\.(scss|sass)$/, use: cssLoaders}`，（注意顺序，放在后面）由于之前的老页面使用了普通的方式，我们还得保持原来的方式可用，这里进行了剔除。
 
-## 3.解析ts报错
+## 3.解决ts报错
 
 配置完上述步骤，如果不出意料的话，会爆出`TS2307: Cannot find module './index.module.scss'.`的错误：
 

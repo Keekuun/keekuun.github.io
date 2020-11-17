@@ -80,19 +80,19 @@ myStream.end('完成写入数据');
 
 + `writable.cork()`：强制把所有写入的数据都缓冲到内存中。 当调用 [`stream.uncork()`](http://nodejs.cn/s/2Bzt8L) 或 [`stream.end()`](http://nodejs.cn/s/nvArK4) 方法时，缓冲的数据才会被输出。
 
-+ `writable.destroy([error])`：销毁流。 可选地触发 `'error'`，并且触发 `'close'` 事件（除非将 `emitClose` 设置为 `false`）。
++ `writable.destroy([error])`：销毁流。 可选地触发 `error`，并且触发 `'close'` 事件（除非将 `emitClose` 设置为 `false`）。
 
-  + `error` [<Error>](http://nodejs.cn/s/qZ873x) 可选，使用 `'error'` 事件触发的错误。
-  + 返回: [<this>](http://nodejs.cn/s/v7Fsu2)
+  + `error` [Error](http://nodejs.cn/s/qZ873x) 可选，使用 `'error'` 事件触发的错误。
+  + 返回: [this](http://nodejs.cn/s/v7Fsu2)
 
-+ `writable.destroyed` : <boolean> 在调用了 [`writable.destroy()`](http://nodejs.cn/s/tLkQ7J) 之后为 `true`。
++ `writable.destroyed` : boolean 在调用了 [`writable.destroy()`](http://nodejs.cn/s/tLkQ7J) 之后为 `true`。
 
 + `writable.end([chunk[, encoding]][, callback])`:调用 `writable.end()` 表明已没有数据要被写入[可写流](http://nodejs.cn/s/9JUnJ8)。 可选的 `chunk` 和 `encoding` 参数可以在关闭流之前再写入一块数据。 如果传入了 `callback` 函数，则会做为监听器添加到 [`'finish'`](http://nodejs.cn/s/VBJRc8) 事件和 `'error'` 事件。
 
-  + `chunk` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<any>](http://nodejs.cn/s/6sTGdS) 要写入的数据。 对于非对象模式的流， `chunk` 必须是字符串、 `Buffer`、或 `Uint8Array`。 对于对象模式的流， `chunk` 可以是任何 JavaScript 值，除了 `null`。
-  + `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `chunk` 是字符串，则指定字符编码。
-  + `callback` [<function>](http://nodejs.cn/s/ceTQa6) 当流结束或报错时的回调函数。
-  + 返回: [<this>](http://nodejs.cn/s/v7Fsu2)
+  + `chunk` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [any](http://nodejs.cn/s/6sTGdS) 要写入的数据。 对于非对象模式的流， `chunk` 必须是字符串、 `Buffer`、或 `Uint8Array`。 对于对象模式的流， `chunk` 可以是任何 JavaScript 值，除了 `null`。
+  + `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `chunk` 是字符串，则指定字符编码。
+  + `callback` [function](http://nodejs.cn/s/ceTQa6) 当流结束或报错时的回调函数。
+  + 返回: [this](http://nodejs.cn/s/v7Fsu2)
 
   调用 [`stream.end()`](http://nodejs.cn/s/nvArK4) 之后再调用 [`stream.write()`](http://nodejs.cn/s/doppiK) 会导致错误。
 
@@ -105,7 +105,7 @@ myStream.end('完成写入数据');
   // 后面不允许再写入数据！
   ```
 
-+ `writable.setDefaultEncoding(encoding)`为[可写流](http://nodejs.cn/s/9JUnJ8)设置默认的 `encoding`。返回：<this>
++ `writable.setDefaultEncoding(encoding)`为[可写流](http://nodejs.cn/s/9JUnJ8)设置默认的 `encoding`。返回：this
 
 + `writable.uncork()`调用 [`stream.cork()`](http://nodejs.cn/s/HbaGHW) 后缓冲的所有数据输出到目标。
 
@@ -134,10 +134,10 @@ myStream.end('完成写入数据');
 
 + `writable.write(chunk[, encoding][, callback])`
 
-  - `chunk`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<any>](要写入的数据。  对于非对象模式的流， `chunk` 必须是字符串、 `Buffer` 或 `Uint8Array`。 对于对象模式的流， `chunk` 可以是任何 JavaScript 值，除了 `null`。
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `chunk` 是字符串，则指定字符编码。
-  - `callback` [<function>](http://nodejs.cn/s/ceTQa6) 当数据块被输出到目标后的回调函数。
-  - 返回: [<boolean>](http://nodejs.cn/s/jFbvuT) 如果流需要等待 `'drain'` 事件触发才能继续写入更多数据，则返回 `false`，否则返回 `true`。
+  - `chunk`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [any](要写入的数据。  对于非对象模式的流， `chunk` 必须是字符串、 `Buffer` 或 `Uint8Array`。 对于对象模式的流， `chunk` 可以是任何 JavaScript 值，除了 `null`。
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `chunk` 是字符串，则指定字符编码。
+  - `callback` [function](http://nodejs.cn/s/ceTQa6) 当数据块被输出到目标后的回调函数。
+  - 返回: [boolean](http://nodejs.cn/s/jFbvuT) 如果流需要等待 `'drain'` 事件触发才能继续写入更多数据，则返回 `false`，否则返回 `true`。
 
   `writable.write()` 写入数据到流，并在数据被完全处理之后调用 `callback`。 如果发生错误，则 `callback` 可能被调用也可能不被调用。 为了可靠地检测错误，可以为 `'error'` 事件添加监听器。 `callback` 会在触发 `'error'` 之前被异步地调用。
 
@@ -260,11 +260,11 @@ readable.on('end', () => {
 
 + `readable.destroy([error])`：销毁流。 可选地触发 `'error'` 事件，并触发 `'close'` 事件（除非将 `emitClose` 设置为 `false`）。 在此调用之后，可读流将会释放所有内部的资源，并且将会忽略对 `push()` 的后续调用。
 
-  一旦调用 `destroy()`，则不会再执行任何其他操作，并且除了 `_destroy` 以外的其他错误都不会作为 `'error'` 触发。返回: [<this>](http://nodejs.cn/s/v7Fsu2)
+  一旦调用 `destroy()`，则不会再执行任何其他操作，并且除了 `_destroy` 以外的其他错误都不会作为 `'error'` 触发。返回: [this](http://nodejs.cn/s/v7Fsu2)
 
-+ `readable.destroyed`：在调用 [`readable.destroy()`](http://nodejs.cn/s/6VkV74) 之后为 `true`。返回: <boolean>
++ `readable.destroyed`：在调用 [`readable.destroy()`](http://nodejs.cn/s/6VkV74) 之后为 `true`。返回: boolean
 
-+ `readable.isPaused()`：`readable.isPaused()` 方法返回可读流当前的操作状态。 主要用于 `readable.pipe()` 底层的机制。返回: <boolean>
++ `readable.isPaused()`：`readable.isPaused()` 方法返回可读流当前的操作状态。 主要用于 `readable.pipe()` 底层的机制。返回: boolean
 
   ```js
   const readable = new stream.Readable();
@@ -276,7 +276,7 @@ readable.on('end', () => {
   readable.isPaused(); // === false
   ```
 
-+ `readable.pause()`：`readable.pause()` 方法使流动模式的流停止触发 [`'data'`](http://nodejs.cn/s/8CCPjN) 事件，并切换出流动模式。 任何可用的数据都会保留在内部缓存中。返回: [<this>](http://nodejs.cn/s/v7Fsu2)
++ `readable.pause()`：`readable.pause()` 方法使流动模式的流停止触发 [`'data'`](http://nodejs.cn/s/8CCPjN) 事件，并切换出流动模式。 任何可用的数据都会保留在内部缓存中。返回: [this](http://nodejs.cn/s/v7Fsu2)
 
   ```js
   const readable = getReadableStreamSomehow();
@@ -295,10 +295,10 @@ readable.on('end', () => {
 
 + `readable.pipe(destination[, options])`:
 
-  - `destination` [<stream.Writable>](http://nodejs.cn/s/9JUnJ8) 数据写入的目标。
-  - `options` [<object>](http://nodejs.cn/s/jzn6Ao) 管道选项。
-    - `end` [<boolean>](http://nodejs.cn/s/jFbvuT) 当读取器结束时终止写入器。**默认值:** `true`。
-  - 返回: [<stream.Writable>](http://nodejs.cn/s/9JUnJ8) 目标可写流，如果是 [`Duplex`](http://nodejs.cn/s/2iRabr) 流或 [`Transform`](http://nodejs.cn/s/fhVJQM) 流则可以形成管道链。
+  - `destination` [stream.Writable](http://nodejs.cn/s/9JUnJ8) 数据写入的目标。
+  - `options` [object](http://nodejs.cn/s/jzn6Ao) 管道选项。
+    - `end` [boolean](http://nodejs.cn/s/jFbvuT) 当读取器结束时终止写入器。**默认值:** `true`。
+  - 返回: [stream.Writable](http://nodejs.cn/s/9JUnJ8) 目标可写流，如果是 [`Duplex`](http://nodejs.cn/s/2iRabr) 流或 [`Transform`](http://nodejs.cn/s/fhVJQM) 流则可以形成管道链。
 
   `readable.pipe()` 方法绑定可写流到可读流，将可读流自动切换到流动模式，并将可读流的所有数据推送到绑定的可写流。 数据流会被自动管理，所以即使可读流更快，目标可写流也不会超负荷。
 
@@ -323,8 +323,8 @@ readable.on('end', () => {
 
 + `readable.read([size])`:
 
-  - `size` [<number>](http://nodejs.cn/s/SXbo1v) 要读取的数据的字节数。
-  - 返回: [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<null>](http://nodejs.cn/s/334hvC) | [<any>](http://nodejs.cn/s/6sTGdS)
+  - `size` [number](http://nodejs.cn/s/SXbo1v) 要读取的数据的字节数。
+  - 返回: [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [null](http://nodejs.cn/s/334hvC) | [any](http://nodejs.cn/s/6sTGdS)
 
   从内部缓冲拉取并返回数据。 如果没有可读的数据，则返回 `null`。 默认情况下， `readable.read()` 返回的数据是 `Buffer` 对象，除非使用 `readable.setEncoding()` 指定字符编码或流处于对象模式。
 
@@ -360,7 +360,7 @@ readable.on('end', () => {
 
 + `readable.readableEnded`： 当 [`'end'`](http://nodejs.cn/s/ZgviqU) 事件被触发时变为 `true`。
 
-+ `readable.resume()`：返回[<this>](http://nodejs.cn/s/v7Fsu2)
++ `readable.resume()`：返回[this](http://nodejs.cn/s/v7Fsu2)
 
   `readable.resume()` 方法将被暂停的可读流恢复触发 [`'data'`](http://nodejs.cn/s/8CCPjN) 事件，并将流切换到流动模式。
 
@@ -378,8 +378,8 @@ readable.on('end', () => {
 
 + `readable.setEncoding(encoding)`:
 
-  + `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 字符编码。
-  + 返回: [<this>](http://nodejs.cn/s/v7Fsu2)
+  + `encoding` [string](http://nodejs.cn/s/9Tw2bK) 字符编码。
+  + 返回: [this](http://nodejs.cn/s/v7Fsu2)
 
   `readable.setEncoding()` 方法为从可读流读取的数据设置字符编码。
 
@@ -398,8 +398,8 @@ readable.on('end', () => {
 
 + `readable.unpipe([destination])`:
 
-  - `destination` [<stream.Writable>](http://nodejs.cn/s/9JUnJ8) 要移除管道的可写流。
-  - 返回: [<this>](http://nodejs.cn/s/v7Fsu2)
+  - `destination` [stream.Writable](http://nodejs.cn/s/9JUnJ8) 要移除管道的可写流。
+  - 返回: [this](http://nodejs.cn/s/v7Fsu2)
 
   `readable.unpipe()` 方法解绑之前使用 [`stream.pipe()`](http://nodejs.cn/s/Ea2ZNW) 方法绑定的可写流。
 

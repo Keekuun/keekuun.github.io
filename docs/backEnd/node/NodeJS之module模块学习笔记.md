@@ -10,7 +10,7 @@ tags:
 
 # NodeJS之module模块学习笔记
 
-![module](E:\blog\images\node\node-module.png)
+![module](../../../images/node/node-module.png)
 
 ## 1.module模块简介
 
@@ -195,21 +195,21 @@ function require(/* ... */) {
 
 ### 9.3 `module`对象
 
-+  `module.children`：<module[]>  被该模块引用的模块对象。
++  `module.children`：module[]  被该模块引用的模块对象。
 
-+ `module.exports`: <object>`module.exports` 对象由 `Module` 系统创建。
++ `module.exports`: object`module.exports` 对象由 `Module` 系统创建。
 
-+ `module.filename`: <string>模块的完全解析后的文件名。
++ `module.filename`: string模块的完全解析后的文件名。
 
-+  `module.id`: <string>模块的标识符。 通常是完全解析后的文件名。
++  `module.id`: string模块的标识符。 通常是完全解析后的文件名。
 
-+ `module.loaded`：<boolean>模块是否已经加载完成，或正在加载中。
++ `module.loaded`：boolean模块是否已经加载完成，或正在加载中。
 
-+  `module.parent`: <moduls>最先引用该模块的模块。
++  `module.parent`: moduls最先引用该模块的模块。
 
-+  `module.paths`: <string[]>模块的搜索路径。
++  `module.paths`: string[]模块的搜索路径。
 
-+ `module.require(id)`: id<string>, 返回: [<any>](http://nodejs.cn/s/6sTGdS) 导出的模块内容。
++ `module.require(id)`: id string, 返回: [any](http://nodejs.cn/s/6sTGdS) 导出的模块内容。
 
 + `module.require()` 方法提供了一种加载模块的方法，就像从原始模块调用 `require()` 一样。
 

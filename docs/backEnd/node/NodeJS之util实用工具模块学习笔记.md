@@ -22,10 +22,10 @@ const util = require('util');
 
 ### 2.1 `util.callbackify(original)`
 
-- `original` [<function>](http://nodejs.cn/s/ceTQa6) `async` 异步函数。
-- 返回: [<function>](http://nodejs.cn/s/ceTQa6) 传统回调函数。
+- `original` [function](http://nodejs.cn/s/ceTQa6) `async` 异步函数。
+- 返回: [function](http://nodejs.cn/s/ceTQa6) 传统回调函数。
 
-将 `async` 异步函数（或者一个返回值为 `Promise` 的函数）转换成遵循异常优先的回调风格的函数，例如将 `(err, value) => ...` 回调作为最后一个参数。 在回调函数中，第一个参数为拒绝的原因（如果 `Promise` 解决，则为 `null`），第二个参数则是解决的值。
+将 `async` 异步函数（或者一个返回值为 `Promise` 的函数）转换成遵循异常优先的回调风格的函数，例如将 `(err, value) = ...` 回调作为最后一个参数。 在回调函数中，第一个参数为拒绝的原因（如果 `Promise` 解决，则为 `null`），第二个参数则是解决的值。
 
 ```js
 const util = require('util');
@@ -43,7 +43,7 @@ callbackFunction((err, ret) => {
 
 ### 2.2 `util.format(format[, ...args])`
 
-- `format` [<string>](http://nodejs.cn/s/9Tw2bK) 一个类似 `printf` 的格式字符串。
+- `format` [string](http://nodejs.cn/s/9Tw2bK) 一个类似 `printf` 的格式字符串。
 
 `util.format()` 方法返回一个格式化后的字符串，使用第一个参数作为一个类似 `printf` 的格式的字符串，该字符串可以包含零个或多个格式占位符。 每个占位符会被对应参数转换后的值所替换。 支持的占位符有：
 
@@ -56,7 +56,7 @@ callbackFunction((err, ret) => {
 - `%O` - `Object`。具有通用 JavaScript 对象格式的对象的字符串表示形式。 类似于 `util.inspect()` 但没有选项。 这将显示完整对象，不包括非可枚举属性和代理。
 - `%c` - `CSS`。该说明符当前会被忽略，将会跳过任何传入的 CSS。
 - `%%` - 单个百分号（`'%'`）。这不会消耗参数。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK) 格式化的字符串。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK) 格式化的字符串。
 
 如果占位符没有对应的参数，则占位符不被替换。
 
@@ -92,19 +92,19 @@ util.format('%% %s');
 
 ### 2.3 `util.promisify(original)`
 
-- `original` [<function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<function>](http://nodejs.cn/s/ceTQa6)
+- `original` [function](http://nodejs.cn/s/ceTQa6)
+- 返回: [function](http://nodejs.cn/s/ceTQa6)
 
-传入一个遵循常见的**错误优先**的回调风格的函数（即以 `(err, value) => ...` 回调作为最后一个参数），并返回一个返回 promise 的版本。
+传入一个遵循常见的**错误优先**的回调风格的函数（即以 `(err, value) = ...` 回调作为最后一个参数），并返回一个返回 promise 的版本。
 
 ```js
 const util = require('util');
 const fs = require('fs');
 
 const stat = util.promisify(fs.stat);
-stat('.').then((stats) => {
+stat('.').then((stats) = {
   // 使用 `stats`。
-}).catch((error) => {
+}).catch((error) = {
   // 处理错误。
 });
 ```
@@ -146,12 +146,12 @@ const foo = new Foo();
 
 const naiveBar = util.promisify(foo.bar);
 // TypeError: Cannot read property 'a' of undefined
-// naiveBar().then(a => console.log(a));
+// naiveBar().then(a = console.log(a));
 
-naiveBar.call(foo).then((a) => console.log(a)); // '42'
+naiveBar.call(foo).then((a) = console.log(a)); // '42'
 
 const bindBar = naiveBar.bind(foo);
-bindBar().then((a) => console.log(a)); // '42'
+bindBar().then((a) = console.log(a)); // '42'
 ```
 
 ### 2.4 `util.types.isArrayBuffer(value)`判断`ArrayBuffer`实例

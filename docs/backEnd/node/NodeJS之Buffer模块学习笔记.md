@@ -11,10 +11,10 @@ tags:
 
 # NodeJS之Buffer模块学习笔记
 
-![Buffer](E:\blog\images\node\buffer.png)
+![Buffer](../../../images/node/buffer.png)
 
-> `Buffer` 类是NodeJS中的一个全局变量，用于直接处理二进制数据。 其API和js中的Array有很大的类似之处，可以对比学习。
->
+>`Buffer` 类是NodeJS中的一个全局变量，用于直接处理二进制数据。 其API和js中的Array有很大的类似之处，可以对比学习。
+
 > （本文中：buf.xx -代表 实例方法  Buffer.xx- 代表静态方法）
 
 ## 1. 简介
@@ -42,7 +42,7 @@ const buffer = Buffer.from([1, 2, 3]);
 
 + `Buffer.from(array)`
 
-  + `array <integer[]>`使用 `0` – `255` 范围内的**字节数组** `array` 来分配一个新的 `Buffer`。 超出该范围的数组条目会被截断以适合它。
+  + `array integer[]`使用 `0` – `255` 范围内的**字节数组** `array` 来分配一个新的 `Buffer`。 超出该范围的数组条目会被截断以适合它。
 
   ```js
   // 创建一个包含字符串 'buffer' 的 UTF-8 字节的新 Buffer。
@@ -52,8 +52,8 @@ const buffer = Buffer.from([1, 2, 3]);
 + `Buffer.from(arrayBuffer[, byteOffset[, length]])`
 
   + `arrayBuffer`: 一个 [`ArrayBuffer`](http://nodejs.cn/s/mUbfvF) 或 [`SharedArrayBuffer`](http://nodejs.cn/s/6J6LBy)，例如 [`TypedArray`](http://nodejs.cn/s/oh3CkV) 的 `.buffer` 属性。
-  + `byteOffset` [<integer>](http://nodejs.cn/s/SXbo1v) 开始拷贝的索引。**默认值:** `0`。
-  + `length` [<integer>](http://nodejs.cn/s/SXbo1v) 拷贝的字节数。**默认值:** `arrayBuffer.byteLength - byteOffset`。
+  + `byteOffset` [integer](http://nodejs.cn/s/SXbo1v) 开始拷贝的索引。**默认值:** `0`。
+  + `length` [integer](http://nodejs.cn/s/SXbo1v) 拷贝的字节数。**默认值:** `arrayBuffer.byteLength - byteOffset`。
 
   ```js
   const ab = new ArrayBuffer(10);
@@ -64,7 +64,7 @@ const buffer = Buffer.from([1, 2, 3]);
 
 + `Buffer.from(buffer)`:拷贝 `buffer` 的数据到新建的 `Buffer` 实例。
 
-  + `buffer` [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) 要拷贝数据的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
+  + `buffer` [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) 要拷贝数据的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
 
   ```js
   const buf1 = Buffer.from('buffer');
@@ -73,19 +73,19 @@ const buffer = Buffer.from([1, 2, 3]);
 
 + `Buffer.from(object[, offsetOrEncoding[, length]])`
 
-  + `object` [<Object>](http://nodejs.cn/s/jzn6Ao) 支持 `Symbol.toPrimitive` 或 `valueOf()` 的对象。
-  + `offsetOrEncoding` [<integer>](http://nodejs.cn/s/SXbo1v) | [<string>](http://nodejs.cn/s/9Tw2bK) 字节偏移量或字符编码，取决于 `object.valueOf()` 或 `object[Symbol.toPrimitive]()` 返回的值。
-  + `length` [<integer>](http://nodejs.cn/s/SXbo1v) 长度，取决于 `object.valueOf()` 或 `object[Symbol.toPrimitive]()` 的返回值。
+  + `object` [Object](http://nodejs.cn/s/jzn6Ao) 支持 `Symbol.toPrimitive` 或 `valueOf()` 的对象。
+  + `offsetOrEncoding` [integer](http://nodejs.cn/s/SXbo1v) | [string](http://nodejs.cn/s/9Tw2bK) 字节偏移量或字符编码，取决于 `object.valueOf()` 或 `object[Symbol.toPrimitive]()` 返回的值。
+  + `length` [integer](http://nodejs.cn/s/SXbo1v) 长度，取决于 `object.valueOf()` 或 `object[Symbol.toPrimitive]()` 的返回值。
 
   ```js
   const buf = Buffer.from(new String('this is a test'));
-  // 打印: <Buffer 74 68 69 73 20 69 73 20 61 20 74 65 73 74>
+  // 打印: Buffer 74 68 69 73 20 69 73 20 61 20 74 65 73 74
   ```
 
 + `Buffer.from(string[, encoding])`: 创建一个包含 `string` 的新 `Buffer`。 `encoding` 参数指定用于将 `string` 转换为字节的字符编码。
 
-  + `string` [<string>](http://nodejs.cn/s/9Tw2bK) 要编码的字符串。
-  + `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) `string` 的字符编码。**默认值:** `'utf8'`。
+  + `string` [string](http://nodejs.cn/s/9Tw2bK) 要编码的字符串。
+  + `encoding` [string](http://nodejs.cn/s/9Tw2bK) `string` 的字符编码。**默认值:** `'utf8'`。
 
   ```JS
   const buf1 = Buffer.from('this is a tést');
@@ -101,9 +101,9 @@ const buffer = Buffer.from([1, 2, 3]);
 
 ### 3.2 Buffer.alloc(size[, fill[, encoding]]) 分配空间
 
-- `size` [<integer>](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 的所需长度。
-- `fill` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<integer>](http://nodejs.cn/s/SXbo1v) 用于预填充新 `Buffer` 的值。**默认值:** `0`。
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `fill` 是一个字符串，则这是它的字符编码。**默认值:** `'utf8'`。
+- `size` [integer](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 的所需长度。
+- `fill` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [integer](http://nodejs.cn/s/SXbo1v) 用于预填充新 `Buffer` 的值。**默认值:** `0`。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `fill` 是一个字符串，则这是它的字符编码。**默认值:** `'utf8'`。
 
 分配一个大小为 `size` 字节的新 `Buffer`。 如果 `fill` 为 `undefined`，则用零填充 `Buffer`。
 
@@ -111,7 +111,7 @@ const buffer = Buffer.from([1, 2, 3]);
 const buf = Buffer.alloc(5);
 
 console.log(buf);
-// 打印: <Buffer 00 00 00 00 00>
+// 打印: Buffer 00 00 00 00 00
 ```
 
 如果 `size` 大于 [`buffer.constants.MAX_LENGTH`](http://nodejs.cn/s/aBiAe5) 或小于 0，则抛出 [`ERR_INVALID_OPT_VALUE`](http://nodejs.cn/s/ouMFyk)。
@@ -122,7 +122,7 @@ console.log(buf);
 const buf = Buffer.alloc(5, 'a');
 
 console.log(buf);
-// 打印: <Buffer 61 61 61 61 61>
+// 打印: Buffer 61 61 61 61 61
 ```
 
 如果同时指定了 `fill` 和 `encoding`，则分配的 `Buffer` 通过调用 [`buf.fill(fill, encoding)`](http://nodejs.cn/s/2dLJk5) 进行初始化 。
@@ -131,7 +131,7 @@ console.log(buf);
 const buf = Buffer.alloc(11, 'aGVsbG8gd29ybGQ=', 'base64');
 
 console.log(buf);
-// 打印: <Buffer 68 65 6c 6c 6f 20 77 6f 72 6c 64>
+// 打印: Buffer 68 65 6c 6c 6f 20 77 6f 72 6c 64
 ```
 
 调用 [`Buffer.alloc()`](http://nodejs.cn/s/Du96og) 可能比替代的 [`Buffer.allocUnsafe()`](http://nodejs.cn/s/TWpeWk) 慢得多，但能确保新创建的 `Buffer` 实例的内容永远不会包含来自先前分配的敏感数据，包括可能尚未分配给 `Buffer` 的数据。
@@ -140,11 +140,11 @@ console.log(buf);
 
 ### 3.3 `buf.fill(value[, offset[, end]][, encoding])` 填充buffer
 
-- `value` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<integer>](http://nodejs.cn/s/SXbo1v) 用来填充 `buf` 的值。
-- `offset` [<integer>](http://nodejs.cn/s/SXbo1v) 开始填充 `buf` 的偏移量。**默认值:** `0`。
-- `end` [<integer>](http://nodejs.cn/s/SXbo1v) 结束填充 `buf` 的偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
-- 返回: [<Buffer>](http://nodejs.cn/s/6x1hD3) `buf` 的引用。
+- `value` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [integer](http://nodejs.cn/s/SXbo1v) 用来填充 `buf` 的值。
+- `offset` [integer](http://nodejs.cn/s/SXbo1v) 开始填充 `buf` 的偏移量。**默认值:** `0`。
+- `end` [integer](http://nodejs.cn/s/SXbo1v) 结束填充 `buf` 的偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
+- 返回: [Buffer](http://nodejs.cn/s/6x1hD3) `buf` 的引用。
 
 用指定的 `value` 填充 `buf`。 如果没有指定 `offset` 与 `end`，则填充整个 `buf`：
 
@@ -164,7 +164,7 @@ console.log(b.toString());
 // 使用在 UTF-8 中占用两个字节的字符来填充 `Buffer`。
 
 console.log(Buffer.allocUnsafe(5).fill('\u0222'));
-// 打印: <Buffer c8 a2 c8 a2 c8>
+// 打印: Buffer c8 a2 c8 a2 c8
 ```
 
 如果 `value` 包含无效的字符，则截掉无效的字符。 如果截掉后没有数据，则不填充：
@@ -173,20 +173,20 @@ console.log(Buffer.allocUnsafe(5).fill('\u0222'));
 const buf = Buffer.allocUnsafe(5);
 
 console.log(buf.fill('a'));
-// 打印: <Buffer 61 61 61 61 61>
+// 打印: Buffer 61 61 61 61 61
 console.log(buf.fill('aazz', 'hex'));
-// 打印: <Buffer aa aa aa aa aa>
+// 打印: Buffer aa aa aa aa aa
 console.log(buf.fill('zz', 'hex'));
 // 抛出异常。
 ```
 
 ### 3.4 `buf.write(string[, offset[, length]][, encoding])` 写入buffer
 
-- `string` [<string>](http://nodejs.cn/s/9Tw2bK) 要写入 `buf` 的字符串。
-- `offset` [<integer>](http://nodejs.cn/s/SXbo1v) 开始写入 `string` 之前要跳过的字节数。**默认值:** `0`。
-- `length` [<integer>](http://nodejs.cn/s/SXbo1v) 要写入的最大字节数（写入的字节数不会超出 `buf.length - offset`）。**默认值:** `buf.length - offset`。
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) `string` 的字符编码。**默认值:** `'utf8'`。
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v) 已写入的字节数。
+- `string` [string](http://nodejs.cn/s/9Tw2bK) 要写入 `buf` 的字符串。
+- `offset` [integer](http://nodejs.cn/s/SXbo1v) 开始写入 `string` 之前要跳过的字节数。**默认值:** `0`。
+- `length` [integer](http://nodejs.cn/s/SXbo1v) 要写入的最大字节数（写入的字节数不会超出 `buf.length - offset`）。**默认值:** `buf.length - offset`。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) `string` 的字符编码。**默认值:** `'utf8'`。
+- 返回: [integer](http://nodejs.cn/s/SXbo1v) 已写入的字节数。
 
 根据 `encoding` 指定的字符编码将 `string` 写入到 `buf` 中的 `offset` 位置。 `length` 参数是要写入的字节数。 如果 `buf` 没有足够的空间保存整个字符串，则只会写入 `string` 的一部分。 只编码了一部分的字符不会被写入。
 
@@ -210,15 +210,15 @@ console.log(`${length} bytes: ${buffer.toString('utf8', 8, 10)}`);
 
 ### 4.1 Buffer.isBuffer(obj)  判断是否是Buffer
 
-- `obj` [<Object>](http://nodejs.cn/s/jzn6Ao)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `obj` [Object](http://nodejs.cn/s/jzn6Ao)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果 `obj` 是一个 `Buffer`，则返回 `true`，否则返回 `false`。
 
 ### 4.2 Buffer.isEncoding(encoding) 检查字符编码是否支持
 
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 要检查的字符编码名称。
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 要检查的字符编码名称。
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果 `encoding` 是支持的字符编码的名称，则返回 `true`，否则返回 `false`。
 
@@ -240,9 +240,9 @@ console.log(Buffer.isEncoding('utf8'));
 
 ### 5.1 `buf.subarray([start[, end]])` 通过截取访问
 
-- `start` [<integer>](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 开始的位置。**默认值:** `0`。
-- `end` [<integer>](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 结束的位置（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。指定大于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 的 `end` 将会返回与 `end` 等于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 时相同的结果。
-- 返回: [<Buffer>](http://nodejs.cn/s/6x1hD3)
+- `start` [integer](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 开始的位置。**默认值:** `0`。
+- `end` [integer](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 结束的位置（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。指定大于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 的 `end` 将会返回与 `end` 等于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 时相同的结果。
+- 返回: [Buffer](http://nodejs.cn/s/6x1hD3)
 
 返回一个新的 `Buffer`，它引用与原始的 Buffer 相同的内存，但是由 `start` 和 `end` 索引进行偏移和裁剪。所以，修改新的 `Buffer` 切片将会修改原始 `Buffer` 中的内存，因为两个对象分配的内存是重叠的。
 
@@ -287,9 +287,9 @@ console.log(buf.subarray(-5, -2).toString());
 
 ### 5.2 `buf.slice([start[, end]])`通过切片访问
 
-- `start` [<integer>](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 开始的位置。**默认值:** `0`。
-- `end` [<integer>](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 结束的位置（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。指定大于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 的 `end` 将会返回与 `end` 等于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 时相同的结果。
-- 返回: [<Buffer>](http://nodejs.cn/s/6x1hD3)
+- `start` [integer](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 开始的位置。**默认值:** `0`。
+- `end` [integer](http://nodejs.cn/s/SXbo1v) 新 `Buffer` 结束的位置（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。指定大于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 的 `end` 将会返回与 `end` 等于 [`buf.length`](http://nodejs.cn/s/hn6FjL) 时相同的结果。
+- 返回: [Buffer](http://nodejs.cn/s/6x1hD3)
 
 返回一个新的 `Buffer`，它引用与原始的 Buffer 相同的内存，但是由 `start` 和 `end` 索引进行偏移和裁剪。指定负的索引会导致切片的生成是相对于 `buf` 的末尾而不是开头。这些与 `buf.subarray()` 的行为相同。
 
@@ -309,11 +309,11 @@ console.log(buf.toString());
 
 ### 5.3 `buf[index]` 通过索引访问
 
-+ `index` [<integer>](http://nodejs.cn/s/SXbo1v)：0-255
++ `index` [integer](http://nodejs.cn/s/SXbo1v)：0-255
 
 索引操作符 `[index]` 可用于获取或设置 `buf` 中指定的 `index` 位置的八位字节。 该值指向单个字节，所以有效的值的范围是 `0x00` 至 `0xFF`（十六进制）、或 `0` 至 `255`（十进制）。
 
-该操作符继承自 `Uint8Array`，所以对越界访问的行为与 `Uint8Array` 相同。 也就是说，当 `index` 为负数或 `>= buf.length` 时，则 `buf[index]` 返回 `undefined`，而如果 `index` 为负数或 `>= buf.length` 时，则 `buf[index] = value` 不会修改该 buffer。
+该操作符继承自 `Uint8Array`，所以对越界访问的行为与 `Uint8Array` 相同。 也就是说，当 `index` 为负数或 `= buf.length` 时，则 `buf[index]` 返回 `undefined`，而如果 `index` 为负数或 `= buf.length` 时，则 `buf[index] = value` 不会修改该 buffer。
 
 ```js
 const str = 'http://nodejs.cn/';
@@ -329,15 +329,15 @@ console.log(buf.toString('utf8'));
 
 ### 5.4 `buf.indexOf(value[, byteOffset][, encoding])`查找索引
 
-- `value` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<integer>](http://nodejs.cn/s/SXbo1v) 要查找的值。
+- `value` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [integer](http://nodejs.cn/s/SXbo1v) 要查找的值。
 
-- `byteOffset` [<integer>](http://nodejs.cn/s/SXbo1v) `buf` 中开始查找的偏移量。**默认值:** `0`。
+- `byteOffset` [integer](http://nodejs.cn/s/SXbo1v) `buf` 中开始查找的偏移量。**默认值:** `0`。
 
   如果 `byteOffset` 不是一个数值，则会被转换成数值。 如果转换后的值为 `NaN` 或 `0`, 则会查找整个 buffer。 这与 [`String#indexOf()`](http://nodejs.cn/s/Uqm5hr) 是一致的。
 
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
 
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v) `buf` 中**首次**出现 `value` 的索引，如果 `buf` 没包含 `value` 则返回 `-1`。
+- 返回: [integer](http://nodejs.cn/s/SXbo1v) `buf` 中**首次**出现 `value` 的索引，如果 `buf` 没包含 `value` 则返回 `-1`。
 
 如果 `value` 是：
 
@@ -377,10 +377,10 @@ console.log(utf16Buffer.indexOf('\u03a3', -4, 'utf16le'));
 
 ### 5.6 `buf.includes(value[, byteOffset][, encoding])`查找包含
 
-- `value` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm) | [<integer>](http://nodejs.cn/s/SXbo1v) 要查找的值。
-- `byteOffset` [<integer>](http://nodejs.cn/s/SXbo1v) `buf` 中开始查找的偏移量。**默认值:** `0`。
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT) 如果 `buf` 查找到 `value`，则返回 `true`，否则返回 `false`。
+- `value` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm) | [integer](http://nodejs.cn/s/SXbo1v) 要查找的值。
+- `byteOffset` [integer](http://nodejs.cn/s/SXbo1v) `buf` 中开始查找的偏移量。**默认值:** `0`。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `value` 是字符串，则指定 `value` 的字符编码。**默认值:** `'utf8'`。
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT) 如果 `buf` 查找到 `value`，则返回 `true`，否则返回 `false`。
 
 相当于 [`buf.indexOf() !== -1`](http://nodejs.cn/s/eFR2KV)。
 
@@ -407,7 +407,7 @@ console.log(buf.includes('this', 4));
 
 ### 5.6 `buf.keys()`、[`buf.values()`](http://nodejs.cn/s/DPvcum)、[`buf.entries()`](http://nodejs.cn/s/E1Z524)
 
-+ 返回 [<terator>](http://nodejs.cn/s/Y2SE1q)
++ 返回 [terator](http://nodejs.cn/s/Y2SE1q)
 
 分别创建并返回 `buf` 键名[index]、[byte]、[index, byte]的[迭代器](http://nodejs.cn/s/KK7Xfc)。
 
@@ -437,11 +437,11 @@ for (const b of buf) {
 
 ### 6.1 Buffer.compare(buf1, buf2) 静态方法
 
-- `buf1` [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm)
+- `buf1` [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm)
 
-- `buf2` [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm)
+- `buf2` [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm)
 
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v) `-1`、 `0` 或 `1`，取决于比较的结果。 有关详细信息，参见 [`buf.compare()`](http://nodejs.cn/s/3wddT3)。
+- 返回: [integer](http://nodejs.cn/s/SXbo1v) `-1`、 `0` 或 `1`，取决于比较的结果。 有关详细信息，参见 [`buf.compare()`](http://nodejs.cn/s/3wddT3)。
 
   1.如果 `buf1`与 `buf2`相同，则返回 `0`。
 
@@ -457,18 +457,18 @@ const buf2 = Buffer.from('0123');
 const arr = [buf1, buf2];
 
 console.log(arr.sort(Buffer.compare));
-// 打印: [ <Buffer 30 31 32 33>, <Buffer 31 32 33 34> ]
+// 打印: [ Buffer 30 31 32 33, Buffer 31 32 33 34 ]
 // (结果相当于: [buf2, buf1])
 ```
 
 ### 6.2 `buf.compare(target[, targetStart[, targetEnd[, sourceStart[, sourceEnd]]]])` 实例方法
 
-- `target`  [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<Uint8Array>](http://nodejs.cn/s/ZbDkpm)要与 `buf` 对比的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
-- `targetStart` [<integer>](http://nodejs.cn/s/SXbo1v) `target` 中开始对比的偏移量。**默认值:** `0`。
-- `targetEnd` [<integer>](http://nodejs.cn/s/SXbo1v) `target` 中结束对比的偏移量（不包含）。**默认值:** `target.length`。
-- `sourceStart` [<integer>](http://nodejs.cn/s/SXbo1v) `buf` 中开始对比的偏移量。**默认值:** `0`。
-- `sourceEnd` [<integer>](http://nodejs.cn/s/SXbo1v) `buf` 中结束对比的偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v)
+- `target`  [Buffer](http://nodejs.cn/s/6x1hD3) | [Uint8Array](http://nodejs.cn/s/ZbDkpm)要与 `buf` 对比的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
+- `targetStart` [integer](http://nodejs.cn/s/SXbo1v) `target` 中开始对比的偏移量。**默认值:** `0`。
+- `targetEnd` [integer](http://nodejs.cn/s/SXbo1v) `target` 中结束对比的偏移量（不包含）。**默认值:** `target.length`。
+- `sourceStart` [integer](http://nodejs.cn/s/SXbo1v) `buf` 中开始对比的偏移量。**默认值:** `0`。
+- `sourceEnd` [integer](http://nodejs.cn/s/SXbo1v) `buf` 中结束对比的偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
+- 返回: [integer](http://nodejs.cn/s/SXbo1v)
 
 对比 `buf` 与 `target`，并返回一个数值，表明 `buf` 在排序上是否排在 `target` 前面、或后面、或相同。 对比是基于各自 `Buffer` 实际的字节序列。
 
@@ -492,7 +492,7 @@ console.log(buf2.compare(buf1));
 console.log(buf2.compare(buf3));
 // 打印: 1
 console.log([buf1, buf2, buf3].sort(Buffer.compare));
-// 打印: [ <Buffer 41 42 43>, <Buffer 41 42 43 44>, <Buffer 42 43 44> ]
+// 打印: [ Buffer 41 42 43, Buffer 41 42 43 44, Buffer 42 43 44 ]
 // (相当于: [buf1, buf3, buf2])
 ```
 
@@ -512,8 +512,8 @@ console.log(buf1.compare(buf2, 5, 6, 5));
 
 ### 6.3 `buf.equals(otherBuffer)`
 
-- `otherBuffer` [<Buffer>](http://nodejs.cn/s/6x1hD3) 要与 `bur` 对比的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `otherBuffer` [Buffer](http://nodejs.cn/s/6x1hD3) 要与 `bur` 对比的 `Buffer` 或 [`Uint8Array`](http://nodejs.cn/s/ZbDkpm)。
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果 `buf` 与 `otherBuffer` 具有完全相同的字节，则返回 `true`，否则返回 `false`。 相当于 [`buf.compare(otherBuffer) === 0`](http://nodejs.cn/s/3wddT3)。
 
@@ -534,15 +534,15 @@ console.log(buf1.equals(buf3));
 
 ### 71 `Buffer.poolSize`缓冲池
 
-- [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `8192`。
+- [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `8192`。
 
 这是用于缓冲池的预分配的内部 `Buffer` 实例的大小（以字节为单位）。 该值可以修改
 
 ### 7.2 `Buffer.byteLength(string[, encoding])`计算字节长度
 
-- `string` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<TypedArray>](http://nodejs.cn/s/oh3CkV) | [<DataView>](http://nodejs.cn/s/yCdVkD) | [<ArrayBuffer>](http://nodejs.cn/s/mUbfvF) | [SharedArrayBuffer](http://nodejs.cn/s/6J6LBy) 要计算长度的值。
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 如果 `string` 是字符串，则这是它的字符编码。**默认值:** `'utf8'`。
-- 返回: [<integer>](http://nodejs.cn/s/SXbo1v) `string` 中包含的字节数。
+- `string` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [TypedArray](http://nodejs.cn/s/oh3CkV) | [DataView](http://nodejs.cn/s/yCdVkD) | [ArrayBuffer](http://nodejs.cn/s/mUbfvF) | [SharedArrayBuffer](http://nodejs.cn/s/6J6LBy) 要计算长度的值。
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 如果 `string` 是字符串，则这是它的字符编码。**默认值:** `'utf8'`。
+- 返回: [integer](http://nodejs.cn/s/SXbo1v) `string` 中包含的字节数。
 
 当使用 `encoding` 进行编码时，返回字符串的字节长度。 与 [`String.prototype.length`](http://nodejs.cn/s/TmnY1C) 不同，后者不会考虑用于将字符串转换为字节的编码。
 
@@ -560,10 +560,10 @@ console.log(`${str}: ${str.length} 个字符, ` +
 
 ### 7.3  `buf.toString([encoding[, start[, end]]])`转为string
 
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 使用的字符编码。**默认值:** `'utf8'`。
-- `start` [<integer>](http://nodejs.cn/s/SXbo1v) 开始解码的字节偏移量。**默认值:** `0`。
-- `end` [<integer>](http://nodejs.cn/s/SXbo1v) 结束解码的字节偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) 使用的字符编码。**默认值:** `'utf8'`。
+- `start` [integer](http://nodejs.cn/s/SXbo1v) 开始解码的字节偏移量。**默认值:** `0`。
+- `end` [integer](http://nodejs.cn/s/SXbo1v) 结束解码的字节偏移量（不包含）。**默认值:** [`buf.length`](http://nodejs.cn/s/hn6FjL)。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK)
 
 根据 `encoding` 指定的字符编码将 `buf` 解码成字符串。 传入 `start` 和 `end` 可以只解码 `buf` 的子集。
 
@@ -596,7 +596,7 @@ console.log(buf2.toString(undefined, 0, 3));
 
 ### 7.4 `buf.toJSON()`
 
-- 返回: [<Object>](http://nodejs.cn/s/jzn6Ao)
+- 返回: [Object](http://nodejs.cn/s/jzn6Ao)
 
 返回 `buf` 的 JSON 格式。 当字符串化 `Buffer` 实例时，[`JSON.stringify()`](http://nodejs.cn/s/bmLTNS) 会调用该函数。
 
@@ -616,7 +616,7 @@ const copy = JSON.parse(json, (key, value) => {
 });
 
 console.log(copy);
-// 打印: <Buffer 01 02 03 04 05>
+// 打印: Buffer 01 02 03 04 05
 ```
 
 ## 8. 小结
@@ -684,4 +684,3 @@ console.log(copy);
   bf.toJSON(); // {type: 'Buffer',data: [104, 101, 108, 108,111,  32, 119, 111,114, 108, 100]}
   ```
 
-  

@@ -1,5 +1,6 @@
 ---
-title: 【目录】JS学习笔记
+title: 【Echarts】Echarts API笔记
+date: 2018-11-25
 sidebar: auto
 isComment: true
 categories: 
