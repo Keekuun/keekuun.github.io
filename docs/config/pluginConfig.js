@@ -106,6 +106,7 @@ module.exports = {
     // 广告通知
     '@vuepress-reco/vuepress-plugin-bulletin-popover': {
         width: '300px', // 默认 260px
+        left: '20px',
         title: '迁移通知',
         body: [
             {
