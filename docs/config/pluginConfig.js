@@ -103,16 +103,14 @@ module.exports = {
             bottom: '70px',
         },
     },
-    // 广告通知
+    // 广告通知 https://vuepress-theme-reco.recoluan.com/views/plugins/bulletinPopover.html#loader-wrapper
     '@vuepress-reco/vuepress-plugin-bulletin-popover': {
-        width: '300px', // 默认 260px
-        left: '20px',
         title: '迁移通知',
         body: [
             {
                 type: 'title',
                 content: '博客源码迁移至 gitee 🎉🎉🎉',
-                style: 'text-aligin: center;'
+                style: 'text-aligin: center',
             },
         ],
     }
