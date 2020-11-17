@@ -10,7 +10,7 @@ tags:
 
 # NodeJS之HTTP模块学习笔记
 
-![HTTP模块](E:\blog\images\node\http-module.png)
+![HTTP模块](../../../images/node/http-module.png)
 
 ## 1.简介
 
@@ -50,7 +50,7 @@ module.exports = {
 
 ## 3.http.METHODS
 
-返回类型：`<string[]>`
+返回类型：`string[]`
 
 解析器支持的 HTTP 方法列表，依赖于`_http_common`模块。
 
@@ -67,7 +67,7 @@ module.exports = {
 
 ## 4.http.STATUS_CODES
 
-返回类型：`<Object>`
+返回类型：`Object`
 
 所有标准 HTTP 响应状态码的集合，以及每个状态码的简短描述。
 
@@ -143,13 +143,13 @@ const STATUS_CODES = {
 
 ## 5.http.createServer方法
 
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `IncomingMessage` [<http.IncomingMessage>](http://nodejs.cn/s/2RqpEw) 指定要使用的 `IncomingMessage` 类。用于扩展原始的 `IncomingMessage`。**默认值:** `IncomingMessage`。
-  - `ServerResponse` [<http.ServerResponse>](http://nodejs.cn/s/rMXoZ1) 指定要使用的 `ServerResponse` 类。用于扩展原始的 `ServerResponse`。**默认值:** `ServerResponse`。
-  - `insecureHTTPParser` [<boolean>](http://nodejs.cn/s/jFbvuT) 使用不安全的 HTTP 解析器，当为 `true` 时接受无效的 HTTP 请求头。应避免使用不安全的解析器。有关更多信息，参见 [`--insecure-http-parser`](http://nodejs.cn/s/5Bnm43)。**默认值:** `false`。
-  - `maxHeaderSize` [<number>](http://nodejs.cn/s/SXbo1v) 可选地，重写此服务器接收的请求的 [`--max-http-header-size`](http://nodejs.cn/s/HfsyuU) 值，即请求头的最大长度（以字节为单位）。 **默认值:** 16384（16KB）。
-- `requestListener` [<Function>](http://nodejs.cn/s/ceTQa6)， 是一个自动添加到 [`'request'`](http://nodejs.cn/s/2qCn57) 事件的函数。参数(request, response)见后面的`http.clientRequest`和`http.ServerResponse`。
-- 返回: [<http.Server>](http://nodejs.cn/s/jLiRTh)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao)
+  - `IncomingMessage` [http.IncomingMessage](http://nodejs.cn/s/2RqpEw) 指定要使用的 `IncomingMessage` 类。用于扩展原始的 `IncomingMessage`。**默认值:** `IncomingMessage`。
+  - `ServerResponse` [http.ServerResponse](http://nodejs.cn/s/rMXoZ1) 指定要使用的 `ServerResponse` 类。用于扩展原始的 `ServerResponse`。**默认值:** `ServerResponse`。
+  - `insecureHTTPParser` [boolean](http://nodejs.cn/s/jFbvuT) 使用不安全的 HTTP 解析器，当为 `true` 时接受无效的 HTTP 请求头。应避免使用不安全的解析器。有关更多信息，参见 [`--insecure-http-parser`](http://nodejs.cn/s/5Bnm43)。**默认值:** `false`。
+  - `maxHeaderSize` [number](http://nodejs.cn/s/SXbo1v) 可选地，重写此服务器接收的请求的 [`--max-http-header-size`](http://nodejs.cn/s/HfsyuU) 值，即请求头的最大长度（以字节为单位）。 **默认值:** 16384（16KB）。
+- `requestListener` [Function](http://nodejs.cn/s/ceTQa6)， 是一个自动添加到 [`'request'`](http://nodejs.cn/s/2qCn57) 事件的函数。参数(request, response)见后面的`http.clientRequest`和`http.ServerResponse`。
+- 返回: [http.Server](http://nodejs.cn/s/jLiRTh)
 
 源码解读：
 
@@ -179,21 +179,21 @@ const server = new http.Server(function(req, res){...})
 
 ### 6.1`new Agent([options])`构造方法
 
-`options` [<Object>](http://nodejs.cn/s/jzn6Ao) 要在代理上设置的可配置选项集：
+`options` [Object](http://nodejs.cn/s/jzn6Ao) 要在代理上设置的可配置选项集：
 
-+ `keepAlive <boolean>`，**默认值:** `false`, true-开启长连接；
++ `keepAlive boolean`，**默认值:** `false`, true-开启长连接；
 
   不要与 `Connection` 请求头的 `keep-alive` 值混淆。 `Connection: keep-alive` 请求头始终在使用代理时发送，除非明确指定 `Connection` 请求头、或者 `keepAlive` 和 `maxSockets` 选项分别设置为 `false` 和 `Infinity`，在这种情况下将会使用 `Connection: close`。
 
-> [NodeJS如何实现真正的长连接？](https://my.oschina.net/antianlu/blog/261105)
->
-> [解决使用 KeepAlive Agent 遇到的 ECONNRESET](https://www.yuque.com/egg/nodejs/keep-alive-agent-econnreset)
+ [NodeJS如何实现真正的长连接？](https://my.oschina.net/antianlu/blog/261105)
 
-+ `keepAliveMsecs` [<number>](http://nodejs.cn/s/SXbo1v) 当使用 `keepAlive` 选项时，指定用于 TCP Keep-Alive 数据包的[初始延迟](http://nodejs.cn/s/qqbgUD)。当 `keepAlive` 选项为 `false` 或 `undefined` 时则忽略。**默认值:** `1000`。
+ [解决使用 KeepAlive Agent 遇到的 ECONNRESET](https://www.yuque.com/egg/nodejs/keep-alive-agent-econnreset)
 
-+ `maxSockets` [<number>](http://nodejs.cn/s/SXbo1v) 每个主机允许的`Socket`的最大数量。**默认值:** `Infinity`。
++ `keepAliveMsecs` [number](http://nodejs.cn/s/SXbo1v) 当使用 `keepAlive` 选项时，指定用于 TCP Keep-Alive 数据包的[初始延迟](http://nodejs.cn/s/qqbgUD)。当 `keepAlive` 选项为 `false` 或 `undefined` 时则忽略。**默认值:** `1000`。
+
++ `maxSockets` [number](http://nodejs.cn/s/SXbo1v) 每个主机允许的`Socket`的最大数量。**默认值:** `Infinity`。
 + `maxFreeSockets` [number](http://nodejs.cn/s/SXbo1v) 在空闲状态下保持打开的`Socket`的最大数量。仅当 `keepAlive` 被设置为 `true` 时才相关。**默认值:** `256`。
-+ `timeout` [<number>](http://nodejs.cn/s/SXbo1v) `Socket`的超时时间，以毫秒为单位。这会在`Socket`被连接之后设置超时时间。
++ `timeout` [number](http://nodejs.cn/s/SXbo1v) `Socket`的超时时间，以毫秒为单位。这会在`Socket`被连接之后设置超时时间。
 
 要配置其中任何一个，则必须创建自定义的 [`http.Agent`](http://nodejs.cn/s/HRCnER) 实例:
 
@@ -208,13 +208,13 @@ http.request(options, onResponseCallback);
 
 生成用于 HTTP 请求的`Socket`或流。默认情况下，此函数与 [`net.createConnection()`](http://nodejs.cn/s/xu7F69) 相同。
 
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) 包含连接详细信息的选项。 查看 [`net.createConnection()`](http://nodejs.cn/s/xu7F69) 以获取选项的格式。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6) 接收创建的`Socket`的回调函数。
-- 返回: [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) 包含连接详细信息的选项。 查看 [`net.createConnection()`](http://nodejs.cn/s/xu7F69) 以获取选项的格式。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6) 接收创建的`Socket`的回调函数。
+- 返回: [stream.Duplex](http://nodejs.cn/s/2iRabr)
 
 ### 6.3 `agent.keepSocketAlive(socket)`
 
-`socket` [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+`socket` [stream.Duplex](http://nodejs.cn/s/2iRabr)
 
 当 `socket` 与请求分离并且可以由 `Agent` 保留时调用。 默认行为是：
 
@@ -228,8 +228,8 @@ return true;
 
 ### 6.4 `agent.reuseSocket(socket, request)`
 
-- `socket` [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
-- `request` [<http.ClientRequest>](http://nodejs.cn/s/2F5RHd)
+- `socket` [stream.Duplex](http://nodejs.cn/s/2iRabr)
+- `request` [http.ClientRequest](http://nodejs.cn/s/2F5RHd)
 
 由于 keep-alive 选项而在持久化后将 `socket` 附加到 `request` 时调用。 默认行为是：
 
@@ -247,7 +247,7 @@ socket.ref();
 
 ### 6.6 `agent.freeSockets`
 
-[<Object>](http://nodejs.cn/s/jzn6Ao)
+[Object](http://nodejs.cn/s/jzn6Ao)
 
 一个对象，其中包含当启用 `keepAlive` 时代理正在等待使用的`Socket`数组。 不要修改。
 
@@ -255,36 +255,36 @@ socket.ref();
 
 ### 6.7  `agent.getName(options)`
 
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) 一组选项，为生成名称提供信息。
-  - `host` [<string>](http://nodejs.cn/s/9Tw2bK) 请求发送至的服务器的域名或 IP 地址。
-  - `port` [<number>](http://nodejs.cn/s/SXbo1v) 远程服务器的端口。
-  - `localAddress` [<string>](http://nodejs.cn/s/9Tw2bK) 为网络连接绑定的本地接口。
-  - `family` [<integer>](http://nodejs.cn/s/SXbo1v) 如果不等于 `undefined`，则必须为 4 或 6。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) 一组选项，为生成名称提供信息。
+  - `host` [string](http://nodejs.cn/s/9Tw2bK) 请求发送至的服务器的域名或 IP 地址。
+  - `port` [number](http://nodejs.cn/s/SXbo1v) 远程服务器的端口。
+  - `localAddress` [string](http://nodejs.cn/s/9Tw2bK) 为网络连接绑定的本地接口。
+  - `family` [integer](http://nodejs.cn/s/SXbo1v) 如果不等于 `undefined`，则必须为 4 或 6。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK)
 
 获取一组请求选项的唯一名称，以判定一个连接是否可以被重用。 对于 HTTP 代理，这返回 `host:port:localAddress` 或 `host:port:localAddress:family`。 对于 HTTPS 代理，该名称包括 CA、证书、密码、以及其他可判定`Socket`可重用性的 HTTPS/TLS 特有的选项。
 
 ### 6.8 `agent.maxFreeSockets`
 
-- [<number>](http://nodejs.cn/s/SXbo1v)
+- [number](http://nodejs.cn/s/SXbo1v)
 
 默认设置为 256。 对于启用了 `keepAlive` 的代理，这将设置在空闲状态下保持打开的最大`Socket`数。
 
 ### 6.9 `agent.requests`
 
-- [<Object>](http://nodejs.cn/s/jzn6Ao)
+- [Object](http://nodejs.cn/s/jzn6Ao)
 
 一个对象，包含尚未分配给`Socket`的请求队列。 不要修改。
 
 ### 6.10 `agent.sockets`
 
-- <Object>](http://nodejs.cn/s/jzn6Ao)
+- Object](http://nodejs.cn/s/jzn6Ao)
 
 一个对象，包含尚未分配给`Socket`的请求队列。 不要修改。
 
 ## 7.http.ClientRequest类
 
-继承自: [<Stream>](http://nodejs.cn/s/t73H94)
+继承自: [Stream](http://nodejs.cn/s/t73H94)
 
 源码解读：
 
@@ -337,7 +337,7 @@ const proxy = http.createServer((req, res) => {
 proxy.on('connect', (req, clientSocket, head) => {
   // 连接到原始服务器。
   const { port, hostname } = new URL(`http://${req.url}`);
-  const serverSocket = net.connect(port || 80, hostname, () => {
+  const serverSocket = net.connect(port || 80, hostname, () = {
     clientSocket.write('HTTP/1.1 200 Connection Established\r\n' +
                     'Proxy-agent: Node.js-Proxy\r\n' +
                     '\r\n');
@@ -385,15 +385,15 @@ proxy.listen(1337, '127.0.0.1', () => {
 
 #### 7.1.4 'information' 事件
 
-`info` [<Object>](http://nodejs.cn/s/jzn6Ao)
+`info` [Object](http://nodejs.cn/s/jzn6Ao)
 
-- `httpVersion` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `httpVersionMajor` [<integer>](http://nodejs.cn/s/SXbo1v)
-- `httpVersionMinor` [<integer>](http://nodejs.cn/s/SXbo1v)
-- `statusCode` [<integer>](http://nodejs.cn/s/SXbo1v)
-- `statusMessage` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `headers` [<Object>](http://nodejs.cn/s/jzn6Ao)
-- `rawHeaders` [<string[]>](http://nodejs.cn/s/9Tw2bK)
+- `httpVersion` [string](http://nodejs.cn/s/9Tw2bK)
+- `httpVersionMajor` [integer](http://nodejs.cn/s/SXbo1v)
+- `httpVersionMinor` [integer](http://nodejs.cn/s/SXbo1v)
+- `statusCode` [integer](http://nodejs.cn/s/SXbo1v)
+- `statusMessage` [string](http://nodejs.cn/s/9Tw2bK)
+- `headers` [Object](http://nodejs.cn/s/jzn6Ao)
+- `rawHeaders` [string[]](http://nodejs.cn/s/9Tw2bK)
 
 服务器发送 1xx 中间响应（不包括 101 Upgrade）时触发。 此事件的监听器将会接收一个对象，该对象包含 HTTP 版本，状态码，状态消息，键值对请求头对象、以及具有原始请求头名称和值的数组。
 
@@ -419,15 +419,15 @@ req.on('information', (info) => {
 
 #### 7.1.5 'response' 事件
 
-- `response` [<http.IncomingMessage>](http://nodejs.cn/s/2RqpEw)
+- `response` [http.IncomingMessage](http://nodejs.cn/s/2RqpEw)
 
 当收到此请求的响应时触发。 此事件仅触发一次。
 
 #### 7.1.6 'socket' 事件
 
-- `socket` [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+- `socket` [stream.Duplex](http://nodejs.cn/s/2iRabr)
 
-此事件保证传入 [<net.Socket>](http://nodejs.cn/s/wsJ1o1) 类（[<stream.Duplex>](http://nodejs.cn/s/2iRabr) 的子类）的实例，除非用户指定了 [<net.Socket>](http://nodejs.cn/s/wsJ1o1) 以外的`Socket`类型。
+此事件保证传入 [net.Socket](http://nodejs.cn/s/wsJ1o1) 类（[stream.Duplex](http://nodejs.cn/s/2iRabr) 的子类）的实例，除非用户指定了 [net.Socket](http://nodejs.cn/s/wsJ1o1) 以外的`Socket`类型。
 
 #### 7.1.7 'timeout' 事件
 
@@ -437,13 +437,13 @@ req.on('information', (info) => {
 
 #### 7.1.8 'upgrade' 事件
 
-- `response` [<http.IncomingMessage>](http://nodejs.cn/s/2RqpEw)
-- `socket` [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
-- `head` [<Buffer>](http://nodejs.cn/s/6x1hD3)
+- `response` [http.IncomingMessage](http://nodejs.cn/s/2RqpEw)
+- `socket` [stream.Duplex](http://nodejs.cn/s/2iRabr)
+- `head` [Buffer](http://nodejs.cn/s/6x1hD3)
 
 每次服务器响应升级请求时发出。 如果未监听此事件且响应状态码为 `101 Switching Protocols`，则接收升级响应头的客户端将关闭其连接。
 
-此事件保证传入[<net.Socket>](http://nodejs.cn/s/wsJ1o1)类（[<stream.Duplex>](http://nodejs.cn/s/2iRabr)的子类）的实例，除非用户指定了[<net.Socket>](http://nodejs.cn/s/wsJ1o1)以外的`Socket`类型。
+此事件保证传入[net.Socket](http://nodejs.cn/s/wsJ1o1)类（[stream.Duplex](http://nodejs.cn/s/2iRabr)的子类）的实例，除非用户指定了[net.Socket](http://nodejs.cn/s/wsJ1o1)以外的`Socket`类型。
 
 客户端服务器对，演示如何监听 `'upgrade'` 事件。
 
@@ -490,25 +490,25 @@ server.listen(1337, '127.0.0.1', () => {
 
 ### 7.2 `request.aborted`
 
-<boolean>
+boolean
 
 如果请求已中止，则 `request.aborted` 属性将会为 `true`。
 
 ### 7.3 `request.end([data[, encoding]][, callback])`
 
-+ data: <string> | <Buffer>
-+ encoding: <string>
-+ callback: <function>
-+ 返回：this ---> request，即 可以链式调用
++ `data`: string | Buffer
++ `encoding`: string
++ `callback`: function
++ 返回：this --- request，即 可以链式调用
 
 ### 7.4 `request.destroy([error])`
 
-+ error: <Error>
++ `error`: Error
 + 返回： this
 
 ##### 7.5 `request.destroyed`
 
-<boolean>
+`boolean`
 
 在`request.destroyed`调用之后变为`true`
 
@@ -522,9 +522,9 @@ server.listen(1337, '127.0.0.1', () => {
 
 ### 7.7 `request.getHeader(name)`
 
-+ name: <string>
++ `name`: string
 
-+ 返回：<any>
++ 返回：any
 
   
 
@@ -544,17 +544,17 @@ const cookie = request.getHeader('Cookie');
 
 ### 7.8 `request.maxHeadersCount`
 
-- [<number>](http://nodejs.cn/s/SXbo1v) **默认值:** `2000`。
+- [number](http://nodejs.cn/s/SXbo1v) **默认值:** `2000`。
 
 限制最大响应头数。 如果设置为 `0`，则不会应用任何限制。
 
 ### 7.9 `request.path`
 
-- [<string>](http://nodejs.cn/s/9Tw2bK) 请求的路径。
+- [string](http://nodejs.cn/s/9Tw2bK) 请求的路径。
 
 ### 7.10 `request.removeHeader(name)`
 
-- `name` [<string>](http://nodejs.cn/s/9Tw2bK)
+- `name` [string](http://nodejs.cn/s/9Tw2bK)
 
 移除已定义到请求头对象中的请求头。
 
@@ -564,8 +564,8 @@ request.removeHeader('Content-Type');
 
 ### 7.11 `request.setHeader(name, value)`
 
-+ name: <string>
-+ value: <any>
++ `name`: string
++ `value`: any
 
 为请求头对象设置单个请求头的值。
 
@@ -579,28 +579,28 @@ request.setHeader('Cookie', ['type=ninja', 'language=javascript']);
 
 ### 7.12 `request.setNoDelay([noDelay])`
 
-- `noDelay` [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `noDelay` [boolean](http://nodejs.cn/s/jFbvuT)
 
 一旦将`Socket`分配给此请求并且连接了`Socket`，就会调用 [`socket.setNoDelay()`](http://nodejs.cn/s/q9UswY)。
 
 ### 7.13 `request.setSocketKeepAlive([enable][, initialDelay])`
 
-- `enable` [<boolean>](http://nodejs.cn/s/jFbvuT)
-- `initialDelay` [<number>](http://nodejs.cn/s/SXbo1v)
+- `enable` [boolean](http://nodejs.cn/s/jFbvuT)
+- `initialDelay` [number](http://nodejs.cn/s/SXbo1v)
 
 一旦将`Socket`分配给此请求并连接了`Socket`，就会调用 [`socket.setKeepAlive()`](http://nodejs.cn/s/qqbgUD)。
 
 ### 7.14 `request.setTimeout(timeout[, callback])`
 
-- `timeout` [<number>](http://nodejs.cn/s/SXbo1v) 请求超时前的毫秒数。
-- `callback` [<function>](http://nodejs.cn/s/ceTQa6) 发生超时时要调用的可选函数。相当于绑定到 `'timeout'` 事件。
+- `timeout` [number](http://nodejs.cn/s/SXbo1v) 请求超时前的毫秒数。
+- `callback` [function](http://nodejs.cn/s/ceTQa6) 发生超时时要调用的可选函数。相当于绑定到 `'timeout'` 事件。
 - 返回: [http.ClientRequest](http://nodejs.cn/s/2F5RHd)
 
 一旦将`Socket`分配给此请求并且连接了`Socket`，就会调用 [`socket.setTimeout()`](http://nodejs.cn/s/XC4Yyj)。
 
 ### 7.15 `request.socket`
 
-- [<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+- [stream.Duplex](http://nodejs.cn/s/2iRabr)
 
 指向底层`Socket`。 通常用户无需访问此属性。 特别是，由于协议解析器附加到`Socket`的方式，`Socket`将不会触发 `'readable'` 事件。 也可以通过 `request.connection` 访问 `socket`。
 
@@ -627,10 +627,10 @@ req.once('response', (res) => {
 
 ### 7.17 `request.write(chunk[, encoding][, callback])`
 
-- `chunk` [<string>](http://nodejs.cn/s/9Tw2bK) | [](http://nodejs.cn/s/6x1hD3)
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `callback` [<function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `chunk` [string](http://nodejs.cn/s/9Tw2bK) | [](http://nodejs.cn/s/6x1hD3)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK)
+- `callback` [function](http://nodejs.cn/s/ceTQa6)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 发送一个请求主体的数据块。 通过多次调用此方法，可以将请求主体发送到服务器。 在这种情况下，建议在创建请求时使用 `['Transfer-Encoding', 'chunked']` 请求头行。
 
@@ -644,7 +644,7 @@ req.once('response', (res) => {
 
 ### 7.17 `request.reusedSocket`
 
-<boolean> 
+- boolean 
 
 判断`request`是否是通过一个被拒绝的`socket`发送。
 
@@ -664,7 +664,7 @@ http
 setInterval(() => {
   // Adapting a keep-alive agent
   http.get('http://localhost:3000', { agent }, (res) => {
-    res.on('data', (data) => {
+    res.on('data', (data) = {
       // Do nothing
     });
   });
@@ -679,10 +679,10 @@ const agent = new http.Agent({ keepAlive: true });
 
 function retriableRequest() {
   const req = http
-    .get('http://localhost:3000', { agent }, (res) => {
+    .get('http://localhost:3000', { agent }, (res) = {
       // ...
     })
-    .on('error', (err) => {
+    .on('error', (err) = {
       // Check if retry is needed
       if (req.reusedSocket && err.code === 'ECONNRESET') {
         retriableRequest();
@@ -695,7 +695,7 @@ retriableRequest();
 
 ## 8.http.ServerResponse 类
 
-继承自: [<Stream>](http://nodejs.cn/s/t73H94)
+继承自: [Stream](http://nodejs.cn/s/t73H94)
 
 源码解读：
 
@@ -747,10 +747,10 @@ res.on('finish', function() {})
 
 ### 8.3 `response.end([data[, encoding]][, callback])`
 
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3)
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回：<this>
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK)
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回：this
 
 此方法向服务器发出信号，表明已发送所有响应头和主体，该服务器应该视为此消息已完成。 必须在每个响应上调用此 `response.end()` 方法。
 
@@ -764,8 +764,8 @@ res.on('finish', function() {})
 
 ### 8.5 `response.getHeader(name)`
 
-- `name` [<string>](http://nodejs.cn/s/9Tw2bK)
-- 返回: [<any>](http://nodejs.cn/s/6sTGdS)
+- `name` [string](http://nodejs.cn/s/9Tw2bK)
+- 返回: [any](http://nodejs.cn/s/6sTGdS)
 
 读出已排队但未发送到客户端的响应头。 该名称不区分大小写。 返回值的类型取决于提供给 [`response.setHeader()`](http://nodejs.cn/s/rqeM3J) 的参数。
 
@@ -783,7 +783,7 @@ const setCookie = response.getHeader('set-cookie');
 
 ### 8.6 `response.getHeaderNames()`
 
-- 返回: [<string[]>](http://nodejs.cn/s/9Tw2bK)
+- 返回: [string[]](http://nodejs.cn/s/9Tw2bK)
 
 返回一个数组，其中包含当前传出的响应头的唯一名称。 所有响应头名称都是小写的。
 
@@ -797,7 +797,7 @@ const headerNames = response.getHeaderNames();
 
 ### 8.7 `response.getHeaders()`
 
-- 返回: [<Object>](http://nodejs.cn/s/jzn6Ao)
+- 返回: [Object](http://nodejs.cn/s/jzn6Ao)
 
 返回当前传出的响应头的浅拷贝。 由于使用浅拷贝，因此可以更改数组的值而无需额外调用各种与响应头相关的 http 模块方法。 返回对象的键是响应头名称，值是各自的响应头值。 所有响应头名称都是小写的。
 
@@ -845,8 +845,8 @@ new http.Server(function (req, res) {
 
 ### 8.8 `response.hasHeader(name)`
 
-- `name` [<string>](http://nodejs.cn/s/9Tw2bK)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `name` [string](http://nodejs.cn/s/9Tw2bK)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果当前在传出的响应头中设置了由 `name` 标识的响应头，则返回 `true`。 响应头名称匹配不区分大小写。
 
@@ -856,7 +856,7 @@ const hasContentType = response.hasHeader('content-type');
 
 ### 8.9 `response.removeHeader(name)`
 
-- `name` [<string>](http://nodejs.cn/s/9Tw2bK)
+- `name` [string](http://nodejs.cn/s/9Tw2bK)
 
 移除排队等待中的隐式发送的响应头。
 
@@ -866,8 +866,8 @@ response.removeHeader('Content-Encoding');
 
 ### 8.10 `response.setHeader(name, value)`
 
-- `name` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `value` [<any>](http://nodejs.cn/s/6sTGdS)
+- `name` [string](http://nodejs.cn/s/9Tw2bK)
+- `value` [any](http://nodejs.cn/s/6sTGdS)
 
 为隐式响应头设置单个响应头的值。 如果此响应头已存在于待发送的响应头中，则其值将被替换。 在这里可以使用字符串数组来发送具有相同名称的多个响应头。 非字符串值将被原样保存。 因此 [`response.getHeader()`](http://nodejs.cn/s/pbE7VN) 可能返回非字符串值。 但是非字符串值将转换为字符串以进行网络传输。
 
@@ -899,9 +899,9 @@ const server = http.createServer((req, res) => {
 
 ### 8.11 `response.setTimeout(msecs[, callback])`
 
-- `msecs` [<number>](http://nodejs.cn/s/SXbo1v)
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<http.ServerResponse>](http://nodejs.cn/s/rMXoZ1)
+- `msecs` [number](http://nodejs.cn/s/SXbo1v)
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [http.ServerResponse](http://nodejs.cn/s/rMXoZ1)
 
 将Socket的超时值设置为 `msecs`。 如果提供了回调，则会将其作为监听器添加到响应对象上的 `'timeout'` 事件中。
 
@@ -909,7 +909,7 @@ const server = http.createServer((req, res) => {
 
 ### 8.12 `response.socket`
 
-[<stream.Duplex>](http://nodejs.cn/s/2iRabr)
+[stream.Duplex](http://nodejs.cn/s/2iRabr)
 
 指向底层的`socket`。 通常用户不需要访问此属性。 特别是，由于协议解析器附加到`socket`的方式，`socket`将不会触发 `'readable'` 事件。 在调用 `response.end()` 之后，此属性将为空。 也可以通过 `response.connection` 访问 `socket`。
 
@@ -922,11 +922,11 @@ const server = http.createServer((req, res) => {
 }).listen(3000);
 ```
 
-此属性保证是 [<net.Socket>](http://nodejs.cn/s/wsJ1o1) 类（[<stream.Duplex>](http://nodejs.cn/s/2iRabr) 的子类）的实例，除非用户指定了 [<net.Socket>](http://nodejs.cn/s/wsJ1o1) 以外的`socket`类型。
+此属性保证是 [net.Socket](http://nodejs.cn/s/wsJ1o1) 类（[stream.Duplex](http://nodejs.cn/s/2iRabr) 的子类）的实例，除非用户指定了 [net.Socket](http://nodejs.cn/s/wsJ1o1) 以外的`socket`类型。
 
 ### 8.13 `response.statusCode`
 
-- [<number>](http://nodejs.cn/s/SXbo1v) **默认值:** `200`。
+- [number](http://nodejs.cn/s/SXbo1v) **默认值:** `200`。
 
 当使用隐式的响应头时（没有显式地调用 [`response.writeHead()`](http://nodejs.cn/s/fnj9oM)），此属性控制在刷新响应头时将发送到客户端的状态码。
 
@@ -938,7 +938,7 @@ response.statusCode = 404;
 
 ### 8.14 `response.statusMessage`
 
-- [<string>](http://nodejs.cn/s/9Tw2bK)
+- [string](http://nodejs.cn/s/9Tw2bK)
 
 当使用隐式的响应头时（没有显式地调用 [`response.writeHead()`](http://nodejs.cn/s/fnj9oM)），此属性控制在刷新响应头时将发送到客户端的状态消息。 如果保留为 `undefined`，则将使用状态码的标准消息。
 
@@ -950,10 +950,10 @@ response.statusMessage = 'Not found';
 
 ### 8.15`response.write(chunk[, encoding][, callback])`
 
-- `chunk` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3)
-- `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `chunk` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3)
+- `encoding` [string](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 `chunk` 可以是字符串或 buffer。 如果 `chunk` 是一个字符串，则第二个参数指定如何将其编码为字节流。 当刷新此数据块时将调用 `callback`。
 
@@ -963,10 +963,10 @@ response.statusMessage = 'Not found';
 
 ### 8.16 `response.writeHead(statusCode[, statusMessage][, headers])`
 
-- `statusCode` [<number>](http://nodejs.cn/s/SXbo1v)
-- `statusMessage` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `headers`[<Object>](http://nodejs.cn/s/jzn6Ao)
-- 返回: [<http.ServerResponse>](http://nodejs.cn/s/rMXoZ1)
+- `statusCode` [number](http://nodejs.cn/s/SXbo1v)
+- `statusMessage` [string](http://nodejs.cn/s/9Tw2bK)
+- `headers`[Object](http://nodejs.cn/s/jzn6Ao)
+- 返回: [http.ServerResponse](http://nodejs.cn/s/rMXoZ1)
 
 向请求发送响应头。 状态码是一个 3 位的 HTTP 状态码，如 `404`。 最后一个参数 `headers` 是响应头。 可以可选地将用户可读的 `statusMessage` 作为第二个参数。
 
@@ -1004,10 +1004,10 @@ const server = http.createServer((req, res) => {
 
 ## 9.`http.get(options[, callback])`和`http.get(url[, options][, callback])`
 
-- `url` [<string>](http://nodejs.cn/s/9Tw2bK) | [<URL>](http://nodejs.cn/s/5dwq7G)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) 接受与 [`http.request()`](http://nodejs.cn/s/d1myoL) 相同的 `options`，且 `method` 始终设置为 `GET`。从原型继承的属性将被忽略。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6), `callback` 调用时只有一个参数，该参数是 [`http.IncomingMessage`](http://nodejs.cn/s/2RqpEw) 的实例。
-- 返回: [<http.ClientRequest>](http://nodejs.cn/s/2F5RHd)
+- `url` [string](http://nodejs.cn/s/9Tw2bK) | [URL](http://nodejs.cn/s/5dwq7G)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) 接受与 [`http.request()`](http://nodejs.cn/s/d1myoL) 相同的 `options`，且 `method` 始终设置为 `GET`。从原型继承的属性将被忽略。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6), `callback` 调用时只有一个参数，该参数是 [`http.IncomingMessage`](http://nodejs.cn/s/2RqpEw) 的实例。
+- 返回: [http.ClientRequest](http://nodejs.cn/s/2F5RHd)
 
 这个方法与 [`http.request()`](http://nodejs.cn/s/d1myoL) 的唯一区别是它将方法设置为 GET 并自动调用 `req.end()`
 
@@ -1069,7 +1069,7 @@ const req = http.request(options, (res) => {
   console.log(`状态码: ${res.statusCode}`);
   console.log(`响应头: ${JSON.stringify(res.headers)}`);
   res.setEncoding('utf8');
-  res.on('data', (chunk) => {
+  res.on('data', (chunk) = {
     console.log(`响应主体: ${chunk}`);
   });
   res.on('end', () => {
@@ -1087,32 +1087,32 @@ req.write(postData);
 req.end();
 ```
 
-- `url` [<string>](http://nodejs.cn/s/9Tw2bK) | [<URL>](http://nodejs.cn/s/5dwq7G)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `agent` [<http.Agent>](http://nodejs.cn/s/HRCnER) | [<boolean>](http://nodejs.cn/s/jFbvuT) 控制 [`Agent`](http://nodejs.cn/s/HRCnER) 的行为。可能的值有：
+- `url` [string](http://nodejs.cn/s/9Tw2bK) | [URL](http://nodejs.cn/s/5dwq7G)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao)
+  - `agent` [http.Agent](http://nodejs.cn/s/HRCnER) | [boolean](http://nodejs.cn/s/jFbvuT) 控制 [`Agent`](http://nodejs.cn/s/HRCnER) 的行为。可能的值有：
     - `undefined` (默认): 对此主机和端口使用 [`http.globalAgent`](http://nodejs.cn/s/g7BhW2)。
     - `Agent` 对象: 显式地使用传入的 `Agent`。
     - `false`: 使用新建的具有默认值的 `Agent`。
-  - `auth` [<string>](http://nodejs.cn/s/9Tw2bK) 基本的身份验证，即 `'user:password'`，用于计算授权请求头。
-  - `createConnection` [<Function>](http://nodejs.cn/s/ceTQa6) 当 `agent` 选项未被使用时，用来为请求生成套接字或流的函数。这可用于避免创建自定义的 `Agent` 类以覆盖默认的 `createConnection` 函数。详见 [`agent.createConnection()`](http://nodejs.cn/s/nH3X12)。任何[双工流](http://nodejs.cn/s/2iRabr)都是有效的返回值。
-  - `defaultPort` [<number>](http://nodejs.cn/s/SXbo1v) 协议的默认端口。 如果使用 `Agent`，则默认值为 `agent.defaultPort`，否则为 `undefined`。
-  - `family` [<number>](http://nodejs.cn/s/SXbo1v) 当解析 `host` 或 `hostname` 时使用的 IP 地址族。有效值为 `4` 或 `6`。如果没有指定，则同时使用 IP v4 和 v6。
-  - `headers` [<Object>](http://nodejs.cn/s/jzn6Ao) 包含请求头的对象。
-  - `host` [<string>](http://nodejs.cn/s/9Tw2bK) 请求发送至的服务器的域名或 IP 地址。**默认值:** `'localhost'`。
-  - `hostname` [<string>](http://nodejs.cn/s/9Tw2bK) `host` 的别名。为了支持 [`url.parse()`](http://nodejs.cn/s/b28B2A)，如果同时指定 `host` 和 `hostname`，则使用 `hostname`。
-  - `insecureHTTPParser` [<boolean>](http://nodejs.cn/s/jFbvuT) 使用不安全的 HTTP 解析器，当为 `true` 时接受无效的 HTTP 请求头。应避免使用不安全的解析器。有关更多信息，参见 [`--insecure-http-parser`](http://nodejs.cn/s/5Bnm43)。**默认值:** `false`。
-  - `localAddress` [<string>](http://nodejs.cn/s/9Tw2bK) 为网络连接绑定的本地接口。
-  - `lookup` [<Function>](http://nodejs.cn/s/ceTQa6) 自定义的查找函数。 **默认值:** [`dns.lookup()`](http://nodejs.cn/s/LJLsTL)。
-  - `maxHeaderSize` [<number>](http://nodejs.cn/s/SXbo1v) 可选地，重写此服务器接收的请求的 [`--max-http-header-size`](http://nodejs.cn/s/HfsyuU) 值，即请求头的最大长度（以字节为单位）。 **默认值:** 16384（16KB）。
-  - `method` [<string>](http://nodejs.cn/s/9Tw2bK) 一个字符串，指定 HTTP 请求的方法。**默认值:** `'GET'`。
-  - `path` [<string>](http://nodejs.cn/s/9Tw2bK) 请求的路径。应包括查询字符串（如果有）。例如 `'/index.html?page=12'`。当请求的路径包含非法的字符时，则抛出异常。目前只有空格被拒绝，但未来可能会有所变化。**默认值:** `'/'`。
-  - `port` [<number>](http://nodejs.cn/s/SXbo1v) 远程服务器的端口。**默认值:** `defaultPort`（如果有设置）或 `80`。
-  - `protocol` [<string>](http://nodejs.cn/s/9Tw2bK) 使用的协议。**默认值:** `'http:'`。
-  - `setHost` [<boolean>](http://nodejs.cn/s/jFbvuT): 指定是否自动添加 `Host` 请求头。**默认值:** `true`。
-  - `socketPath` [<string>](http://nodejs.cn/s/9Tw2bK) Unix 域套接字。如果指定了 `host` 或 `port` 之一（它们指定了 TCP 套接字），则不能使用此选项。
-  - `timeout` [<number>](http://nodejs.cn/s/SXbo1v): 指定套接字超时的数值，以毫秒为单位。这会在套接字被连接之前设置超时。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6),可选的 `callback` 参数会作为单次监听器被添加到 [`'response'`](http://nodejs.cn/s/qwaiK8) 事件。
-- 返回: [<http.ClientRequest>](http://nodejs.cn/s/2F5RHd)
+  - `auth` [string](http://nodejs.cn/s/9Tw2bK) 基本的身份验证，即 `'user:password'`，用于计算授权请求头。
+  - `createConnection` [Function](http://nodejs.cn/s/ceTQa6) 当 `agent` 选项未被使用时，用来为请求生成套接字或流的函数。这可用于避免创建自定义的 `Agent` 类以覆盖默认的 `createConnection` 函数。详见 [`agent.createConnection()`](http://nodejs.cn/s/nH3X12)。任何[双工流](http://nodejs.cn/s/2iRabr)都是有效的返回值。
+  - `defaultPort` [number](http://nodejs.cn/s/SXbo1v) 协议的默认端口。 如果使用 `Agent`，则默认值为 `agent.defaultPort`，否则为 `undefined`。
+  - `family` [number](http://nodejs.cn/s/SXbo1v) 当解析 `host` 或 `hostname` 时使用的 IP 地址族。有效值为 `4` 或 `6`。如果没有指定，则同时使用 IP v4 和 v6。
+  - `headers` [Object](http://nodejs.cn/s/jzn6Ao) 包含请求头的对象。
+  - `host` [string](http://nodejs.cn/s/9Tw2bK) 请求发送至的服务器的域名或 IP 地址。**默认值:** `'localhost'`。
+  - `hostname` [string](http://nodejs.cn/s/9Tw2bK) `host` 的别名。为了支持 [`url.parse()`](http://nodejs.cn/s/b28B2A)，如果同时指定 `host` 和 `hostname`，则使用 `hostname`。
+  - `insecureHTTPParser` [boolean](http://nodejs.cn/s/jFbvuT) 使用不安全的 HTTP 解析器，当为 `true` 时接受无效的 HTTP 请求头。应避免使用不安全的解析器。有关更多信息，参见 [`--insecure-http-parser`](http://nodejs.cn/s/5Bnm43)。**默认值:** `false`。
+  - `localAddress` [string](http://nodejs.cn/s/9Tw2bK) 为网络连接绑定的本地接口。
+  - `lookup` [Function](http://nodejs.cn/s/ceTQa6) 自定义的查找函数。 **默认值:** [`dns.lookup()`](http://nodejs.cn/s/LJLsTL)。
+  - `maxHeaderSize` [number](http://nodejs.cn/s/SXbo1v) 可选地，重写此服务器接收的请求的 [`--max-http-header-size`](http://nodejs.cn/s/HfsyuU) 值，即请求头的最大长度（以字节为单位）。 **默认值:** 16384（16KB）。
+  - `method` [string](http://nodejs.cn/s/9Tw2bK) 一个字符串，指定 HTTP 请求的方法。**默认值:** `'GET'`。
+  - `path` [string](http://nodejs.cn/s/9Tw2bK) 请求的路径。应包括查询字符串（如果有）。例如 `'/index.html?page=12'`。当请求的路径包含非法的字符时，则抛出异常。目前只有空格被拒绝，但未来可能会有所变化。**默认值:** `'/'`。
+  - `port` [number](http://nodejs.cn/s/SXbo1v) 远程服务器的端口。**默认值:** `defaultPort`（如果有设置）或 `80`。
+  - `protocol` [string](http://nodejs.cn/s/9Tw2bK) 使用的协议。**默认值:** `'http:'`。
+  - `setHost` [boolean](http://nodejs.cn/s/jFbvuT): 指定是否自动添加 `Host` 请求头。**默认值:** `true`。
+  - `socketPath` [string](http://nodejs.cn/s/9Tw2bK) Unix 域套接字。如果指定了 `host` 或 `port` 之一（它们指定了 TCP 套接字），则不能使用此选项。
+  - `timeout` [number](http://nodejs.cn/s/SXbo1v): 指定套接字超时的数值，以毫秒为单位。这会在套接字被连接之前设置超时。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6),可选的 `callback` 参数会作为单次监听器被添加到 [`'response'`](http://nodejs.cn/s/qwaiK8) 事件。
+- 返回: [http.ClientRequest](http://nodejs.cn/s/2F5RHd)
 
 ## 11. 小结
 
@@ -1154,4 +1154,4 @@ req.end();
 
   `http.request`是创建http请求万能方法。
 
-> 本文学习笔记大部分是查看官网API，部分是查看nodejs源码，只供参考，不喜勿喷 (#^.^#)。
+ 本文学习笔记大部分是查看官网API，部分是查看nodejs源码，只供参考，不喜勿喷 (#^.^#)。

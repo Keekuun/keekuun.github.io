@@ -10,7 +10,7 @@ tags:
 
 # NodeJS之fs模块学习笔记
 
-![fs文件系统模块](E:\blog\images\node\fs.png)
+![fs文件系统模块](../../../images/node/fs.png)
 
 ## 1.fs简介
 
@@ -56,12 +56,12 @@ try {
 
 ### 3.1 `fs.mkdir(path[, options], callback)`异步创建
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G): 文件目录路径
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<integer>](http://nodejs.cn/s/SXbo1v)
-  - `recursive` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。指示是否要创建父目录。
-  - `mode` [<string>](http://nodejs.cn/s/9Tw2bK) | [<integer>](http://nodejs.cn/s/SXbo1v) 在 Windows 上不支持， **mode** -- 权限模式。**默认值:** `0o777`（linux系统下：所有人、所属组、其他人可读可写可执行）。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G): 文件目录路径
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [integer](http://nodejs.cn/s/SXbo1v)
+  - `recursive` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。指示是否要创建父目录。
+  - `mode` [string](http://nodejs.cn/s/9Tw2bK) | [integer](http://nodejs.cn/s/SXbo1v) 在 Windows 上不支持， **mode** -- 权限模式。**默认值:** `0o777`（linux系统下：所有人、所属组、其他人可读可写可执行）。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
 
 异步地创建目录。
 
@@ -88,17 +88,17 @@ fs.mkdir('test/fsDir', {recursive: true}, err => {
 
 ```js
 fs.mkdir('/', { recursive: true }, (err) => {
-  // => [Error: EPERM: operation not permitted, mkdir 'C:\']
+  // = [Error: EPERM: operation not permitted, mkdir 'C:\']
 });
 ```
 
 ### 3.2 `fs.mkdirSync(path[, options])`同步创建
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<integer>](http://nodejs.cn/s/SXbo1v)
-  - `recursive` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-  - `mode` [<string>](http://nodejs.cn/s/9Tw2bK) | [<integer>](http://nodejs.cn/s/SXbo1v) 在 Windows 上不支持， **mode** -- 权限模式。**默认值:** `0o777`（linux系统下：所有人、所属组、其他人可读可写可执行）。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK) | [<undefined>](http://nodejs.cn/s/8ym6ow)
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [integer](http://nodejs.cn/s/SXbo1v)
+  - `recursive` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+  - `mode` [string](http://nodejs.cn/s/9Tw2bK) | [integer](http://nodejs.cn/s/SXbo1v) 在 Windows 上不支持， **mode** -- 权限模式。**默认值:** `0o777`（linux系统下：所有人、所属组、其他人可读可写可执行）。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK) | [undefined](http://nodejs.cn/s/8ym6ow)
 
 同步地创建目录，参数和异步创建目录少了一个回调函数，其余参数相同。 返回 `undefined`，或创建的第一个目录的路径（如果 `recursive` 为 `true`）。
 
@@ -117,12 +117,12 @@ try {
 
 ### 3.3 `fs.mkdtemp(prefix[, options], callback)` 异步创建临时目录
 
-- `prefix` [<string>](http://nodejs.cn/s/9Tw2bK) 目录名称-前缀。默认会再这个前缀后面接上六位随机的字符，保证创建的临时性目录有唯一性
-- `options` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Object>](http://nodejs.cn/s/jzn6Ao)  指定编码，参数值为：`'utf-8'` 或者 `{encoding: 'utf-8'}`
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
-  - `directory` [<string>](http://nodejs.cn/s/9Tw2bK)
+- `prefix` [string](http://nodejs.cn/s/9Tw2bK) 目录名称-前缀。默认会再这个前缀后面接上六位随机的字符，保证创建的临时性目录有唯一性
+- `options` [string](http://nodejs.cn/s/9Tw2bK) | [Object](http://nodejs.cn/s/jzn6Ao)  指定编码，参数值为：`'utf-8'` 或者 `{encoding: 'utf-8'}`
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
+  - `directory` [string](http://nodejs.cn/s/9Tw2bK)
 
 ```js
 const fs = require('fs');
@@ -147,27 +147,27 @@ fs.mkdtemp(`testDir${sep}`, (err, directory) => {
 });
 ```
 
->  [nodejs中通过fs.mkdtemp 创建的临时目录会自动删除么？](https://segmentfault.com/q/1010000010321645)
+  [nodejs中通过fs.mkdtemp 创建的临时目录会自动删除么？](https://segmentfault.com/q/1010000010321645)
 
 ### 3.4 `fs.mkdtempSync(prefix[, options])`同步创建临时目录
 
-- `prefix` [<string>](http://nodejs.cn/s/9Tw2bK)
-- `options` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK) 返回创建的目录路径。
+- `prefix` [string](http://nodejs.cn/s/9Tw2bK)
+- `options` [string](http://nodejs.cn/s/9Tw2bK) | [Object](http://nodejs.cn/s/jzn6Ao)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) **默认值:** `'utf8'`。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK) 返回创建的目录路径。
 
 ## 4.追加文件（不存在则创建文件）
 
 ### 4.1 `fs.appendFile(path, data[, options], callback)`异步追加文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<number>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。文件权限
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'a'`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [number](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。文件权限
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'a'`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
 
 异步地追加数据到文件，如果文件尚不存在则创建文件。 `data` 可以是字符串或 [`Buffer`](http://nodejs.cn/s/FApxjh)。
 
@@ -200,12 +200,12 @@ fs.open('文件.txt', 'a', (err, fd) => {
 
 ### 4.2 `fs.appendFileSync(path, data[, options])`同步追加文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<number>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。文件权限
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'a'`。
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [number](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。文件权限
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'a'`。
 
 同步地将数据追加到文件，如果文件不存在则创建该文件。 `data` 可以是字符串或 [`Buffer`](http://nodejs.cn/s/FApxjh)。
 
@@ -244,12 +244,12 @@ try {
 
 ### 5.1  `fs.open(path[, flags[, mode]], callback)`异步打开文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G)
-- `flags` [<string>](http://nodejs.cn/s/9Tw2bK) | [<number>](http://nodejs.cn/s/SXbo1v) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
-- `mode` [<string>](http://nodejs.cn/s/9Tw2bK) | [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`（可读写）。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
-  - `fd` [<integer>](http://nodejs.cn/s/SXbo1v) 文件描述符的整数
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G)
+- `flags` [string](http://nodejs.cn/s/9Tw2bK) | [number](http://nodejs.cn/s/SXbo1v) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
+- `mode` [string](http://nodejs.cn/s/9Tw2bK) | [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`（可读写）。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
+  - `fd` [integer](http://nodejs.cn/s/SXbo1v) 文件描述符的整数
 
 ```js
 const fs = require('fs');
@@ -266,10 +266,10 @@ fs.open('文件.txt', 'r', (err, dir) => {
 
 ### 5.2 `fs.openSync(path[, flags, mode])`同步打开文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G)
-- `flags` [<string>](http://nodejs.cn/s/9Tw2bK) | [<number>](http://nodejs.cn/s/SXbo1v) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
-- `mode` [<string>](http://nodejs.cn/s/9Tw2bK) | [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`（可读写）。
-- 返回: [<number> ](http://nodejs.cn/s/SXbo1v)返回表示文件描述符的整数。
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G)
+- `flags` [string](http://nodejs.cn/s/9Tw2bK) | [number](http://nodejs.cn/s/SXbo1v) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
+- `mode` [string](http://nodejs.cn/s/9Tw2bK) | [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`（可读写）。
+- 返回: [number ](http://nodejs.cn/s/SXbo1v)返回表示文件描述符的整数。
 
 ### 5.3 为什么不使用它们？
 
@@ -318,13 +318,13 @@ function writeFile(path, data, options, callback) {
 
 ### 6.1 `fs.readFile(path[, options], callback)`异步读取文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<integer>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `null`。字符编码
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'r'`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
-  - `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) 如果没有指定字符编码，则返回原始的 buffer。
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [integer](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `null`。字符编码
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'r'`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
+  - `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) 如果没有指定字符编码，则返回原始的 buffer。
 
 异步地读取文件的全部内容。
 
@@ -339,24 +339,24 @@ fs.readFile('文件名','utf8', (err, data) => {
 
 ### 6.2 `fs.readFileSync(path[, options])`同步读取文件
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<integer>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `null`。字符编码
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'r'`。
-- 返回: [<string>](http://nodejs.cn/s/9Tw2bK) | [<buffer>](http://nodejs.cn/s/6x1hD3) 返回 `path` 的内容。如果指定了 `encoding` 选项，则此函数返回字符串。 否则，返回 buffer。
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [integer](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `null`。字符编码
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。**默认值:** `'r'`。
+- 返回: [string](http://nodejs.cn/s/9Tw2bK) | [buffer](http://nodejs.cn/s/6x1hD3) 返回 `path` 的内容。如果指定了 `encoding` 选项，则此函数返回字符串。 否则，返回 buffer。
 
 ## 7. 写入文件
 
 ### 7.1`fs.writeFile(file, data[, options], callback)`异步写入文件
 
-- `file` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<integer>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<TypedArray>](http://nodejs.cn/s/oh3CkV) | [<DataView>](http://nodejs.cn/s/yCdVkD)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'w'`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
+- `file` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [integer](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [TypedArray](http://nodejs.cn/s/oh3CkV) | [DataView](http://nodejs.cn/s/yCdVkD)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'w'`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
 
 当 `file` 是文件名时，则异步地写入数据到文件（如果文件已存在，则覆盖文件）。 `data` 可以是字符串或 buffer。
 
@@ -366,7 +366,7 @@ fs.readFile('文件名','utf8', (err, data) => {
 
 ```js
 const data = new Uint8Array(Buffer.from('Node.js 中文网'));
-fs.writeFile('文件.txt', data, (err) => {
+fs.writeFile('文件.txt', data, (err) = {
   if (err) throw err;
   console.log('文件已被保存');
 });
@@ -382,12 +382,12 @@ fs.writeFile('文件.txt', 'Node.js 中文网', 'utf8', callback);
 
 ### 7.2`fs.writeFileSync(file, data[, options])`同步写入文件
 
-- `file` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) | [<integer>](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
-- `data` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<TypedArray>](http://nodejs.cn/s/oh3CkV) | [<DataView>](http://nodejs.cn/s/yCdVkD)
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
-  - `flag` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'w'`。
+- `file` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) | [integer](http://nodejs.cn/s/SXbo1v) 文件名或文件描述符。
+- `data` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [TypedArray](http://nodejs.cn/s/oh3CkV) | [DataView](http://nodejs.cn/s/yCdVkD)
+- `options` [Object](http://nodejs.cn/s/jzn6Ao) | [string](http://nodejs.cn/s/9Tw2bK)
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) | [null](http://nodejs.cn/s/334hvC) **默认值:** `'utf8'`。
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
+  - `flag` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'w'`。
 
 返回 `undefined`。
 
@@ -395,10 +395,10 @@ fs.writeFile('文件.txt', 'Node.js 中文网', 'utf8', callback);
 
 ### 8.1 `fs.copyFile(src, dest[, mode], callback)`异步拷贝文件
 
-- `src` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 要拷贝的源文件名。
-- `dest` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 拷贝操作的目标文件名。
-- `mode` [<integer>](http://nodejs.cn/s/SXbo1v) 用于拷贝操作的修饰符。**默认值:** `0`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
+- `src` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 要拷贝的源文件名。
+- `dest` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 拷贝操作的目标文件名。
+- `mode` [integer](http://nodejs.cn/s/SXbo1v) 用于拷贝操作的修饰符。**默认值:** `0`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
 
 异步地将 `src` 拷贝到 `dest`。 默认情况下，如果 `dest` 已经存在，则覆盖它。 除了可能的异常，回调函数没有其他参数。 Node.js 不保证拷贝操作的原子性。 如果在打开目标文件用于写入后发生错误，则 Node.js 将尝试删除目标文件。
 
@@ -426,9 +426,9 @@ fs.copyFile('源文件.txt', '目标文件.txt', COPYFILE_EXCL, callback);
 
 ### 8.2 `fs.copyFileSync(src, dest[, mode])`同步拷贝文件
 
-- `src` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 要拷贝的源文件名。
-- `dest` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 拷贝操作的目标文件名。
-- `mode` [<integer>](http://nodejs.cn/s/SXbo1v) 用于拷贝操作的修饰符。**默认值:** `0`。
+- `src` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 要拷贝的源文件名。
+- `dest` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 拷贝操作的目标文件名。
+- `mode` [integer](http://nodejs.cn/s/SXbo1v) 用于拷贝操作的修饰符。**默认值:** `0`。
 
 其余同``fs.copyFile(src, dest[, mode], callback)`
 
@@ -448,10 +448,10 @@ fs.copyFileSync('源文件.txt', '目标文件.txt', COPYFILE_EXCL);
 
 ### 9.1 `fs.rename(oldPath, newPath, callback)`异步重命名文件
 
-- `oldPath` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `newPath` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
+- `oldPath` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `newPath` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
 
 异步地把 `oldPath` 文件重命名为 `newPath` 提供的路径名。 如果 `newPath` 已存在，则覆盖它。 除了可能的异常，完成回调没有其他参数。
 
@@ -466,18 +466,18 @@ fs.rename('旧文件.txt', '新文件.txt', (err) => {
 
 ### 9.2 `fs.renameSync(oldPath, newPath, callback)`同步重命名文件
 
-- `oldPath` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `newPath` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
+- `oldPath` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `newPath` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
 - 返回 `undefined`
 
 ## 10.判断文件
 
 ### 10.1 `fs.access(path[, mode], callback)` 异步测试文件权限（存在、读写）
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `fs.constants.F_OK`。
-- `callback` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `err` [<Error>](http://nodejs.cn/s/qZ873x)
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `fs.constants.F_OK`。
+- `callback` [Function](http://nodejs.cn/s/ceTQa6)
+  - `err` [Error](http://nodejs.cn/s/qZ873x)
 
 测试用户对 `path` 指定的文件或目录的权限。 `mode` 参数是一个可选的整数，指定要执行的可访问性检查。 查看[文件可访问性的常量](http://nodejs.cn/s/qZfpqk)了解 `mode` 的可选值。 可以创建由两个或更多个值按位或组成的掩码（例如 `fs.constants.W_OK | fs.constants.R_OK`）。
 
@@ -514,8 +514,8 @@ fs.access(file, fs.constants.F_OK | fs.constants.W_OK, (err) => {
 
 ### 10.2`fs.accessSync(path[, mode])` 同步测试文件权限（存在、读写）
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `fs.constants.F_OK`
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `fs.constants.F_OK`
 
 同步地测试用户对 `path` 指定的文件或目录的权限。 `mode` 参数是一个可选的整数，指定要执行的可访问性检查。 查看[文件可访问性的常量](http://nodejs.cn/s/qZfpqk)了解 `mode` 的可选值。 可以创建由两个或更多个值按位或组成的掩码（例如 `fs.constants.W_OK | fs.constants.R_OK`）。
 
@@ -566,8 +566,8 @@ fs.open('文件', 'r', (err, fd) => {
 
 ### 10.5 `fs.existsSync(path)` 判断文件是否存在
 
-- `path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- 返回: [<boolean>](http://nodejs.cn/s/jFbvuT)
+- `path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果路径存在，则返回 `true`，否则返回 `false`。
 
@@ -587,15 +587,15 @@ if (fs.existsSync('文件')) {
 
 ### 11.1 `fs.watch(filename[, options][, listener])`监听文件更改(高效)
 
-- `filename`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `options` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `persistent` [<boolean>](http://nodejs.cn/s/jFbvuT) 指示如果文件已正被监视，进程是否应继续运行。**默认值:** `true`。
-  - `recursive` [<boolean>](http://nodejs.cn/s/jFbvuT) 指示应该监视所有子目录，还是仅监视当前目录。这适用于监视目录时，并且仅适用于受支持的平台（参见[注意事项](http://nodejs.cn/s/PJEx13)）。**默认值:** `false`。
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) 指定用于传给监听器的文件名的字符编码。**默认值:** `'utf8'`。
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6) | [<Buffer>](http://nodejs.cn/s/8ym6ow) **默认值:** `undefined`。
-  - `eventType` [<string>](http://nodejs.cn/s/9Tw2bK)
-  - `filename` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3)
-- 返回: [<fs.FSWatcher>](http://nodejs.cn/s/8XNtAD)
+- `filename`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `options` [string](http://nodejs.cn/s/9Tw2bK) | [Object](http://nodejs.cn/s/jzn6Ao)
+  - `persistent` [boolean](http://nodejs.cn/s/jFbvuT) 指示如果文件已正被监视，进程是否应继续运行。**默认值:** `true`。
+  - `recursive` [boolean](http://nodejs.cn/s/jFbvuT) 指示应该监视所有子目录，还是仅监视当前目录。这适用于监视目录时，并且仅适用于受支持的平台（参见[注意事项](http://nodejs.cn/s/PJEx13)）。**默认值:** `false`。
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) 指定用于传给监听器的文件名的字符编码。**默认值:** `'utf8'`。
+- `listener` [Function](http://nodejs.cn/s/ceTQa6) | [Buffer](http://nodejs.cn/s/8ym6ow) **默认值:** `undefined`。
+  - `eventType` [string](http://nodejs.cn/s/9Tw2bK)
+  - `filename` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3)
+- 返回: [fs.FSWatcher](http://nodejs.cn/s/8XNtAD)
 
 第二个参数是可选的。 如果 `options` 传入字符串，则它指定 `encoding`。 否则， `options` 应传入对象。
 
@@ -616,14 +616,14 @@ fs.watch('somedir', (eventType, filename) => {
 
 ### 11.2 `fs.watchFile(filename[, options], listener)`监听文件更改
 
-- `filename`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `options` [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `bigint` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-  - `persistent` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
-  - `interval` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `5007`。
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6)
-  - `current` [<fs.State>](http://nodejs.cn/s/NMuvVx)
-  - `previous` [<fs.State>](http://nodejs.cn/s/NMuvVx)
+- `filename`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `options` [Object](http://nodejs.cn/s/jzn6Ao)
+  - `bigint` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+  - `persistent` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
+  - `interval` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `5007`。
+- `listener` [Function](http://nodejs.cn/s/ceTQa6)
+  - `current` [fs.State](http://nodejs.cn/s/NMuvVx)
+  - `previous` [fs.State](http://nodejs.cn/s/NMuvVx)
 
 监视 `filename` 的更改。 每当访问文件时都会调用 `listener` 回调。
 
@@ -640,8 +640,8 @@ fs.watchFile('message.text', (curr, prev) => {
 
 ### 11.3 `fs.unwatchFile(filename[, listener])` 解绑监听器
 
-- `filename`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `listener` [<Function>](http://nodejs.cn/s/ceTQa6) 可选的，之前使用 `fs.watchFile()` 绑定的监听器。
+- `filename`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `listener` [Function](http://nodejs.cn/s/ceTQa6) 可选的，之前使用 `fs.watchFile()` 绑定的监听器。
 
 停止监视 `filename` 的变化。 如果指定了 `listener`，则仅移除此特定监听器，否则，将移除所有监听器，从而停止监视 `filename`。
 
@@ -651,26 +651,27 @@ fs.watchFile('message.text', (curr, prev) => {
 
 ### 11.4 为什么推荐[`fs.watch()`](http://nodejs.cn/s/h2QY7Q)
 
-> [精读《如何利用 Nodejs 监听文件夹》](https://www.jianshu.com/p/09dae09457fa)
->
-> [原文《How to Watch for Files Changes in Node.js》](https://thisdavej.com/how-to-watch-for-files-changes-in-node-js/)
+ [精读《如何利用 Nodejs 监听文件夹》](https://www.jianshu.com/p/09dae09457fa)
+
+ [原文《How to Watch for Files Changes in Node.js》](https://thisdavej.com/how-to-watch-for-files-changes-in-node-js/)
 
 + `fs.watchFile` 是通过轮询检测文件变化的，它并不能实时作出反馈，而且只能监听一个文件，存在效率问题。
 
 + `fs.watch` 通过操作系统提供的文件更改通知机制来监听
 
-  > `fs.watch`方式取决于底层操作系统，通知文件系统更改的方法如下：（了解一下）
-  >
-  > - 在 Linux 系统上，使用 [`inotify(7)`](http://nodejs.cn/s/d7HYeP)。
-  > - 在 BSD 系统上，使用 [`kqueue(2)`](http://nodejs.cn/s/sKFUBp)。
-  > - 在 macOS 系统上，对文件使用 [`kqueue(2)`](http://nodejs.cn/s/sKFUBp)，对目录使用 [`FSEvents`](http://nodejs.cn/s/Asxgry)。
-  > - 在 SunOS 系统上（包括 Solaris 和 SmartOS），使用[事件端口](http://nodejs.cn/s/bqLYZP)。
-  > - 在 Windows 系统上，此特性取决于 [`ReadDirectoryChangesW`](http://nodejs.cn/s/Tbrfbe)。
-  > - 在 Aix 系统上，此特性取决于 [`AHAFS`](http://nodejs.cn/s/uAha9z) 必须启动。
-  >
-  > 仍然可以使用 `fs.watchFile()`，因为它使用 stat 轮询 ，但这种方法较慢且不太可靠。—— 官方说法
+   `fs.watch`方式取决于底层操作系统，通知文件系统更改的方法如下：（了解一下）
+  
+   - 在 Linux 系统上，使用 [`inotify(7)`](http://nodejs.cn/s/d7HYeP)。
+   - 在 BSD 系统上，使用 [`kqueue(2)`](http://nodejs.cn/s/sKFUBp)。
+   - 在 macOS 系统上，对文件使用 [`kqueue(2)`](http://nodejs.cn/s/sKFUBp)，对目录使用 [`FSEvents`](http://nodejs.cn/s/Asxgry)。
+   - 在 SunOS 系统上（包括 Solaris 和 SmartOS），使用[事件端口](http://nodejs.cn/s/bqLYZP)。
+   - 在 Windows 系统上，此特性取决于 [`ReadDirectoryChangesW`](http://nodejs.cn/s/Tbrfbe)。
+   - 在 Aix 系统上，此特性取决于 [`AHAFS`](http://nodejs.cn/s/uAha9z) 必须启动。
+  
+   仍然可以使用 `fs.watchFile()`，因为它使用 stat 轮询 ，但这种方法较慢且不太可靠。—— 官方说法
 
 ```typescript
+const fs = require('fs');
 fs.watch(dir, (event, filename) => {
   if (filename && event === "change") {
     console.log(`${filename} file Changed`);
@@ -682,7 +683,7 @@ fs.watch(dir, (event, filename) => {
 
 ### 11.1 文件路径`path` 参数解读
 
-`path` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) ：大多数 `fs` 操作接受的文件路径可以指定为字符串、[`Buffer`](http://nodejs.cn/s/FApxjh)、或 [`URL`](http://nodejs.cn/s/5dwq7G) 对象（使用 `file:` 协议）。
+`path` [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) ：大多数 `fs` 操作接受的文件路径可以指定为字符串、[`Buffer`](http://nodejs.cn/s/FApxjh)、或 [`URL`](http://nodejs.cn/s/5dwq7G) 对象（使用 `file:` 协议）。
 
 `file:` URL 始终是绝对路径。
 
@@ -749,23 +750,23 @@ fs.promises.readFile('文件.txt', 'utf8').then(res => {
 
 ### 13.2 使用Stream流式操作文件
 
-> [Node.js 流: 你需要知道的一切](https://juejin.im/post/5940a9c3128fe1006a0ab176)
+ [Node.js 流: 你需要知道的一切](https://juejin.im/post/5940a9c3128fe1006a0ab176)
 
 #### 13.2.1 `fs.createReadStream(path[, options])`创建可读流
 
-- `path`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `options` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `flags` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) **默认值:** `null`。
-  - `fd` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `null`。如果指定了 `fd`，则 `ReadStream` 会忽略 `path` 参数，并且会使用指定的文件描述符
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
-  - `autoClose` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
-  - `emitClose` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-  - `start` [<integer>](http://nodejs.cn/s/SXbo1v) 从文件中读取一定范围的字节，而不是读取整个文件
-  - `end` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `Infinity`。从文件中读取一定范围的字节，而不是读取整个文件
-  - `highWaterMark` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `64 * 1024`。
-  - `fs` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `null`。
-- 返回: [<fs.ReadStream>](http://nodejs.cn/s/C3Eioq) 参见[可读流](http://nodejs.cn/s/vx79o1)。
+- `path`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `options` [string](http://nodejs.cn/s/9Tw2bK) | [Object](http://nodejs.cn/s/jzn6Ao)
+  - `flags` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) **默认值:** `null`。
+  - `fd` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `null`。如果指定了 `fd`，则 `ReadStream` 会忽略 `path` 参数，并且会使用指定的文件描述符
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
+  - `autoClose` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
+  - `emitClose` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+  - `start` [integer](http://nodejs.cn/s/SXbo1v) 从文件中读取一定范围的字节，而不是读取整个文件
+  - `end` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `Infinity`。从文件中读取一定范围的字节，而不是读取整个文件
+  - `highWaterMark` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `64 * 1024`。
+  - `fs` [Object](http://nodejs.cn/s/jzn6Ao) | [null](http://nodejs.cn/s/334hvC) **默认值:** `null`。
+- 返回: [fs.ReadStream](http://nodejs.cn/s/C3Eioq) 参见[可读流](http://nodejs.cn/s/vx79o1)。
 
 ```js
 
@@ -806,18 +807,18 @@ readStream.on('close', () => {
 
 #### 13.2.2 `fs.createWriteStream(path[, options])` 创建可写流
 
-- `path`  [<string>](http://nodejs.cn/s/9Tw2bK) | [<Buffer>](http://nodejs.cn/s/6x1hD3) | [<URL>](http://nodejs.cn/s/5dwq7G) 
-- `options` [<string>](http://nodejs.cn/s/9Tw2bK) | [<Object>](http://nodejs.cn/s/jzn6Ao)
-  - `flags` [<string>](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
-  - `encoding` [<string>](http://nodejs.cn/s/9Tw2bK) **默认值:** `null`。
-  - `fd` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `null`。如果指定了 `fd`，则 `ReadStream` 会忽略 `path` 参数，并且会使用指定的文件描述符
-  - `mode` [<integer>](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
-  - `autoClose` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
-  - `emitClose` [<boolean>](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
-  - `start` [<integer>](http://nodejs.cn/s/SXbo1v)  范围 [0, [`Number.MAX_SAFE_INTEGER`](http://nodejs.cn/s/e9ereu)] 
-  - `fs` [<Object>](http://nodejs.cn/s/jzn6Ao) | [<null>](http://nodejs.cn/s/334hvC) **默认值:** `null`。
+- `path`  [string](http://nodejs.cn/s/9Tw2bK) | [Buffer](http://nodejs.cn/s/6x1hD3) | [URL](http://nodejs.cn/s/5dwq7G) 
+- `options` [string](http://nodejs.cn/s/9Tw2bK) | [Object](http://nodejs.cn/s/jzn6Ao)
+  - `flags` [string](http://nodejs.cn/s/9Tw2bK) 参见[文件系统 `flag` 的支持](http://nodejs.cn/s/JjbY8n)。 **默认值:** `'r'`。
+  - `encoding` [string](http://nodejs.cn/s/9Tw2bK) **默认值:** `null`。
+  - `fd` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `null`。如果指定了 `fd`，则 `ReadStream` 会忽略 `path` 参数，并且会使用指定的文件描述符
+  - `mode` [integer](http://nodejs.cn/s/SXbo1v) **默认值:** `0o666`。
+  - `autoClose` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `true`。
+  - `emitClose` [boolean](http://nodejs.cn/s/jFbvuT) **默认值:** `false`。
+  - `start` [integer](http://nodejs.cn/s/SXbo1v)  范围 [0, [`Number.MAX_SAFE_INTEGER`](http://nodejs.cn/s/e9ereu)] 
+  - `fs` [Object](http://nodejs.cn/s/jzn6Ao) | [null](http://nodejs.cn/s/334hvC) **默认值:** `null`。
 
-+ 返回: [<fs.WriteStream>](http://nodejs.cn/s/2uZDVA) 参见[可写流](http://nodejs.cn/s/9JUnJ8)。
++ 返回: [fs.WriteStream](http://nodejs.cn/s/2uZDVA) 参见[可写流](http://nodejs.cn/s/9JUnJ8)。
 
 ## 14.小结
 
@@ -907,4 +908,3 @@ readStream.on('close', () => {
   fs.unwatch
   ```
 
-  

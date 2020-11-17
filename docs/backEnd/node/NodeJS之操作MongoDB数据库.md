@@ -13,9 +13,9 @@ tags:
 
 ## 1.SQL与NOSQL
 
-SQL：Structure Query Language，结构性查询语言，使用SQL的数据库如：MySQL、SQLite、Oracle等(传统关系型数据库，使用行和列来存储数据，类似excel)。
+**SQL**：_Structure Query Language_，结构性查询语言，使用SQL的数据库如：MySQL、SQLite、Oracle等(传统关系型数据库，使用行和列来存储数据，类似excel)。
 
-NOSQL：不使用SQL的数据库，如：MongoDB（以 JSON 或 XML 格式存储数据）、Redis、LevelDB等（非关系型分布式数据库）
+**NOSQL**：不使用SQL的数据库，如：MongoDB（以 JSON 或 XML 格式存储数据）、Redis、LevelDB等（非关系型分布式数据库）
 
 ### 1.1 SQL的ACID
 
@@ -81,7 +81,7 @@ db.student.insert({name: 'zkk'},{name: 'zzz'})
 
 ### 2.2 删drop、remove
 
-`db.collection.remove(<query>,<justOne>)`
+`db.collection.remove(query,justOne)`
 
 ```sh
 # 删除当前数据库
@@ -475,7 +475,7 @@ catSchema.statics.haha = function() {}
 
 
 
-<iframe src="https://mongoose.kkfor.com/guides.html" height="600px">
+<iframe src="https://mongoose.kkfor.com/guides.html" height="600px" width="100%" />
 
 ## 5. 参考文档
 

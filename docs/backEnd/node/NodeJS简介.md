@@ -10,7 +10,7 @@ tags:
 
 # NodeJS简介
 
-![NodeJS](E:\blog\images\node\nodejs.jpg)
+![NodeJS](../../../images/node/nodejs.jpg)
 
 ## NodeJS之父——Ryan Dahl
 
@@ -49,7 +49,7 @@ NodeJS不为每个客户连接创建一个新的线程，而仅仅使用一个�
 
 使用NodeJS,一个8GB内存的web服务器，可以同时处理超过4万用户的连接。此外，使用单线程，操作系统不再有线程创建、销毁的事件开销。
 
-![多线程I/O与单线程I/O](E:\blog\images\node\multi-single-process.png)
+![多线程I/O与单线程I/O](../../../images/node/multi-single-process.png)
 
 ### 
 
@@ -69,7 +69,7 @@ NodeJS不为每个客户连接创建一个新的线程，而仅仅使用一个�
 
 在NodeJS中，客户端请求建立连接、提交数据等操作都会触发相应的事件。在node中，一个时刻只能执行一个事件回调函数，但是在执行一个时间回调函数的中途，可以转而处理其他事件，然后返回继续执行原事件的回调函数，这个机制成为**“事件环”**机制。
 
-![事件环](E:\blog\images\node\event-loop.png)
+![事件环](../../../images/node/event-loop.png)
 
 
 

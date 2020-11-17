@@ -22,21 +22,22 @@ const url = require('url');
 // 解析URL字符串
 url.parse('http://localhost:11014/#/order-agreement-manager?key=reward-distribution#a');
 new URL('https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash');
-
+```
 // 结果如下：
+```json
 {
-  protocol: 'https:', // 协议
-  slashes: true, // 
-  auth: 'user:pass',
-  host: 'sub.host.com:8080', // 域名
-  port: '8080', // 端口号
-  hostname: 'sub.host.com',// 域名
-  hash: '#hash', // 哈希
-  search: '?query=string', 
-  query: 'query=string',// 查询字符串（用querystring.parse解析）或url.searchParams解析
-  pathname: '/p/a/t/h', // 路徑名
-  path: '/p/a/t/h?query=string',
-  href: 'https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash'
+  "protocol": "https:", // 协议
+  "slashes": true, // 
+  "auth": "user:pass",
+  "host": "sub.host.com:8080", // 域名
+  "port": "8080", // 端口号
+  "hostname": "sub.host.com",// 域名
+  "hash": "#hash", // 哈希
+  "search": "?query=string", 
+  "query": "query=string",// 查询字符串（用querystring.parse解析）或url.searchParams解析
+  "pathname": "/p/a/t/h", // 路徑名
+  "path": "/p/a/t/h?query=string",
+  "href": "https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash"
 }
 ```
 
@@ -44,8 +45,8 @@ URL 字符串是结构化的字符串，包含多个含义不同的组成部分�
 
 ## 2.构造方法new URL(input[, base])
 
-- `input` [<string>](http://nodejs.cn/s/9Tw2bK) 要解析的绝对或相对的 URL。如果 `input` 是相对路径，则需要 `base`。 如果 `input` 是绝对路径，则忽略 `base`。
-- `base` [<string>](http://nodejs.cn/s/9Tw2bK) | [<URL>](http://nodejs.cn/s/5dwq7G) 如果 `input` 不是绝对路径，则为要解析的基本 URL。
+- `input` [string](http://nodejs.cn/s/9Tw2bK) 要解析的绝对或相对的 URL。如果 `input` 是相对路径，则需要 `base`。 如果 `input` 是绝对路径，则忽略 `base`。
+- `base` [string](http://nodejs.cn/s/9Tw2bK) | [URL](http://nodejs.cn/s/5dwq7G) 如果 `input` 不是绝对路径，则为要解析的基本 URL。
 
 通过将 `input` 相对于 `base` 进行解析，创建一个新的 `URL` 对象。 如果 `base` 是一个字符串，则解析方法与 `new URL(base)` 相同。
 
@@ -285,4 +286,3 @@ console.log(JSON.stringify(myURLs));
 
   
 
-  

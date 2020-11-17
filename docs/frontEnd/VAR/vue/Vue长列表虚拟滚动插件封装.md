@@ -1,6 +1,17 @@
+---
+title: 【vue】Vue长列表虚拟滚动插件封装
+sidebar: auto
+isComment: true
+categories: 
+- 前端
+tags: 
+- JS
+- vue
+---
+
 # Vue长列表虚拟滚动插件封装
 
-## 虚拟滚动概述
+## 1.虚拟滚动概述
 
 
 
@@ -8,48 +19,48 @@
 
 >  **思考：**
 >
->  ​			老板让我开发一个 类似 新浪新闻  移动端 H5 Web页面，需要怎样设计，才能符合**「 企业实践标准 」**？
+>  老板让我开发一个 类似 新浪新闻  移动端 H5 Web页面，需要怎样设计，才能符合**「 企业实践标准 」**？
 
-根据用户行为，滑动下拉置底，使用 Axios ，按需请求分页数据，追加显示页面。
+根据用户行为，滑动下拉置底，使用 `Axios` ，按需请求分页数据，追加显示页面。
 
 
 
 > **思考：**
 >
-> ​			如果，我们不断下拉访问，页面中有大量的新闻列表的时候，用户会不会有不好的体验？
+> 如果，我们不断下拉访问，页面中有大量的新闻列表的时候，用户会不会有不好的体验？
 
 > **案例：**
 >
-> ​			使用 Vue 构建一个页面，直接将 10000 条新闻类列表数据显示到页面上，体验效果
+> 使用 Vue 构建一个页面，直接将 10000 条新闻类列表数据显示到页面上，体验效果
 >
-> ​         *PS：通过 Chrome 浏览器性能分析工具  **Performance**，监测分析页面前端性能数据*
+> *PS：通过 Chrome 浏览器性能分析工具  **Performance**，监测分析页面前端性能数据*
 >
-> ​					FPS，每秒帧数，图表上的红色块表示长时间帧，很可能会出现卡顿；
+>   FPS，每秒帧数，图表上的红色块表示长时间帧，很可能会出现卡顿；
 >
-> ​					CPU，CPU消耗占用，实体图越多消耗越高
+>   CPU，CPU消耗占用，实体图越多消耗越高
 >
-> ​					NET，网络请求效率
+>   NET，网络请求效率
 >
->    ​			通过 CHrome 浏览器内存分析工具 Memory，监测分析内存消耗情况
+>   通过 CHrome 浏览器内存分析工具 Memory，监测分析内存消耗情况
 
 一个长列表 Web 页面，如果需要展示成千上万条数据，那么页面中就会有数万甚至数十万的HTML节点，会巨大的消耗浏览器性能，进而给用户造成非常不友好的体验。
 
-1. 页面等待时间极长，用户体验差；
-2. CPU 计算能力不够，滑动会卡顿；
-3. GPU 渲染能力不够，页面会跳屏；
-4. RAM 内存容量不够，浏览器崩溃。
++ 1. 页面等待时间极长，用户体验差；
++ 2. CPU 计算能力不够，滑动会卡顿；
++ 3. GPU 渲染能力不够，页面会跳屏；
++ 4. RAM 内存容量不够，浏览器崩溃。
 
 
 
 > **思考：**
 >
-> ​			前端如何优化这种 「 长列表 」显示场景，才能符合**「 企业最佳实践标准 」**？
+> 前端如何优化这种 「 长列表 」显示场景，才能符合**「 企业最佳实践标准 」**？
 
-1. 不把长列表数据一次性全部直接显示在页面上；
-2. 截取长列表一部分数据用来填充屏幕容器区域；
-3. 长列表数据不可视部分使用使用空白占位填充；
-4. 监听滚动事件根据滚动位置动态改变可视列表；
-5. 监听滚动事件根据滚动位置动态改变空白填充。
++ 1. 不把长列表数据一次性全部直接显示在页面上；
++ 2. 截取长列表一部分数据用来填充屏幕容器区域；
++ 3. 长列表数据不可视部分使用使用空白占位填充；
++ 4. 监听滚动事件根据滚动位置动态改变可视列表；
++ 5. 监听滚动事件根据滚动位置动态改变空白填充。
 
   我们也把上面的优化行为简称为 **「 虚拟滚动 」**
 
@@ -65,19 +76,14 @@
 
 虚拟滚动，就是根据 **「 容器可视区域 」**的 **「 列表容积数量 」**，监听用户滑动或者滚动事件，动态截取 **「 长列表数据 」** 中的**「 部分数据 」**渲染到页面上，动态使用空白占位填充容器 **「上下滚动区域内容 」** ，模拟实现 **「 原生滚动效果 」**。
 
-<img src="./虚拟滚动实现.jpg" alt="虚拟滚动实现" style="zoom:80%;" />
-
+<img src="../../../../images/vue/虚拟滚动实现.jpg">
 
 
 **课程安排**
 
-![](./课程安排.jpg)
+<img src="../../../../images/vue/课程安排.jpg">
 
-
-
-
-
-##  基础案例准备
+##  2.基础案例准备
 
 
 
@@ -131,17 +137,13 @@ const server = app.listen(4000, function () {
 })
 ```
 
-
-
 ### 基于 Vue-Cli  脚手架准备基础案例
 
-![](./代码结构.png)
+<img src="../../../../images/vue/代码结构.png">
 
 > PS：企业级应用开发，在 Vue WebPack 中灵活配置，可以让我们的项目更加灵活可靠
 
-
-
-## 基础功能实现
+## 3.基础功能实现
 
 
 
@@ -188,8 +190,6 @@ export default {
 };
 ```
 
-
-
 ### 计算滚动容器最大列表容积
 
 根据滚动容器 DOM 元素高度 `this.$refs.scrollContainer.innerHeight` 和单条数据的固定高度  `oneHeight` ，计算当前滚动容器最大列表容积数量  `containSize` 。
@@ -198,33 +198,38 @@ export default {
 >
 > ​			当屏幕 `Resize` 改变窗口，或者 `orientationchange` 手机横竖屏切换时，滚动容器最大容积数需要动态计算
 
-```vue
+``````vue
 // 给滚动容器加一个 ref 属性，用来获取当前滚动容器的 DOM 节点
 <div class="scroll-container" ref="scrollContainer" />
-// 首先在data中声明两个属性
-data() {
-  return {
-    // 列表单条条数据 CSS 高度，这个数值需要固定，根据 CSS 值手动填写，如此才能准确的计算容积
-    oneHeight: 100,
-    // 当前页面可以容纳的列表最大数量
-    containSize: 0
-  }
+
+<script>
+export default {
+  // 首先在data中声明两个属性
+  data() {
+    return {
+      // 列表单条条数据 CSS 高度，这个数值需要固定，根据 CSS 值手动填写，如此才能准确的计算容积
+      oneHeight: 100,
+      // 当前页面可以容纳的列表最大数量
+      containSize: 0
+    }
+  },
+  mounted() {
+  	// 根据显示区域高度，计算可以容纳最大列表数量
+   	this.myresize();
+  	window.onresize = this.myresize;
+   	window.orientationchange = this.myresize;
+  },
+  methods: {
+    // 监听窗口变化动态计算容器最大容积数
+    myresize: () => {
+      console.log(this.$refs.scrollContainer.offsetHeight);
+      // 容积数量可能只截取了单条数据的一部分，所以要进位加一
+      this.containSize = 
+        Math.ceil(this.$refs.scrollContainer.offsetHeight / this.oneHeight) + 1;
+    }
+  }		
 }
-mounted() {
-	// 根据显示区域高度，计算可以容纳最大列表数量
- 	this.myresize();
-	window.onresize = this.myresize;
- 	window.orientationchange = this.myresize;
-},
-methods: {
-  // 监听窗口变化动态计算容器最大容积数
-  myresize: () => {
-    console.log(this.$refs.scrollContainer.offsetHeight);
-    // 容积数量可能只截取了单条数据的一部分，所以要进位加一
-    this.containSize = 
-      Math.ceil(this.$refs.scrollContainer.offsetHeight / this.oneHeight) + 1;
-  }
-}
+</script>
 ``````
 
 > **思考：**
@@ -245,47 +250,58 @@ methods: {
 
 监听用户滚动、滑动事件，根据滚动位置，动态计算当前可视区域起始数据的索引位置 `startIndex`，再根据  `containSize`，计算结束数据的索引位置 `endIndex`，最后根据`startIndex`与 `endIndex`截取长列表所有数据 `allDataList` 中需显示的数据列表 `showDataList`。
 
-```vue
-// 给滚动容器添加滚动事件 @scroll="handleScroll"
-// 使用passive修饰符，确保默认滚动行为有效
-<div class="scroll-container" ref="scrollContainer" @scroll.passive="handleScroll" />
-// 显示容器最大容积截取的数组数据
-<div v-for="(item, index) in showDataList" :key="index" />
- 
-data() {
-  return {
-    // 可视元素开始索引
-    startIndex:0
-	}
-}
-computed: {
-    // 根据 starIndex 和屏幕容积 containSize 计算 endIndex
-    endIndex() {
-      let endIndex = this.startIndex + this.containSize;
-      // 判断截取到最后元素是否存在，如果不存在则只取最后一位
-      if (!this.allDataList[endIndex]) {
-        endIndex = this.allDataList.length - 1;
+``````vue
+<template>
+    <!--给滚动容器添加滚动事件 @scroll="handleScroll"-->
+    <!--使用passive修饰符，确保默认滚动行为有效-->
+    <div class="scroll-container" ref="scrollContainer" @scroll.passive="handleScroll" />
+    <!--显示容器最大容积截取的数组数据-->
+    <div v-for="(item, index) in showDataList" :key="index" />
+</template>
+
+<script >
+export default {
+   data() {
+    return {
+      // 可视元素开始索引
+      startIndex:0,
+      containSize: 0,
+      allDataList: [],
       }
-      return endIndex;
-    },
-    // 根据容器最大容积数，截取显示，实际需要渲染列表，这里也通过计算属性动态依赖计算
-    showDataList() {
-      // 根据 starIndex 和 endIndex，截取 allDataList 对应需要显示部分 showDataList
-      return this.allDataList.slice(this.startIndex, this.endIndex);
+  },
+  computed: {
+      // 根据 starIndex 和屏幕容积 containSize 计算 endIndex
+      endIndex() {
+        let endIndex = this.startIndex + this.containSize;
+        // 判断截取到最后元素是否存在，如果不存在则只取最后一位
+        if (!this.allDataList[endIndex]) {
+          endIndex = this.allDataList.length - 1;
+        }
+        return endIndex;
+      },
+      // 根据容器最大容积数，截取显示，实际需要渲染列表，这里也通过计算属性动态依赖计算
+      showDataList() {
+        // 根据 starIndex 和 endIndex，截取 allDataList 对应需要显示部分 showDataList
+        return this.allDataList.slice(this.startIndex, this.endIndex);
+      },
+  },
+  methods: {
+    // 监听容器滚动事件
+    handleScroll() {
+      this.startIndex = ~~(
+         this.$refs.scrollContainer.scrollTop / this.oneHeight
+      );
     }
-},
-methods: {
-  // 监听容器滚动事件
-  handleScroll() {
-    this.startIndex = ~~(
-       this.$refs.scrollContainer.scrollTop / this.oneHeight
-    );
   }
 }
-// 给容器添加 Y 轴可滚动 CSS 属性
+</script>
+
+<style>
+/*给容器添加 Y 轴可滚动 CSS 属性*/
 .scroll-container {
    overflow-y: auto;
 }
+</style>
 ``````
 
 > **注意：**
@@ -306,21 +322,25 @@ methods: {
 
 根据 `startIndex` 和 `endIndex` 的位置，使用计算属性，动态的计算并设置，上下空白填充的高度样式 `blankFillStyle`，使用 padding 或者 margin 进行空白占位都是可以的
 
-```vue
+``````vue
 <!-- 添加上下空白占位 -->
 <div :style="blankFillStyle">
 	<!-- 循环遍历元素 -->
 </div>
 
-computed: {
-	// blankFillStyle 依赖 计算上下空白占位高度样式
-	blankFillStyle() {
-		return {
-			paddingTop: this.startIndex * 100 + "px",
-			paddingBottom: (this.allDataList.length - this.endIndex) * 100 + "px"
-		};
-	}
-}
+<script>
+export default {
+    computed: {
+            // blankFillStyle 依赖 计算上下空白占位高度样式
+            blankFillStyle() {
+                return {
+                    paddingTop: this.startIndex * 100 + "px",
+                    paddingBottom: (this.allDataList.length - this.endIndex) * 100 + "px"
+                };
+            }
+        }
+    }
+</script>
 ``````
 
 > **注意：**
@@ -337,66 +357,68 @@ computed: {
 >
 > ​				`@touchmove.passive="handleScroll"`
 
-
-
-## 完整功能实现
+## 4.完整功能实现
 
 
 
 ### 下拉置底自动请求加载数据
 
-```vue
+``````vue
 
-async created() {
-    // 分批发送请求时，先请求一部分数据保证数据显示
-    let request = await this.getAllListData(100);
-    if (!!request && request.length > 0) {
-      this.allDataList = [...request];
-      this.isRequestStatus = false;
-    }
-  },
-  methods: {
-    // 发送请求获取新的请求模拟数据，这个是跨域请求的网络mock数据
-    getAllListData(num) {
-      this.isRequestStatus = true;
-      this.msg = "小二正在努力，请耐心等待...";
-      return this.$axios
-        .get("http://localhost:4000/data?num=" + num)
-        .then(res => {
-          this.isRequestStatus = false;
-          return res.data.list;
-        })
-        .catch(() => {
-          this.msg = "亲，网络请求出错啦！赶快检查吧...";
-          return false;
-        });
-    },
-    // 监听容器滚动事件
-    handleScroll() {
-      // 获取当前容器在scoll事件中距离顶部的位移 scrollTop 计算可视元素开始索引
-      let CurrentStartIndex = ~~(
-        this.$refs.scrollContainer.scrollTop / this.oneHeight
-   	  );
-      // 如果当前可视元素开始索引和记录的 startIndex 开始索引发生变化，才需要更改 showDataList
-      if (CurrentStartIndex === this.startIndex) return;
-      // 当前可视元素索引发生变化后，更新记录的 startIndex 值
-      this.startIndex = CurrentStartIndex;
-      // PS：因为计算属性依赖关系，startIndex 发生变化，endIndex 会自动触发计算属性的操作
-      // 同理，根据计算属性依赖关系，showDataList 也会自动触发返回新的值
-      
-      // 如果下拉到了底部，并且上一次请求已经完成，则触发新的数据更新
-      // 使用 this.loadingTag 状态进行节流，防止非必要触发
-      if ( this.containSize + currentIndex > this.listData.length - 1  
-           && !this.loadingTag ) {
-           // 请求新的20条新闻数据，如果没有请求到数据则直接return
-           let newListData = await this.getAllListData(20);
-           if (!!newListData && newListData.length === 0) return;
-           // 使用拓展运算符将请求的最新数据写进所有数据的列表
-           this.listData = [...this.listData, ...newListData];
+<script>
+export default {
+  async created() {
+      // 分批发送请求时，先请求一部分数据保证数据显示
+      let request = await this.getAllListData(100);
+      if (!!request && request.length > 0) {
+        this.allDataList = [...request];
+        this.isRequestStatus = false;
       }
     },
-  }
-```
+    methods: {
+      // 发送请求获取新的请求模拟数据，这个是跨域请求的网络mock数据
+      getAllListData(num) {
+        this.isRequestStatus = true;
+        this.msg = "小二正在努力，请耐心等待...";
+        return this.$axios
+          .get("http://localhost:4000/data?num=" + num)
+          .then(res => {
+            this.isRequestStatus = false;
+            return res.data.list;
+          })
+          .catch(() => {
+            this.msg = "亲，网络请求出错啦！赶快检查吧...";
+            return false;
+          });
+      },
+      // 监听容器滚动事件
+      async handleScroll () {
+        // 获取当前容器在scoll事件中距离顶部的位移 scrollTop 计算可视元素开始索引
+        let CurrentStartIndex = ~~(
+          this.$refs.scrollContainer.scrollTop / this.oneHeight
+     	  );
+        // 如果当前可视元素开始索引和记录的 startIndex 开始索引发生变化，才需要更改 showDataList
+        if (CurrentStartIndex === this.startIndex) return;
+        // 当前可视元素索引发生变化后，更新记录的 startIndex 值
+        this.startIndex = CurrentStartIndex;
+        // PS：因为计算属性依赖关系，startIndex 发生变化，endIndex 会自动触发计算属性的操作
+        // 同理，根据计算属性依赖关系，showDataList 也会自动触发返回新的值
+        
+        // 如果下拉到了底部，并且上一次请求已经完成，则触发新的数据更新
+        // 使用 this.loadingTag 状态进行节流，防止非必要触发
+        if ( this.containSize + currentIndex > this.listData.length - 1  
+             && !this.loadingTag ) {
+             // 请求新的20条新闻数据，如果没有请求到数据则直接return
+             let newListData = await this.getAllListData(20);
+             if (!!newListData && newListData.length === 0) return;
+             // 使用拓展运算符将请求的最新数据写进所有数据的列表
+             this.listData = [...this.listData, ...newListData];
+        }
+      }
+    }
+}
+</script>
+``````
 
 
 
@@ -406,45 +428,49 @@ async created() {
 >
 > ​			监听滚动事件触发对应函数方法的频率是极高的，该如何做好页面节流优化呢？
 
-```vue
-// 在data中声明一个属性scrollState用来记录滚动状态
-// 监听滚动（滑动）事件，
-handelScroll() {
-     // 只有scrollState值为true的时候才会具体执行 
-     if (this.scrollState) {
-       this.scrollState = false;
-       this.setDataStartIndex();
-       var mytimer = setTimeout(() => {
-         this.scrollState = true;
-         window.clearTimeout(mytimer);
-       },60);
-     }
-},
-
-async setDataStartIndex() {
-  		// 获取当前容器在scoll事件中距离顶部的位移 scrollTop 计算可视元素开始索引
-      let CurrentStartIndex = ~~(
-        this.$refs.scrollContainer.scrollTop / this.oneHeight
-   	  );
-      // 如果当前可视元素开始索引和记录的 startIndex 开始索引发生变化，才需要更改 showDataList
-      if (CurrentStartIndex === this.startIndex) return;
-      // 当前可视元素索引发生变化后，更新记录的 startIndex 值
-      this.startIndex = CurrentStartIndex;
-      // PS：因为计算属性依赖关系，startIndex 发生变化，endIndex 会自动触发计算属性的操作
-      // 同理，根据计算属性依赖关系，showDataList 也会自动触发返回新的值
-      
-      // 如果下拉到了底部，并且上一次请求已经完成，则触发新的数据更新
-      // 使用 this.loadingTag 状态进行节流，防止非必要触发
-      if ( this.containSize + currentIndex > this.listData.length - 1  
-           && !this.loadingTag ) {
-           // 请求新的20条新闻数据，如果没有请求到数据则直接return
-           let newListData = await this.getAllListData(20);
-           if (!!newListData && newListData.length === 0) return;
-           // 使用拓展运算符将请求的最新数据写进所有数据的列表
-           this.listData = [...this.listData, ...newListData];
-      }
+``````vue
+<script>
+export default {
+   // 在data中声明一个属性scrollState用来记录滚动状态
+    // 监听滚动（滑动）事件，
+    handelScroll() {
+         // 只有scrollState值为true的时候才会具体执行 
+         if (this.scrollState) {
+           this.scrollState = false;
+           this.setDataStartIndex();
+           var mytimer = setTimeout(() => {
+             this.scrollState = true;
+             window.clearTimeout(mytimer);
+           },60);
+         }
+    },
+    
+    async setDataStartIndex() {
+      		// 获取当前容器在scoll事件中距离顶部的位移 scrollTop 计算可视元素开始索引
+          let CurrentStartIndex = ~~(
+            this.$refs.scrollContainer.scrollTop / this.oneHeight
+       	  );
+          // 如果当前可视元素开始索引和记录的 startIndex 开始索引发生变化，才需要更改 showDataList
+          if (CurrentStartIndex === this.startIndex) return;
+          // 当前可视元素索引发生变化后，更新记录的 startIndex 值
+          this.startIndex = CurrentStartIndex;
+          // PS：因为计算属性依赖关系，startIndex 发生变化，endIndex 会自动触发计算属性的操作
+          // 同理，根据计算属性依赖关系，showDataList 也会自动触发返回新的值
+          
+          // 如果下拉到了底部，并且上一次请求已经完成，则触发新的数据更新
+          // 使用 this.loadingTag 状态进行节流，防止非必要触发
+          if ( this.containSize + currentIndex > this.listData.length - 1  
+               && !this.loadingTag ) {
+               // 请求新的20条新闻数据，如果没有请求到数据则直接return
+               let newListData = await this.getAllListData(20);
+               if (!!newListData && newListData.length === 0) return;
+               // 使用拓展运算符将请求的最新数据写进所有数据的列表
+               this.listData = [...this.listData, ...newListData];
+          }
+    }
 }
-```
+</script>
+``````
 
 
 
@@ -453,7 +479,7 @@ async setDataStartIndex() {
 [requestAnimationFrame 介绍](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)
 
 
-```js
+``````js
 //兼容低版本浏览器
 let requestAnimationFrame =
   window.requestAnimationFrame ||
@@ -473,55 +499,59 @@ requestAnimationFrame(() => {
     requestAnimationFrame(arguments.callee);
   }
 });
-```
+``````
 
 
 
 ### 设置上下滚动缓冲消除快速滚动白屏
 
-```vue
-computed: {
-// 用来保存实际要渲染到页面的数据
-showListData() {
-  // 设置起始、结尾位置索引
-	let startIndex = 0;
-  let endIndex = 0;
-    // 如果当前滚动的位置还没有完成一屏，则从第1条开始，截取到当前索引位置+屏幕容积+向下缓冲屏幕容积
-    if (this.currentIndex <= this.containSize) {
-      startIndex = 0;
-    } else {
-      startIndex = this.currentIndex - this.containSize;
-    }
-    endIndex = this.currentIndex + this.containSize * 2;
-    // 判断截取到最后元素是否存在，如果不存在则只取最后一位
-    if (!this.listData[endIndex]) {
-      endIndex = this.listData.length - 1;
-    }
-    return this.listData.slice(startIndex, endIndex);
-  },
-  // 用来动态的计算上下空白padding的占位样式
-  wrapperStyle() {
-    let paddingTop = "0px";
-    let paddingBottom = "0px";
-    // 判断当前滚动位置
-    if (this.currentIndex > this.containSize) {
-      // 当当前滚动位置大于屏幕容积后才填充空白
-      paddingTop =
-        (this.currentIndex - this.containSize) * this.oneHeight + "px";
-    }
-    let endIndex = this.currentIndex + this.containSize * 2;
-    // 判断截取到最后元素是否存在，只有最后一个元素存在则填充下空白
-    if (!!this.listData[endIndex]) {
-      paddingBottom =
-        (this.listData.length - endIndex) * this.oneHeight + "px";
-    }
-    return {
-      paddingTop,
-      paddingBottom
-    };
+``````vue
+<script>
+export default {
+    computed: {
+    // 用来保存实际要渲染到页面的数据
+    showListData() {
+      // 设置起始、结尾位置索引
+        let startIndex = 0;
+      let endIndex = 0;
+        // 如果当前滚动的位置还没有完成一屏，则从第1条开始，截取到当前索引位置+屏幕容积+向下缓冲屏幕容积
+        if (this.currentIndex <= this.containSize) {
+          startIndex = 0;
+        } else {
+          startIndex = this.currentIndex - this.containSize;
+        }
+        endIndex = this.currentIndex + this.containSize * 2;
+        // 判断截取到最后元素是否存在，如果不存在则只取最后一位
+        if (!this.listData[endIndex]) {
+          endIndex = this.listData.length - 1;
+        }
+        return this.listData.slice(startIndex, endIndex);
+      },
+      // 用来动态的计算上下空白padding的占位样式
+      wrapperStyle() {
+        let paddingTop = "0px";
+        let paddingBottom = "0px";
+        // 判断当前滚动位置
+        if (this.currentIndex > this.containSize) {
+          // 当当前滚动位置大于屏幕容积后才填充空白
+          paddingTop =
+            (this.currentIndex - this.containSize) * this.oneHeight + "px";
+        }
+        let endIndex = this.currentIndex + this.containSize * 2;
+        // 判断截取到最后元素是否存在，只有最后一个元素存在则填充下空白
+        if (!!this.listData[endIndex]) {
+          paddingBottom =
+            (this.listData.length - endIndex) * this.oneHeight + "px";
+        }
+        return {
+          paddingTop,
+          paddingBottom
+        };
+      }
   }
 }
-```
+</script>
+``````
 
 
 
@@ -531,41 +561,43 @@ showListData() {
 >
 > ​			当我们滚动了一段列表后，点击一条新闻查看新闻详情，然后再返回列表页面，发现列表回到顶部了，这个体验很不好，该如何解决？
 
-``````js
+``````vue
 // 在 app.vue 文件的路由出口添加 keepAlive 
 <keep-alive>
  <router-view />
 </keep-alive>	
 ``````
 
-```vue
+``````vue
+<script>
 // 在 index.vue 文件中记录相关信息
-data(){
-  return {
-    // 在data中声明一个属性，用来保存路由切换后的偏移定位
-    scrollTop: 0  
-  }
-},
-methods:{
-  async setDataStartIndex() {
-      // 根据滚动事件，获取当前容器在scoll事件中距离顶部的位移
-    	this.scrollTop = this.$refs.scrollContainer.scrollTop;
-  		// 根据 scrollTop 计算可视元素开始索引
-      let CurrentStartIndex = ~~( this.scrollTop / this.oneHeight );
-    	...
-  }
-},
-activated() {
-	//在keep-alive路由模式下，切换路由时确保能够返回用户之前所在位置
-	this.$nextTick(() => {
-		this.$refs.scrollContainer.scrollTop = this.scrollTop;
-	});
-},
-```
+export default {
+   data(){
+      return {
+        // 在data中声明一个属性，用来保存路由切换后的偏移定位
+        scrollTop: 0  
+      }
+    },
+    methods:{
+      async setDataStartIndex() {
+          // 根据滚动事件，获取当前容器在scoll事件中距离顶部的位移
+        	this.scrollTop = this.$refs.scrollContainer.scrollTop;
+      		// 根据 scrollTop 计算可视元素开始索引
+          let CurrentStartIndex = ~~( this.scrollTop / this.oneHeight )
+        	// ...
+      }
+    },
+    activated() {
+    	//在keep-alive路由模式下，切换路由时确保能够返回用户之前所在位置
+    	this.$nextTick(() => {
+    		this.$refs.scrollContainer.scrollTop = this.scrollTop;
+    	});
+    },
+}
+</script>
+``````
 
-
-
-## 插件封装调用
+## 5.插件封装调用
 
 
 
@@ -594,7 +626,7 @@ export default {
 
 2. 新建 index.js 文件输出插件
 
-``````vue
+``````js
 import VirtualScroll from './VirtualScroll.vue';
 const plugin = {
     install(Vue) {
@@ -621,12 +653,6 @@ Vue.use(VirtualScroll);
   </div>
 </template>
 ``````
-
-
-
-
-
-
 
 ### 调用插件并传递 Props 参数
 
@@ -667,28 +693,33 @@ export default {
 在组件中使用 props 接收父组件传递过来的参数
 
 ``````vue
-props: {
-    // 请求数据提示信息
-    msg: {
-      default: () => "小二正在努力，请耐心等待...",
-      type: String,
-    },
-    // 记录单条数据的高度
-    oneHeight: {
-      default: () => 100,
-      type: Number,
-    },
-    // 数据请求的 Url
-    requestUrl: {
-      default: () => "http://localhost:4000/data?num=",
-      type: String,
-    },
-    // 单次请求数据的条数
-    oneRequestDataLength: {
-      default: () => 20,
-      type: Number,
-    },
+<script>
+export default {
+    props: {
+        // 请求数据提示信息
+        msg: {
+          default: () => "小二正在努力，请耐心等待...",
+          type: String,
+        },
+        // 记录单条数据的高度
+        oneHeight: {
+          default: () => 100,
+          type: Number,
+        },
+        // 数据请求的 Url
+        requestUrl: {
+          default: () => "http://localhost:4000/data?num=",
+          type: String,
+        },
+        // 单次请求数据的条数
+        oneRequestDataLength: {
+          default: () => 20,
+          type: Number,
+        },
+    }
 }
+
+</script>
 ``````
 
 修改关键传递过来的参数信息
@@ -701,13 +732,7 @@ return this.$axios.get(this.requestUrl + num)
 let newList = async () => await this.getNewsList(this.oneRequestDataLength);
 ``````
 
-
-
-
-
 ### 使用作用域插槽传递单条元素结构
-
-
 
 将 VirtualScroll.vue 组件内部的单条元素的 html 结构、css 样式、data 数据，使用作用域插槽传递出去
 
@@ -807,9 +832,7 @@ let newList = async () => await this.getNewsList(this.oneRequestDataLength);
 </style>
 ``````
 
-
-
-## 技术场景拓展简介
+## 6.技术场景拓展简介
 
 1. 使用上下空白占位的方式实现虚拟滚动
 2. 横屏滑动实现虚拟滚动
