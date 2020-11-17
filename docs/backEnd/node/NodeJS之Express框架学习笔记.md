@@ -1,5 +1,5 @@
 ---
-title: 【Node】Express web 开发框架学习笔记
+title: 【Node】NodeJS之Express框架学习笔记
 date: 2019-8-28
 categories: 
 - 后端
@@ -7,19 +7,26 @@ tags:
 - Node
 - JS
 ---
+
 # Express web 开发框架
+
 ## Express web 开发框架简介
+
 [Express](http://expressjs.com) 是一个简洁而灵活的 node.js Web应用框架, 提供一系列强大特性帮助你创建各种Web应用。
+
 > [Express英文官网](http://www.expressjs.com.cn)
+>
 > [Express中文官网](http://expressjs.com)
 
 ## Express web 开发框架特点
+
 1. 实现了路由功能。
 2. 中间件功能。
 3. 对request和response对象的扩展。
 4. 可以继承其他模板引擎。
 
 ## Express web 开发框架基本使用
+
 1. 安装
 	```
 	创建目录
@@ -63,15 +70,15 @@ tags:
 		
 		- `app.use`和`app.all`请求方式不限，什么请求方法都可以;
 		
-		  ```js
+	```js
 	  // http://127.0.0.1:3000/admin/aa/bb/cc/dd
-		  app.use('admin', function(req, res) {
-		      res.write(req.originalUrl + '\n'); // /admin/aa/bb/cc/dd
-		      res.write(req.baseUrl + '\n'); // /admin
-		      res.write(req.path + '\n'); // /aa/bb/cc/dd
-		      res.end();
-		  })
-		  ```
+      app.use('admin', function(req, res) {
+          res.write(req.originalUrl + '\n'); // /admin/aa/bb/cc/dd
+          res.write(req.baseUrl + '\n'); // /admin
+          res.write(req.path + '\n'); // /aa/bb/cc/dd
+          res.end();
+      })
+	```
 		
 		  
 	+ 路由匹配
@@ -91,6 +98,7 @@ tags:
 	})
 	```
 > tips：路径规则支持正则表达式
+
 6. 小结
 + `req.query`: 获取 `query`参数；
 + `req.params`: 获取`path`参数；

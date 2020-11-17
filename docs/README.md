@@ -15,9 +15,7 @@ bgImageStyle: {
         :lrc-type="3"
         theme="#ff0a87"
         order="random"
-        mini=true
-        fixed=false
-        listFolded=false 
-        volume=0.1
-        autoplay=true
+        mini
+        fixed
+        listFolded
         />
