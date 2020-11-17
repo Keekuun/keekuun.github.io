@@ -1,3 +1,12 @@
+---
+title: 【HTTP】HTTP学习笔记
+date: 2019-6-20
+categories: 
+- 网络
+tags:
+- HTTP
+---
+
 # HTTP学习笔记
 ![HTTP](https://upload-images.jianshu.io/upload_images/16584865-6da1237e47a3ba2b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

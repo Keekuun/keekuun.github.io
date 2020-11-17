@@ -169,7 +169,7 @@ git commit
 -  添加原作者的远程仓库到 `remote` （本例使用 `upstream` 作为远程仓库名）
 
    ```bash
-   git remote add upstream <原作者远程仓库地址>
+   git remote add upstream 原作者远程仓库地址
    ```
 
 ### 同步 fork
@@ -202,8 +202,10 @@ git commit
 ### 如何删除已经添加的远程仓库
 
 ```bash
-git remote rm <remoteRep>
+git remote rm remoteRep
 ```
+
++ [【git merge 和 git rebase 小结】](https://blog.csdn.net/seableble/article/details/103174347?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 
 # Reference
 
