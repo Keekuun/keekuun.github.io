@@ -5,5 +5,6 @@ categories:
 - 前端
 tags: 
 - JS
+- ES6
 ---
 

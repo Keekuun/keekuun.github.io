@@ -312,7 +312,7 @@ function writeFile(path, data, options, callback) {
 }
 ```
 
-从源码中可以看出，一般直接使用`fs.readFile`等方式直接操作文件即可，因为他们都之间或间接的使用了`open`方法。
+从源码中可以看出，一般直接使用`fs.readFile`等方式直接操作文件即可，因为他们都直接或间接的使用了`open`方法。
 
 ## 6. 读取文件
 
@@ -366,7 +366,7 @@ fs.readFile('文件名','utf8', (err, data) => {
 
 ```js
 const data = new Uint8Array(Buffer.from('Node.js 中文网'));
-fs.writeFile('文件.txt', data, (err) = {
+fs.writeFile('文件.txt', data, (err) => {
   if (err) throw err;
   console.log('文件已被保存');
 });
@@ -583,7 +583,7 @@ if (fs.existsSync('文件')) {
 
 ## 11. 监听文件的变化
 
-![监听文件的变化](E:\blog\images\node\watch-code.gif)
+![监听文件的变化](../../../images/node/watch-code.gif)
 
 ### 11.1 `fs.watch(filename[, options][, listener])`监听文件更改(高效)
 

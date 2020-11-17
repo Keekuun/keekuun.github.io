@@ -5,6 +5,7 @@ categories:
 - 前端
 tags: 
 - JS
+- ES6
 ---
 
 ## 1. 对象表示法
