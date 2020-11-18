@@ -1,3 +1,12 @@
+---
+title: 【Algorithm】算法训练题
+categories: 
+- 算法
+- 其他
+tags:
+- Algorithm
+---
+
 > https://www.cnblogs.com/jztan/p/12273671.html
 > https://www.jianshu.com/p/a28db3d3cc18
 ## 冒泡排序
