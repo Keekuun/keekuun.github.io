@@ -1,3 +1,12 @@
+---
+title: 【Algorithm】算法训练题
+categories: 
+- 算法
+- 其他
+tags:
+- Algorithm
+---
+
 # 算法训练
 
 ## 一、[位运算](https://leetcode-cn.com/tag/bit-manipulation/)
