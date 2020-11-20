@@ -1,6 +1,7 @@
 ---
 title: 【Webpack】Webpack学习笔记之核心概念
 date: 2020-5-28
+sidebar: auto
 categories: 
 - webpack
 tags: 

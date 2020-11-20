@@ -2617,6 +2617,11 @@ colorette@^1.2.1:
   resolved "http://npm.dev.casstime.com/colorette/-/colorette-1.2.1.tgz#4d0b921325c14faf92633086a536db6e89564b1b"
   integrity sha512-puCDz0CzydiSYOrnXpz/PKd69zRrribezjtE9yd4zvytoRc8+RY/KJPvtPFKZS3E3wP6neGyMe0vOTlHO5L3Pw==
 
+colors@^1.4.0:
+  version "1.4.0"
+  resolved "http://npm.dev.casstime.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
+
 colour@~0.7.1:
   version "0.7.1"
   resolved "http://npm.dev.casstime.com/colour/-/colour-0.7.1.tgz#9cb169917ec5d12c0736d3e8685746df1cadf778"
@@ -8524,6 +8529,13 @@ vuepress-html-webpack-plugin@^3.2.0:
     tapable "^1.0.0"
     toposort "^1.0.0"
     util.promisify "1.0.0"
+
+vuepress-plugin-auto-sidebar@^1.5.0:
+  version "1.5.0"
+  resolved "http://npm.dev.casstime.com/vuepress-plugin-auto-sidebar/-/vuepress-plugin-auto-sidebar-1.5.0.tgz#fc11b32f5e7976394bab01edd68cd602b1c0cefe"
+  integrity sha512-PsF+XRWBZw+xbh/4IzTw6VbM4PoMhEMemHgK+c1Lmf7+9Fq3FK/iB4/P6Bp3VmlY+GenJ95MtwKK0BRjuK4RCQ==
+  dependencies:
+    colors "^1.4.0"
 
 vuepress-plugin-boxx@^0.0.7:
   version "0.0.7"
