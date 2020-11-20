@@ -1,7 +1,7 @@
 ---
 title: 【优化】使用CSS Module避免样式污染
 date: 2020-09-24
-sidebar: 'auto'
+sidebar: auto
 categories: 
 - 前端
 tags: 

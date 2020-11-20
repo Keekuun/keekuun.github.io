@@ -1,7 +1,7 @@
 ---
 title: 【优化】HTTP缓存策略
 date: 2020-09-23
-sidebar: 'auto'
+sidebar: auto
 categories: 
 - 前端
 tags: 

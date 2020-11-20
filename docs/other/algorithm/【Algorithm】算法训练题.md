@@ -1,8 +1,8 @@
 ---
 title: 【Algorithm】算法训练题
+sidebar: auto
 categories: 
 - 算法
-- 其他
 tags:
 - Algorithm
 ---

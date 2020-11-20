@@ -1,9 +1,9 @@
 ---
 title: 【Algorithm】数据结构和算法学习笔记
 date: 2020-10-20
+sidebar: auto
 categories: 
 - 算法
-- 其他
 tags:
 - Algorithm
 ---

@@ -15,3 +15,22 @@ summary + pre {
 .content__default pre code {
   font-size: 0.85rem !important;
 }
+
+pre[class~="language"] {
+  padding-top: 40px;
+}
+
+pre[class~="language"]::before {
+  position: absolute;
+  top: 1rem;
+  left: 3rem;
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  /* 	第一个小圆点 */
+  background-color: #ff5f56;
+  /* 	后面两个小圆点 */
+  -webkit-box-shadow: 18px 0 0 0 #ffbd2e, 36px 0 0 0 #27c93f;
+  box-shadow: 18px 0 0 0 #ffbd2e, 36px 0 0 0 #27c93f;
+}

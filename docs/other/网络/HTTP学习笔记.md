@@ -1,6 +1,7 @@
 ---
 title: 【HTTP】HTTP学习笔记
 date: 2019-6-20
+sidebar: auto
 categories: 
 - 网络
 tags:

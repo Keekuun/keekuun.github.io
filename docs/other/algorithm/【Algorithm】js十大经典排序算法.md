@@ -1,14 +1,12 @@
 ---
-title: 【Algorithm】算法训练题
+title: 【Algorithm】JS经典排序算法
+sidebar: auto
 categories: 
 - 算法
-- 其他
 tags:
 - Algorithm
 ---
 
-> https://www.cnblogs.com/jztan/p/12273671.html
-> https://www.jianshu.com/p/a28db3d3cc18
 ## 冒泡排序
 ### 1.常规冒泡排序
 ```js
@@ -116,3 +114,7 @@ function quickSort(data) {
     return [...quickSort(left), pivot, ...quickSort(right)];
 }
 ```
+
+> https://www.cnblogs.com/jztan/p/12273671.html
+>
+> https://www.jianshu.com/p/a28db3d3cc18
