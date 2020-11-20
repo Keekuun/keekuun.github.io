@@ -1,5 +1,5 @@
 ---
-title: 【CSS】水平垂直居中总结
+title: 【CSS】CSS水平垂直居中总结
 date: 2019-6-5
 sidebar: auto
 categories: 
@@ -30,7 +30,7 @@ tags:
 </head>
 <body>
 	<div id="father">
-		<span id="son">我想牵着你的手，从心动到古稀！---酒馆</span>
+		<span id="son">我想牵着你的手，从心动到古稀！---</span>
 	</div>
 </body>
 </html>
@@ -60,7 +60,7 @@ tags:
 </head>
 <body>
 <span id="father">
-	<span id="son">我想牵着你的手，从心动到古稀！---酒馆</span>
+	<span id="son">我想牵着你的手，从心动到古稀！---</span>
 </span>
 </body>
 </html>
@@ -72,6 +72,7 @@ tags:
 ### 块级元素
 
 #### 方案一
+
 **定宽度**：谁居中，谁设置`margin:0 auto`
 ```html
 <!DOCTYPE html>
@@ -98,7 +99,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -132,7 +133,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -142,6 +143,7 @@ tags:
 ![水平居中：块级元素-不定宽](https://upload-images.jianshu.io/upload_images/16584865-ac985779575f90ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 #### 方案二：使用定位属性
+
 首先设置：
 ```html
 父元素：相对定位 `position:relative`
@@ -189,7 +191,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -234,7 +236,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -244,6 +246,7 @@ tags:
 ![水平居中：定位属性-不定宽](https://upload-images.jianshu.io/upload_images/16584865-a4341d7d39acf5d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 #### 方案三：使用flexbox布局实现（宽度定不定都可以）
+
 使用flexbox布局，只需要给待处理的块状元素的父元素添加属性 `display: flex; justify-content: center;`
 ```html
 <!DOCTYPE html>
@@ -272,7 +275,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -284,6 +287,7 @@ tags:
 ## 垂直居中
 
 ### 单行的行内元素
+
 只需设置`单行的行内元素`的：`行高（line-height）=盒子高度`
 ```html
 <!DOCTYPE html>
@@ -309,7 +313,7 @@ tags:
 
 <body>
 <div id="father">
-	<span id="son">我想牵着你的手，从心动到古稀！---酒馆</span>
+	<span id="son">我想牵着你的手，从心动到古稀！---</span>
 </div>
 </body>
 </html>
@@ -319,6 +323,7 @@ tags:
 ![垂直居中：单行的行内元素](https://upload-images.jianshu.io/upload_images/16584865-4348e156c326dd0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 多行的行内元素
+
 父元素：`display:table-cell;vertical-align:center`即可
 ```html
 <!DOCTYPE html>
@@ -345,7 +350,7 @@ tags:
 
 <body>
 <div id="father">
-	<span id="son">我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！---酒馆</span>
+	<span id="son">我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！我想牵着你的手，从心动到古稀！---</span>
 </div>
 </body>
 </html>
@@ -356,7 +361,9 @@ tags:
 
 
 ### 块级元素
+
 #### 方案一：使用定位
+
 首先设置：
 ```html
 父元素：相对定位 `position:relative`
@@ -402,7 +409,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -448,7 +455,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -458,6 +465,7 @@ tags:
 ![垂直居中：定位属性-定高](https://upload-images.jianshu.io/upload_images/16584865-e92f6d49e80fc31c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 #### 方案二：flexbox布局实现（不论高度）
+
 只需给块状元素的父元素设置`display: flex; align-items: center;`
 ```html
 <!DOCTYPE html>
@@ -484,7 +492,7 @@ tags:
 
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>
@@ -494,8 +502,11 @@ tags:
 ![垂直居中：flebox布局-不论高度](https://upload-images.jianshu.io/upload_images/16584865-b3a43420c1840038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 水平垂直居中
-###已知高度和宽度的元素
+
+### 已知高度和宽度的元素
+
 #### 方案一：position+top/right/bottom/left
+
 ```html
   父元素:相对定位
   子元素:绝对定位 + top: 0; right: 0; bottom: 0; left: 0; margin: auto;
@@ -532,7 +543,7 @@ tags:
 </head>
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！--酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！--</div>
 </div>
 </body>
 </html>
@@ -543,6 +554,7 @@ tags:
 
 
 #### 方案二：position+margin
+
 ```html
   父元素:相对定位
   子元素:绝对定位 + left: 50%; top: 50%; margin-left: 元素宽度的负一半; margin-top: 元素高度的负一半;
@@ -579,7 +591,7 @@ tags:
 </head>
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！--酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！--</div>
 </div>
 </body>
 </html>
@@ -589,7 +601,9 @@ tags:
 ![水平垂直居中：宽高定<2>](https://upload-images.jianshu.io/upload_images/16584865-d4585e269b60a5d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 未知高度和宽度的元素
-####方案一：使用定位属性
+
+#### 方案一：使用定位属性
+
 ```html
   父元素:相对定位
   子元素:绝对定位 + left: 50%; top: 50%; + transform: translateX(-50%) translateY(-50%);
@@ -663,7 +677,7 @@ tags:
 </head>
 <body>
 <div id="father">
-	<div id="son">我想牵着你的手，从心动到古稀！---酒馆</div>
+	<div id="son">我想牵着你的手，从心动到古稀！---</div>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: 【CSS】水平垂直居中总结
+title: 【CSS】CSS布局练习总结
 date: 2019-6-8
 sidebar: auto
 categories: 
@@ -9,10 +9,13 @@ tags:
 ---
 
 >为了提高工作效率，不在CSS布局上多次耗费时间，故记录此练习笔记。借鉴了大神【浪里行舟】的博客，文末有链接。
+
 ## CSS布局概要：
+
 ![CSS布局思维导图](https://upload-images.jianshu.io/upload_images/16584865-7d8ac41ab39653b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## demo效果页面
+
 1. [单列布局1](https://keekuun.github.io/relearn-the-front-end.github.io/css3/CSS%E5%B8%83%E5%B1%80%E6%80%BB%E7%BB%93/demo/%E5%8D%95%E5%88%97%E5%B8%83%E5%B1%801.html)
 2. [单列布局2](https://keekuun.github.io/relearn-the-front-end.github.io/css3/CSS%E5%B8%83%E5%B1%80%E6%80%BB%E7%BB%93/demo/%E5%8D%95%E5%88%97%E5%B8%83%E5%B1%802.html)
 3. [两列自适应布局flex](https://keekuun.github.io/relearn-the-front-end.github.io/css3/CSS%E5%B8%83%E5%B1%80%E6%80%BB%E7%BB%93/demo/%E4%B8%A4%E5%88%97%E8%87%AA%E9%80%82%E5%BA%94%E5%B8%83%E5%B1%80flex.html)
@@ -30,7 +33,7 @@ tags:
 15. [等高布局：仿table](https://keekuun.github.io/relearn-the-front-end.github.io/css3/CSS%E5%B8%83%E5%B1%80%E6%80%BB%E7%BB%93/demo/%E7%AD%89%E9%AB%98%E5%B8%83%E5%B1%80%E4%BB%BFtable.html)
 16. [粘连布局](https://keekuun.github.io/relearn-the-front-end.github.io/css3/CSS%E5%B8%83%E5%B1%80%E6%80%BB%E7%BB%93/demo/%E7%B2%98%E8%BF%9E%E5%B8%83%E5%B1%80.html)
 
-##一、单列布局
+## 一、单列布局
 ### 1、单列布局：header-content-footer等宽
 
 原理：将header-content-footer统一设置相等的width属性（屏幕小于属性值时会出现滚动条），或者max-width属性（屏幕小于属性值时不会出现滚动条），然后设置margin: 0 auto实现居中效果
@@ -958,10 +961,10 @@ Grid布局，基于网格的二维布局系统，用来优化用户界面设计�
 - **圣杯布局**是利用**父容器的左、右内边距+两个从列相对定位**；
 - **双飞翼布局**是把主列嵌套在一个**新的父级块中利用主列的左、右外边距**进行布局调整
 
-##四、等高布局
+## 四、等高布局
 等高布局是指子元素在父元素中高度相等的布局方式。接下来我们介绍常见几种实现方式：
 
-###1、利用正padding+负margin
+### 1、利用正padding+负margin
 原理：
 在圣杯布局基础上，**设置一个大数值的 padding-bottom，再设置相同数值的负的 margin-bottom，并在所有列外面加上一个容器，并设置 overflow:hidden 把溢出背景切掉。**解决圣杯布局的第二个缺点。
 
@@ -1074,7 +1077,7 @@ Grid布局，基于网格的二维布局系统，用来优化用户界面设计�
 
 		main.wrap {
 			/*注意img必须足够宽*/
-			background: url("../img/bg.png") repeat-y;
+			background: url("..") repeat-y;
 			width: 100%;
 			height: 500px;
 			margin: 0 auto;
@@ -1234,10 +1237,10 @@ Grid布局，基于网格的二维布局系统，用来优化用户界面设计�
 </html>
 ````
 
-##五、粘连布局
+## 五、粘连布局
 + 1、特点：
-    + 有一块内容<main>，当<main>的高康足够长的时候，紧跟在<main>后面的元素<footer>会跟在<main>元素的后面。
-    + 当<main>元素比较短的时候(比如小于屏幕的高度),我们期望这个<footer>元素能够“粘连”在屏幕的底部
+    + 有一块内容`<main>`，当`<main>`的高康足够长的时候，紧跟在`<main>`后面的元素`<footer>`会跟在`<main>`元素的后面。
+    + 当`<main>`元素比较短的时候(比如小于屏幕的高度),我们期望这个`<footer>`元素能够“粘连”在屏幕的底部
 
 + 2、实现步骤：
     + (1)footer必须是一个独立的结构，与wrap没有任何嵌套关系
@@ -1307,7 +1310,7 @@ Grid布局，基于网格的二维布局系统，用来优化用户界面设计�
 </body>
 </html>
 ```
-##参考文章
+## 参考文章
 - [双飞翼布局介绍-始于淘宝UED](http://www.imooc.com/wenda/detail/254035)
 - [CSS三栏布局的四种方法](https://zhuanlan.zhihu.com/p/24305930)
 - [CSS 两列布局---左侧固定，右侧自适应](http://changfeng-liu.blog.163.com/blog/static/21046518420128645553217/)
