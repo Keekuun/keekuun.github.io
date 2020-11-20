@@ -65,6 +65,6 @@ typings/
 
 # secretKeyConfig
 # secretKeyConfig.js
-dist
+*/dist
 
 package-lock.json
