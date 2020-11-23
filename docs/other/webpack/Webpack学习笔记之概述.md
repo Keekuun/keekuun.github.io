@@ -10,7 +10,7 @@ tags:
 
 # Webpack学习笔记之概述
 
-![webpack](../images/webpack/webpack.png)
+![webpack](../../../images/webpack/webpack.png)
 
 ## webpack能做的事儿：提升打包速度、体积优化
 
@@ -19,11 +19,11 @@ tags:
 
 ## 为什么需要构建工具
 
-![](E:\blog\images\webpack\why-build.png)
+![](../../../images/webpack/why-build.png)
 
 ## 为什么选择webpack
 
-![](E:\blog\images\webpack\why-webpack.png)
+![](../../../images/webpack/why-webpack.png)
 
 + 社区生态丰富
 + 配置灵活和插件化扩展
