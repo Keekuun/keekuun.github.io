@@ -1,13 +1,13 @@
 module.exports = [
     // 网页标签栏图标
-    // ['link', {rel: 'icon', href: '/images/favicon.ico'}],
+    ['link', {rel: 'icon', href: './favicon.ico'}],
     // 移动栏优化
     ['meta', {name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
     ['meta', {name: 'keywords', content: 'vuepress, blog, 前端, HTML5, CSS3，javascript, typescript'}],
     ['meta', {name: 'copyright', content: 'zkk'}],
     ['meta', {name: 'robots', content: 'all'}],
     // pwa
-    ['link', { rel: 'manifest', href: '/data/manifest.json' }],
+    ['link', { rel: 'manifest', href: './data/manifest.json' }],
     // 引入jquery
     ["script", {
         "language": "javascript",
