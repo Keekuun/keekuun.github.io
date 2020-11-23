@@ -3,8 +3,7 @@ const headConfig = require('./config/headConfig.js');
 const themeConfig = require('./config/themeConfig');
 module.exports = {
     title: '月上秦少',
-    base: '/',
-    // base: '/blog/', // gitee部署
+    base: '/blog/',
     description: '每一个不曾起舞的日子，都是对生命的辜负！',
     locales: {
         '/': {
