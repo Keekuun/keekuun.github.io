@@ -30,7 +30,7 @@ npm init --yes
 cnpm install vue --save
 ```
 + 像Jquery一样引入到你的html文档中
-```js
+```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="./node_modules/vue/dist/vue.min.js"></script>
 ```
@@ -206,7 +206,7 @@ vuejs中常用的指令介绍
 + v-if
     + 类型： any
     
-    根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 <template> ，将提出它的内容作为条件块。
+    根据表达式的值的真假条件渲染元素。在切换时元素及它的数据绑定 / 组件被销毁并重建。如果元素是 `<template>` ，将提出它的内容作为条件块。
     当条件变化时该指令触发过渡效果。（删除重绘）
     ```vue
     <div v-if="flag">如果flag=true我就显示（删除重绘）</div>
@@ -260,7 +260,7 @@ vuejs中常用的指令介绍
     <my-component :prop="someThing"></my-component>
   
     <!-- XLink -->
-    <svg><a :xlink:special="foo"></a></svg>
+    <svg><a :xlink:special="foo"></a></svg></div>
     ```
 + v-text
     + 类型： string
@@ -326,7 +326,9 @@ vuejs中常用的指令介绍
 由于vue2.x中已经没有内置过滤器，所以我们需要自定义过滤器。
 
 #### 自定义全局过滤器
-使用全局方法Vue.filter(过滤器ID,过滤器函数)
+
+使用全局方法`Vue.filter(`过滤器ID,过滤器函数)
+
 ```vue
 Vue.filters('lowercase', function(value){
           // 处理value值,比如：转为小写

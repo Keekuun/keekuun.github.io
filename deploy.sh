@@ -21,7 +21,7 @@ git commit -m ':rocket: deploy'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:zkkysqs/blog.git master:gh-pages
-#git push -f git@gitee.com:keekuun/blog.git master:gh-pages
+git push -f git@gitee.com:keekuun/blog.git master:gh-pages
 
 
 # coding
