@@ -2,7 +2,8 @@ const pluginConfig = require('./config/pluginConfig.js');
 const headConfig = require('./config/headConfig.js');
 const themeConfig = require('./config/themeConfig');
 module.exports = {
-    base: './',
+    // 为了部署在gitee
+    base: '/blog/',
     title: '月上秦少',
     description: '每一个不曾起舞的日子，都是对生命的辜负！',
     locales: {

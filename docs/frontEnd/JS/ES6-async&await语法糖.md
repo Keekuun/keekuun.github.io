@@ -158,7 +158,7 @@ JS中由于函数的形式有很多种，故`async/await`的形式也有多种�
 
   ```js
   let obj = { async foo() {} };
-  obj.foo().then(...);
+  obj.foo().then(res => console.log(res));
   ```
 
 + Class 方法
@@ -384,17 +384,19 @@ closeCow();
 但是，当我们多个方法不需要严格的执行顺序的时候,我们其实可以这样并发执行：
 
 ```js
-let foo = await getFoo();
-let bar = await getBar();
+(async function () {
 
-// 写法一
-let [foo, bar] = await Promise.all([getFoo(), getBar()]);
-
-// 写法二
-let fooPromise = getFoo();
-let barPromise = getBar();
-let foo = await fooPromise;
-let bar = await barPromise;
+    let foo = await getFoo();
+    let bar = await getBar();
+    
+    // 写法一
+    let [foo1, bar1] = await Promise.all([getFoo(), getBar()]);
+    
+    // 写法二
+    let fooPromise = getFoo();
+    let barPromise = getBar();
+    let foo2 = await fooPromise;
+    let bar2 = await barPromise;})()
 ```
 
 
@@ -516,16 +518,15 @@ console.log('script end')
 <summary>详细解读</summary>
     <pre>
     1.执行同步代码
-    <code>script start</code> <br/>
-	2.遇到setTimeout，推入宏任务队列<br/>
+    <code>script start</code><br/>
+    2.遇到setTimeout，推入宏任务队列<br/>
     3.执行async1()
     <code>async1 start</code><br/>
     4.遇到await 执行右侧表达式后让出线程，阻塞后面代码
     <code>async2</code><br/>
     5.执行promise中的同步代码
     <code>promise1</code><br/>
-    6.将.then()推入微任务队列
-    向下执行同步代码
+    6.将.then()推入微任务队列向下执行同步代码
     <code>script end</code><br/>
     7.同步代码执行完毕，执行所有微任务队列中的微任务
     <code>promise2</code><br/>
@@ -537,4 +538,5 @@ console.log('script end')
     <code>undefined</code><br/>
     11.开始下一轮evenloop，执行宏任务队列中的任务
     <code>setTimeout</code><br/>
-</pre>
+    </pre>
+</details>

@@ -7,7 +7,7 @@ module.exports = [
     ['meta', {name: 'copyright', content: 'zkk'}],
     ['meta', {name: 'robots', content: 'all'}],
     // pwa
-    ['link', {'rel':'manifest', href: './data/manifest.json'}],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
     // 引入jquery
     ["script", {
         "language": "javascript",
