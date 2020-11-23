@@ -37,7 +37,7 @@ module.exports = {
 
 ## 2.PostCSS插件autoprfixer自动补齐CSS3前缀
 
-![](E:\blog\images\webpack\precss-browser.png)
+![](../../../images/webpack/precss-browser.png)
 
 为了兼容各种浏览器，需要手动添加css前缀，例子：
 
@@ -89,7 +89,7 @@ yarn add postcss-loader autoprefixed -D
 
 ## 3.CSS单位PX自动转为rem
 
-![移动端浏览器分辨率](E:\blog\images\webpack\mobile-screen.png)移动端设备分辨率五花八门，为了适应移动端设备，`CSS3`引入了rem单位（相对于`root`的`font-size`大小），配合媒体查询（`@media`）来实现移动端适配。
+![移动端浏览器分辨率](../../../images/webpack/mobile-screen.png)移动端设备分辨率五花八门，为了适应移动端设备，`CSS3`引入了rem单位（相对于`root`的`font-size`大小），配合媒体查询（`@media`）来实现移动端适配。
 
 > 摘自[移动端适配](https://blog.csdn.net/tcf_jingfeng/article/details/80803083)
 
@@ -600,7 +600,7 @@ module.exports = {
 
 ## 9.Scope Hoisting减少闭包
 
-![](E:\blog\images\webpack\module-transfer.png)
+![](../../../images/webpack/module-transfer.png)
 
 上图中代码经过`webpack`打包之后会给模块加上一层函数包裹，`import`会被转换成`__webpack_require`（用来加载模块）。打包的结果是一个`IIFE`（自执行的匿名闭包函数）
 
@@ -620,7 +620,7 @@ module.exports = {
 
 对于打的web应用来讲，将所有的代码都放在一个文件中显然是不够有效的，特别是当你的某些代码块是在某些特殊的时候才会被使用到。`webpack`有一个功能就是将你的代码分割成chunks(语块)，当代码运行到需要他们的时候再进行加载。
 
-![代码分割](E:\blog\images\webpack\code-splitting.png)
+![代码分割](../../../images/webpack/code-splitting.png)
 
 适用场景：
 
@@ -696,7 +696,7 @@ npx eslint --init
 
 + 和`CI/CD`集成（生产阶段）
 
-  ![CI/CD集成ESLint](E:\blog\images\webpack\CI-CD.jpg)
+  ![CI/CD集成ESLint](../../../images/webpack/CI-CD.jpg)
 
   ```js
   yarn add husky -D
@@ -1007,11 +1007,11 @@ module.exports = merge(baseConfig, devConfig);
 
 ### 14.4 功能模块设计
 
-![webpack功能模块设计](E:\blog\images\webpack\common-module-design.png)
+![webpack功能模块设计](../../../images/webpack/common-module-design.png)
 
 ### 14.5 功能目录设计
 
-![](E:\blog\images\webpack\directory-design.png)
+![](../../../images/webpack/directory-design.png)
 
 ### 14.5 代码实现
 

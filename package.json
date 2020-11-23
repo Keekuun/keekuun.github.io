@@ -35,5 +35,6 @@
     "vuepress-plugin-nuggets-style-copy": "^1.0.3",
     "vuepress-plugin-ribbon": "0.0.4",
     "vuepress-theme-reco": "^1.5.7"
-  }
+  },
+  "homepage": "/blog/"
 }

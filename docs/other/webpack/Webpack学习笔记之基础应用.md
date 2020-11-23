@@ -37,7 +37,7 @@ module.exports = {
             // 将@指向src目录
             '@': path.resolve(__dirname, 'src/')
         }
-    }
+    },
     module: {
         rules: [
             {
@@ -236,7 +236,7 @@ yarn add url-loader -D
 + 借助`file-loader`(处理文件)
 
   ```js
-   ....
+// ...
   module: {
           rules: [
               {
@@ -432,7 +432,7 @@ app.listen(3000, function() {
 
 + 热更新原理分析- 通过websocket通知浏览器
 
-![热更新原理](E:\blog\images\webpack\hot-update.png)
+![热更新原理](../../../images/webpack/hot-update.png)
 
 ## 6.文件指纹策略：chunkhash、contenthash和hash
 
@@ -481,7 +481,7 @@ module.exports = {
                 'css-loader'
             ]}
         ]
-    }
+    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name]_[contenthash:8].css'

@@ -14,7 +14,7 @@ tags:
 
 Entry用来指定webpack的打包入口。
 
-![](E:\blog\images\webpack\entry.png)
+![](../../../images/webpack/entry.png)
 
 ### 1.1 entry单入口
 
@@ -82,7 +82,7 @@ webpack开箱即用只支持JS和JSON两种文件类型，通过Loaders区支持
 
 Loaders本身是一个函数，接受源文件作为参数，返回转换后的结果。
 
-![](E:\blog\images\webpack\loaders.png)
+![](../../../images/webpack/loaders.png)
 
 ### 3.1  Loaders的用法
 
@@ -109,7 +109,7 @@ module.exports = {
 
 plugins即插件，用于bundle文件的优化，资源管理和环境变量的注入，它作用于整个构建过程。
 
-![](E:\blog\images\webpack\plugins.png)
+![](../../../images/webpack/plugins.png)
 
 ### 4.1 Plugins的用法
 
@@ -134,6 +134,6 @@ mode用来指定当前的构建环境：`production`、`development`或`none`。
 
 设置mode可以使用webpack内置的函数，默认值为`production`(生产环境)。
 
-![](E:\blog\images\webpack\mode.png)
+![](../../../imageswebpackmode.png)
 
 ## 6.Resolve
