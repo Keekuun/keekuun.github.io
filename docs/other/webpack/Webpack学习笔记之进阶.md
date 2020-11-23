@@ -593,7 +593,7 @@ if (Array.isArray(options)) {
 
 ## 4. webapck编译流程
 
-![](E:\blog\images\webpack\webpack-process.png)
+![](../../../images/webpack/webpack-process.png)
 
 ## 5.实现简易webpack
 
