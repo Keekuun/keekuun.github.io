@@ -134,6 +134,6 @@ mode用来指定当前的构建环境：`production`、`development`或`none`。
 
 设置mode可以使用webpack内置的函数，默认值为`production`(生产环境)。
 
-![](../../../imageswebpackmode.png)
+![](../../../images/webpack/mode.png)
 
 ## 6.Resolve
