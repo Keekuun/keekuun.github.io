@@ -10,7 +10,7 @@ tags:
 
 # Webpack学习笔记之概述
 
-![webpack](E:\blog\images\webpack\webpack.png)
+![webpack](../images/webpack/webpack.png)
 
 ## webpack能做的事儿：提升打包速度、体积优化
 
