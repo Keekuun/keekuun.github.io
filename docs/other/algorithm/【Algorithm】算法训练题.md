@@ -69,8 +69,16 @@ tags:
 
 ### 2.[设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)
 
+## 六.队列和广度优先搜索（BFS）
 
-## 六、[树](https://leetcode-cn.com/tag/tree/)
+### 1.[完全平方数](https://leetcode-cn.com/problems/perfect-squares/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--51/)
+
+### 2.[路径总和](https://leetcode-cn.com/problems/path-sum/)
+
+### 3.[二叉树的层序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefh1i/)
+
+
+## 七、[树](https://leetcode-cn.com/tag/tree/)
 
 ### 1.[二叉树的前序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xeywh5/)
 
@@ -82,7 +90,60 @@ tags:
 
 ### 5.[二叉树的最大深度](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoh1zg/)
 
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    if(!root) return 0;
+
+    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right))
+};
+```
+
+
+
 ### 6.[对称二叉树](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoxzgv/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    if(!root) return true;
+
+    return helper(root.left, root.right);
+};
+
+var helper = function(root1, root2) {
+    // 两者都不存在
+    if(!root1 && !root2) return true;
+    // 两者有一个存在
+    if(!root1 || !root2) return false;
+    // 两者都存在，但是val不同
+    if(root1.val !== root2.val) return false;
+    // 两者都存在且val相同,那么继续比较子节点
+    return helper(root1.left, root2.right) && helper(root1.right, root2.left);
+}
+```
+
+
 
 ### 7.[验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
@@ -92,8 +153,160 @@ tags:
 
 ### 10.[平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)
 
+### 11.[路径总和](https://leetcode-cn.com/problems/path-sum/)
 
-## 七、[动态规划](https://leetcode-cn.com/tag/dynamic-programming/)
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} sum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, sum) {
+    if(!root) return false;
+
+    if(!root.left && !root.right && root.val === sum) return true;
+
+    return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+};
+```
+
+
+
+### 12.[从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xo98qt/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} inorder
+ * @param {number[]} postorder
+ * @return {TreeNode}
+ */
+var buildTree = function(inorder, postorder) {
+    return helper(inorder, postorder, 0, inorder.length - 1, 0, postorder.length - 1);
+};
+
+var helper = function(inorder, postorder, inorderStart, inorderEnd, postorderStart, postorderEnd) {
+    // 判断越界
+    if(inorderStart > inorderEnd || postorderStart > postorderEnd) return null;
+
+    // 根节点
+    const rootVal = postorder[postorderEnd];
+    const root = new TreeNode(rootVal);
+    // 判断是不是只有一个节点
+    if(postorderStart === postorderEnd) return root;
+
+    // **在inorder中找到root对应的index将inorder分为左右两个子节点**
+    const rootIndex = inorder.indexOf(rootVal);
+
+    root.left = helper(inorder, postorder, inorderStart, rootIndex - 1, postorderStart, postorderStart + ((rootIndex - 1) - inorderStart)); // ((rootIndex - 1) - inorderStart) 即左子树的长度
+
+    root.right = helper(inorder, postorder, rootIndex + 1, inorderEnd, postorderEnd - 1 - (inorderEnd - (rootIndex + 1)), postorderEnd - 1); // (inorderEnd - (rootIndex + 1)) 即右子树的长度
+
+    return root;
+}
+```
+
+
+
+### 13.[从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoei3r/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @param {number[]} inorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+    return helper(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
+};
+
+var helper = function(preorder, inorder, preorderStart, preorderEnd, inorderStart, inorderEnd) {
+    // 判断越界
+    if(preorderStart > preorderEnd || inorderStart > inorderEnd) return null;
+    
+    // 根节点
+    const rootVal = preorder[preorderStart];
+    const root = new TreeNode(rootVal);
+
+    // 判断preorder是不是只有一个节点
+    if(preorderStart === preorderEnd) return root;
+    // **在中序遍历中找到rootIndex,将inorder分为左右两个子节点**
+    const rootIndex = inorder.indexOf(rootVal);
+
+    root.left = helper(preorder, inorder, preorderStart + 1, preorderStart + 1 + ((rootIndex - 1) - inorderStart), inorderStart, rootIndex - 1); // (rootIndex - 1) - inorderStart)即左子树长度
+
+    root.right = helper(preorder, inorder,(preorderEnd - (inorderEnd - (rootIndex + 1))),preorderEnd, rootIndex + 1, inorderEnd); // (inorderEnd - (rootIndex + 1)) 即右子树长度
+
+    return root;
+}
+```
+
+### 14.[从前序和后序遍序列历构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} pre
+ * @param {number[]} post
+ * @return {TreeNode}
+ */
+var constructFromPrePost = function(pre, post) {
+    return helper(pre, post, 0, pre.length - 1, 0, post.length - 1);
+};
+
+var helper = function(pre, post, preStart, preEnd, postStart, postEnd) {
+    // 判断越界
+    if(preStart > preEnd || postStart > postEnd) return null;
+
+    // 根节点
+    const rootVal = pre[preStart];
+    const root = new TreeNode(rootVal);
+
+    // 判断是不是只有一个节点
+    if(preStart === preEnd) return root;
+
+    // 先在preorder中找到左子树的leftRootVal
+    const leftRootVal = pre[preStart + 1];
+    // **然后在post中找到leftRootIndex, 然后根据这个index将post分为左右两个子节点**
+    const index = post.indexOf(leftRootVal);
+
+    root.left = helper(pre, post, preStart + 1, preStart + 1 + (index - postStart) , postStart, index); // (index - postStart) 即左子树长度
+    root.right = helper(pre, post, (preEnd - (postEnd - 1 - (index + 1))), preEnd, index + 1, postEnd - 1);  // (postEnd - 1 - (index + 1))即右子树长度
+
+    return root;
+}
+```
+
+> [“看我就够了”三种遍历方式构造二叉树的通解](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solution/kan-wo-jiu-gou-liao-san-chong-bian-li-fang-shi-g-2/)
+
+
+## 八、[动态规划](https://leetcode-cn.com/tag/dynamic-programming/)
 
 ### 1.[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 
@@ -142,3 +355,9 @@ tags:
 ### 23.[路径总和](https://leetcode-cn.com/problems/path-sum/)
 
 ### 24.[路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)
+
+
+
+> [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
+>
+> [【LeetCode】代码模板，刷题必会](https://blog.csdn.net/fuxuemingzhu/article/details/101900729)

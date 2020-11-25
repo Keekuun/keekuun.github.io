@@ -8638,7 +8638,7 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress-theme-reco@^1.5.5:
+vuepress-theme-reco@^1.5.7:
   version "1.5.7"
   resolved "http://npm.dev.casstime.com/vuepress-theme-reco/-/vuepress-theme-reco-1.5.7.tgz#100c92b33dcd931874952ac4eb27e123cfbf87ce"
   integrity sha512-EFhePs61GGrDNwM8Y3JF7/oxh2ffcxGZNkHPZk8LTEjdj+jOQrMtTSqAD3wnK+NY/xbhwsDo60ByJ9ItwSm54w==
