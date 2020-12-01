@@ -1,6 +1,7 @@
 ---
 title: 【Algorithm】算法训练题
 sidebar: auto
+date: 2020-10-21
 categories: 
 - 算法
 tags:
@@ -82,11 +83,153 @@ tags:
 
 ### 1.[二叉树的前序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xeywh5/)
 
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function(root) {
+    var res = [];
+    preOrder(root, res);
+
+    return res;
+};
+
+var preOrder = function(root, res) {
+    if(!root) return;
+    // 根 - 左 - 右
+    res.push(root.val);
+    preOrder(root.left, res);
+    preOrder(root.right, res);
+}
+```
+
+
+
 ### 2.[二叉树的中序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xecaj6/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+    var res = [];
+    inOrder(root, res);
+
+    return res;
+};
+
+var inOrder = function(root, res) {
+    if(!root) return;
+    // 左 - 根 - 右
+    inOrder(root.left, res);
+    res.push(root.val);
+    inOrder(root.right, res);
+}
+```
+
+
 
 ### 3.[二叉树的后序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xebrb2/)
 
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function(root) {
+    var res = [];
+    postOrder(root, res);
+
+    return res;
+};
+
+var postOrder = function(root, res) {
+    if(!root) return;
+    // 左 - 右 - 根
+    postOrder(root.left, res);
+    postOrder(root.right, res);
+    res.push(root.val)
+}
+```
+
+
+
 ### 4.[二叉树的层序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefh1i/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+    var res = [];
+    // 广度优先遍历
+    bfs(root, res);
+
+    return res;
+};
+
+var bfs = function(root, res) {
+    if(!root) return;
+    // 根入队列
+    var queue = [root];
+
+    while(queue.length > 0) {
+        // 记录size
+        var size = queue.length;
+        // 保存当前层数据
+        var data = [];
+        // 此处使用size，不要使用queue.length,因为他是一直变化的
+        for(var i=0; i < size; i++) {
+            // 出队列
+            var cur = queue.shift();
+            // 保存数据
+            data.push(cur.val);
+            // 左子树入队列
+            if(cur.left) queue.push(cur.left);
+            // 右子树入队列
+            if(cur.right) queue.push(cur.right);
+        }
+
+        res.push(data);
+    }
+}
+```
+
+
 
 ### 5.[二叉树的最大深度](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xoh1zg/)
 
@@ -131,14 +274,15 @@ var isSymmetric = function(root) {
     return helper(root.left, root.right);
 };
 
+// 判断左右节点是否对称
 var helper = function(root1, root2) {
-    // 两者都不存在
+    // 都不存在
     if(!root1 && !root2) return true;
-    // 两者有一个存在
+    // 有一个不存在
     if(!root1 || !root2) return false;
-    // 两者都存在，但是val不同
+    // 都存在，值不同
     if(root1.val !== root2.val) return false;
-    // 两者都存在且val相同,那么继续比较子节点
+    // 都存在，值相同,继续比较子节点
     return helper(root1.left, root2.right) && helper(root1.right, root2.left);
 }
 ```
@@ -304,6 +448,338 @@ var helper = function(pre, post, preStart, preEnd, postStart, postEnd) {
 ```
 
 > [“看我就够了”三种遍历方式构造二叉树的通解](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/solution/kan-wo-jiu-gou-liao-san-chong-bian-li-fang-shi-g-2/)
+
+### 15.[二叉搜索树转为单链表](https://leetcode-cn.com/problems/binode-lcci/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+// 正确解法1
+var convertBiNode1 = function(root) {
+    let head = new TreeNode(null);
+    let pre = head;
+    var inOrder = function(root) {
+        if(!root) return;
+        // 左 - 右 - 根
+        inOrder(root.left);
+        root.left = null;
+        pre.right = root;
+        pre = root;
+        inOrder(root.right);
+    }
+    inOrder(root);
+    return head.right;
+};
+
+// 将inOrder提取出来：
+// 错误解法
+var convertBiNode = function(root) {
+    let head = new TreeNode(null);
+    let pre = head;
+    inOrder(root, pre);
+    return head.right;
+};
+
+var inOrder = function(root, pre) {
+        if(!root) return;
+        // 左 - 根 - 右 
+        inOrder(root.left, pre);
+
+        root.left = null;
+        pre.right = root;
+        pre = root;
+
+        inOrder(root.right, pre);
+    }
+
+// 正确解法2
+var convertBiNode2 = function(root) {
+    let head = new TreeNode(null);
+    inOrder(root, head);
+    return head.right;
+};
+
+var pre;
+var inOrder = function(root, head) {
+        if(!root) return;
+    
+    	pre = head;
+        // 左 - 根 - 右 
+        inOrder(root.left, pre);
+
+        root.left = null;
+        pre.right = root;
+        pre = root;
+
+        inOrder(root.right, pre);
+    }
+
+// 正确解法3
+var convertBiNode = function(root) {
+    let head = new TreeNode(null);
+    inOrder(root, head);
+    return head.right;
+};
+
+// var pre;
+var inOrder = function(root, pre) {
+        if(!root) return pre;
+        // 左 - 根 - 右 
+        pre = inOrder(root.left, pre);
+
+        root.left = null;
+        pre.right = root;
+        pre = root;
+
+        pre = inOrder(root.right, pre);
+
+        return pre;
+    }
+```
+
+
+
+### 16.[二叉树转为单链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ */
+var flatten = function(root) {
+    let pre = new TreeNode();;
+
+    var preOrder = function(root) {
+        if(!root) return;
+        let left = root.left;
+        let right = root.right;
+
+        root.left = null;
+        pre.right = root;
+        pre = root;
+
+        preOrder(left);
+        preOrder(right);
+    }
+    
+    // 调用
+    preOrder(root);
+    
+    root = pre.right;
+};
+```
+
+
+
+### 17.[二叉搜索树转为双向链表](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/)
+
++ 思路：先中序遍历二叉树，在将结果转为循环双向链表
+
+  ```js
+  /**
+   * // Definition for a Node.
+   * function Node(val,left,right) {
+   *    this.val = val;
+   *    this.left = left;
+   *    this.right = right;
+   * };
+   */
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  var treeToDoublyList = function(root) {
+      if(!root) return root;
+      
+      let res = [];
+  
+      inOrder(root, res);
+  
+      // 方式一：
+      // var head = res[0];
+      // var tail = res[res.length - 1];
+      // tail.right = head;
+      // head.left = tail;
+      // for(var i=1; i < res.length; i++) {
+      //     // 更改left和right指向
+      //     head.right = res[i];
+      //     res[i].left = head;
+      //     head = res[i];
+      // }
+      
+      // 方式二：
+      // var pre = null;
+      // var head = null;
+  
+      // for(var i=0; i < res.length; i++) {
+      //    if(pre) {
+      //       // 更改left和right指向
+      //        pre.right = res[i];
+      //        res[i].left = pre;
+      //    } else {
+      //        head = res[i]
+      //    }
+      //    pre = res[i];
+      //}
+      
+      // 方式三：
+      var pre = res[0];
+      var head = res[0];
+      
+      for(var i=1; i < res.length; i++) {
+          // 更改left和right指向
+          pre.right = res[i];
+          res[i].left = pre;
+          
+          pre = res[i];
+      }
+      
+      // 循环完毕，pre指向了最后一个节点
+      // 处理首尾节点
+      pre.right = head;
+      head.left = pre;
+  
+      return res[0];
+  };
+  
+  var inOrder = function(root, res) {
+      if(!root) return;
+      var left = root.left;
+      var right = root.right;
+      // 左 - 根 - 右
+      inOrder(left, res);
+      res.push(root);
+      inOrder(right, res);
+  }
+  ```
+
++ 改进：在中序遍历的过程中把二叉树转为双向链表，然后再处理首尾链表，转为循环双向链表
+
+  ```js
+  /**
+   * // Definition for a Node.
+   * function Node(val,left,right) {
+   *    this.val = val;
+   *    this.left = left;
+   *    this.right = right;
+   * };
+   */
+  /**
+   * @param {Node} root
+   * @return {Node}
+   */
+  var treeToDoublyList = function(root) {
+      if(!root) return root;
+      
+      let pre = null;
+      let head = null;
+  
+      var inOrder = function(cur) {
+          if(!cur) return;
+          
+          // 左 - 根 - 右
+          inOrder(cur.left);
+          
+          // 修改为链表
+          if(pre) {
+              pre.right = cur;
+              cur.left = pre;
+          } else {
+              // 记录第一个节点
+              head = cur;
+          }
+          // 保存当前节点
+          pre = cur;
+  
+          inOrder(cur.right);
+  	}
+      
+      inOrder(root);
+      head.left = pre;
+      // 此时pre指向了最后一个节点
+      pre.right = head;
+  
+      return head;
+  };
+  ```
+
+  
+
+### 18.[有序链表转换二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {TreeNode}
+ */
+var sortedListToBST = function(head) {
+    // 链表为空
+    if(!head) return null;
+
+    // 链表只有一个节点
+    if(!head.next) return new TreeNode(head.val);
+
+    // 找到中继节点
+    var pre = head; // pre慢slow一步
+    // slow每次走一步 fast每次走两步，当fast走到终点时，slow刚好在中途
+    var slow = head.next;
+    var fast = head.next.next;
+
+    while(fast && fast.next) {
+        pre = pre.next;
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    // 此时pre的下一个节点就是中继节点slow，将其打断把链表一分为二
+    pre.next = null;
+
+    // 将中继节点作为树根节点
+    var root = new TreeNode(slow.val);
+    // 左子树开始节点
+    var left = head;
+    // 右子树开始节点
+    var right = slow.next;
+
+    root.left = sortedListToBST(left);
+    root.right = sortedListToBST(right);
+
+    return root;
+};
+```
+
 
 
 ## 八、[动态规划](https://leetcode-cn.com/tag/dynamic-programming/)

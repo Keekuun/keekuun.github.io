@@ -1151,7 +1151,7 @@ var inorderTraversal = function(root) {
 var inOrder = function(root, ans) {
     if(!root) return;
     
-    // 左 - 右 - 根
+    // 左 -  根 - 右
     inOrder(root.left, ans);
     ans.push(root.val);
     inOrder(root.right, ans);
@@ -1243,3 +1243,13 @@ var bfs = function(root, ans) {
 }
 ```
 
+### 8.[二叉搜索树（Binary Search Tree）](https://leetcode-cn.com/tag/binary-search-tree/)
+
+概念：**在二叉树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值** --- **中序遍历**的值是一个升序的数据序列
+
++ 若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；
++ 若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；
++ 任意节点的左、右子树也分别为二叉查找树；
++ 没有键值相等的节点。
+
+二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低。为 `O(logn)`
