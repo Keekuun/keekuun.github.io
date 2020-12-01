@@ -291,6 +291,70 @@ var helper = function(root1, root2) {
 
 ### 7.[验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
++ 递归：
+
+  ```js
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+  var isValidBST = function(root) {
+      return helper(root, -Infinity, Infinity);
+  };
+  
+  var helper = function(root, lower, higher) {
+      if(!root) return true;
+      if(root.val <= lower || root.val >= higher) return false;
+      // 维护这个最值，左节点的最大值为root.val；右节点的最小值为root.val
+      return helper(root.left, lower, root.val) && helper(root.right, root.val, higher);
+  }
+  ```
+
++ 迭代：中序遍历二叉搜索树的结果序列是一个升序序列
+
+  ```js
+  /**
+   * Definition for a binary tree node.
+   * function TreeNode(val) {
+   *     this.val = val;
+   *     this.left = this.right = null;
+   * }
+   */
+  /**
+   * @param {TreeNode} root
+   * @return {boolean}
+   */
+  var isValidBST = function(root) {
+     // 中序遍历
+     let inorder = -Infinity;
+     let stack = [];
+  
+     while(root !== null || stack.length) {
+         // 先遍历左子树
+         while(root !== null) {
+             stack.push(root);
+             root = root.left;
+         }
+         // 左子树出栈
+         root = stack.pop();
+          // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+         if(root.val <= inorder) return false;
+         inorder = root.val;
+         root = root.right;
+     }
+     return true;
+  };
+  ```
+
+  
+
 ### 8.[二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
 
 ### 9.[二叉树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
@@ -837,3 +901,5 @@ var sortedListToBST = function(head) {
 > [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
 >
 > [【LeetCode】代码模板，刷题必会](https://blog.csdn.net/fuxuemingzhu/article/details/101900729)
+
+
