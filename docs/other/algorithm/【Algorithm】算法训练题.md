@@ -52,6 +52,39 @@ tags:
 
 ### 6.[环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
+### 7.[两个链表的第一个公共节点](https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    if(!headA || !headB) return null;
+
+    var n1 = headA;
+    var n2 = headB;
+    while(n1 != n2) {
+        n1 = n1 == null ? headB : n1.next;
+        n2 = n2 == null ? headA : n2.next;
+    }
+
+    return n1;
+
+};
+```
+
+
+
 
 ## 四、[栈](https://leetcode-cn.com/tag/stack/)
 
@@ -355,9 +388,71 @@ var helper = function(root1, root2) {
 
   
 
-### 8.[二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
+### 8.[二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
-### 9.[二叉树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+        //如果根节点和p,q的差相乘是正数，说明这两个差值要么都是正数要么都是负数，也就是说
+        //他们肯定都位于根节点的同一侧，就继续往下找
+        while ((root.val - p.val) * (root.val - q.val) > 0) {
+            root = p.val < root.val ? root.left : root.right;
+        }
+        //如果相乘的结果是负数，说明p和q位于根节点的两侧，如果等于0，说明至少有一个就是根节点
+        return root;
+};
+```
+
+
+
+### 9.[二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+    if(root === null || root === p || root === q) return root;
+    
+    // 分别在left和right中找p和q的公共祖先
+    var left = lowestCommonAncestor(root.left, p, q);
+    var right = lowestCommonAncestor(root.right, p, q);
+    
+    //如果left为空，说明这两个节点在cur结点的右子树上，我们只需要返回右子树查找的结果即可
+    if(left === null) return right;
+    //同理
+    if(right === null) return left;
+    
+	//如果left和right都不为空，说明这两个节点一个在root的左子树上一个在root的右子树上，
+    //我们只需要返回root结点即可。	
+    return root;
+
+};
+```
+
+
 
 ### 10.[平衡二叉树](https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/)
 
