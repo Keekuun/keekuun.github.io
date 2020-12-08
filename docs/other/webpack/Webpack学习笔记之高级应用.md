@@ -1540,23 +1540,21 @@ module.exports = merge(baseConfig, devConfig);
   docs: 更新CHANGELOG文档
   ```
 
+  | 提交类型 | 说明                                                      |
+| -------- | --------------------------------------------------------- |
+  | feat     | 新增feature                                               |
+  | fix      | 修复bug                                                   |
+  | docs     | 紧急修改了文档，比如`READNE`、`CHENGELOG`、`CONTRIBUTE`等 |
+  | style    | 紧急修改了空格、格式缩进、逗号等，不修改代码逻辑          |
+  | refactor | 代码重构，没有加新功能或者修复bug                         |
+  | perf     | 优化相关，比如提升性能、体验                              |
+  | test     | 测试用例，包括单元测试、集成测试等                        |
+  | chore    | 改变构件流程或者增加依赖、工具等                          |
+  | revert   | 回滚到上一个版本                                          |
   
-
-  | 提交类型<type> | 说明                                                      |
-  | -------------- | --------------------------------------------------------- |
-  | feat           | 新增feature                                               |
-  | fix            | 修复bug                                                   |
-  | docs           | 紧急修改了文档，比如`READNE`、`CHENGELOG`、`CONTRIBUTE`等 |
-  | style          | 紧急修改了空格、格式缩进、逗号等，不修改代码逻辑          |
-  | refactor       | 代码重构，没有加新功能或者修复bug                         |
-  | perf           | 优化相关，比如提升性能、体验                              |
-  | test           | 测试用例，包括单元测试、集成测试等                        |
-  | chore          | 改变构件流程或者增加依赖、工具等                          |
-  | revert         | 回滚到上一个版本                                          |
-
 + 本地开发阶段增加`precommit`钩子：
 
-  ```sh 
+  ```bash
   yarn add husky -S
   ```
 
