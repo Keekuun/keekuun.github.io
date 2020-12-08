@@ -1,5 +1,5 @@
 ---
-title: 【Algorithm】数据结构和算法学习笔记
+title: 【Algorithm】数据结构和算法
 date: 2020-10-20
 sidebar: auto
 categories: 
@@ -8,7 +8,7 @@ tags:
 - Algorithm
 ---
 
-# 数据结构和算法学习笔记
+# 数据结构和算法
 
 **掌握数据结构和算法，不管对于阅读框架源码，还是理解其背后的设计思想，都是非常有用的。**
 
@@ -142,7 +142,7 @@ function find(arr, x) {
 
 + **均摊时间复杂度**（amortized time complexity）：均摊时间复杂度就是一种特殊的平均时间复杂度
 
-## 三、数组
+## 三、[数组Array](https://leetcode-cn.com/tag/array/)
 
 > 数组访问速度快
 
@@ -160,7 +160,7 @@ function find(arr, x) {
 
 这种表述是不准确的，数组是适合查找操作，但是查找的时间复杂度并不为O(1)。即便是排好序的数组，你用二分查找，时间复杂度也是 O(logn)。所以，正确的表述应该是，数组支持随机访问，根据下标随机访问的时间复杂度为 O(1)。
 
-## 四、[链表](https://leetcode-cn.com/tag/linked-list/)
+## 四、[链表LinkedList](https://leetcode-cn.com/tag/linked-list/)
 
 > 插入和删除速度快
 
@@ -278,6 +278,7 @@ class Node {
 class LinkedList {
     constructor(){
         this.head = null;
+        this.tail = null;
         this.length = 0;
     }
     
@@ -285,6 +286,7 @@ class LinkedList {
     append(val) {
         let node = new Node(val);
         let current = null;
+        this.tail = node;
         if(this.head === null) {
             // 链表中第一个节点
             this.head = node;
@@ -308,6 +310,9 @@ class LinkedList {
             // 移除第一项
             if(position === 0) {
                 this.head = current.next;
+                if (this.length === 1) {
+                    this.tail = null;
+                }
             } else {
                 // 从head顺延找到目标
                 while(position--) {
@@ -334,9 +339,18 @@ class LinkedList {
             
             // 在第一个位置添加
             if(position === 0) {
-                node.next = current;
-                this.head = node;
-            } else {
+                if (!this.head) { //新增的
+                    this.head = node;
+                    this.tail = node;
+                } else {
+                    node.next = current;
+                	this.head = node;
+                }
+            } else if (position === length) {
+                current = this.tail;
+                current.next = node;
+                this.tail = node;
+            }else {
                 // 在其他位置添加
                 while(--position) {
                     previous = current;
@@ -395,6 +409,11 @@ class LinkedList {
     getHead(){
         return this.head;
     }
+    
+    // getHead获取tail
+    getTail(){
+        return this.tail;
+    }
 }
 ```
 
@@ -407,6 +426,7 @@ lk.append(2); // 2
 lk.insert(0,0); // true
 lk.toString(); // '0->1->2'
 lk.getHead(); // Node {val: 0, next: Node}
+lk.getTail(); // Node {val: 2, next: Node}
 lk.size(); // 3
 lk.isEmpty(); // false
 
@@ -445,17 +465,16 @@ class DoubleLinkedList {
     append(val) {
         let node = new Node(val);
         let current = null;
+         // 新增
+        this.tail = node;
         if(this.head === null) {
             // 链表中第一个节点
             this.head = node;
-            // 新增
-            this.tail = node;
         } else {
             //找到最后一项，将其next赋为node，建立链接
             current = this.tail;
             current.next = node;
             node.prev = current;
-            this.tail = node;
         }
         return ++this.length;
     }
@@ -589,7 +608,7 @@ class DoubleLinkedList {
 }
 ```
 
-## 五、[栈](https://leetcode-cn.com/tag/stack/)
+## 五、[栈Stack](https://leetcode-cn.com/tag/stack/)
 
 ### 1.栈的引出：如何实现浏览器的前进和后退功能？
 
@@ -618,13 +637,98 @@ class DoubleLinkedList {
 class Stack {
     constructor() {
         this.length = 0;
+        this.data = [];
     }
     
+    // 入栈
+    push(val){
+        this.data.push(val);
+        this.length++;
+        return val;
+    }
     
+    // 出栈
+    pop() {
+        if(this.length > 0) {
+          this.length--;
+          return this.data.pop();
+        }
+    }
+    // 判空
+    isEmpty() {
+        return this.length === 0;
+    }
+    // 获取长度
+    size() {
+        return this.length;
+    }
+    
+    // 获取栈顶元素
+    top() {
+        return this.data[this.length - 1]
+    }
+    
+    // 获取栈底元素
+    bottom(){
+        return this.data[0];
+    }
 }
 ```
 
-## 六、队列
+### 4.用栈实现队列
+
+```js {14-28}
+class QueenByStack {
+    constructor() {
+        // 入队列-栈
+        this.stack1 = new Stack();
+        // 出队列栈
+        this.stack2 = new Stack();
+    }
+    
+     // 入队列
+    enqueue(value) {
+       this.stack1.push(value);
+        return value;
+    }
+    
+    // 出队列
+    dequeue() {
+      	// 将stack1的数据放入stack2(从而完成将stack1队首和队尾调换位置)
+        while(!this.stack1.isEmpty()){
+            this.stack2.push(this.stack1.pop())
+        }
+        // 此时stack2的队尾就是最先进入队列的元素,出栈即出队列
+        const top = this.stack2.pop();
+        // 再将剩余的数据还原
+        while(!this.stack2.isEmpty()) {
+            this.stack1.push(this.stack2.pop())
+        }
+        
+        return top;
+    }
+    // 获取队列头部
+    getHead() {
+        return this.stack1.bottom();
+    }
+    // 获取队列尾部
+    getTail() {
+        return this.stack1.top();
+    }
+    // 判空
+    isEmpty() {
+        return this.stack1.isEmpty();
+    }
+    // 获取长度
+    size() {
+        return this.stack1.size();
+    }
+}
+```
+
+
+
+## 六、[队列Queue](https://leetcode-cn.com/leetbook/read/queue-stack/ktrmr/)
 
 ### 1.如何理解“队列”？
 
@@ -642,6 +746,10 @@ class Stack {
 
 跟栈一样，队列可以用数组来实现，也可以用链表来实现。用数组实现的栈叫作顺序栈，用链表实现的栈叫作链式栈。同样，用数组实现的队列叫作顺序队列，用链表实现的队列叫作链式队列。
 
+#### 2.1 顺序队列
+
+使用数组来实现队列：
+
 ```js
 class Queue {
     constructor() {
@@ -653,6 +761,7 @@ class Queue {
        this.data.push(value);
         return true;
     }
+    
     // 出队列
     dequeue() {
         if(this.data.length > 0) {
@@ -662,11 +771,11 @@ class Queue {
 		return false
     }
     // 获取队列头部
-    head() {
+    getHead() {
         return this.data[0];
     }
     // 获取队列尾部
-    tail() {
+    getTail() {
         return this.data[this.data.length - 1];
     }
     // 判空
@@ -729,6 +838,8 @@ class Queue {
 
 
 ### 3.[JS实现循环队列](https://leetcode-cn.com/problems/design-circular-queue/solution/shu-zu-shi-xian-de-xun-huan-dui-lie-by-liweiwei141/)
+
+> [队列&双端队列&循环队列&双端循环队列](https://www.cnblogs.com/ggnbnb/p/12435479.html)
 
 循环队列是一种线性数据结构，其操作表现基于 FIFO（先进先出）原则并且队尾被连接在队首之后以形成一个循环。它也被称为“环形缓冲器”。
 
@@ -831,25 +942,314 @@ circularQueue.enqueue(4);  // 返回 true
 circularQueue.getTail();  // 返回 4
 ```
 
-### 4.JS实现双端队列
-
-### 5.JS实现循环双端队列
-
-> [队列&双端队列&循环队列&双端循环队列](https://www.cnblogs.com/ggnbnb/p/12435479.html)
-
-### 6.队列和广度优先搜索（BFS）
-
-> [完全平方数](https://leetcode-cn.com/problems/perfect-squares/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--51/)
 
 
+### 4.用队列实现栈
+
+```js
+class StackByQueue {
+    constructor() {
+        // 这里是顺序队列（数组实现）
+        this.queue = new Queue();
+    }
+    
+    // 入栈
+    push(val){
+        this.queue.enqueue(val);
+        return val;
+    }
+    
+    // 出栈
+    pop() {
+       if(!this.queue.isEmpty()) {
+           let ret = [];
+           // 获取栈顶元素(队尾元素)
+           const top = this.top();
+           while(this.size() > 1) {
+               // 除了队尾，其他出队列
+               ret.push(this.queue.dequeue());
+           }
+           this.queue = ret;
+           return top;
+       }
+    }
+    
+    // 判空
+    isEmpty() {
+        return this.queue.isEmpty();
+    }
+    // 获取长度
+    size() {
+        return this.queue.size();
+    }
+    
+    // 获取栈顶元素
+    top() {
+        return this.queue.getTail();
+    }
+    
+    // 获取栈底元素
+    bottom(){
+        return this.queue.getHead();
+    }
+    
+}
+```
+
+## 七、[树Tree](https://leetcode-cn.com/tag/tree/)
+
+数组、栈、队列、链表都是线性表结构，树是一种非线性结构。
+
+树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由 n(n>0)n(n>0) 个有限节点组成一个具有层次关系的集合。
+
+![tree](../../../images/algorithm/tree.png)
+
+把它叫做「树」是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。
+
+它具有以下的特点：
+
++ 每一个非根节点有且只有一个父节点；
++ 每个节点都只有有限个子节点或无子节点；
++ 没有父节点的节点称为根节点；
++ 没有子节点的叫做叶子节点；
++ 除了根节点外，每个子节点可以分为多个不相交的子树；
++ 树里面没有环路。(有环的话，就是图了)
+
+**节点名称**：
+
++ **父节点**：A是B的父节点
++ **子节点**：B是A的子节点
++ **兄弟节点**：B、C、D 这三个节点的父节点是同一个节点，他们是兄弟节点
++ **叶子节点**：没有子节点的节点叫作叶子节点或者叶节点，比如图中的 G、H、I、J、K、L 都是叶子节点。
+
+![tree](../../../images/algorithm/tree-node.png)
+
+**三个概念**：
+
++ 节点的**高度（height）**：节点到叶子节点的最长路径（从0开始）
++ 节点的**深度（depth）**：根节点到该节点的路径长度（从0开始）
++ 节点的**层级（level）**：节点的深度 + 1（从1开始）
++ 树的高度：即根节点的高度
+
+![tree](../../../images/algorithm/tree-level.png)
+
+### 1.二叉树
+
+二叉树，顾名思义，每个节点最多有两个“叉”，也就是两个子节点，分别是左子节点和右子节点。
+
+![tree](../../../images/algorithm/binary-tree.png)
+
+**满二叉树**：叶子节点全都在最底层，除了叶子节点之外，每个节点都有左右两个子节点，这种二叉树就叫作满二叉树。（如：编号2）
+
+**完全二叉树**：叶子节点都在最底下两层，最后一层的叶子节点都**靠左排列**，并且除了最后一层，其他层的节点个数都要达到最大，这种二叉树叫作完全二叉树。（如编号3）
+
+![](../../../images/algorithm/perf-binary-tree.png)
 
 
 
+### 2. 二叉树的存储
+
+**如何表示（或者存储）一棵二叉树？**
+
+想要存储一棵二叉树，我们有两种方法，一种是基于指针或者引用的二叉**链式存储法**，一种
+是基于数组的**顺序存储法**。
+
++ **链式存储法**：每个节点有三个字段，其中一个存储数据，另外两个是指向左右子节点的指针。
+
+  ![](../../../images/algorithm/linked-save-tree.png)
+
++ **顺序存储法**：把根节点存储在下标 i = 1 的位置，那左子节点存储在下标 2 * i = 2 的位置，右子节点存储在 2 * i + 1 = 3 的位置。以此类推，B 节点的左子节点存储在 2 * i = 2 * 2 = 4 的位置，右子节点存储在 2 * i + 1 = 2 * 2 + 1 = 5 的位置。
+
+  ![](../../../images/algorithm/array-save-tree.png)
+
+不过，我刚刚举的例子是一棵完全二叉树，所以仅仅“浪费”了一个下标为 0 的存储位置。如果是非完全二叉树，其实会浪费比较多的数组存储空间。你可以看我举的下面这个例子。
+
+![](../../../images/algorithm/array-save-tree2.png)
+
+### 3.二叉树的遍历O(n)
+
+如何将所有节点都遍历打印出来呢？经典的方法有三种，**前序遍历**、**中序遍历**和**后序遍历**。其中，前、中、后序，表示的是节点与它的左右子树节点遍历打印的先后顺序。
+
++ **前序遍历**：根-左-右。对于树中的任意节点来说，先打印这个节点，然后再打印它的左子树，最后打印它的右子树。
++ **中序遍历**：左-右-根。对于树中的任意节点来说，先打印它的左子树，然后再打印它本身，最后打印它的右子树。
++ **后序遍历**：左-右-根。对于树中的任意节点来说，先打印它的左子树，然后再打印它的右子树，最后打印这个节点本身。
+
+
+![](../../../images/algorithm/search-binary-tree.png)
+
+从前、中、后序遍历的顺序图中，可以看出来，每个节点最多会被访问两次，所以遍历操作的时间复杂度，跟节点的个数 n 成正比，也就是说二叉树遍历的时间复杂度是**O(n)**。
+
+**实际上，二叉树的前、中、后序遍历就是一个递归的过程**。比如，前序遍历，其实就是先打印根节点，然后再递归地打印左子树，最后递归地打印右子树。
+
+写递归代码的关键，就是看能不能写出**递推公式**，而写递推公式的关键就是，如果要解决问题 A，就假设子问题 B、C 已经解决，然后再来看如何利用 B、C 来解决 A。所以，我们可以把前、中、后序遍历的递推公式都写出来。
+
+```
+前序遍历的递推公式：
+preOrder(r) = print r->preOrder(r->left)->preOrder(r->right)
+
+中序遍历的递推公式：
+inOrder(r) = inOrder(r->left)->print r->inOrder(r->right)
+
+后序遍历的递推公式：
+postOrder(r) = postOrder(r->left)->postOrder(r->right)->print r
+```
+
+### 4.[二叉树的前序遍历(preOrder)](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xeywh5/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var preorderTraversal = function(root) {
+    let ans = [];
+    preOrder(root, ans);
+    return ans;
+};
+
+var preOrder = function(root, ans) {
+    if(!root) return;
+    
+    // 根 - 左 - 右
+    ans.push(root.val);
+    preOrder(root.left, ans);
+    preOrder(root.right, ans);
+}
+```
 
 
 
+### 5.[二叉树的中遍历(inOrder)](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xecaj6/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+    let ans = [];
+    inOrder(root, ans);
+    return ans;
+};
+
+var inOrder = function(root, ans) {
+    if(!root) return;
+    
+    // 左 -  根 - 右
+    inOrder(root.left, ans);
+    ans.push(root.val);
+    inOrder(root.right, ans);
+}
+```
 
 
 
-> [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
->[【LeetCode】代码模板，刷题必会](https://blog.csdn.net/fuxuemingzhu/article/details/101900729)
+### 6.[二叉树的后序遍历(postOrder)](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xebrb2/)
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var postorderTraversal = function(root) {
+    let ans = [];
+    postOrder(root, ans);
+    return ans;
+};
+
+var postOrder = function(root, ans) {
+    if(!root) return;
+    
+    // 左 - 右 - 根
+    postOrder(root.left);
+    postOrder(root.right);
+    ans.push(root.val);
+}
+```
+
+
+
+### 7.[二叉树的层序遍历(levelOrder)](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefh1i/)
+
+除了前、中、后序遍历，还可以对二叉树进行层序遍历。层序遍历就是逐层遍历树结构。
+
+[`广度优先搜索`](https://leetcode-cn.com/leetbook/read/queue-stack/k89rs/)是一种广泛运用在树或图这类数据结构中，遍历或搜索的算法。从一个根节点开始，首先访问节点本身。 然后遍历它的相邻节点，其次遍历它的二级邻节点、三级邻节点，以此类推。
+
+```js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+    let ans = [];
+    bfs(root, ans);
+    return ans;
+};
+
+var bfs = function(root, ans) {
+    if(!root) return;
+    let queue = [root];
+    
+    while(queue.length > 0) {
+        // 记录当前层的数据
+        let data = [];
+        // 这里一定要使用固定大小size，不要使用que.size()，因为que.size是不断变化的
+        let size = queue.length;
+        
+        for(let i=0; i < size; i++) {
+            let cur = queue.shift();
+            data.push(cur.val);
+            
+            // 左子节点入
+            if(cur.left) queue.push(cur.left);
+            // 右子节点入
+            if(cur.right) queue.push(cur.right);
+        }
+        
+        // 保存当前层数据
+        ans.push(data);
+    }
+}
+```
+
+### 8.[二叉搜索树（Binary Search Tree）](https://leetcode-cn.com/tag/binary-search-tree/)
+
+概念：**在二叉树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值** --- **中序遍历**的值是一个升序的数据序列
+
++ 若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；
++ 若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；
++ 任意节点的左、右子树也分别为二叉查找树；
++ 没有键值相等的节点。
+
+二叉查找树相比于其他数据结构的优势在于查找、插入的时间复杂度较低。为 `O(logn)`
