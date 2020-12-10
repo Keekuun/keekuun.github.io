@@ -45,7 +45,7 @@ React.js是全球最火的前端框架（由facebook推出）**函数式编程**
 
 另外，React 推荐开发者使用特殊的 JSX 语法来编写 UI 代码，对于初学者来讲，尝试 JSX 最快的方法是在页面中引入 `babel-standalone.js` 包：
 
-```jsx
+```js
 <!DOCTYPE html>
 <html>
 <head>

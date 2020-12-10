@@ -24,7 +24,7 @@ tags:
 
 - 方法一：为组件添加 `constructor` 构造函数，然后在该函数中为 `this.state` 赋初始值
 
-  ```jsx
+  ```js
   class App extends React.Component {
       constructor(){
           super();
@@ -39,7 +39,7 @@ tags:
 
 - 方法二：使用 class 属性新提案(推荐)
 
-  ```jsx
+  ```js
   class App extends React.Component {
       state = { count: 0 }
   
@@ -53,7 +53,7 @@ tags:
 
 React组件是不能修改props数据的，如果想在组建内部修改props数据，可以将props挂载到state上
 
-```jsx
+```js
 class Counter extends React.Component {
     constructor(props){
         super(props);
@@ -73,7 +73,7 @@ class Counter extends React.Component {
 
  使用 `setState()` 更新组件数据，这样才能实时渲染更新视图：
 
-```jsx
+```js
 class Counter extends React.Component {
     constructor(props){
         super(props);
@@ -104,7 +104,7 @@ class Counter extends React.Component {
 
 我们之前的 `Counter` 组件是这样使用 `setState` 的，此代码有时可能会无法更新计数器：
 
-```jsx
+```js
 handleClick = () => {
     let { count } = this.state;
     this.setState({ count: count })
@@ -113,7 +113,7 @@ handleClick = () => {
 
 为了避免这个问题，可以让 `setState()` 接收一个函数而不是一个对象，这个函数可以用上一个 `state` 作为第一个参数，将此次更新被应用时的 `props` 做为第二个参数：
 
-```jsx
+```js
 handleClick = () => {
     this.setState((state, props) => {
         return { count: state.count + 1 }
@@ -138,7 +138,7 @@ handleClick = () => {
 
 - **无状态组件：**函数式
 
-```jsx
+```js
 function Welcome (props) {
     return <h1>{ props.name }~ 你好呀！</h1>
 }
@@ -146,7 +146,7 @@ function Welcome (props) {
 
 - **有状态组件：**class式
 
-```jsx
+```js
 class Welcome extends React.Component {
     state = { name : "Alan" }
 
