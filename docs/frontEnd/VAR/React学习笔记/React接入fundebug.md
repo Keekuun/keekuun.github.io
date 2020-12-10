@@ -34,7 +34,7 @@ fundebug.init({ apikey: API_KEY });
 
 通过`componentDidCatch`定义一个异常捕获函数，专门用来捕获组件的异常：
 
-```jsx
+```js
 import React from 'react';
 
 export default function catchError<T>(Com: React.ComponentType<T>) {
@@ -52,7 +52,7 @@ export default function catchError<T>(Com: React.ComponentType<T>) {
 
 然后在每个页面中将组件传入给异常捕获函数：
 
-```jsx
+```js
 import { catchError } from 'catchError';
 
 const HomePage = (props: RouteConfigComponentProps<void>) => {
@@ -74,7 +74,7 @@ export default catchError(HomePage);
 
 + 在项目根目录`index`文件里初始化
 
-  ```jsx
+  ```js
   import fundebug from 'fundebug-javascript';
   
   // eslint-disable-next-line 忽略下行代码的tslint检测

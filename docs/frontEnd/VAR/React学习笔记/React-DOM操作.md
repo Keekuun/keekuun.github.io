@@ -28,7 +28,7 @@ React应用中操作DOM方式：
 
 `event.target`：返回触发事件处理函数的 DOM 元素的引用；
 
-```jsx
+```js
 class BtnGroup extends React.Component {
     handleClick = (e) => {
         if (e.target.tagName !== "BUTTON") return;
@@ -59,7 +59,7 @@ class BtnGroup extends React.Component {
 
  Refs 是使用`React.createRef()`创建的，并通过`ref`属性附加到 React 元素上。在构造组件时，通常将 Refs 分配给**实例属性**，以便可以在整个组件中引用它们： 
 
-```jsx
+```js
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -80,7 +80,7 @@ class App extends React.Component {
 
  当`ref`被传递给`render`中的元素时，对该节点的引用可以通过 ref 的`current`属性访问： 
 
-```jsx
+```js
 class BtnGroup extends React.Component {
     constructor(props){
         super(props);
@@ -109,7 +109,7 @@ class BtnGroup extends React.Component {
 
 **注意：**你**不能**在函数组件上用 ref 属性，因为他们没有实例。
 
-```jsx
+```js
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -139,7 +139,7 @@ class App extends React.Component {
 
  如果 React 组件已经被渲染，使用`ReactDOM.findDOMNode()`可访问浏览器中相应的原生 DOM 元素，此方法对于从 DOM 中读取值很有用。 
 
-```jsx
+```js
 class App extends React.Component {
     handleClick = () => {
         // 返回浏览器中与 App 组件相对应的 DOM 元素
