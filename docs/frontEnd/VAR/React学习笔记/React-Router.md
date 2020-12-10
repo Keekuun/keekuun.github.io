@@ -75,7 +75,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 使用HTML5 history API更新页面，组件API：
 
-```jsx
+```js
 <BrowserRouter
   basename={optionalString}
   forceRefresh={optionalBool}
@@ -88,14 +88,14 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 + basename：string，为路由添加root url，需要以`/`开头，但是尾部不需要`/`：
 
-  ```jsx
+  ```js
   <BrowserRouter basename="/calendar" />
   <Link to="/today"/> // renders <a href="/calendar/today">
   ```
 
 + getUserConfirmation：func，使用[window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)，会出现一个路由离开确认对话框：
 
-  ```jsx
+  ```js
   <BrowserRouter
     getUserConfirmation={(message, callback) => {
       // this is the default behavior
@@ -107,19 +107,19 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 + forcerefresh：bool，如果值为`true`会强制刷新整个页面：
 
-  ```jsx
+  ```js
   <BrowserRouter forceRefresh={true} />
   ```
 
 + keyLength：number，`location.key`的长度，默认为6：
 
-  ```jsx
+  ```js
   <BrowserRouter keyLength={12} />
   ```
 
 + children：node，需要被渲染的子组件，在react16版本之前，只能有一个子节点，若想包裹多个，需要使用`<div>`包裹。react16版本之后，可以有多个子节点。
 
-  ```jsx
+  ```js
   <BrowserRouter
     basename={''}
     forceRefresh={false}
@@ -139,7 +139,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 使用URL的hash部分来更新页面，组件API：
 
-```jsx
+```js
 <HashRouter
   basename={optionalString}
   getUserConfirmation={optionalFunc}
@@ -151,7 +151,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 + basename: string，为路由添加root url，需要以`/`开头，但是尾部不需要`/`：
 
-  ```jsx
+  ```js
   <HashRouter basename="/calendar"/>
   <Link to="/today"/> // renders <a href="#/calendar/today">
   ```
@@ -185,7 +185,7 @@ Router组件，根据url模式的不同，分为history模式（对应`<BrowserR
 
 以上三种方式，在同一个`<Route>`中只能选择一种，如果写了多个，会被覆盖，`<Route children>` 的优先级更高。
 
-```jsx
+```js
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function Hello() {
@@ -221,7 +221,7 @@ ReactDOM.render(
 
 + [path:string |  string[]](https://reacttraining.com/react-router/web/api/Route/path-string-string)匹配的URL字符串
 
-  ```jsx
+  ```js
   // 匹配一个
   <Route path="/users/:id">
     <User />
@@ -235,7 +235,7 @@ ReactDOM.render(
 
 + [exact: bool](https://reacttraining.com/react-router/web/api/Route/exact-bool)是否精准匹配还是模糊匹配：
 
-  ```jsx
+  ```js
   <Route exact path="/one">
     <About />
   </Route>
@@ -250,7 +250,7 @@ ReactDOM.render(
 
 + [strict: bool](https://reacttraining.com/react-router/web/api/Route/strict-bool)是否开启严格模式，当值为true时，必须后面带斜杠才能匹配：
 
-  ```jsx
+  ```js
   <Route strict path="/one/">
     <About />
   </Route>
@@ -266,7 +266,7 @@ ReactDOM.render(
 
   如果必须匹配尾部没有斜杠的，那么 `strict` and `exact` 都得为`true`：
 
-  ```jsx
+  ```js
   <Route exact strict path="/one">
     <About />
   </Route>
@@ -279,7 +279,7 @@ ReactDOM.render(
 
 + [sensitive: bool](https://reacttraining.com/react-router/web/api/Route/sensitive-bool)是否区分大小写，当为true时，区分大小写：
 
-  ```jsx
+  ```js
   <Route sensitive path="/one">
     <About />
   </Route>
@@ -295,7 +295,7 @@ ReactDOM.render(
 
 渲染第一个匹配的URL对应的 [`<Route>`](https://reacttraining.com/react-router/Route.md) 或 [`<Redirect>`](https://reacttraining.com/react-router/Redirect.md) 
 
-```jsx
+```js
 import { Route } from "react-router";
 
 let routes = (
@@ -315,7 +315,7 @@ let routes = (
 
 如果URL为`/`，只使用`<Route>`，那么上面的两个路由都能匹配，会被同时渲染出来，如果加上`<Switch>`则只会渲染第一个匹配的URL：
 
-```jsx
+```js
 import { Route, Switch } from "react-router";
 
 let routes = (
@@ -342,7 +342,7 @@ let routes = (
 
 提供路由跳转的链接，会被渲染为`<a>`标签：
 
-```jsx
+```js
 <Link to="/about">About</Link>
 ```
 
@@ -350,7 +350,7 @@ let routes = (
 
 + [to: string](https://reacttraining.com/react-router/web/api/Link/to-string)直接跟URL字符串：
 
-  ```jsx
+  ```js
   <Link to="/courses?sort=name" />
   ```
 
@@ -361,7 +361,7 @@ let routes = (
   + `hash`: url的hash部分
   + `state`: State to persist to the `location`.
 
-  ```jsx
+  ```js
   <Link
     to={{
       pathname: "/courses",
@@ -374,7 +374,7 @@ let routes = (
 
 + [to: function](https://reacttraining.com/react-router/web/api/Link/to-function)以当前的location作为参数，需要返回一个url字符串或者object来匹配to的合法参数。
 
-  ```jsx
+  ```js
   <Link to={location => ({ ...location, pathname: "/courses" })} />
   <Link to={location => `${location.pathname}?sort=name`} />
   ```
@@ -384,7 +384,7 @@ let routes = (
 
 + [replace: bool](https://reacttraining.com/react-router/web/api/Link/replace-bool)当值为true时，将会替换历史记录的当前URL
 
-```jsx
+```js
 <Link to="/courses" replace />
 ```
 
@@ -398,7 +398,7 @@ let routes = (
 
 给激活的URL加上类名：
 
-```jsx
+```js
 <NavLink to="/faq" activeClassName="selected">
   FAQs
 </NavLink>
@@ -408,7 +408,7 @@ let routes = (
 
 + [activeStyle: object](https://reacttraining.com/react-router/web/api/NavLink/activestyle-object)给激活的URL加上样式：
 
-  ```jsx
+  ```js
   <NavLink
     to="/faq"
     activeStyle={{
@@ -424,7 +424,7 @@ let routes = (
 
 + [exact: bool](https://reacttraining.com/react-router/web/api/NavLink/exact-bool)当为true时，只有精准匹配的时候activeClassName或activeStyle属性才会生效：
 
-```jsx
+```js
 <NavLink exact to="/profile">
   Profile
 </NavLink>
@@ -434,7 +434,7 @@ let routes = (
 
 + [strict: bool](https://reacttraining.com/react-router/web/api/NavLink/strict-bool)当为true时，会严格匹配尾部的斜杠
 
-```jsx
+```js
 <NavLink strict to="/events/">
   Events
 </NavLink>
@@ -444,7 +444,7 @@ let routes = (
 
 + [isActive: func](https://reacttraining.com/react-router/web/api/NavLink/isactive-func)返回布尔值，用来额外判断链接是否是激活的状态：
 
-  ```jsx
+  ```js
   <NavLink
     to="/events/123"
     isActive={(match, location) => {
@@ -467,7 +467,7 @@ let routes = (
 
 路由重定向到新的URL，会在历史记录中替换掉当前的URL，和HTTP 3xx表现类似：
 
-```jsx
+```js
 <Route exact path="/">
   {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
 </Route>
@@ -477,13 +477,13 @@ let routes = (
 
 + [to: string](https://reacttraining.com/react-router/web/api/Redirect/to-string)路由重定向到URL：
 
-  ```jsx
+  ```js
   <Redirect to="/somewhere/else" />
   ```
 
 + [to: object](https://reacttraining.com/react-router/web/api/Redirect/to-object)
 
-  ```jsx
+  ```js
   <Redirect
     to={{
       pathname: "/login",
@@ -497,7 +497,7 @@ let routes = (
 
 + [push: bool](https://reacttraining.com/react-router/web/api/Redirect/push-bool)若为true则会将重定向路由添加到历史记录中而不是替换：
 
-```jsx
+```js
 <Redirect push to="/somewhere/else" />
 ```
 
@@ -505,7 +505,7 @@ let routes = (
 
 + [from: string](https://reacttraining.com/react-router/web/api/Redirect/from-string)
 
-  ```jsx
+  ```js
   <Switch>
     <Redirect from='/old-path' to='/new-path' />
     <Route path='/new-path'>
@@ -541,7 +541,7 @@ useHistroy提供路由[history](https://reacttraining.com/react-router/web/api/h
 
 useLocation获取路由[location](https://reacttraining.com/react-router/web/api/location)相关信息，如可以获取查询参数：
 
-```jsx
+```js
 // location的实例
 {
   key: 'ac3df4', // not with HashHistory!

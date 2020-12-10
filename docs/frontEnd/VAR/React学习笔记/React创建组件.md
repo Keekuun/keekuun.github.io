@@ -12,7 +12,7 @@ tags:
 
 ## 函数组件
 
-```jsx
+```js
 import React from 'react';
 // 注意：组件名称必须以大写字母开头
 function Hello(props) {
@@ -32,7 +32,7 @@ React 会将小写字母开头的组件视为原生 DOM 标签，例如：`<div 
 
 ## 类组件
 
-```jsx
+```js
 import React from 'react';
 
 class Hello extends React.Component { // 需要继承 React.Component 类
@@ -55,7 +55,7 @@ ReactDOM.render(
 
 props属性用来动态传值，通过props属性复用组件，让相同的组件呈现不同的内容。
 
-```jsx
+```js
 const user = {
         name: "Han Solo",
         age: 17,

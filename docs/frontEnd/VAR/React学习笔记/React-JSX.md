@@ -14,7 +14,7 @@ tags:
 
 **JSX = JS + XML**：JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方便的利用HTML语法来创建虚拟DOM，当遇到`<`，JSX就当作HTML解析，遇到`{`就当JavaScript解析.
 
-```jsx
+```js
 const div = (<div> React JXS <div>);
 const dom = (
           <div>
@@ -30,7 +30,7 @@ const dom = (
 2. 使用XML标签式语法定义JS变量的值。
 3. 在标签内使用`{}`包裹，写JS表达式。
 
-```jsx
+```js
 import React from 'react'
 const Component = React.Component
 class App extends Component{
@@ -72,7 +72,7 @@ JSX中`{}`内部的JS表达式：
 
 + **首字母小写的字符串是HTML标签**
 
-  ```jsx
+  ```js
   ReactDOM.render(
       <div className="foo" />,
       document.getElementById("app")
@@ -81,7 +81,7 @@ JSX中`{}`内部的JS表达式：
 
 + **首字母大写的变量是React组件**
 
-```jsx
+```js
 function MyComponent() {
     return (
         <div>
@@ -102,7 +102,7 @@ ReactDOM.render(
 
 + **必须有且只有一个React元素根节点**
 
-  ```jsx
+  ```js
   // 反例
   const ele1 = (
       <h1>没有一个根标签包裹</h1>
@@ -119,7 +119,7 @@ ReactDOM.render(
 
    作`Flex`布局的时候,外层不能有包裹元素 ， 在React16 之后，我们可以使用`<Fragment>`标签替代，在渲染时就没有最外层的包裹标签：
 
-  ```jsx
+  ```js
   import React,{Component,Fragment } from 'react'
   class Test extends Component{
       render(){
@@ -136,7 +136,7 @@ ReactDOM.render(
 
 + **JSX中所有的标签都必须正确闭合**
 
-  ```jsx
+  ```js
   // 反例
   const ele = <input type="text">;
   // 正确
@@ -150,7 +150,7 @@ ReactDOM.render(
 
   +  在 p 标签里不允许嵌套块级元素 
 
-    ```jsx
+    ```js
     // 反例
     ReactDOM.render( 
         <div>
@@ -174,7 +174,7 @@ ReactDOM.render(
 +  `colspan` 属性 改为 `colSpan` 
 +  **在表单元素上：**存在 `value` 与 `defaultValue`、`checked` 与 `defaultChecked`，它们有不同的意义 
 
-```jsx
+```js
 // import classes form './myCss.css'
 {/*JSX 中的注释方式*/}
 
@@ -198,7 +198,7 @@ ReactDOM.render(
 
  注意：**当 JSX 代码出现换行时，建议使用一对小括号 () 将代码包裹起来，可以防止分号自动插入的 Bug** 
 
-```jsx
+```js
 const ele = (
     <div>
         使用 () 包裹了 div 标签

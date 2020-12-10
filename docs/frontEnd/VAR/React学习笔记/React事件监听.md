@@ -18,7 +18,7 @@ tags:
 
 ## react DOM事件监听
 
-```jsx
+```js
 function handleClick(){
     alert("你敢点我？");
 }
@@ -38,7 +38,7 @@ ReactDOM.render(
 
 + 在`constructor`中将事件处理函数定义为组件实例的私有方法：
 
-```jsx
+```js
 class App extends React.Component {
     constructor() {
         super();
@@ -54,7 +54,7 @@ class App extends React.Component {
 
 +  使用 class 属性定义事件处理函数，与方法一的作用相同，会成为组件实例的私有方法 ：
 
-```jsx
+```js
 class App extends React.Component {
     constructor(){
         super();
@@ -72,7 +72,7 @@ class App extends React.Component {
 
 +  将事件处理函数定义为组件的公有方法 ：
 
-```jsx
+```js
 class App extends React.Component {
     // 注意与方法二的区别
     handleClick() { alert("试试就试试"); }
@@ -88,7 +88,7 @@ class App extends React.Component {
 
 +  向事件处理程序传递参数 
 
-  ```jsx
+  ```js
   // 使用 bind 预传参
   <button onClick={this.handleClick.bind(this, id)}>点我呀</button>
   
@@ -110,13 +110,13 @@ class App extends React.Component {
 
  传统的 HTML 中阻止链接默认打开一个新页面 :
 
-```jsx
+```js
 <a href="https://www.w3cschool.cn/" onclick="return false">w3cschool</a>
 ```
 
  在 React 中 :
 
-```jsx
+```js
 class App extends React.Component {
     handleClick = (e) => { e.preventDefault() }
     
