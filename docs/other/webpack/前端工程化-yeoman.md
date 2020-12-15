@@ -9,7 +9,7 @@ tags:
 ---
 
 :::tip
-使用yeoman定制化自己的CLI
+Yeoman是一个脚手架，可以快速生成一个项目的骨架。官网上有很多大家<a href="http://yeoman.io/generators/" rel="nofollow noreferrer" target="_blank">已经写好的脚手架</a>我们可以通过yeoman来定制自己的脚手架
 :::
 
 # 使用yeoman搭建自己的CLI
@@ -47,72 +47,44 @@ yo gengrator
 ![](../../../images/webpack/generator-cli.jpg)
 
 ### 2.编辑`index.js`
-在上述生成的目录中，`generators/app/index.js`是我们CLI的入口，通过修改，可以定制化我们的`console`输出信息：
+
+**yeoman创建项目阶段：**
+
++ `initializing`: 初始化一些状态之类的，通常是和用户输入的 `options` 或者 `arguments` 打交道
++ `prompting`: 和用户交互的时候（命令行问答之类的）调用
++ `configuring`: 保存配置文件（如 `.babelrc` 等）
++ `writing`: 生成模板文件
++ `install`: 安装依赖
++ `end`: 结束部分，初始代码自动提交
+
+我们只需要继承Yeoman的Generator类做模板定制化，基于Yeoman的脚手架设计思路应该如下图所示：
+![](../../../images/webpack/yo-process.jpg)
+
+在上述生成的目录中，`generators/app/index.js`是我们CLI的入口，通过修改，可以定制化我们的CLI：
 
 ```js
-"use strict";
-const Generator = require("yeoman-generator");
-const chalk = require("chalk");
-const yosay = require("yosay");
+const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(
-        `Welcome to the extraordinary ${chalk.red(
-          "generator-zkk-test"
-        )} generator!`
-      )
-    );
-
-    // 定制console选项
-    const prompts = [
-      {
-        type: "confirm",
-        name: "someAnswer",
-        message: "Would you like to enable this option?",
-        default: true
-      },
-      {
-        type: "input",
-        name: "projectName",
-        message: "输入项目名称",
-        default: this.appname
-      },
-      {
-        type: "input",
-        name: "projectAuthor",
-        message: "项目开发者",
-        store: true,
-        default: ""
-      },
-      {
-        type: "input",
-        name: "projectVersion",
-        message: "项目版本号",
-        default: "0.0.1"
-      }
-    ];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
-  }
-
-  writing() {
-    // 从模板生成项目文件，默认为template目录template/module
-    this.fs.copy(this.templatePath("module"), this.destinationPath(""));
-  }
-
-  install() {
-    // 不使用bower,使用npm安装依赖
-    this.installDependencies({ bower: false });
-  }
-};
-
+    // 初始化阶段
+    initializing () { /* code */ }
+    // 接收用户输入阶段
+    prompting () { /* code */ }
+    // 保存配置信息和文件
+    configuring () { /* code */ }
+    // 执行自定义函数阶段
+    default () { /* code */ }
+    // 生成项目目录阶段
+    writing () { /* code */ }
+    // 统一处理冲突，如要生成的文件已经存在是否覆盖等处理
+    conflicts () { /* code */ }
+    // 安装依赖阶段
+    install () { /* code */ }
+    // 结束阶段
+    end () { /* code */ }
+}
 ```
+
 ### 3.创建模板文件
 上述生成的目录，`generators/app/template`即为我们的模板所在目录，我们可以把创建好的模板拷贝进来：
 ![](../../../images/webpack/generator-templator.jpg)
