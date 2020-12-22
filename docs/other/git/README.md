@@ -1,6 +1,7 @@
 ---
 title: Git Handbook
 sidebar: auto
+sticky: 4
 date: 2018-09-16
 categories:
    - Git
