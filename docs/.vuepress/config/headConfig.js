@@ -9,15 +9,15 @@ module.exports = [
     // pwa
     ['link', { rel: 'manifest', href: './data/manifest.json' }],
     // 引入jquery
-    ["script", {
-        "language": "javascript",
-        "type": "text/javascript",
-        "src": "https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ['script', {
+        'language': 'javascript',
+        'type': 'text/javascript',
+        'src': 'https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js'
     }],
     // 引入鼠标点击脚本
-    ["script", {
-        "language": "javascript",
-        "type": "text/javascript",
-        "src": "/js/MouseClickEffect.js"
+    ['script', {
+        'language': 'javascript',
+        'type': 'text/javascript',
+        'src': '/js/MouseClickEffect.js'
     }]
 ];
