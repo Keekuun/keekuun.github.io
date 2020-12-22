@@ -1,6 +1,8 @@
 ---
 title: 【工程化】前端工程化-yeoman
 date: 2020-12-10
+sticky: 3
+sidebar: auto
 categories: 
 - 工程化
 tags: 
@@ -136,5 +138,10 @@ npm i -g generator-zkk-test
 # 使用自己CLI的
 yo zkk-test
 ```
+
+## 六.示例项目
++ [使用lerna构建react自定义组件项目](https://gitee.com/keekuun/generator-lerna-project)
+
++ [react业务组件，基于ts，提升开发效率](https://gitee.com/keekuun/react-components)
 
 > 本文只是入门的操作，更多请访问[Yeoman官网](https://yeoman.io/)
