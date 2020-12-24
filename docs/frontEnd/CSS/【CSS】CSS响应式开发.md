@@ -1,0 +1,98 @@
+---
+title: 【CSS】CSS响应式开发概述
+date: 2020-12-23
+sidebar: auto
+categories: 
+- 前端
+tags: 
+- CSS
+- 响应式
+---
+
+# 响应式开发
+## 1.响应式布局概念
+简而言之，即多端兼容。
+
+响应式开发的提出：
++ 在移动互联日益成熟的时候，我们在桌面浏览器上开发的网页已经无法满足移动设备的阅读。
++ 通常的做法是针对移动端单独做一套稳定的版本。
++ 但是如果中断越来越多那么你需要开发的版本就会越来越多（大屏移动设备普及）。
++ 于是，Ethan Marcotte在2010年5月提出一个概念：**响应式开发**。简而言之，就是一个网站能构兼容多个终端。
+
+web开发现状：
++ 移动web开发和响应式开发是目前主流的开发模式。
++ 使用流式布局（百分比）来适配不同的设备。
++ 由于终端设备的多样化，新建站点会优先使用响应式开发。
+
+## 2.响应式原理
+基于CSS3 中的 [Media Query(媒体查询)](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Media_queries)。
+
+通过查询`screen`的宽度来指定某个宽度区间的网页布局。
++ 超小屏幕（移动设备） 768px（iPad）以下
++ 小屏幕 	768px - 992px
++ 中屏幕	992px - 1200px;（如：1024 x 1366）
++ 大屏幕 	1200px以上(如：1366 x 768; 1920 x 1080)
+
+## 3.实现响应式布局
+### 使用 **@media** （媒体查询）关键字
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="keekuun" data-slug-hash="xxKXKOe" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="响应式开发-媒体查询1">
+  <span>See the Pen <a href="https://codepen.io/keekuun/pen/xxKXKOe/">
+  响应式开发-媒体查询1</a> by Keekuun (<a href="https://codepen.io/keekuun">@keekuun</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
++ **@media** 默认设备为**screen**可以简写：
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="keekuun" data-slug-hash="wvwrwde" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="响应式开发-媒体查询2">
+  <span>See the Pen <a href="https://codepen.io/keekuun/pen/wvwrwde/">
+  响应式开发-媒体查询2</a> by Keekuun (<a href="https://codepen.io/keekuun">@keekuun</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
++ 调整样式顺序，利用样式覆盖，简化条件：
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="keekuun" data-slug-hash="wvwrwde" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="响应式开发-媒体查询2">
+  <span>See the Pen <a href="https://codepen.io/keekuun/pen/wvwrwde/">
+  响应式开发-媒体查询2</a> by Keekuun (<a href="https://codepen.io/keekuun">@keekuun</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+## 4.使用UI布局框架
++ [Bootstrap](https://www.bootcss.com) 是最受欢迎的 HTML、CSS 和 JS 框架(UI框架)，用于开发响应式布局、移动设备优先的 WEB 项目。
++ [Amaze ~ 妹子 UI](https://amazeui.clouddeep.cn)中国首个开源 HTML5 跨屏前端框架
++ [SUI Mobile](http://m.sui.taobao.org)是一套基于 [Framework7](http://framework7.taobao.org) 开发的UI库。它非常轻量、精美，只需要引入我们的CDN文件就可以使用，并且能兼容到 iOS 6.0+ 和 Android 4.0+，非常适合开发跨平台Web App。
++ [WeTouch](http://www.wetouch.net)是App一站式快速开发平台，包含了Touch UI移动组件库、移动端常用API、插件化机制、热更新、云端打包等内容。几乎囊括了开发移动应用的所有细节，真正实现拿来即用，像搭积木一样开发移动应用。使用它，你无需学习原生native开发，就可以一次拥有安卓App、苹果App和H5等应用，极大地缩短项目周期。结合我们的Touch WX框架，还可以很方便的移植为微信小程序。
++ [FrozenUI](https://frozenui.github.io) 是一套基于移动端的UI库轻量、精美、遵从手机 QQ 设计规范。
+
++ Bootstrap模板：
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <h1>你好，世界！</h1>
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+```
