@@ -3,8 +3,8 @@ title: 【React】React创建组件
 date: 2019-11-14
 sidebar: auto
 categories: 
-- 前端
 - React
+- 前端
 tags: 
 - JS
 - React

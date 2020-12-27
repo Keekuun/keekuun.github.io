@@ -5,7 +5,7 @@ sidebar: auto
 categories: 
 - 算法
 tags:
-- Algorithm
+- 算法
 ---
 
 # 数据结构和算法
