@@ -2,10 +2,8 @@
 title: 【Linux】开发环境的搭建
 date: 2020-11-25
 categories: 
-- linux
-- docker
+- 其他
 tags: 
-- Node
 - Linux
 - Docker
 - Nginx

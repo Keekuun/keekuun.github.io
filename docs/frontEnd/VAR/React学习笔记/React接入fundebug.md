@@ -3,11 +3,11 @@ title: 【React】React接入fundebug
 date: 2019-11-23
 sidebar: auto
 categories: 
+- React
 - 前端
 tags: 
 - React
 - 优化
-publish: true
 ---
 
 # React-ts项目接入【fundebug-javascript】捕获异常

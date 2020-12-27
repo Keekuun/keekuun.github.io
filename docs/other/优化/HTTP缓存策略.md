@@ -3,11 +3,10 @@ title: 【优化】HTTP缓存策略
 date: 2020-09-23
 sidebar: auto
 categories: 
-- 前端
+- 优化
 tags: 
 - JS
 - 优化
-publish: true
 
 ---
 

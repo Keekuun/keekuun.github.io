@@ -2,7 +2,6 @@
 title: 【CSS】CSS揭秘学习笔记
 date: 2020-7-14
 sidebar: auto
-sticky: 5
 categories: 
 - 前端
 tags: 

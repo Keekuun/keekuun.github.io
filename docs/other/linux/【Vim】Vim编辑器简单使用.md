@@ -2,11 +2,10 @@
 title: 【Vim】Vim编辑器简单使用
 date: 2020-11-29
 categories: 
-- linux
-- vim
+- 其他
 tags: 
 - Linux
-- vim
+- Vim
 ---
 
 ## 1. 使用Docker-compose
