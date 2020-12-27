@@ -5,7 +5,7 @@ date: 2020-10-21
 categories: 
 - 算法
 tags:
-- Algorithm
+- 算法
 ---
 
 # 算法训练

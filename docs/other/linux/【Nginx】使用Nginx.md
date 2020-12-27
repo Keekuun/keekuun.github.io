@@ -2,7 +2,7 @@
 title: 【Nginx】使用Nginx
 date: 2020-12-3
 categories: 
-- nginx
+- 其他
 tags: 
 - Nginx
 

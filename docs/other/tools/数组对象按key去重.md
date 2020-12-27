@@ -1,9 +1,9 @@
 ---
-title: 【安全】网络和安全
+title: 【工具】录一些实用的ts工具函数
 date: 2020-12-21
 sidebar: auto
 categories: 
-- 工具
+- 其他
 tags:
 - ts
 ---

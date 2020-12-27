@@ -1,13 +1,11 @@
 ---
 title: Git Handbook
 sidebar: auto
-sticky: 4
 date: 2018-09-16
 categories:
-   - Git
-   - 其他
+- 其他
 tags:
-   - Git
+- Git
 ---
 
 ## Git Commit 规范

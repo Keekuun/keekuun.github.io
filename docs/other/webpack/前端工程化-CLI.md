@@ -1,7 +1,6 @@
 ---
-title: 【工程化】前端工程化-yeoman
+title: 【工程化】前端工程化-CLI
 date: 2020-12-10
-sticky: 3
 sidebar: auto
 categories: 
 - 工程化

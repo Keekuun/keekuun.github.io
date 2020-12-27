@@ -3,8 +3,8 @@ title: 【React】React生命周期
 date: 2019-11-18
 sidebar: auto
 categories: 
-- 前端
 - React
+- 前端
 tags: 
 - JS
 - React

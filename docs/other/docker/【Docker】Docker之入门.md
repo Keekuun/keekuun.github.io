@@ -2,10 +2,9 @@
 title: 【Docker】Docker之入门
 date: 2020-11-23
 categories: 
-- 运维
+- 其他
 tags: 
 - Docker
-- 运维
 
 ---
 

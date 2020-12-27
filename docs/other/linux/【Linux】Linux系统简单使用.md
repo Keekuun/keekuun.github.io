@@ -2,7 +2,7 @@
 title: 【Linux】Linux系统简单使用
 date: 2020-11-30
 categories: 
-- linux
+- 其他
 tags: 
 - Linux
 ---

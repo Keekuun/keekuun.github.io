@@ -2,11 +2,8 @@
 title: 【Docker】使用Docker-compose
 date: 2020-12-2
 categories: 
-- linux
-- docker
+- 其他
 tags: 
-- Node
-- Linux
 - Docker
 ---
 

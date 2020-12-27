@@ -1,8 +1,8 @@
 ---
 title: 【Vue】Vue Nuxt SSR
 categories: 
-- 前端
 - Vue
+- 前端
 tags: 
 - JS
 - Vue

@@ -3,8 +3,8 @@ title: 【React】React diff算法
 date: 2020-11-16
 sidebar: auto
 categories: 
-- 前端
 - React
+- 前端
 tags: 
 - JS
 - React
@@ -13,6 +13,8 @@ tags:
 # React diff算法
 
 > [diff 算法的进化](https://blog.shenfq.com/2019/%E8%99%9A%E6%8B%9F-dom-%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/#diff-%E7%AE%97%E6%B3%95%E7%9A%84%E8%BF%9B%E5%8C%96)
+>
+> [全面解析 vue3.0 diff算法](https://juejin.cn/post/6861960532048642061#comment)
 
 ## DOM 树的遍历
 ![](https://file.shenfq.com/FsioVJQiRylzBQN3quCjf2H0s287.gif)

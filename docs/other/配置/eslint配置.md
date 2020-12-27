@@ -3,9 +3,10 @@ title: 【配置】ESLint配置
 date: 2020-12-24
 sidebar: auto
 categories: 
-- 配置
+- 其他
 tags: 
 - ESLint
+- 配置
 ---
 
 
