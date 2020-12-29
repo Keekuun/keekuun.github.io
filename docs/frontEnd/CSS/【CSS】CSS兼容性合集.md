@@ -77,3 +77,51 @@ input::-ms-reveal{display: none;}
   See the Pen <a href='https://codepen.io/keekuun/pen/gOORJNV'>CSS3-解决inline元素之间的空白</a> by Keekuun
   (<a href='https://codepen.io/keekuun'>@keekuun</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+## 5.input框placeholder样式
+```css
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-size: 14px;
+    color: #999;
+  }
+
+  ::-moz-placeholder { /* Mozilla Firefox */
+    font-size: 14px;
+    color: #999;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-size: 14px;
+    color: #999;
+  }
+```
+
+## 6.自定义滚动条样式scrollbar
+```scss
+.my-scroll,
+.my-scroll * {
+	//滚动条样式（只适用于chrome浏览器）
+	&::-webkit-scrollbar {
+		/* 滚动条整体样式 */
+		width: 10px;
+		padding-right: 6px;
+		border-radius: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		/* 滚动条里面轨道 */
+		background-color: #f1f1f1;
+		border-radius: 5px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		/* 滚动条里面小方块 */
+		background: #d2d2d2;
+		border-radius: 5px;
+	}
+}
+```
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="CSS3-chrome浏览器滚动条样式" src="https://codepen.io/keekuun/embed/yLyXjrb?height=265&theme-id=light&default-tab=css,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/keekuun/pen/yLyXjrb'>CSS3-chrome浏览器滚动条样式</a> by Keekuun
+  (<a href='https://codepen.io/keekuun'>@keekuun</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
