@@ -537,7 +537,9 @@ module.exports = {
 
   
 
-## 8.`Tree Shaking`使用与原理
+## 8.[`Tree Shaking`使用与原理](https://webpack.docschina.org/guides/tree-shaking/)
+
+> 理解： 你可以将应用程序想象成一棵树。绿色表示实际用到的 source code(源码) 和 library(库)，是树上活的树叶。灰色表示未引用代码，是秋天树上枯萎的树叶。为了除去死去的树叶，你必须摇动这棵树，使它们落下。
 
 ### 8.1 `Tree Shaking`使用
 
@@ -698,7 +700,7 @@ npx eslint --init
 
   ![CI/CD集成ESLint](../../../images/webpack/CI-CD.jpg)
 
-  ```js
+  ```bash
   yarn add husky -D
   ```
 

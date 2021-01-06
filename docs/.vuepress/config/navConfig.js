@@ -72,5 +72,35 @@ module.exports = [
             {text: 'Git', link: '/tag/Git/'},
         ]
     },
+    {
+        text: '资源',
+        icon: 'reco-blog',
+        items: [
+            {
+                text: '算法', items: [
+                    {text: 'Leetcode', link: 'https://leetcode-cn.com/u/zkkysqs/'},
+                    {text: '牛客网', link: 'https://www.nowcoder.com/profile/9027587'},
+                ],
+            },
+            {
+                text: '前端', items: [
+                    {text: 'Vue3生态技术内幕', link: 'https://www.yuque.com/hugsun/vue3'},
+                    {text: 'Node.js与前端架构实践', link: 'https://www.yuque.com/hugsun/node'},
+                ],
+            },
+            {
+                text: '学习', items: [
+                    {text: '极客时间', link: 'https://time.geekbang.org/dashboard/course'},
+                    {text: '开课吧', link: 'https://learn.kaikeba.com/home'},
+                ],
+            },
+            {
+                text: '书籍', items: [
+                    {text: '七里香', link: 'http://lxqnsys.com/pdf/'},
+                    {text: 'awesome-books', link: 'https://github.com/guanpengchn/awesome-books'},
+                ],
+            }
+        ]
+    },
     {text: '流月', link: '/timeLine/', icon: 'reco-date'},
 ];

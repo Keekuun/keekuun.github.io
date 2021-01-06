@@ -29,6 +29,7 @@ const ast = espree.parse(code);
 >[平庸前端码农之蜕变 — AST](https://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651230568&idx=1&sn=1f6f1de7316f7a57c3209b6faa1ed9a4&chksm=bd4948ec8a3ec1fa5f6e27d82aa367e3003da92182b06d2b4b885693b318f1b08049c380ea68&scene=21#wechat_redirect)
 >
 >[AST抽象语法树——最基础的javascript重点知识](https://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651230664&idx=1&sn=595511aae2a2ce6460e8ab6949e862bf&chksm=bd49484c8a3ec15ab00728d75d8447e176067b0a087150c169a59c6f1902e2705cb7f4351fae&scene=21#wechat_redirect)
+
 ## 1.ESLint安装和初始化
 
 > 前提：Nodejs版本>6.14, npm版本>3
@@ -99,6 +100,15 @@ module.exports = {
         "quotes": ["error", "single"]
     }
 }
+```
+
+```js
+module.exports = {
+    parser: {},     // 解析器
+    extends: [],    // 继承的规则 [扩展]
+    plugins: [],    // 插件
+    rules: {}       // 规则
+};
 ```
 
 + 规则分为三个等级：`off(0)`关闭；`warn(1)`警告、`error(2)`强制
@@ -203,7 +213,7 @@ eslint --fix [file.js][dir]
 ```json
 {
     "scripts":  {
-     "lint-fix": "eslint --fix --ext .js --ext .ts --ext .tsx"
+     "lint-fix": "eslint --fix"
     }
 }
 ```
@@ -218,10 +228,148 @@ npm run lint-fix
 配置setting:
 ```json
 {
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "eslint.autoFixOnSave": true
 }
 ```
 [vscode eslint+prettier+vuter 代码自动格式化](https://blog.csdn.net/weixin_36222137/article/details/80040758?utm_medium=distribute.pc_relevant_t0.none-task-blog-searchFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-searchFromBaidu-1.control)
+
+## 4. [ESLint](https://eslint.org/)实践
+
+### 4.1 为react-ts项目配置eslint
+```sh
+# 安装依赖
+yarn add eslint --dev
+
+# 初始化配置
+npx eslint --init
+```
+
+示例：`react-ts`项目[`eslint`配置文件](https://cn.eslint.org/docs/user-guide/configuring)`.eslinttrc.json`：
+
+```js
+{
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    jest: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+  ],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    jsx: true,
+    useJSXTextNode: true,
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: ['react', '@typescript-eslint', 'prettier'],
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        endOfLine: 'auto',
+        trailingComma: 'es5',
+      },
+    ],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: false,
+        varsIgnorePattern: 'Example|Demo',
+      },
+    ],
+    quotes: ['error', 'single'],
+    semi: 'off',
+    'comma-dangle': 'off',
+  },
+};
+}
+
+```
+
+> [React with TypeScript: Best Practices](https://www.sitepoint.com/react-with-typescript-best-practices/)
+
+有些文件不需要`eslint`检测，可以加入`.eslintignore`配置文件中。
+
+配置`ESLint`目的是为了代码规范化和统一化，那么如何落地呢？
+
+### 4.2 和`CI/CD`集成（生产阶段）
+
+  ![CI/CD集成ESLint](../../../images/webpack/CI-CD.jpg)
+
+  ```bash
+  yarn add husky -D
+  ```
+
+  `package.json`增加:
+
+```json
+{
+  "script": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": ["eslint --fix", "git add"]
+  }
+}
+```
+
+### 4.3 和`webpack`集成（开发阶段）
+
+使用`eslint-loader`，构建时检查规范：
+
+```sh
+yarn add eslint-loader -D
+```
+
+配置`webpack`：
+
+```js
+module.exports = {
+  module: {
+      rules: [
+          {
+              test:/\.jsx?$/,
+              exclude: /node_modules/,
+              use: [
+                  'babel-loader',
+                  'eslint-loader'
+              ]
+          },
+          {
+              test:/\.tsx?$/,
+              exclude: /node_modules/,
+              use: [
+                  'ts-loader',
+                  'eslint-loader'
+              ]
+          }
+      ]
+  }
+}
+```
