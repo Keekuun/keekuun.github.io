@@ -7,6 +7,7 @@ categories:
 tags: 
 - CSS
 - 响应式
+- 移动端
 ---
 
 # rem和媒体查询适配方案
