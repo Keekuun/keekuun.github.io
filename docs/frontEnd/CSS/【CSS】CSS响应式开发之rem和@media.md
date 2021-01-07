@@ -199,3 +199,6 @@ $deviceWidthList: 320px, 360px, 375px, 384px, 400px, 414px, 424px, 432px, 480px,
 + 流式布局的适配：百分比
 + 响应式布局：媒体查询（在超小屏幕时使用的还是流式布局）
 + rem适配方式：rem单位用在内容的高宽自适应，一般与流式布局和伸缩布局结合
+
+
+> [移动端适配](https://jayzangwill.github.io/blog/2019/04/02/flexible/)

@@ -232,7 +232,7 @@ middleware1 ending
 + 静态资源：`koa-static`
 + 代理处理：`koa-server-http-proxy`
 + 路由压缩：`koa-combine-routers`
-+ 安全headers：`koa-`
++ 安全headers：`koa-helmet`
 
 ### 1.kao开发restful接口
 
@@ -299,7 +299,7 @@ console.log('Server is running at http://localhost:3000');
 |	|	|--routes		路由模块
 |	|	|	|-index.js  路由出口 
 |	|	|	|-a.js		a路由
-|	|	|	|-a.js		b路由
+|	|	|	|-b.js		b路由
 |	|	|--index.js		项目入口
 |	|	|--utils		工具库
 ...	...	...				其他配置文件，比如： eslint、webpack等
@@ -452,7 +452,7 @@ console.log('Server is running at http://localhost:3000');
           // 配置区分生产、开发环境的常量
           new webpcak.DefinePlugin({
               'process.env': {
-                  NODE_ENV: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') ? 'production' : 'develpoment'
+                  NODE_ENV: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'prod') ? 'production' : 'development'
               }
           })
       ],
