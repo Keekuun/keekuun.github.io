@@ -77,27 +77,38 @@ module.exports = [
         icon: 'reco-blog',
         items: [
             {
-                text: '算法', items: [
+                text: '', items: [
                     {text: 'Leetcode', link: 'https://leetcode-cn.com/u/zkkysqs/'},
-                    {text: '牛客网', link: 'https://www.nowcoder.com/profile/9027587'},
+                    {text: 'Nowcoder', link: 'https://www.nowcoder.com/profile/9027587'},
                 ],
             },
             {
-                text: '前端', items: [
-                    {text: 'Vue3生态技术内幕', link: 'https://www.yuque.com/hugsun/vue3'},
-                    {text: 'Node.js与前端架构实践', link: 'https://www.yuque.com/hugsun/node'},
+                text: '', items: [
+                    {text: '网络编程', link: 'https://www.bookstack.cn/read/tcp-udp-ip/1.md'},
                 ],
             },
             {
-                text: '学习', items: [
-                    {text: '极客时间', link: 'https://time.geekbang.org/dashboard/course'},
-                    {text: '开课吧', link: 'https://learn.kaikeba.com/home'},
+                text: '', items: [
+                    {text: 'Google Developer', link: 'https://developers.google.com/web/fundamentals/performance/get-started'},
+                    {text: 'Chrome DevTools', link: 'https://developers.google.cn/web/tools/chrome-devtools/'},
                 ],
             },
             {
-                text: '书籍', items: [
-                    {text: '七里香', link: 'http://lxqnsys.com/pdf/'},
-                    {text: 'awesome-books', link: 'https://github.com/guanpengchn/awesome-books'},
+                text: '', items: [
+                    {text: 'Vue3', link: 'https://www.yuque.com/hugsun/vue3'},
+                    {text: 'Node', link: 'https://www.yuque.com/hugsun/node'},
+                ],
+            },
+            {
+                text: '', items: [
+                    {text: 'Geekbang', link: 'https://time.geekbang.org/dashboard/course'},
+                    {text: 'Kaikeba', link: 'https://learn.kaikeba.com/home'},
+                ],
+            },
+            {
+                text: '', items: [
+                    {text: 'Reading', link: 'http://lxqnsys.com/pdf/'},
+                    {text: 'Awesome Books', link: 'https://github.com/guanpengchn/awesome-books'},
                 ],
             }
         ]
