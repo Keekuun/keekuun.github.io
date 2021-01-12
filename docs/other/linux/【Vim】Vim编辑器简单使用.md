@@ -8,5 +8,5 @@ tags:
 - Vim
 ---
 
-## 1. 使用Docker-compose
+[Vim 修行之路](https://harttle.land/vim-practice.html)
 
