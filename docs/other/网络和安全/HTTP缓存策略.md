@@ -161,14 +161,17 @@ resp.setDateHeader("Expires", System.currentTimeMillis() + exp.longValue() * 100
 
 
 
-
+>
+> **推荐**：[CDN缓存控制原理，看看能不能难住你](https://www.toutiao.com/i6734112972387385864/)
+>
+>  **推荐**：[【缓存（一）——缓存总览：从性能优化的角度看缓存】](https://github.com/amandakelake/blog/issues/43)
+>
+>
 >  [彻底弄懂HTTP缓存机制及原理](https://www.cnblogs.com/chenqf/p/6386163.html)
 >
 >  [【webpack学习系列笔记-文件指纹策略】](https://docs.zkkysqs.top/other/webpack/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8.html#_6-文件指纹策略-chunkhash、contenthash和hash)
 >
 >  [【HTTP 304状态码的详细讲解】](https://blog.csdn.net/huwei2003/article/details/70139062?utm_medium=distribute.pc_relevant.none-task-blog-title-1&spm=1001.2101.3001.4242)
->
->  **推荐**：[【缓存（一）——缓存总览：从性能优化的角度看缓存】](https://github.com/amandakelake/blog/issues/43)
 >
 >  [【利用nginx设置浏览器协商缓存】](https://blog.csdn.net/weixin_30443895/article/details/96133353?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.channel_param)
 >
