@@ -541,6 +541,12 @@ module.exports = {
 
 > 理解： 你可以将应用程序想象成一棵树。绿色表示实际用到的 source code(源码) 和 library(库)，是树上活的树叶。灰色表示未引用代码，是秋天树上枯萎的树叶。为了除去死去的树叶，你必须摇动这棵树，使它们落下。
 
+> [你的Tree-Shaking并没什么卵用](https://zhuanlan.zhihu.com/p/32831172)
+>
+>[Tree-Shaking性能优化实践 - 原理篇](https://juejin.cn/post/6844903544756109319)
+>
+>[Tree-Shaking性能优化实践 - 实践篇](https://juejin.cn/post/6844903544760336398)
+>
 ### 8.1 `Tree Shaking`使用
 
 + 问题：1个模块中可能有多个方法，只要其中的某个方法被使用了，则整个文件都会被打包到`bundle`文件里面去

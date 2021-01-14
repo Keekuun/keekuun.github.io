@@ -992,6 +992,24 @@ var sortedListToBST = function(head) {
 ### 24.[路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)
 
 
+## 八、其他
+### 1.[斐波那契数列](https://www.nowcoder.com/practice/aa8ffe28ec7c4050b2aa8bc9d26710e9?tpId=2&tqId=10852&rp=1&ru=%2Factivity%2Foj&qru=%2Fta%2Ffront-end%2Fquestion-ranking)
+```js
+function fibonacci(n) {
+    return help(n,1,1)
+}
+
+// 尾递归优化
+function help(n,a,b) {
+    if (n <= 2) {
+        return b;
+    }
+    return help(n - 1, b, a+b);
+}
+```
+> 真正实现尾递归优化，只是改写代码优化还不够，还需要编译器或解释器的支持才行
+
+> [尾递归优化原理](https://cloud.tencent.com/developer/article/1553486)
 
 > [leetcode高频题精选](https://segmentfault.com/a/1190000037466967)
 >
