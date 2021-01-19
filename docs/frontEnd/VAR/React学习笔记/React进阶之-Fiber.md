@@ -24,11 +24,6 @@ React将虚拟DOM的更新过程划分两个阶段，reconciler阶段与commit�
 其实基于算法的优化是一种绝望的优化，就类似玛雅文明因为找不到铜矿一直停留于石器时代，诞生了伟大的工匠精神把石器打磨得美伦美奂。
 
 
-<iframe src="http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" frameborder="0" height=650 width="100%"></iframe>
-
-
-
-
 之所以这么说，因为diff算法都用于组件的新旧children比较，children一般不会出现过长的情况，有点大炮打蚊子。况且当我们的应用变得非常庞大，页面有上万个组件，要diff这么多组件，再卓绝的算法也不能保证浏览器不会累趴。因为他们没想到浏览器也会累趴，也没有想到这是一个长跑的问题。如果是100米短跑，或者1000米竞赛，当然越快越好。如果是马拉松，就需要考虑到保存体力了，需要注意休息了。性能是一个系统性的工程。
 
 在我们的代码里面，休息就是检测时间然后断开Fiber链。
@@ -43,6 +38,8 @@ getDerivedStateFromProps取代了原来的componentWillMount与componentWillRece
 
 在进入commi阶段时，组件多了一个新钩子叫getSnapshotBeforeUpdate，它与commit阶段的钩子一样只执行一次。
 
+[如果加载失败CLICK ME](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+<iframe importance="low" height="600" width="100%;" scrolling="no" title="react lifecycle" src="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
 
 >[React 架构的演变 - 从同步到异步](https://blog.shenfq.com/2020/react-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98-%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%88%B0%E5%BC%82%E6%AD%A5/#%E6%97%A7%E7%89%88%E6%9C%AC-setState-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
 >
