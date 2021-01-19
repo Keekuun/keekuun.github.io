@@ -11,4 +11,6 @@ tags:
 - 服务端渲染
 ---
 
-<iframe src="https://nextjs.frontendx.cn/" width="100%" height="666px"></iframe>
+<iframe importance="low" height="600" width="100%;" scrolling="no" title="react lifecycle" src="https://nextjs.frontendx.cn/" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
+
+[如果加载失败CLICK ME](https://nextjs.frontendx.cn/)
