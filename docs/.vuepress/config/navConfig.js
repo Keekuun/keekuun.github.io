@@ -96,6 +96,7 @@ module.exports = [
             {
                 text: '', items: [
                     {text: 'Vue3', link: 'https://www.yuque.com/hugsun/vue3'},
+                    {text: 'vue3js', link: 'https://vue3js.cn/start/'},
                     {text: 'Node', link: 'https://www.yuque.com/hugsun/node'},
                 ],
             },
@@ -109,8 +110,15 @@ module.exports = [
                 text: '', items: [
                     {text: 'Reading', link: 'http://lxqnsys.com/pdf/'},
                     {text: 'Awesome Books', link: 'https://github.com/guanpengchn/awesome-books'},
+                    {text: 'Programming Books', link: 'https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md'},
                 ],
-            }
+            },
+            {
+                text: '', items: [
+                    {text: 'Docschina', link: 'https://docschina.org/'},
+                    {text: 'Tool', link: 'https://tool.lu/'},
+                ],
+            },
         ]
     },
     {text: '流月', link: '/timeLine/', icon: 'reco-date'},
