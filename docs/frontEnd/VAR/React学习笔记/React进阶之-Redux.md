@@ -20,7 +20,7 @@ Redux是react状态管理工具， 还有如Flux、Reflux、Mobx 等其他状态
 
 `state` 是应用的状态，一般本质上是一个普通对象
 
-sto`r`e 是应用状态 state 的管理者，包含下列四个函数：
+`store` 是应用状态 state 的管理者，包含下列四个函数：
 
 + `getState()` # 获取整个 `state`
 + `dispatch(action)` # ※ 触发 `state` 改变的【唯一途径】※
@@ -58,7 +58,7 @@ const store = createStore(reducer, initialState)
 **action（动作）实质上是包含 type 属性的普通对象**，这个 `type` 是我们实现用户行为追踪的关键
 例如，增加一个待办事项 的 `action` 可能是像下面一样：
 
-```js
+```
 {
   type: 'ADD_TODO',
   payload: {
@@ -168,6 +168,14 @@ Redux 有五个 API，分别是：
 | `reducer` 中的 `switch-case` 分支 | 路由，根据 `action.type` 路由到对应的控制器     |
 | `reducer` 内部对 `state` 的处理   | 控制器对数据库进行增删改操作                    |
 | `reducer` 返回 `nextState`        | 将修改后的记录写回数据库                        |
+
+> [Redux 入门教程（一）：基本用法](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
+>
+>[Redux 入门教程（二）：中间件与异步操作](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_two_async_operations.html)
+>
+>[中文官网：redux-saga](https://redux-saga-in-chinese.js.org/)
+>
+>[简书：Redux-saga](https://www.jianshu.com/p/6f96bdaaea22)
 
 <iframe src="http://cn.redux.js.org/" width="100%" height="666px"></iframe>
 [Redux 中文文档](https://cn.redux.js.org/)
