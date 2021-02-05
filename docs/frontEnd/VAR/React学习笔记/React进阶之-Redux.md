@@ -102,10 +102,7 @@ var initState = {
   todos: []
 }
 
-function reducer(state, action) {
-  // ※ 应用的初始状态是在第一次执行 reducer 时设置的 ※
-  if (!state) state = initState
-  
+function reducer(state = initState, action) {
   switch (action.type) {
     case 'ADD_TODO':
       var nextState = _.cloneDeep(state) // 用到了 lodash 的深克隆
@@ -152,7 +149,7 @@ Redux 有五个 API，分别是：
 + `reducer` 本质上是根据 `action.type` 来更新 `state` 并返回 `nextState` 的函数
 + `reducer` 必须返回值，否则 `nextState` 即为 `undefined`
 
-实际上，`state` 就是所有 `reducer` 返回值的汇总
+实际上，`state` 就是所有 `reducer` 返回值的汇总: `state + action = new state`
 
 > Action Creator => action => store.dispatch(action) => reducer(state, action) => 原 state state = nextState
 
