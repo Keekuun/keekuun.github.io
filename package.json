@@ -14,7 +14,17 @@
     "blog",
     "博客",
     "vuepress",
-    "前端"
+    "前端",
+    "移动端",
+    "node",
+    "css3",
+    "react",
+    "ts",
+    "js",
+    "es6",
+    "flutter",
+    "java",
+    "electron"
   ],
   "author": "月上秦少",
   "license": "MIT",
@@ -25,7 +35,7 @@
     "@vuepress/plugin-medium-zoom": "^1.0.0-rc.1",
     "@vuepress/plugin-pwa": "^1.0.3",
     "markdown-it-plantuml": "^1.4.1",
-    "vuepress": "^1.5.4",
+    "vuepress": "^1.8.0",
     "vuepress-plugin-auto-sidebar": "^1.5.0",
     "vuepress-plugin-boxx": "^0.0.7",
     "vuepress-plugin-dynamic-title": "^1.0.0",
@@ -35,6 +45,6 @@
     "vuepress-plugin-nuggets-style-copy": "^1.0.3",
     "vuepress-plugin-ribbon": "0.0.4",
     "vuepress-plugin-thirdparty-search": "^1.0.2",
-    "vuepress-theme-reco": "^1.5.7"
+    "vuepress-theme-reco": "^1.6.1"
   }
 }
