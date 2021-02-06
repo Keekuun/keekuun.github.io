@@ -8,8 +8,9 @@ tags:
 - HTTP
 ---
 
+[[toc]]
 # HTTP学习笔记
-![HTTP](https://upload-images.jianshu.io/upload_images/16584865-6da1237e47a3ba2b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![HTTP](../../../images/frontEnd/http1-3.webp.jpg)
 
 ## 1. web与网络基础
 
