@@ -11,6 +11,7 @@ module.exports = [
                     // {text: 'HTML', link: '/tag/HTML/'},
                     {text: 'CSS', link: '/tag/CSS/'},
                     {text: 'JS', link: '/tag/JS/'},
+                    {text: 'TS', link: '/tag/TS/'},
                 ],
             },
 
