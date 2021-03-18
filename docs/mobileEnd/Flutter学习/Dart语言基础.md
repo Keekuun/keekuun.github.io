@@ -4,7 +4,7 @@ sidebar: auto
 isComment: true
 categories:
 - 移动端
-  tags:
+tags:
 - 跨平台
 - 移动端
 - flutter
