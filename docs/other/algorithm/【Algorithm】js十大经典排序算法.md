@@ -7,7 +7,7 @@ tags:
 - 算法
 ---
 
-## 冒泡排序
+## 冒泡排序(稳定)
 ### 1.常规冒泡排序
 ```js
 function bubbleSort(data) {
@@ -74,7 +74,7 @@ function bubbleSort(data) {
 }
 ```
 
-## 选择排序
+## 选择排序(稳定)
 ```js
 function selectionSort(data) {
     if(data.length < 2) return data;
@@ -92,7 +92,7 @@ function selectionSort(data) {
 }
 ```
 
-## 快速排序
+## 快速排序(不稳定)
 ```js
 function quickSort(data) {
     if(data.length < 2) return data;
@@ -112,6 +112,36 @@ function quickSort(data) {
 
     // 递归调用 [基准左侧， 基准， 基准右侧]
     return [...quickSort(left), pivot, ...quickSort(right)];
+}
+```
+
+## 归并排序(稳定)
+```js
+function mergeSort(arr) {
+    if(arr.length < 2) return arr;
+    
+    let mid = arr.length >> 1;
+    let left = arr.slice(0, mid);
+    let right = arr.slice(mid);
+    
+    return merge(mergeSort(left), mergeSort(right));
+    
+    function merge(left, right) {
+        let res = [];
+        let i=0, j=0;
+        
+        while(i<left.length && j <right.length) {
+            if(left[i] <=right[j]) {
+                res.push(left[i]);
+                i++;
+            } else {
+                res.push(right[j]);
+                j++;
+            }
+        }
+        
+        return [...res, ...left.slice(i), ...right.slice(j)]
+    }
 }
 ```
 
