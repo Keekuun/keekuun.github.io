@@ -574,9 +574,9 @@ useParams获取路由path（路径参数）的一系列key/value值。
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 
-### 4.4 useRouteMacth
+### 4.4 useRouteMatch
 
-useRouteMacth像`<Route>`方式一样，使用[match](https://reacttraining.com/react-router/web/api/match)匹配当前URL，但是可以不用正真渲染`<route>`UI，就可以获取匹配到的URL数据。
+useRouteMatch像`<Route>`方式一样，使用[match](https://reacttraining.com/react-router/web/api/match)匹配当前URL，但是可以不用正真渲染`<route>`UI，就可以获取匹配到的URL数据。
 
 <p class="codepen" data-height="265" data-theme-id="default" data-default-tab="js,result" data-user="zkkysqs" data-slug-hash="MWYWLQM" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="React-router hooks useRouteMatch">
   <span>See the Pen <a href="https://codepen.io/zkkysqs/pen/MWYWLQM">
@@ -584,3 +584,50 @@ useRouteMacth像`<Route>`方式一样，使用[match](https://reacttraining.com/
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+## 二、React路由原理
+
+### 1、BrowserHistory模式下
+
+#### 1.1 改变路由
+
+改变路由，指的是通过调用 api 实现的路由跳转，比如开发者在 React 应用中调用 history.push 改变路由，本质上是调用` window.history.pushState` 方法。
+
+**window.history.pushState**： 
+```js
+history.pushState(state,title,path)
+```
++ 1 state：一个与指定网址相关的状态对象， popstate 事件触发时，该对象会传入回调函数。如果不需要可填 null。
++ 2 title：新页面的标题，但是所有浏览器目前都忽略这个值，可填 null 。
++ 3 path：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个地址。
+
+**window.history.replaceState**:
+```js
+history.replaceState(state,title,path)
+```
+参数和 pushState 一样，这个方法会修改当前的 history 对象记录， 但是 history.length 的长度不会改变。
+
+#### 1.2 监听路由 popstate
+```js
+window.addEventListener('popstate',function(e){
+    /* 监听改变 */
+})
+```
+同一个文档的 history 对象出现变化时，就会触发 popstate 事件 history.pushState 可以使浏览器地址改变，但是无需刷新页面。注意⚠️的是：用 history.pushState() 或者 history.replaceState() 不会触发 popstate 事件。 popstate 事件只会在浏览器某些行为下触发, 比如点击后退、前进按钮或者调用 history.back()、history.forward()、history.go()方法。
+
+**总结： BrowserHistory 模式下的 history 库就是基于上面改变路由，监听路由的方法进行封装处理，最后形成 history 对象，并传递给 Router。**
+
+### 2.HashHistory模式下
+
+#### 2.1 改变路由 window.location.hash
+通过 window.location.hash 属性获取和设置 hash 值。开发者在哈希路由模式下的应用中，切换路由，本质上是改变 window.location.hash 。
+
+#### 2.2 监听路由 onhashchange
+hash 路由模式下，监听路由变化用的是 hashchange
+```js
+window.addEventListener('hashchange',function(e){
+    /* 监听改变 */
+})
+```
+
+> [「源码解析 」这一次彻底弄懂react-router路由原理](https://juejin.cn/post/6886290490640039943)
