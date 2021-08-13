@@ -103,7 +103,7 @@ var getIntersectionNode = function(headA, headB) {
 
 ### 2.[设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)
 
-## 六.队列和广度优先搜索（BFS）
+## 六.[队列和广度优先搜索（BFS）]
 
 ### 1.[完全平方数](https://leetcode-cn.com/problems/perfect-squares/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--51/)
 
@@ -111,6 +111,137 @@ var getIntersectionNode = function(headA, headB) {
 
 ### 3.[二叉树的层序遍历](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefh1i/)
 
+### 4.[解数独]
+```js
+/**
+ * @param {string[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solveSudoku = function(/** @type {any} */ board) {
+  backtrack(board);
+};
+
+/**
+ * @param {string | any[]} board
+ */
+function backtrack(board) {
+  for(let i = 0; i < board.length; i++) {
+    for(let j = 0; j < board[0].length; j++) {
+      if(board[i][j] !== '.') continue;
+
+      for(let k = 1; k <= 9; k++) {
+        if(isValid(board, i, j, k.toString())) {
+          board[i][j] = k.toString();
+          if(backtrack(board)) return true;
+          board[i][j] = '.';
+        }
+      }
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
+ * @param {string | any[]} board
+ * @param {number} row
+ * @param {number} col
+ * @param {string} val
+ */
+function isValid(board, row, col, val) {
+  for(let i = 0; i < 9; i++) {
+    if(board[row][i] === val) {
+      return false;
+    }
+  }
+
+  for(let i = 0; i < 9; i++) {
+    if(board[i][col] === val) {
+      return false;
+    }
+  }
+
+  const m = Math.floor(row / 3) * 3;
+  const n = Math.floor(col / 3) * 3;
+  for(let i = m; i < m + 3; i++) {
+    for(let j = n; j < n + 3; j++) {
+      if(board[i][j] === val) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+```
+
+### 5.迷宫问题
+```js
+/**
+ * @param {number[][]} [grid]
+ * @param {number} [row]
+ * @param {number} [col]
+ */
+const grid = [
+          [0, 1, 0, 0, 0],
+          [0, 1, 0, 1, 0],
+          [0, 0, 0, 0, 1],
+          [0, 1, 1, 1, 0],
+          [0, 0, 0, 0, 0],
+        ];
+const row = 5;
+const col = 5;
+
+function resolveMaze(grid = [], row = 1, col = 1) {
+  /** @type {number[][]} */
+  const res = [];
+  const visited = new Map();
+  const direction = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+  backtrack(grid, 0, 0);
+
+  /**
+     * @param {number[][]} arr
+     * @param {number} m
+     * @param {number} n
+     */
+  function backtrack(arr, m, n) {
+    // 到达终点
+    if(m === row - 1 && n === col - 1) {
+      res.push([m, n]);
+
+      for(const item of res) {
+        console.log(`(${item[0]},${item[1]})`);
+      }
+      return true;
+    }
+    if(m < 0 || n < 0 || m >= row || n >= col || visited.has(`${m},${n}`)){
+      return false;
+    }
+    if(grid[m][n] === 1) return false;
+
+    // 记录
+    visited.set(`${m},${n}`, true);
+    res.push([m, n]);
+    // 做选择
+    for(let i = 0; i < direction.length; i++) {
+      const _row = m + direction[i][0];
+      const _col = n + direction[i][1];
+      if(backtrack(grid, _row, _col)) {
+        return true;
+      }
+    }
+
+    // 撤销
+    visited.delete(`${m},${n}`);
+    res.pop();
+
+    return false;
+  }
+  return res;
+}
+```
 
 ## 七、[树](https://leetcode-cn.com/tag/tree/)
 
@@ -1016,3 +1147,78 @@ function help(n,a,b) {
 > [【LeetCode】代码模板，刷题必会](https://blog.csdn.net/fuxuemingzhu/article/details/101900729)
 
 
+### 2.字符串加法
+
+```js
+function strAdd(a, b) {
+    let i = a.toString().trim().length;
+    let j = b.toString().trim().length;
+    
+    let ans = '';
+    let carry = 0;
+    
+    while(i >=0 || j >=0) {
+      let sum;
+      let x=0, y=0;
+      
+      if(i>=0) {
+          x = +a[i];
+          i--;
+      }
+      
+      if(j>=0) {
+          y = +b[i];
+          j--;
+      }
+      
+      sum = x + y + carry;
+      if(sum >= 10) {
+          carry = Math.floor(sum / 10);
+          sum = sum % 10;
+      } else {
+          carry = 0;
+      }
+      
+      ans = sum  + ans;
+    }
+    
+    if(carry) {
+        ans = carry + ans;
+    }
+    
+    return ans;
+}
+```
+
+
+### 3.字符串乘法
+```js
+function strMul(a, b) {
+    a = a.toString().trim();
+    b = b.toString().trim();
+    
+    let m = a.length;
+    let n = b.length;
+    let arr = new Array(m + n).fill(0);
+    
+    // 从个位开始相乘
+    for(let i=m-1; i>=0; i--) {
+        for(let j=n-1; j>=0; j--) {
+            let mul = a[i] * b[j];
+            let p1 = i + j;
+            let p2 = i + j + 1;
+            let sum = mul + arr[p2];
+            arr[p2] = sum % 10;
+            arr[p1] += ~~(sum / 10);
+        }
+    }
+    
+    // 去除首位多余的0
+    let i=0;
+    while(i<arr.length && arr[i]===0) {
+        i++;
+    }
+    
+    return arr.slice(i).join('') || '0';
+}
+```
