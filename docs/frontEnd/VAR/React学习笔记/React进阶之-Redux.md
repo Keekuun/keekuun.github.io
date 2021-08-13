@@ -166,6 +166,74 @@ Redux 有五个 API，分别是：
 | `reducer` 内部对 `state` 的处理   | 控制器对数据库进行增删改操作                    |
 | `reducer` 返回 `nextState`        | 将修改后的记录写回数据库                        |
 
+
+
+****************************************************************
+
+**以下为后续学习补充**：
+
+# React-Redux,Redux,React三者关系
++ Redux： 首先 Redux 是一个应用状态管理js库，它本身和 React 是没有关系的，换句话说，Redux 可以应用于其他框架构建的前端应用，甚至也可以应用于 Vue 中。
+
++ React-Redux：React-Redux 是连接 React 应用和 Redux 状态管理的桥梁。React-redux 主要专注两件事，一是如何向 React 应用中注入 redux 中的 Store ，二是如何根据 Store 的改变，把消息派发给应用中需要状态的每一个组件。
+
++ React：这个就不必多说了。
+
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/83eaf84d71b04b94b7b7e754a6778cd1~tplv-k3u1fbpfcp-watermark.awebp)
+
+# redux设计思想：
+
+## redux三大原则
++ 1.**单向数据流**：整个 redux ，数据流向都是单向的
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3775935f59d435fa6326dbcef90519e~tplv-k3u1fbpfcp-watermark.awebp)
+
++ 2.**state 只读**：在 Redux 中不能通过直接改变 state ，来让状态发生变化，如果想要改变 state ，那就必须触发一次 action ，通过 action 执行每个 reducer 。
+
++ 3.**纯函数执行**：每一个 reducer 都是一个纯函数，里面不要执行任何副作用，返回的值作为新的 state ，state 改变会触发 store 中的 subscribe 。
+
+## 发布订阅思想
+redux 可以作为发布订阅模式的一个具体实现。redux 都会创建一个 store ，里面保存了状态信息，改变 store 的方法 dispatch ，以及订阅 store 变化的方法 subscribe 。
+
+## 中间件思想
+redux 应用了前端领域为数不多的中间件 compose ，那么 redux 的中间件是用来做什么的？ 答案只有一个： 那就是**强化 dispatch** ， Redux 提供了中间件机制，使用者可以根据需要来强化 dispatch 函数，传统的 dispatch 是不支持异步的，但是可以针对 Redux 做强化，于是有了 redux-thunk，redux-actions 等中间件，包括 dvajs 中，也写了一个 redux 支持 promise 的中间件。
+
+compose实现：
+```js
+const compose = (...funcs) => {
+  return funcs.reduce((f, g) => (x) => f(g(x)));
+}
+```
+funcs 为中间件组成的数组，compose 通过数组的 reduce 方法，实现执行每一个中间件，强化 dispatch 。
+
+
+## 核心api
+### 1.createStore
+
+createStore redux中通过 createStore 可以创建一个 Store ，使用者可以将这个 Store 保存传递给 React 应用，具体怎么传递那就是 React-Redux 做的事了。首先看一下 createStore 的使用：
+```js
+const Store = createStore(rootReducer,initialState,middleware)
+```
+
++ 参数一 reducers ： redux 的 reducer ，如果有多个那么可以调用 combineReducers 合并。
++ 参数二 initialState ：初始化的 state 。
++ 参数三 middleware ：如果有中间件，那么存放 redux 中间件。
+
+### combineReducers
+```js
+
+/* 将 number 和 PersonalInfo 两个reducer合并   */
+const rootReducer = combineReducers({ number:numberReducer,info:InfoReducer })
+```
+
+正常状态可以会有多个 reducer ，combineReducers 可以合并多个reducer。
+
+### applyMiddleware
+
+```js
+const middleware = applyMiddleware(logMiddleware)
+```
+applyMiddleware 用于注册中间价，支持多个参数，每一个参数都是一个中间件。每次触发 action ，中间件依次执行。
+
 > [Redux 入门教程（一）：基本用法](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html)
 >
 >[Redux 入门教程（二）：中间件与异步操作](http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_two_async_operations.html)
