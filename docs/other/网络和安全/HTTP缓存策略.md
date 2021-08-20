@@ -156,8 +156,14 @@ resp.setDateHeader("Expires", System.currentTimeMillis() + exp.longValue() * 100
 + 强缓存-HTTP1.0（expires）;HTTP1.1（cache-control）。
 + 协商缓存-HTTP1.0（`Last-Modified` 和 `If-Modified-Since`）;HTTP1.1(`Etag`(设置响应头缓存标识)和`If-None-Match`(保存`Etag`信息))。
 + 为了兼容,一般HTTP1.0和HTTP1.1两种缓存策略都会加上，其中HTTP1.1优先级更高。
-
 + `max-age=0,must-revalidate`和`no-cache`等效，
+
+策略：
++ 如果资源不可复用，直接为Cache-Control设置no-store，拒绝一切形式的缓存；
++ 如果资源可复用，考虑是否每次都需要向服务器进行缓存确认，如果是，设置Cache-Control的值为no-cache；
++ 如果不需要每次都向服务器确认，考虑资源是否可以被代理服务器缓存，根据其结果决定是设置为private还是public；
++ 接下来考虑资源的过期时间，设置对应的max-age；
++ 最后，配置协商缓存需要用到的Etag、Last-Modified等参数。
 
 
 

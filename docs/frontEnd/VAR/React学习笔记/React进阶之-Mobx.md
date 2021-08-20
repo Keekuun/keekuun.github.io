@@ -1,5 +1,5 @@
 ---
-title: 【React】React Mox
+title: 【React】React Mobx
 date: 2019-11-24
 sidebar: auto
 categories: 
