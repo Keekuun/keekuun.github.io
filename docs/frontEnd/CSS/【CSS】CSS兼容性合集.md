@@ -125,3 +125,20 @@ input::-ms-reveal{display: none;}
   See the Pen <a href='https://codepen.io/keekuun/pen/yLyXjrb'>CSS3-chrome浏览器滚动条样式</a> by Keekuun
   (<a href='https://codepen.io/keekuun'>@keekuun</a>) on <a href='https://codepen.io'>CodePen</a>.
 </iframe>
+
+
+## 7.video录频有噪音怎么处理？
+[`muted`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video): 布尔属性，指明了视频里的音频的默认设置。设置后，**音频会初始化为静音**。默认值是false,意味着视频播放的时候音频也会播放 。
+```html
+<video 
+        src="videofile.ogg"
+        poster="posterimage.jpg"
+        autoplay
+<!--        禁止播放-->
+        muted
+        controls 
+>
+  抱歉，您的浏览器不支持内嵌视频，不过不用担心，你可以 <a href="videofile.ogg">下载</a>
+  并用你喜欢的播放器观看!
+</video>
+```

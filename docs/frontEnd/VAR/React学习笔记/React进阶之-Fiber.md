@@ -21,7 +21,7 @@ React将虚拟DOM的更新过程划分两个阶段，reconciler阶段与commit�
 
 有些迷你React则是通过减少移动进行优化，于是绞尽脑汁，用上各种算法，最短编辑距离，最长公共子序列，最长上升子序列。。。
 
-其实基于算法的优化是一种绝望的优化，就类似玛雅文明因为找不到铜矿一直停留于石器时代，诞生了伟大的工匠精神把石器打磨得美伦美奂。
+其实基于算法的优化是一种绝望地优化，就类似玛雅文明因为找不到铜矿一直停留于石器时代，诞生了伟大的工匠精神把石器打磨得美伦美奂。
 
 
 之所以这么说，因为diff算法都用于组件的新旧children比较，children一般不会出现过长的情况，有点大炮打蚊子。况且当我们的应用变得非常庞大，页面有上万个组件，要diff这么多组件，再卓绝的算法也不能保证浏览器不会累趴。因为他们没想到浏览器也会累趴，也没有想到这是一个长跑的问题。如果是100米短跑，或者1000米竞赛，当然越快越好。如果是马拉松，就需要考虑到保存体力了，需要注意休息了。性能是一个系统性的工程。
@@ -36,7 +36,7 @@ getDerivedStateFromProps取代了原来的componentWillMount与componentWillRece
 
 在即使到来的异步更新中，reconciler阶段可能执行多次，才执行一次commit，这样也会导致willXXX钩子执行多次，违反它们的语义，它们的废弃是不可逆转的。
 
-在进入commi阶段时，组件多了一个新钩子叫getSnapshotBeforeUpdate，它与commit阶段的钩子一样只执行一次。
+在进入commit阶段时，组件多了一个新钩子叫getSnapshotBeforeUpdate，它与commit阶段的钩子一样只执行一次。
 
 ## element、fiber、dom关系
 
@@ -176,7 +176,7 @@ function createFiberRoot(containerInfo,tag){
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/907fb4f6768842438e0df7f083adc4b6~tplv-k3u1fbpfcp-watermark.awebp)
 
 ### 2.更新
-如果对于上述 demo ，开发者点击一次按钮发生更新，接下来会发生什么呢? 首先会走如上的逻辑，重新创建一颗 workInProgresss 树，复用当前 current 树上的 alternate ，作为新的 workInProgress ，由于初始化 rootfiber 有 alternate ，所以对于剩余的子节点，React 还需要创建一份，和 current 树上的 fiber 建立起 alternate 关联。渲染完毕后，workInProgresss 再次变成 current 树。
+如果对于上述 demo ，开发者点击一次按钮发生更新，接下来会发生什么呢? 首先会走如上的逻辑，重新创建一颗 workInProgress 树，复用当前 current 树上的 alternate ，作为新的 workInProgress ，由于初始化 rootFiber 有 alternate ，所以对于剩余的子节点，React 还需要创建一份，和 current 树上的 fiber 建立起 alternate 关联。渲染完毕后，workInProgress 再次变成 current 树。
 
 效果：
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff00ce5f2db0430c841ea3a01754542e~tplv-k3u1fbpfcp-watermark.awebp)
@@ -207,12 +207,12 @@ function performUnitOfWork(){
 ```
 `beginWork`：是向下调和的过程。就是由 fiberRoot 按照 child 指针逐层向下调和，期间会执行函数组件，实例类组件，diff 调和子节点，打不同effectTag。
 
-`completeUnitOfWork`：是向上归并的过程，如果有兄弟节点，会返回 sibling兄弟，没有返回 return 父级，一直返回到 fiebrRoot ，期间可以形成effectList，对于初始化流程会创建 DOM ，对于 DOM 元素进行事件收集，处理style，className等。
+`completeUnitOfWork`：是向上归并的过程，如果有兄弟节点，会返回 sibling兄弟，没有返回 return 父级，一直返回到 fiberRoot ，期间可以形成effectList，对于初始化流程会创建 DOM ，对于 DOM 元素进行事件收集，处理style，className等。
 
 这么一上一下，构成了整个 fiber 树的调和。
 
 + 向下调和beginWork
-```js
+```
 function beginWork(current,workInProgress){
 
     switch(workInProgress.tag){
@@ -356,10 +356,4 @@ Layout 阶段 DOM 已经更新完毕，Layout 做的事情有：
 [如果加载失败CLICK ME](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 <iframe importance="low" height="600" width="100%;" scrolling="no" title="react lifecycle" src="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe>
 
->[React 架构的演变 - 从同步到异步](https://blog.shenfq.com/2020/react-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98-%E4%BB%8E%E5%90%8C%E6%AD%A5%E5%88%B0%E5%BC%82%E6%AD%A5/#%E6%97%A7%E7%89%88%E6%9C%AC-setState-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
->
->[React 架构的演变 - 从递归到循环](https://blog.shenfq.com/2020/react-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98-%E4%BB%8E%E9%80%92%E5%BD%92%E5%88%B0%E5%BE%AA%E7%8E%AF/)
->
-> [React 架构的演变 - 更新机制](https://blog.shenfq.com/2020/react-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98-%E6%9B%B4%E6%96%B0%E6%9C%BA%E5%88%B6/)
->
->[React 架构的演变 - Hooks 的实现](https://blog.shenfq.com/2020/react-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%BC%94%E5%8F%98-hooks-%E7%9A%84%E5%AE%9E%E7%8E%B0/)
+> [如何阅读源码](https://blog.shenfq.com/posts/2020/%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E8%AF%BB%E6%BA%90%E7%A0%81%E7%9A%84.html)
