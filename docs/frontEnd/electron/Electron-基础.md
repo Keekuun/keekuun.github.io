@@ -5,7 +5,7 @@ sidebar: auto
 isComment: true
 categories:
 - 前端
-  tags:
+tags:
 - Electron
 - 跨平台
 ---

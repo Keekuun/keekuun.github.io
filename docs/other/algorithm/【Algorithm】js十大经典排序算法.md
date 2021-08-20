@@ -1,10 +1,11 @@
 ---
-title: 【Algorithm】JS经典排序算法
+title: 【Algorithm】JS经典排序算法及二分查找
 sidebar: auto
-categories: 
+categories:
 - 算法
 tags:
 - 算法
+
 ---
 
 ## 冒泡排序(稳定)
@@ -148,3 +149,75 @@ function mergeSort(arr) {
 > https://www.cnblogs.com/jztan/p/12273671.html
 >
 > https://www.jianshu.com/p/a28db3d3cc18
+
+
+## 二分查找
+
+### 1.查找一个数的二分查找
+```js
+function binarySearch(arr, target) {
+    if(!arr || arr.length === 0) return -1;
+    
+    let left = 0, right = arr.length - 1;
+    
+    while(left <= right) {
+        let mid = left + (right - left) >> 2;
+        
+        if(arr[mid] === target) {
+            return mid;
+        } else if(arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    
+    return -1;
+}
+```
+
+### 2.查找左侧边界的二分查找
+```js
+function leftBoundBinarySearch(arr, target) {
+    if(!arr || arr.length === 0) return -1;
+
+    let left = 0, right = arr.length;
+    
+    while(left < right) {
+        let mid = left + (right - left) >> 2;
+        
+        if(arr[mid] === target) { // 收缩右侧边界
+            right = mid;
+        } else if(arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    
+    return arr[left] === target ? left : -1;
+}
+```
+
+### 3.查找右侧边界的二分查找
+```js
+function rightBoundBinarySearch(arr, target) {
+    if(!arr || arr.length === 0) return -1;
+
+    let left = 0, right = arr.length;
+    
+    while(left < right) {
+        let mid = left + (right - left) >> 2;
+        
+        if(arr[target] === mid) { // 收缩左侧边界
+            left = mid + 1;
+        } else if(arr[target] < mid) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    
+    return arr[right - 1] === target ? right - 1 : -1;
+}
+```
