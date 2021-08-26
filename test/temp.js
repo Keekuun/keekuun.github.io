@@ -119,7 +119,7 @@ function bubbleSortK(arr, k) {
         }
     }
 
-    return arr;
+    return arr.slice(0, k);
 }
 
 
