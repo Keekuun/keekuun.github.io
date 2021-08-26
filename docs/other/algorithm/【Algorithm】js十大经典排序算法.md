@@ -93,6 +93,25 @@ function selectionSort(data) {
 }
 ```
 
+<<<<<<< Updated upstream
+
+## 插入排序
+```js
+function insertSort(data) {
+    if(data.length < 2) return data;
+    
+    for(let i=1; i<data.length; i++) {
+        for(let j=i-1; j>=0; j--) {
+            if(data[j] > data[i]) {
+                [data[i], data[j]] = [data[j], data[i]]
+            }
+        }
+    }
+    return data;
+}
+```
+
+
 ## 快速排序(不稳定)
 ```js
 function quickSort(data) {
