@@ -199,9 +199,7 @@ redux 应用了前端领域为数不多的中间件 compose ，那么 redux 的�
 
 compose实现：
 ```js
-const compose = (...funcs) => {
-  return funcs.reduce((f, g) => (x) => f(g(x)));
-}
+const compose = (...args) => value => args.reduceRight((acc, fn) => fn(acc), value);
 ```
 funcs 为中间件组成的数组，compose 通过数组的 reduce 方法，实现执行每一个中间件，强化 dispatch 。
 

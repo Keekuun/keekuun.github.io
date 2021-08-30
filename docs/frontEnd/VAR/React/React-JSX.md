@@ -14,7 +14,7 @@ tags:
 
 **JSX = JS + XML**：JSX就是Javascript和XML结合的一种格式。React发明了JSX，可以方便的利用HTML语法来创建虚拟DOM，当遇到`<`，JSX就当作HTML解析，遇到`{`就当JavaScript解析.
 
-```js
+```jsx
 const div = (<div> React JXS <div>);
 const dom = (
           <div>
@@ -102,7 +102,7 @@ ReactDOM.render(
 
 + **必须有且只有一个React元素根节点**
 
-  ```js
+  ```jsx
   // 反例
   const ele1 = (
       <h1>没有一个根标签包裹</h1>
