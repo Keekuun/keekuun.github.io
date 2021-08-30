@@ -47,8 +47,6 @@ function bubbleSort(data) {
 }
 ```
 
-
-
 ### 2.改进冒泡排序-双向
 
 ```js
@@ -93,8 +91,6 @@ function selectionSort(data) {
 }
 ```
 
-<<<<<<< Updated upstream
-
 ## 插入排序
 ```js
 function insertSort(data) {
@@ -110,7 +106,6 @@ function insertSort(data) {
     return data;
 }
 ```
-
 
 ## 快速排序(不稳定)
 ```js
