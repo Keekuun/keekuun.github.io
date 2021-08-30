@@ -45,6 +45,6 @@
     "vuepress-plugin-nuggets-style-copy": "^1.0.3",
     "vuepress-plugin-ribbon": "0.0.4",
     "vuepress-plugin-thirdparty-search": "^1.0.2",
-    "vuepress-theme-reco": "^1.6.1"
+    "vuepress-theme-reco": "^1.6.6"
   }
 }
