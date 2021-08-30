@@ -122,9 +122,95 @@ function quickSort(arr) {
 }
 ```
 
-### 2.手写 删除链表的第 k 个节点
+### 2.1删除链表的第 k 个节点
+```js
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
 
-### 3.手写 Funtion.prototype.bind
+function removeKthNodeFromStart(root, k) {
+    if(!root || k <= 0) return root;
+    
+    if(k === 1) {
+        return root.next
+    }
+    
+    // 处理 K >= 2
+    // 获取链表长度
+    let len = 1;
+    let head = root;
+    while(head.next) {
+        head = head.next;
+        len++;
+    }
+    
+    // k比len大
+    if(k > len) {
+        return root;
+    }
+    
+    // k <= len
+    let cur = root;
+    while(k > 2) {
+       cur = cur.next;
+       k--;
+    }
+    
+    cur.next = cur.next.next;
+    
+    return root;
+}
+```
+
+### 2.2.删除链表的倒数第 k 个节点
+```js
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+    let dummy = new ListNode();
+    dummy.next = head;
+    let slow = dummy;
+    let fast = dummy;
+    
+    while(n>0) {
+        fast = fast.next;
+        n--;
+    }
+    
+    while(fast && fast.next) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+    
+    slow.next = slow.next.next;
+    
+    return dummy.next;
+};
+```
+
+### 3.1手写 Function.prototype.bind
+```js
+Function.prototype._bind = function(context, ...args) {
+    let that = this;
+    return function(..._args) {
+        // return that.apply(context, [...args, ..._args])
+        return that.call(context, ...args, ..._args)
+    }
+}
+```
+
+### 3.2手写 Function.prototype.call
+```js
+Function.prototype._call = function(context, ...args) {
+    context = context || window;
+    
+}
+```
+### 3.3手写 Function.prototype.apply
 
 ### 4.手写 instanceof(a, b)
 
