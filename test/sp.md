@@ -3,7 +3,7 @@
 ### 1.写一个空间复杂度为 O(1)的快速排序
 
 ```js
-// 非原地排序算法 Time O(nlog(n))  Space O(1)
+// 非原地排序算法 Time O(nlog(n))  Space O(n)
 function quickSort(arr) {
     if (arr.length < 2) return arr;
 
@@ -530,7 +530,7 @@ HTTPS: DNS寻址 ---- 获取IP --- TCP三次握手建立连接 --- 建立TLS连�
   // 使用
   
   jsonp({
-      url: 'http:localhost:8080/serach',
+      url: 'http://localhost:8080/serach',
       params: {wd: 'hello'},
       callback: 'search'
   }).then(res => {
@@ -820,12 +820,11 @@ class Demo extends React.Component {
 "addEventListener child"
 ```
 
-+ B.在childClick中加入'e.stopPropagation()'，打印结果：(和不加一样)
++ B.在childClick中加入'e.stopPropagation()'，打印结果：
 ```
 "addEventListener child"
 "addEventListener parent"
-"onClick child"
-"onClick parent"
+"onClick child" // 阻止了合成事件的冒泡，但阻止不了原生事件
 "document"
 ```
 
@@ -836,7 +835,7 @@ class Demo extends React.Component {
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-> +[React 阻止事件冒泡失效](https://blog.csdn.net/dKnightL/article/details/99844659)
+> + [React 阻止事件冒泡失效](https://blog.csdn.net/dKnightL/article/details/99844659)
 
 ### 12. React.useEffect 和 useLayoutEffect 的执行顺序
 ```jsx
@@ -1169,7 +1168,7 @@ win.target = "_blank";
 
 **装饰器对类的行为的改变，是代码编译时发生的，而不是在运行时**。这意味着，装饰器能在编译阶段运行代码。也就是说，**装饰器本质就是编译时执行的函数**。
 
-### + 装饰类 - @decorator
++  装饰类 - @decorator
 
 ```
 // target 就是构造函数 Foo
@@ -1190,7 +1189,7 @@ var Foo =
 
 由于 `print` 函数返回 `undefined`，所以 `Foo` 在这里仍是 `Foo`。那当我们装饰器写成 `@print()` 时，又会发生什么？
 
-### 装饰类 - @decorator()
++ 装饰类 - @decorator()
 
 ```
 // 编译后
@@ -1279,9 +1278,7 @@ CSRF（Cross-site request forgery），中文名称：跨站请求伪造。
 
 4.在HTTP 头中自定义属性并验证
 
-
-
-注意： 设置`http-only`是用来防止xss攻击的（使cookie不能通过js获取）。[CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)也是用来防止xss攻击
+**注意： 设置`http-only`是用来防止xss攻击的（使cookie不能通过js获取）。[CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)也是用来防止xss攻击**
 
 ### 14.sql注入是什么，如何防范
 
@@ -1347,8 +1344,9 @@ SQL注入是一种注入攻击，，可以执行恶意SQL语句
 3. **`idle, prepare` 阶段**: 仅node内部使用;
 
 4. **`poll` 阶段**: 获取新的I/O事件, 例如操作读取文件等等，适当的条件下node将阻塞在这里;
-   + 技术上来说，poll 阶段控制 timers 什么时候执行。
-
+   
++ 技术上来说，poll 阶段控制 timers 什么时候执行。
+  
 5. **`check` 阶段**: 执行 `setImmediate()` 设定的callbacks;
 
 6. **`close callbacks` 阶段**: 比如 `socket.on(‘close’, callback)` 的callback会在这个阶段执行;
@@ -1374,36 +1372,111 @@ SQL注入是一种注入攻击，，可以执行恶意SQL语句
 
 > [实现防抖节流 - 使用drag拖拽事件+input keydown事件模拟场景](https://juejin.cn/post/6844903864307564551)
 
-### 20. for in / for of 看代码输出
+### 20. for in / for of 
+
++ for in: 用来遍历对象或数组 
+
++ for of：遍历对数组 
 
 ### 21.描述链表的反转如何实现，复杂度多少
 
+```js
+// 反转链表
+function reverse(root) {
+    let pre = null;
+    let cur = root;
+    
+    while(cur) {
+        let next = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = next;
+    }
+    
+    return pre;
+}
+```
+
+
+
 ### 22.实现 instanceof
+
+```js
+function _instance(L, R) {
+    let O = R.prototype;
+    
+    while(true) {
+        if(L === null) return false;
+        if(L === O) return true;
+        L = L.__proto__
+    }
+}
+```
+
+
 
 ### 23.实现一个对象被 for of 遍历
 
+```js
+function iteratored(obj) {
+    let data = [];
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key)) {
+            data.push([key, obj[key]])
+        }
+    };
+    let index = -1;
+    return {
+        next() {
+            index++;
+            return ({
+                value: data[index],
+                done: index === data.length
+            })
+        },
+        [Symbol.iterator](){
+        	return this;
+    	}
+    }
+}
+```
+
+
+
 ### 24.实现链表的添加、删除。复杂度是多少
+
+```js
+function add() {
+    
+}
+
+function delete() {
+    
+}
+```
+
+
 
 ### 25.给两段效果上都可以实现继承的代码，说出差异
 
-\```js
-
+```js
 function child() {}
 
 function parent() {}
 
-child.prototype.__proto__ = parent.prototype
+child.prototype.__proto__ = parent.prototype;
 
-child.prototype = new parent()
+child.prototype = new parent();
+```
 
-\```
+
 
 ### 26.this 输出问题
 
 ### 27.如何监听 html 外链资源加载失败?
 
 ```js
-// window.onerror 无法监听到资源加载错误，是因为 window.onerror 是在事件冒泡阶段执行的
+// 1.window.onerror 无法监听到资源加载错误，是因为 window.onerror 是在事件冒泡阶段执行的
 window.addEventListener('error', e => { // 捕获阶段
   console.log('错误监听', e);
 }, true);
@@ -1412,8 +1485,10 @@ try {} catch (err) {
   console.error(err);
 }
 
+// 2.script onerror
 <script onerror="onError(this)"></script> 
 
+// 3.img/video onerror
 <img src="https://www.github.com/static/xxxxx.png" onerror="handleImgErr()" alt="" srcset="">
 <video src="https://www.gitee.com/staic/xxxx.mp4" onerror="handleVideoErr()"></video>
 
@@ -1430,7 +1505,7 @@ function postError(type, msg) {
 > + [如何监控资源加载失败](http://www.alloyteam.com/2021/01/15358/)
 > + [Fundebug捕获异常](https://docs.fundebug.com/)
 
-### 28.Mutation Observer、Intersection Observer 使用场景
+### 28.Mutation Observer、IntersectionObserver 使用场景
 
 + **MutationObserver**: 监听dom的变化。
 
@@ -1476,12 +1551,21 @@ function postError(type, msg) {
     document.querySelector('.scrollerFooter')
   );
   ```
+  
+  <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="VwWKPVL" data-preview="true" data-editable="true" data-user="keekuun" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+    <span>See the Pen <a href="https://codepen.io/keekuun/pen/VwWKPVL">
+     IntersectionObserver无限滚动</a> by Keekuun (<a href="https://codepen.io/keekuun">@keekuun</a>)
+    on <a href="https://codepen.io">CodePen</a>.</span>
+  </p>
+  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 > + [IntersectionObserver API 使用教程](http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html)
 > + [ JS中的观察者们 —— 四种 Observers](https://xiaotianxia.github.io/blog/vuepress/js/four_kinds_of_observers.html)
 > + [现代浏览器观察者 Observer API 指南](https://juejin.cn/post/6844903976937209863#commenthttps://juejin.cn/post/6844903976937209863)
 
 ### 29. 127.0.0.1 和 0.0.0.0 差别（一个只能通过 localhost ，另一个可以通过本机 ip 或者 localhost 都可以）
+
+127.0.0.1 是一个环回地址, 一般使用localhost访问的就是这个地址，并不表示“本机”。0.0.0.0才是真正表示“本网络中的本机”。
 
 ### 30.利用 Promise js sleep 函数实现
 
@@ -1720,107 +1804,611 @@ rs.pipe(ws);
 
 ## 测试题三
 
-### 1.手写原型链继承
+### 1.JS继承
+
+```js
+function Parent() {
+    this.name = 'Parent';
+    
+    this.getName = function() { // 会覆盖 prototype.getName 
+        return this.name + ' inner';
+    }
+    
+    this.getName1 = function() {
+        return this.name + ' inner1';
+    }
+    this.getName2 = () => {
+        return this.name + ' inner2';
+    }
+}
+
+Parent.prototype.getName = function(){
+    return this.name; // // 此处this并指向Parent
+}
+
+Parent.prototype.getName = () => {
+    return this.name; // 此处this并不指向Parent,指向上层作用域的this，比如： window
+}
+Parent.prototype.greet = function() {
+    return 'hello ' + this.name;
+}
+
+function Child() {
+    this.name = 'Child';
+}
+```
+
+
+
+### 1.2 原型链继承
+
+```js
+Child.prototype = new Parent();
+
+let child1 = new Child();
+let child2 = new Child();
+child1.getName();
+```
+
+缺点：多个实例共享一个内存空间，有篡改风险
+
+### 1.3 构造函数继承(call)
+
+```js
+function Child() {
+    Parent.call(this);
+    this.name = 'child';
+}
+
+let child1 = new Child();
+child1.greet() // error
+```
+
+优点：解决多个实例共享同一个内存的问题
+
+缺点：子类无法继承父类原型对象中的方法
+
+### 1.4 组合继承
+
+```js
+function Child() {
+    Parent.call(this);
+    this.name = 'child';
+}
+
+Child.prototype = new Parent();
+Child.prototype.constructor = Child;
+```
+
+优点：解决了前两种继承方式的缺陷
+
+缺点：父类构造函数执行了两次，造成浪费
+
+### 1.5 原型式继承（Object.create）
+
+```js
+let Parent = {
+  name: 'parent',
+    getName: function(){
+        return this.name; // // 正常访问
+    },
+    getName1() {
+        return this.name + '1'; ; // 正常访问
+    },
+    getName2: () => {
+        return this.name + '2'; // this指向上层作用域
+    },
+};
+let child = Object.create(Parent);
+```
+
+优点：可以继承属性以及属性方法
+
+缺点：无法解决共享问题（同1.2）
+
+### 1.6 寄生式继承
+
+```js
+let Parent = {
+  name: 'parent',
+    getName: function(){
+        return this.name; // // 正常访问
+    },
+    getName1() {
+        return this.name + '1'; ; // 正常访问
+    },
+    getName2: () => {
+        return this.name + '2'; // this指向上层作用域
+    },
+};
+
+function clone(target) {
+    let _clone = Object.create(target);
+    _clone.getName = function(){
+        return this.name + ' clone';
+    }
+    return _clone;
+}
+let child = clone(Parent);
+```
+
+优点：可以在继承的基础上新增自定义方法
+
+### 1.7 组合寄生式继承（最佳）
+
+```js
+function clone(parent, child) {
+    child.prototype = Object.create(parent.prototype);
+    child.prototype.constructor = child;
+}
+
+function Parent(){}
+function Child(){
+    Parent.call(this);
+}
+clone(Parent, Child)
+```
+
+优点：解决多个实例共享的问题；解决组合式继承父类构造函数多次调用的性能开销问题
+
+### 1.8 ES6 Extends继承
+
+es6继承是组合寄生式继承（最佳）的语法糖，底层实现逻辑和组合寄生式继承一般无二。
+
+```js
+function _inherits(subClass, superClass) {
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configure: true
+        }
+    });
+    
+    if(superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+```
+
+
 
 ### 2.实例属性和原型属性的区别
 
++ 1.**实例属性**指的是在构造函数方法中定义的属性和方法，每一个实例对象都**独立开辟**一块内存空间用于保存属性和方法。
+
+```js
+// 1.实例属性指的是在构造函数方法中定义的属性和方法，每一个实例对象都独立开辟一块内存空间用于保存属性和方法。
+function Products() {
+    this.name = 'car',
+    this.ids = [1,2]
+}
+var product1 = new Products();
+var product2 = new Products();
+product1.ids[0] = 3;
+console.log(product1.ids); //[3,2]
+console.log(product2.ids); //[1,2]
+
+```
+
++ 2.**原型属性**指的是用于创建实例对象的构造函数的原型的属性，每一个创建的实例对象都**共享原型**属性。
+
+```js
+// 2.原型属性指的是用于创建实例对象的构造函数的原型的属性，每一个创建的实例对象都共享原型属性。
+function Products() {
+    this.name = 'car',
+    this.ids = [1,2]
+}
+Products.prototype.type = ['a', 'b'];
+var product1 = new Products();
+var product2 = new Products();
+product1.type[0] = 'c';
+console.log(product1.type); //["c", "b"]
+console.log(product2.type); //["c", "b"]
+```
+
+
+
 ### 4.instanceof 的原理
 
-### 5.浏览器缓存
+ `instanceof` **内部机制是通过原型链来实现的**:
 
-### 6.Service Worker 大小大概是30Gb，如果用户硬盘没有那么大怎么办
+```js
+function instance_of(L, R) {         // L 表示instanceof左边，R 表示instanceof右边
+		let O = R.prototype;         // 取 R 的显示原型
+		L = L.__proto__;             // 取 L 的隐式原型
+		while (true) {               // 循环执行，直到 O 严格等于 L
+			if (L === null) return false;
+			if (O === L) return true;
+			L = L.__proto__;
+		}
+	}
 
-### 7.Service Worker 的大小和强缓存、协商缓存的大小是一起计算的还是分开计算
+```
+
+
+
+### 5.浏览器缓存刷新
+
+**刷新：**
+
+1. 打开网页，地址栏输入地址： 查找 `disk cache` 中是否有匹配。如有则使用；如没有则发送网络请求。
+2. 普通刷新 (F5)：因为 TAB 并没有关闭，因此 `memory cache` 是可用的，会被优先使用(如果匹配的话)。其次才是 `disk cache`。
+3. 强制刷新 (Ctrl + F5)：浏览器不使用缓存，因此发送的请求头部均带有 `Cache-control:no-cache`(为了兼容，还带了 `Pragma:no-cache`),服务器直接返回 200 和最新内容
+
+### 6.**缓存位置**
+
+- Service Worker
+
+  **Service Worker 的缓存与浏览器其他内建的缓存机制不同，它可以让我们自由控制缓存哪些文件、如何匹配缓存、如何读取缓存，并且缓存是持续性的**。
+
+- Memory Cache
+
+  内存中的缓存，主要包含的是当前中页面中已经抓取到的资源,例如页面上已经下载的样式、脚本、图片等。读取内存中的数据肯定比磁盘快,内存缓存虽然读取高效，可是缓存持续性很短，会随着进程的释放而释放。**一旦我们关闭 Tab 页面，内存中的缓存也就被释放了**。
+
+- Disk Cache
+
+  Disk Cache 也就是存储在硬盘中的缓存，读取速度慢点，但是什么都能存储到磁盘中，**比之 Memory Cache 胜在容量和存储时效性上**。
+
+- Push Cache
+
+  Push Cache（推送缓存）是 HTTP/2 中的内容，当以上三种缓存都没有命中时，它才会被使用。**它只在会话（Session）中存在，一旦会话结束就被释放，并且缓存时间也很短暂**，在 Chrome 浏览器中只有 5 分钟左右，同时它也并非严格执行 HTTP 头中的缓存指令。
+
+> + [浏览器缓存看这一篇就够了](https://zhuanlan.zhihu.com/p/60950750)
+>
+> + [彻底弄懂浏览器缓存策略](https://www.jiqizhixin.com/articles/2020-07-24-12)
+> + [深入理解浏览器的缓存机制](https://www.infoq.cn/article/8vu-vcrhoxducafprnol)
+
+### 7.Service Worker 
+
++ LocalStorage 使用的缓存限制大小为 `5MB-10MB`
++ indexedDB 缓存的大小限制最大为 `50MB` 。
++ Service Worker 所能使用的容量大小不做统一限制，而是由当前电脑的磁盘空间所限制。(iOS Safari 限制为50MB)
+
+**Service Worker 生命周期：**
+
+```
+install -> installed -> actvating -> Active -> Activated -> Redundant
+```
+
+**Service Worker 使用细节**：
+
++  Service Worker 必须在 HTTPS 协议下使用
++  Service Worker 的作用域限制在其脚本存放路径上
+
+> + [深入了解 Service Worker](https://www.iguan7u.cn/2020/03/15/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3-Service-Worker/)
+> + [ServiceWorker总结](https://blog.michealwayne.cn/2020/08/07/webapi/%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91ServiceWorker%E6%80%BB%E7%BB%93%E7%AF%87/)
+
+
 
 ### 8.Push Cache 的具体处理方式
 
-### 9.HTTP2 的优缺点
+- Service Worker
+- Memory Cache
+- Disk Cache
+- Push Cache
+
+Push Cache（推送缓存）是 HTTP/2 中的内容，当以上三种缓存都没有命中时，它才会被使用。**它只在会话（Session）中存在，一旦会话结束就被释放，并且缓存时间也很短暂**，在 Chrome 浏览器中只有 5 分钟左右，同时它也并非严格执行 HTTP 头中的缓存指令。
+
+Push Cache的几个结论：
+
+- 所有的资源都能被推送，并且能够被缓存,但是 Edge 和 Safari 浏览器支持相对比较差；
+- 可以推送 no-cache 和 no-store 的资源；
+- 一旦连接被关闭，Push Cache 就被释放；
+- 多个页面可以使用同一个 HTTP/2 的连接，也就可以使用同一个 Push Cache。这主要还是依赖浏览器的实现而定，出于对性能的考虑，有的浏览器会对相同域名但不同的 tab 标签使用同一个 HTTP 连接；
+- Push Cache 中的缓存只能被使用一次；
+- 浏览器可以拒绝接受已经存在的资源推送；
+- 你可以给其他域名推送资源。
+
+> [深入理解浏览器的缓存机制](https://www.infoq.cn/article/8vu-vcrhoxducafprnol)
+
+### 9.HTTP2 和HTTP3的优缺点
+
+> [http2/http3协议有什么优劣](https://github.com/LuckyWinty/fe-weekly-questions/issues/3)
+
+**http2优点：**
+
++ 多路复用：基于二进制数据帧和流， 解决TCP中队头阻塞的问题
+
++ 头部压缩
+
++ #### 服务端推送
+
+**http2缺点：**
+
++ TCP 以及 TCP+TLS建立连接的延时,HTTP/2**使用TCP协议**来传输的，而如果使用HTTPS的话，还需要使用TLS协议进行安全传输，而使用TLS也需要一个握手过程,在传输数据之前，导致我们需要花掉 3～4 个 RTT。
++ **TCP的队头阻塞并没有彻底解决**。在HTTP/2中，多个请求是跑在一个TCP管道中的。但当HTTP/2出现丢包时，整个 TCP 都要开始等待重传，那么就会阻塞该TCP连接中的所有请求。
+
+**HTTP3**：基于 UDP 协议的“QUIC”协议
+
+- 实现了类似TCP的**流量控制**、**传输可靠性**的功能。虽然**UDP**不提供可靠性的传输，但**QUIC在UDP**的基础之上增加了一层来保证数据可靠性传输。它提供了数据包重传、拥塞控制以及其他一些TCP中存在的特性
+- 实现了**快速握手**功能。由于**QUIC是基于UDP**的，所以QUIC可以实现使用0-RTT或者1-RTT来建立连接，这意味着QUIC可以用最快的速度来发送和接收数据。
+- 集成了**TLS加密**功能。目前QUIC使用的是TLS1.3，相较于早期版本TLS1.3有更多的优点，其中最重要的一点是减少了握手所花费的RTT个数。
+- **多路复用**，**彻底**解决TCP中队头阻塞的问题
 
 ### 10.HTTP2 有没有可能比 HTTP1 还要更慢
 
+> + [HTTP2的速度比HTTP1.1 HTTPS速度还慢](https://github.com/alibaba/tengine/issues/881)
+
 ### 11.var、let、const 的区别
+
+> [一看就懂的var、let、const三者区别](https://juejin.cn/post/6925641096152399880)
 
 ### 12.说出打印结果
 
-*// 写出下面这段代码打印的结果*
-
+```js
 async function async1() {
-
-console.log('async1 start');
-
-await async2();
-
-console.log('async1 end');
-
+	console.log('async1 start');
+	await async2();
+	console.log('async1 end');
 }
-
 
 
 async function async2() {
-
-console.log('async2 start');
-
+	console.log('async2 start');
 }
-
-
 
 console.log('script start');
 
-
-
 setTimeout(function() {
-
-console.log('setTimeout');
+    console.log('setTimeout');
 
 }, 0);
 
-
-
 async1();
 
-
-
-new Promise(function(*resolve*) {
-
-console.log('promise1');
-
-resolve();
-
+new Promise(function(resolve) {
+	console.log('promise1');
+	resolve();
 }).then(function() {
-
-console.log('promise2');
-
+	console.log('promise2');
 }).then(function() {
-
-console.log('promise3');
-
+	console.log('promise3');
 });
-
-
-
 console.log('script end');
+```
 
-\```
+打印结果：
 
-### 13.webpack常用插件
+```
+script start
+async1 start
+async2 start
+promise1
+script end
+async1 end
+promise2
+promise3
+setTimeout
+```
 
-### 14.如果有一个工程打包特别大，如何进行优化
 
-### 15.cjs 和 esm 模块化的区别
 
-### 16. es6+ 有哪些新的语法
+### 13.webpack常用plugins和loader
 
-### 17.跨域解决方案
++ **常用Plugin :**
+  - **clean-webpack-plugin**：在打包之前将我们指定的文件夹清空。应用场景每次打包前将目录清空, 然后再存放新打包的内容, 避免新老混淆问题，非官方功能。[使用说明](https://github.com/johnagan/clean-webpack-plugin)
+  - **copy-webpack-plugin**：打包相关的文档。除了JS/CSS/图片/字体图标等需要打包以外, 可能还有一些相关的文档也需要打包（word等）。文档内容是固定不变的, 我们只需要将对应的文件拷贝到打包目录中即可。[使用说明。](https://www.webpackjs.com/plugins/copy-webpack-plugin/)
+  - **mini-css-extract-plugin**：是一个专门用于将打包的CSS内容提取到单独文件的插件。前面我们通过style-loader打包的CSS都是直接插入到head中的。[使用说明](https://webpack.js.org/plugins/mini-css-extract-plugin/)
+  - terser-webpack-plugin：压缩js代码
+  - optimize-css-assets-webpack-plugin：压缩css代码
+  - image-webpack-loader或img-loader：压缩图片。[image-webpack-loader使用说明](https://www.npmjs.com/package/image-webpack-loader)、[img-loader使用说明](https://www.npmjs.com/package/img-loader)
+  - postcss-sprites或webpack-spritesmith：合并图片。[postcss-sprites使用说明](https://www.npmjs.com/package/postcss-sprites)、 [webpack-spritesmith使用说明](https://www.npmjs.com/package/webpack-spritesmith)
+  - **webpack-merge**：用于*优化配置文件*。针对不同的环境将不同的配置写到不同的文件中。如：common文件做公共配置项文件，dev文件为开发配置，prod文件为上线配置。在dev，prod文件中配置webpack-merge，使其分别同common文件合并，并暴露给外界。
+  - SplitChunksPlugin：Code-Splitting实现的底层就是通过Split-Chunks-Plugin实现的，其作用就是代码分割。
+  - Provide-Plugin：功能同imports-loader，自动加载模块，所配置模块（jquery等）可以在全局使用。而不必在html头部引用，或在import导入模块。[使用说明](https://www.webpackjs.com/plugins/provide-plugin/)
+  - IgnorePlugin：用于忽略第三方包指定目录，让指定目录不被打包进去。[使用说明](https://www.webpackjs.com/plugins/ignore-plugin/)
+  - add-asset-html-webpack-plugin：将打包好的库引入到html界面上
+  - DllPlugin：生成动态库的映射关系，即dll/[name].mainfest.json文件
+  - DllReferencePlugin：查找动态库。把只有 dll 的 bundle(们)(dll-only-bundle(s)) 引用到需要的预编译的依赖。
+  - webpack-bundle-analyzer：可视化的打包优化插件。会将打包的结果以图形化界面的方式展示给我们,并且在本地开启服务器，将服务器上生成的界面自动在浏览器中展示出来。[使用说明](https://www.npmjs.com/package/webpack-bundle-analyzer)
+  - watch：webpack 可以监听打包文件变化，当它们修改后会重新编译打包
+  - webpack-dev-server：
+    webpack-dev-server和watch一样可以监听文件变化，两者不要同时配置，防止冲突。
+    webpack-dev-server可以将我们打包好的程序运行在一个服务器环境下
+    webpack-dev-server可以解决企业开发中"开发阶段"的跨域问题
+    可以监听css，js代码且能自动刷新
+  - **HMR(HotModuleReplacementPlugin)**：热更新插件, 会在内容发生改变的时候，时时的更新（打包）修改的内容但是不会重新刷新网站。**推荐使用**
+  - **babel**：将ES678高级语法转换为ES5低级语法，否则在低级版本浏览器中我们的程序无法正确执行。[使用说明](https://babeljs.io/)
+  - **babel-preset-env**：告诉webpack我们需要兼容哪些浏览器，然后babel就会根据我们的配置自动调整转换方案, 如果需要兼容的浏览器已经实现了, 就不转换了。
+  - **babel/polyfill**：没有对应关系就是指E5中根本就没有对应的语法, 例如Promise, includes等方法是ES678新增的。ES5中根本就没有对应的实现, 这个时候就需要再增加一些额外配置, 让babel自己帮我们实现对应的语法。
+  - babel/parser：将JS代码转换为AST抽象语法树。[使用说明](https://babeljs.io/docs/en/babel-parser)
+  - abel/generator：将AST抽象语法树转换为JS代码。
+  - babel/traverse：遍历抽象语法树。[使用说明](https://babeljs.io/docs/en/babel-traverse#docsNav)
+  - babel/types：创建AST抽象语法树。[使用说明](https://babeljs.io/docs/en/babel-types)
+  - html-withimg-loader：实现HTML中图片的打包（file-loader或者url-loader并不能将HTML中用到的图片打包到指定目录中）。[使用说明](https://www.npmjs.com/package/html-withimg-loader)
 
-### 18.说一下 CORS 中的预请求
+**常用loader:**
 
-### 19.xss 和 csrf
+- file-loader：打包图片，打包字体图标。[使用说明](https://www.webpackjs.com/loaders/file-loader/)
+- url-loader 功能类似于 file-loader，但是在文件大小（单位 byte）低于指定的限制时，可以返回一个 DataURL（提升网页性能）。[使用说明](https://www.webpackjs.com/loaders/url-loader/)
+- css-loader：和图片一样webpack默认能不能处理CSS文件, 所以也需要借助loader将CSS文件转换为webpack能够处理的类型。解析css文件中的@import依赖关系,打包时会将依赖的代码复制过来代替@import。
+- style-loader: 将css文件通过css-loader处理之后，将处理之后的内容插入到HTML的HEAD代码中。
+- scss-loader：自动将scss转换为CSS
+- less-loader：自动将less转换为CSS
+- PostCSS-loader：PostCSS和sass/less不同, 它不是CSS预处理器（换个格式编写css）。PostCSS是一款使用插件去转换CSS的工具，PostCSS有许多非常好用的插件。例如：autoprefixer(自动补全浏览器前缀)、postcss-pxtorem(自动把px代为转换成rem)。[使用说明](https://www.postcss.com.cn/)，必须放在css规则的最后，最先执行。
+- eslint-loader：用于检查常见的 JavaScript 代码错误，也可以进行"代码规范"检查，在企业开发中项目负责人会定制一套 ESLint 规则，然后应用到所编写的项目上，从而实现辅助编码规范的执行，有效控制项目代码的质量。在编译打包时如果语法有错或者有不符合规范的语法就会报错, 并且会提示相关错误信息。[使用说明](https://www.webpackjs.com/loaders/)
+- imports-loader（不推荐使用）：1. 自动加载模块功能同 Provide-Plugin，2. 还可修改全局this指向（一般都是使用此功能）。[使用说明](https://www.npmjs.com/package/imports-loader)。
+- loader-utils：获取配置文件webpack.config.js文件中option传递的参数。
+- schema-utils：校验配置文件传递的参数。
 
-### 20.用户信息存储的方式
+> + [webpack中常用loader及plugins（插件）](https://www.cxyzjd.com/article/Cao_Mary/104465872?__cf_chl_managed_tk__=pmd_bH2sYhVSFkCQsqYnjhplqkPmmF9of.TE9g0wik9GUOA-1630767359-0-gqNtZGzNAtCjcnBszQhl)
+> + [18个常用 webpack插件](https://www.html.cn/web/javascript/19320.html)
 
-### 21.React 性能优化的方式
+### 13.1 何为插件(Plugin)
 
-### 22. 实现一个防抖函数
+Plugin 是一个扩展器，它丰富了 webpack 本身，针对是 loader 结束后，webpack 打包的整个过程，它并不直接操作文件，而是基于事件机制工作，会监听 webpack 打包过程中的某些节点，执行广泛的任务。
+
+Plugin 的特点
+
+- 是一个独立的模块
+- 模块对外暴露一个 js 函数
+- 函数的原型 `(prototype)` 上定义了一个注入 `compiler` 对象的 `apply`方法 `apply` 函数中需要有通过 `compiler` 对象挂载的 `webpack` 事件钩子，钩子的回调中能拿到当前编译的 `compilation` 对象，如果是异步编译插件的话可以拿到回调 `callback`
+- 完成自定义子编译流程并处理 `complition` 对象的内部数据
+- 如果异步编译插件的话，数据处理完成后执行 `callback` 回调。
+
+实现一个自定义插件：
+
+```js
+class DemoPlugin {
+  constructor(options) {
+    this.options = options
+  }
+  apply(compiler) {
+    // Tap into compilation hook which gives compilation as argument to the callback function
+    compiler.hooks.compilation.tap("DemoPlugin", compilation => {
+      // Now we can tap into various hooks available through compilation
+      compilation.hooks.optimize.tap("DemoPlugin", () => {
+        console.log('Assets are being optimized.')
+      })
+    })
+  } 
+}
+```
+
+> [[手把手用代码教你实现一个 webpack plugin](https://segmentfault.com/a/1190000021214520)]
+
+### 13.2 何为loader
+
+loader 用于对模块的源代码进行转换。loader 可以使你在 import 或"加载"模块时预处理文件。
+
+loader特点:
+单一原则, 一个loader只做一件事情
+多个loader会按照从右至左, 从下至上的顺序执行
+
+插件（plugin）是 webpack 的支柱功能。用于扩展webpack的功能。当然loader也是变相的扩展了webpack ，但是它只专注于转化文件这一个领域。而plugin的功能更加的丰富，而不仅局限于资源的加载。一个插件就是一个类，可以在打包过程中的特定阶段执行。
+**从作用角度简单来讲**：loader帮助我们**加载文件资源**，而plugins则是loader的**延伸**，并不限制于加载文件资源。丰富了loader的功能。
+
+```js
+const loaderUtils = require('loader-utils');
+module.exports = function(source) {
+  // 获取到用户给当前 Loader 传入的 options
+  const options = loaderUtils.getOptions(this);
+  // 关闭该 Loader 的缓存功能
+  this.cacheable(false);
+  return source;
+};
+```
+
+> [手把手教你写一个 Webpack Loader](https://segmentfault.com/a/1190000018980814)
+
+### 14.如果有一个工程打包特别大，如何进行优化?
+
++ 1.首先排查打包环节，使用 webpack 插件 [speed-measure-webpack-plugin](https://link.zhihu.com/?target=https%3A//github.com/stephencookdev/speed-measure-webpack-plugin) 查看在打包中各个阶段的耗时;分析依赖打包情况可以使用：[webpack-bundle-analyzer](https://link.zhihu.com/?target=https%3A//github.com/webpack-contrib/webpack-bundle-analyzer)；lighthouse、performance、coverage等分析其他资源
+
++ 2.代码压缩，gzip压缩（compression-webpack-plugin ）、css压缩([mini-css-extract-plugin)](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fmini-css-extract-plugin)、js压缩([uglifyjs-webpack-plugin](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fuglifyjs-webpack-plugin)不支持es6,[terser-webpack-plugin](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fwebpack-contrib%2Fterser-webpack-plugin)支持es6)、html压缩([html-webpack-plugin](https://link.juejin.cn/?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fhtml-webpack-plugin%23minification))；nginx压缩（利用 nginx 的 GZip Precompression 模块）、图片压缩(image-webpack-loader,可转为webp)
+
++ 3.移除不必要的模块
+
++ 4.选择可替代的体积较小的模块.比如： 使用day.js代替moment.js
+
++ 5.按需引入模块，如：antd使用esm方式引入，便于tree shaking
+
++ 6.code spliting 按需加载，优化页面首次加载体积
+
++ 7.bundle spliting，在 webpack 中，使用 `splitChunks.cacheGroups`
+
+  ```js
+  module.exports = {
+    //...
+    optimization: {
+      splitChunks: {
+        chunks: 'async',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        automaticNameMaxLength: 30,
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
+    }
+  };
+  ```
+
++ 8.路由懒加载，react-loadable
+
++ 9.使用`DLLPlugin`动态链接库，通过生成配置文件和模块进行建立关联。比如打包react和react-dom需要很长时间，我们可以通过把这两个包提前打包好，使用的时候直接引入这个已经打包好的包就可以了。
+
+  ```js
+  const webpack = require('webpack')
+  const path = require('path')
+  
+  module.exports = {
+    entry: {
+      react: ['react', 'react-dom']
+    },
+    output: {
+      library:  'react',
+      filename: '[name].dll.js'
+    },
+    plugins: [
+      new webpack.DllPlugin({
+        name: 'react',
+        path: path.resolve(__dirname, 'dist/manifest.json')
+      })
+    ]
+  }
+  ```
+
+  
+
++ 10.第三方库使用cdn，不打包
+
+```js
+const AddAssetHtmlCdnWebpackPlugin = require('add-asset-html-cdn-webpack-plugin');
+module.exports = {
+  externals: {
+    'query': '$'
+  },
+  plugins: [
+    new AddAssetHtmlCdnWebpackPlugin(true, {
+      'jquery': 'http://code.jquery.com/jquery-3.4.1.js'
+    })
+  ]
+};
+```
+
+
+
+> + [ 前端高级进阶：如何更好地优化打包资源](https://shanyue.tech/frontend-engineering/bundle.html#%E5%8E%9F%E5%88%99)
+> + [webpack 项目打包优化](https://segmentfault.com/a/1190000022583404)
+> + [前端性能优化——图片篇](https://juejin.cn/post/6965761736083243044#heading-7)
+> + [看看webpack打包优化](https://wuxianqiang.github.io/2019/07/14/webpack/)
+
+
+
+### 15.用户信息存储的方式Cookie、Session、Token
+
+> [ Cookie、Session、Token、JWT详解](https://juejin.cn/post/6844904034181070861)
+
+### 16.React 性能优化的方式
+
++ 使用React.Memo来缓存组件
++ 使用useMemo缓存大量的计算
++ 使用React.PureComponent , shouldComponentUpdate
++ 避免使用内联对象: 使用内联对象时，react会在每次渲染时重新创建对此对象的引用，这会导致接收此对象的组件将其视为不同的对象,因此，该组件对于prop的浅层比较始终返回false,导致组件一直重新渲染。
++ 避免使用匿名函数: 它们在每次渲染上都有不同的引用,类似于内联对象
++ 延迟加载不是立即需要的组件，使用新的React.Lazy和React.Suspense
++ 调整CSS而不是强制组件加载和卸载
++ 使用React.Fragment避免添加额外的DOM
+
+> [React 性能优化 | 包括原理、技巧、Demo、工具使用](https://juejin.cn/post/6935584878071119885#heading-1)
+>
+> + [React性能优化的8种方式了解一下？](https://github.com/Rashomon511/MyBlog/issues/53)
+
+### 17. 实现一个防抖函数
 1.要求初次执行的时候立刻执行
 
 2.可以取消等待
@@ -1853,7 +2441,7 @@ function debounce(fn, wait=200, immediate=true) {
 }
 ```
 
-### 22.1 实现一个节流函数
+### 17.1 实现一个节流函数
 
 1.实现leading和trailing
 
@@ -1920,58 +2508,80 @@ function throttle(fn, wait, {leading = true, trailing = true} = {}) {
 >
 > + [理解并优化函数节流Throttle](https://juejin.cn/post/6844903705763020807#heading-0)
 
-### 23.说出以下代码的输出
+### 18.说出以下代码的输出
 
-\```html
+```HTML
+<div id="box">
+    <button id="anchor">click</button>
+</div>
+```
 
-<body>
-
-  <div id="box">
 
 
-<a href="javascript:console.log(1)" id="anchor">Click</a>
+```js
+var box = document.getElementById('box');
+var anchor = document.getElementById('anchor');
 
-  </div>
 
-</body>
-
-\```
-
-\```js
-
-var box = document.getElementById('box')
-
-var anchor = document.getElementById('anchor')
+document.body.addEventListener('click', function() {
+	console.log(1)
+})
 
 anchor.addEventListener('click', function() {
-
-console.log(2)
-
+	console.log(2)
 })
 
 box.addEventListener('click', function() {
-
-console.log(3)
-
-}, true)
+	console.log(3)
+}, true); // 第二个参数默认为： false,表示回调函数发生在冒泡阶段，true-表示回调函数发生在捕获阶段
 
 box.addEventListener('click', function() {
-
-console.log(4)
-
+    console.log(4)
 })
 
-\```
+// 结果： 3 2 4 1
+```
 
-### 24. let a = "abc"，解释器在解释在这句话的过程中，内存发生的变化，比如内存放在哪里，申请了多大的内存
+> [addEventListener之第三个参数 true 和 false 实例展示](https://blog.csdn.net/SunDaDa9/article/details/103693062?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.control)
 
-### 25.介绍一下 esm 和 cjs 的差异
+### 19. let a = "abc"，解释器在解释在这句话的过程中，内存发生的变化，比如内存放在哪里，申请了多大的内存
 
-### 26.介绍一下前端安全问题
 
-### 27.假设有一个页面需要实现下拉无限滚动加载，如何实现和优化
 
-### 28.实现如下这样的函数(**函数柯里化**)
+> + [JS垃圾回收机制](https://blog.csdn.net/qq_39125445/article/details/100190969?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-1.control)
+> + [JavaScript 内存机制](https://blog.csdn.net/weixin_40581980/article/details/81065362?utm_term=JavaScript%E5%86%85%E5%AD%98%E6%8C%87%E9%92%88%E6%98%AF%E4%BB%80%E4%B9%88&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-1-81065362&spm=3001.4430)
+>
+> + [js计算字符串所占字节数](http://www.alloyteam.com/2013/12/js-calculate-the-number-of-bytes-occupied-by-a-string/)
+
+### 20.介绍一下 esm 和 cjs 的差异
+
+1. 使用方式不同；
+2. ESM输出的是`值的引用`，而CJS输出的是`值的拷贝`；
+3. CJS的输出是`运行时加载`，而ESM是`编译时`输出接口；
+4. CJS是`同步加载`，ESM是`异步加载`；
+
+> + [ESM(ESModule)和CJS(CommonJS)的区别](https://juejin.cn/post/6974404976022192141)
+> + [Javascript 中的 CJS, AMD, UMD 和 ESM是什么？](https://juejin.cn/post/6935973925004247077)
+
+### 21.介绍一下前端安全问题
+
++ xss：转义、http only、csp
++ csrf：token、referer检测、验证码、samesite
++ 点击劫持
++ iframe
++ opener
++ cdn劫持
++ sql注入：输入过滤
+
+> + [前端安全问题汇总](https://zhuanlan.zhihu.com/p/83865185)
+> + [常见前端安全问题及解决方案](https://juejin.cn/post/6844903942036389895#heading-8)
+
+### 22.假设有一个页面需要实现下拉无限滚动加载，如何实现和优化
+
+> + [设计无限滚动下拉加载，实践高性能页面真谛](https://segmentfault.com/a/1190000008518315)
+> + [一个简洁、有趣的无限下拉方案](https://juejin.cn/post/6844904009568878600)
+
+### 23.实现如下这样的函数(**函数柯里化**)
 
 ```
 实现如下这样的函数`f()`，要求调用深度不限。(考察点：对 JS 对象化的理解)
@@ -1996,3 +2606,4 @@ function f(...args) {
 
 
 > + [面试回顾(高频问题点)](https://github.com/zhaofeihao/no-cross-no-crown/issues/34)
+> + [ 前端常见面试题总结](https://q.shanyue.tech/fe/)
