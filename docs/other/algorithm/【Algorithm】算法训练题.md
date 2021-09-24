@@ -36,11 +36,393 @@ tags:
 
 ### 10.[最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)
 
+```js
+/**
+ * @param {string} text1
+ * @param {string} text2
+ * @return {number}
+ */
+var longestCommonSubsequence = function(text1, text2) {
+    let len1 = text1.length;
+    let len2 = text2.length;
+
+    let dp = new Array(len1 + 1).fill(0).map(d => new Array(len2 + 1).fill(0));
+
+    for(let i=1; i<=len1; i++) {
+        for(let j=1; j<=len2; j++) {
+            if(text1[i-1] === text2[j-1]) {
+                dp[i][j] = dp[i-1][j-1] + 1;
+            } else {
+                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+
+    return dp[len1][len2];
+};
+```
+
+> [DP Table练习工具](https://alchemist-al.com/algorithms/longest-common-subsequence)
+
 ### 11.[乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)
+
+### 12.[俄罗斯套娃信封问题【排序+最长上升子序列】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Frussian-doll-envelopes%2F)
+
+```js
+
+/**
+ * @param {number[][]} envelopes
+ * @return {number}
+ */
+var maxEnvelopes = function(envelopes) {
+  if (envelopes.length === 1) return 1;
+    // 安左侧升序，相同，安右侧降序
+    // [1,5],[2,5],[2,4], [3,4]
+    envelopes.sort((a, b) => {
+        if (a[0] !== b[0]) return a[0] - b[0];
+        else return b[1] - a[1];
+    });
+    let LISArr = [];
+    for (let [key, value] of envelopes) {
+      LISArr.push(value);
+    }
+    console.log( LISArr);
+    return LIS(LISArr);
+};
+  // 计算最长上升子序列
+function LIS(arr) {
+  let dp = [];
+  let maxAns = 0;
+  for (let i = 0; i < arr.length; i++) {
+    dp[i] = 1;
+  }
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = i; j >= 0; j--) {
+      if (arr[i] > arr[j]) {
+        dp[i] = Math.max(dp[i], dp[j] + 1)
+      }
+      maxAns = Math.max(maxAns, dp[i]);
+    }
+  }
+  return maxAns;
+}
+```
+
+### 13.[最长连续递增序列【快慢指针】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Flongest-continuous-increasing-subsequence%2F)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findLengthOfLCIS = function(nums) {
+    if (nums.length === 0) return 0;
+    const n = nums.length;
+    let left = 0, right = 1;
+    let globalMaxLen = 1, maxLen = 1;
+    while (right < n) {
+        if (nums[right] > nums[left]) maxLen++;
+        else {
+            maxLen = 1;
+        }
+        left++;
+        right++;
+        globalMaxLen = Math.max(globalMaxLen, maxLen);
+    }
+    return globalMaxLen;
+};
+```
+
+### 14.[最长连续序列 【哈希表】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Flongest-consecutive-sequence%2F)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestConsecutive = function(nums) {
+    if (nums.length === 0) return 0;
+    const set = new Set(nums);
+    const n = nums.length;
+    let globalLongest = 1;
+    for (let i = 0; i < n; i++) {
+        if (!set.has(nums[i] - 1)) {
+            let longest = 1;
+            let currentNum = nums[i];
+            while (set.has(currentNum + 1)) {
+                currentNum += 1;
+                longest++;
+            }
+            globalLongest = Math.max(globalLongest, longest);
+        }
+    }
+    return globalLongest;
+};
+```
+
+### 15.[盛最多水的容器【双指针】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fcontainer-with-most-water%2F)
+
+```js
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+    let n = height.length;
+    let left = 0, right = n - 1;
+    let maxOpacity = 0;
+    while (left < right) {
+        let res = Math.min(height[left], height[right]) * (right - left);
+        maxOpacity = Math.max(maxOpacity, res);
+        if (height[left] < height[right]) left++
+        else right--;
+    }
+    return maxOpacity;
+};
+
+```
+
+### 16.[删除有序数组中的重复项【快慢指针】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fremove-duplicates-from-sorted-array%2F)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+  if (nums.length <= 1) return nums.length;
+  let lo = 0, hi = 0;
+  while (hi < nums.length) {
+    while (nums[lo] === nums[hi] && hi < nums.length) hi++;
+    if (nums[lo] !== nums[hi] && hi < nums.length) {
+      lo++;
+      nums[lo] = nums[hi];
+    }
+    hi++;
+  }
+  return lo + 1;
+};
+
+
+```
+
+### 17.[和为K的子数组【哈希表】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fsubarray-sum-equals-k%2F)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var subarraySum = function(nums, k) {
+    let cnt = 0;
+    let sum0_i = 0, sum0_j = 0;
+    let map = new Map();
+    map.set(0, 1);
+    for (let i = 0; i <= nums.length; i++) {
+        sum0_i += nums[i];
+        sum0_j = sum0_i - k;
+        console.log('map', sum0_j, map.get(sum0_j))
+        if (map.has(sum0_j)) {
+            cnt += map.get(sum0_j);
+        }
+        let sumCnt = map.get(sum0_i) || 0;
+        map.set(sum0_i, sumCnt + 1);
+    }
+    return cnt;
+};
+```
+
+### 17.[接雨水【双指针】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Ftrapping-rain-water%2F)
+
+```js
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var trap = function(height) {
+    let ans = 0;
+    let left = 0, right = height.length - 1;
+    let leftMax = 0, rightMax = 0;
+    while (left < right) {
+        leftMax = Math.max(leftMax, height[left]);
+        rightMax = Math.max(rightMax, height[right]);
+        if (height[left] < height[right]) {
+            ans += leftMax - height[left];
+            ++left;
+        } else {
+            ans += rightMax - height[right];
+            --right;
+        }
+    }
+    return ans;
+};
+
+
+```
+
+### 18.[跳跃游戏(贪心)](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fjump-game%2F)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+    let faster = 0;
+    for (let i = 0; i < nums.length - 1; i++) {
+        faster = Math.max(faster, i + nums[i]);
+        if (faster <= i) return false;
+    }
+    return faster >= nums.length - 1;
+};
+```
+
+### 19.[用最少数量的箭引爆气球](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fminimum-number-of-arrows-to-burst-balloons%2F)
+
+```js
+
+/**
+ * @param {number[][]} points
+ * @return {number}
+ */
+var findMinArrowShots = function(points) {
+  if(points.length < 1) return 0;
+
+  points.sort((a,b) => a[0] - b[0]);
+
+  let ans = 1;
+
+  for(let i=1; i<points.length; i++) {
+    if(points[i][0] > points[i-1][1]) {
+      ans++;
+    } else {
+      points[i][1] = Math.min(points[i][1], points[i-1][1])
+    }
+  }
+
+  return ans;
+};
+```
+
+### 20.[合并区间](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fmerge-intervals%2F)
+
+```js
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+  if(intervals.length < 2) return intervals;
+  intervals.sort((a,b) => a[0] - b[0]);
+
+  let ans = [intervals[0]];
+
+  for(let i=1; i<intervals.length; i++) {
+    let last = ans[ans.length - 1];
+    if(last[1] >= intervals[i][0]) {
+      last[1] = Math.max(last[1], intervals[i][1])
+    } else {
+      ans.push(intervals[i])
+    }
+  }
+
+  return ans;
+};
+```
+
+### 21.[在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+```js
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+    const left = leftBound(nums, target);
+    const right = rightBound(nums, target);
+    return [left, right];
+};
+function leftBound(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left <= right) {
+        let mid = Math.floor(left + (right - left) / 2);
+        if (nums[mid] === target) {
+            right = mid - 1;
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else if (nums[mid] > target) {
+            right = mid - 1;
+        }
+    }
+    if (left >= nums.length || nums[left] !== target) {
+        return -1;
+    }
+    return left;
+}
+function rightBound(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left <= right) {
+        let mid = Math.floor(left + (right - left) / 2);
+        if (nums[mid] === target) {
+            left = mid + 1;
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else if (nums[mid] > target) {
+            right = mid - 1;
+        }
+    }
+    if (right < 0 || nums[right] !== target) {
+        return -1;
+    }
+    return right;
+}
+
+
+```
+
+
 
 ## 三、[链表](https://leetcode-cn.com/tag/linked-list/)
 
 ### 1.[反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+    if(!head || !head.next) return head;
+    
+    let next = head.next;
+    let last = reverseList(next);
+    next.next = head;
+    head.next = null;
+    
+    return last;
+}
+```
+
+
 
 ### 2.[反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
 
@@ -49,6 +431,36 @@ tags:
 ### 4.[合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
 ### 5.[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var hasCycle = function(head) {
+    if(!head || !head.next) return false;
+    
+    let slow = head, fast = head;
+    
+    while(fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        
+        if(slow === fatse) return true;
+    }
+    
+    return false;
+}
+```
+
+
 
 ### 6.[环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
@@ -80,6 +492,212 @@ var getIntersectionNode = function(headA, headB) {
 
     return n1;
 
+};
+```
+
+### 8.[合并k个升序链表](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fmerge-k-sorted-lists%2F)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+    if(lists.length === 0) return null;
+    
+    return mergeArr(lists)
+}
+
+// 归并排序
+function mergeArr(lists) {
+    if(lists.length < 2) return lists[0];
+    let index = Math.floor(lists.length / 2);
+    const left = mergeArr(lists.slice(0, index));
+    const right = mergeArr(lists.slice(index));
+    
+    return merge(left, right);
+}
+
+function merge(l1, l2) {
+    if(l1 === null || l2 === null) return l1 || l2;
+    
+    let head = null, newHead = null;
+    
+    while(l1 !== null && l2 !== null) {
+        if(l1.val < l2.val) {
+            if(!head) {
+                head = l1;
+                newHead = l1;
+            } else {
+                newHead.next = l1;
+                newHead = l1;
+            }
+            l1 = l1.next
+        } else {
+            if(!head) {
+                head = l2;
+                newHead = l2;
+            } else {
+                newHead.next = l2;
+                newHead = l2;
+            }
+            l2 = l2.next
+        }
+    }
+    
+    newHead.next = l1 || l2;
+    
+    return head;
+}
+```
+
+### 9.[K个一组翻转链表](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Freverse-nodes-in-k-group%2F)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+var reverseKGroup = function(head, k) {
+    let a = head, b = head;
+    
+    // 先找到第一组k的分界节点
+    for(let i=0; i<k; i++) {
+        if(b===null) return head;
+        b = b.next;
+    }
+    // 翻转head和分界节点之间的节点b（翻转链表）
+    const newHead = reverse(a, b);
+    // 继续翻转b之后的节点
+    a.next = reverseGroup(b, k);
+    return newHead;
+}
+
+// 翻转a,b节点之间的节点
+function reverse(a, b) {
+    let prev = null, cur = a, next;
+    
+    while(cur !== b) {
+        next = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = next;
+    }
+    
+    return prev;
+}
+```
+
+### 10.[排序链表](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fsort-list%2F)
+
+```js
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var sortList = function(head) {
+    if (head == null) return null;
+    let newHead = head;
+    return mergeSort(head);
+};
+function mergeSort(head) {
+    if (head.next != null) {
+        let slower = getCenter(head);
+        let nxt = slower.next;
+        slower.next = null;
+        const left = mergeSort(head);
+        const right = mergeSort(nxt);
+        head = merge(left, right);
+    }
+    return head;
+}
+function merge(left, right) {
+    let newHead = null, head = null;
+    while (left != null && right != null) {
+        if (left.val < right.val) {
+            if (!head) {
+                newHead = left;
+                head = left;
+            } else {
+                newHead.next = left;
+                newHead = newHead.next;
+            }
+            left = left.next;
+        } else {
+            if (!head) {
+                newHead = right;
+                head = right;
+            } else {
+                newHead.next = right;
+                newHead = newHead.next;
+            }
+            right = right.next;
+        }
+    }
+    newHead.next = left ? left : right;
+    return head;
+}
+function getCenter(head) {
+    let slower = head, faster = head.next;
+    while (faster != null && faster.next != null) {
+        slower = slower.next;
+        faster = faster.next.next;
+    }
+    return slower;
+}
+
+```
+
+### 11.[相交链表](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fintersection-of-two-linked-lists%2F)
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    if(!headA || !headB) return null;
+    
+    let a = headA, b = headB;
+    
+    while(a !== b) {
+       a = a === null ? headB : a.next;
+       b = b === null ? headA : b.next;
+    }
+    
+    return a;
 };
 ```
 
@@ -1070,6 +1688,35 @@ var sortedListToBST = function(head) {
 };
 ```
 
+### 19.[搜索树中的 二分查找](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fsearch-in-a-binary-search-tree%2F)
+
+```js
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @return {TreeNode}
+ */
+var searchBST = function(root, val) {
+    if (root == null) return null;
+    if (root.val === val) return root;
+    if (root.val > val) {
+        return searchBST(root.left, val);
+    } else if (root.val < val) {
+        return searchBST(root.right, val);
+    }
+};
+
+
+```
+
 
 
 ## 八、[动态规划](https://leetcode-cn.com/tag/dynamic-programming/)
@@ -1081,6 +1728,29 @@ var sortedListToBST = function(head) {
 ### 3.[滑动窗口中位数](https://leetcode-cn.com/problems/sliding-window-median/)
 
 ### 4.[最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+    if(!nums || !nums.length) return 0;
+    let dp = new Array(nums.length).fill(1);
+    
+    for(let i=0; i<nums.length; i++) {
+        for(let j=i; j>=0; j--) {
+            if(nums[j] < nums[i]) {
+                dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+    
+    return Math.max(...dp)
+}
+```
+
+
 
 ### 5.[剪绳子](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)
 
@@ -1113,6 +1783,33 @@ var sortedListToBST = function(head) {
 ### 19.[岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
 
 ### 20.[零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+
+```js
+
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+  if (amount === 0) return 0;
+  let dp = [];
+  for (let i = 0; i <= amount; i++) {
+    dp[i] = amount + 1;
+  }
+  dp[0] = 0;
+  for (let i = 0; i <= amount; i++) {
+    for (let j = 0; j < coins.length; j++) {
+      if (i >= coins[j]) {
+        dp[i] = Math.min(dp[i - coins[j]] + 1, dp[i])
+      }
+    }
+  }
+  return dp[amount] > amount ? -1 : dp[amount];
+};
+```
+
+
 
 ### 21.[零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)
 
@@ -1221,4 +1918,154 @@ function strMul(a, b) {
     
     return arr.slice(i).join('') || '0';
 }
+```
+
+### 4.[最长回文子串](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Flongest-palindromic-substring%2F)
+
+```js
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    if(s.length < 2) return s;
+    let ans = '', max = 0;
+    
+    for(let i=0; i<s.length; i++) {
+        let str1 = palindrome(s, i, i);
+        let str2 = palindrom(s, i, i+1);
+        ans = max < str1.length ? (str1.length < str2.length ? str2 : str1) : ans;
+        max = Math.max(max, str1.length, str2.length);
+    }
+}
+
+function palindrome(s, l, r) {
+    while(l >= 0 && r<s.length && s[l]===s[r]) {
+        l--;
+        r++;
+    }
+    
+    return s.slice(1+1, r);
+}
+```
+
+### 5.[最长公共前缀](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Flongest-common-prefix%2F)
+
+```js
+
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    if (strs.length === 0) return "";
+    let first = strs[0];
+    if (first === "") return "";
+    let minLen = Number.MAX_SAFE_INTEGER;
+    for (let i = 1; i < strs.length; i++) {
+        const len = twoStrLongestCommonPrefix(first, strs[i]);
+        minLen = Math.min(len, minLen);
+    }
+    return first.slice(0, minLen);
+};
+function twoStrLongestCommonPrefix (s, t) {
+    let i = 0, j = 0;
+    let cnt = 0;
+    while (i < s.length && j < t.length) {
+        console.log(s[i], t[j], cnt)
+        if (s[i] === t[j])  {
+            cnt++;
+        } else {
+            return cnt;
+        }
+        i++;
+        j++;
+    }
+    return cnt;
+}
+```
+
+### 6.[无重复字符的最长子串](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Flongest-substring-without-repeating-characters%2F)
+
+```js
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  let window = {};
+  let left = 0, right = 0;
+  let maxLen = 0, maxStr = '';
+  while (right < s.length) {
+    let c = s[right];
+    right++;
+    if (window[c]) window[c]++;
+    else window[c] = 1
+    while (window[c] > 1) {
+      let d = s[left];
+      left++;
+      window[d]--;
+    }
+    if (maxLen < right - left) {
+      maxLen = right - left;
+    }
+  }
+  return maxLen;
+};
+```
+
+### 7.[ 最小覆盖子串【滑动窗口】](https://link.juejin.cn/?target=https%3A%2F%2Fleetcode-cn.com%2Fproblems%2Fminimum-window-substring%2F)
+
+```js
+
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function(s, t) {
+    let need = {}, window = {};
+    // 1.记录需要的字符数
+    for (let c of t) {
+        if (!need[c]) need[c] = 1;
+        else need[c]++;
+    }
+    // 双指针
+    let left = 0, right = 0;
+    // 记录需要的数量
+    let valid = 0, len = Object.keys(need).length;
+    // 记录结果
+    let minLen = s.length + 1, minStr = '';
+    // right指针先走
+    while (right < s.length) {
+        const d = s[right];
+        right++;
+        if (!window[d]) window[d] = 1;
+        else window[d]++;
+        // 2.记录达标的数量
+        if (need[d] && need[d] === window[d]) {
+            valid++;
+        }
+        console.log('left - right', left, right);
+        // 3.直到刚好满足需求
+        while (valid === len) {
+            // 更新结果
+            if (right - left < minLen) {
+                minLen = right - left;
+                minStr = s.slice(left, right);
+            }
+            console.lo
+            // 4.缩小范围
+            let c = s[left];
+            left++;
+            window[c]--;
+            if (need[c] && window[c] < need[c]) {
+                valid--;
+            }
+        }
+    }
+    return minStr;
+};
 ```
