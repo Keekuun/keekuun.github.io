@@ -1,5 +1,5 @@
 ---
-title: 【Algorithm】算法训练题
+title: Leetcode高频题
 sidebar: auto
 date: 2021-08-01
 categories:
