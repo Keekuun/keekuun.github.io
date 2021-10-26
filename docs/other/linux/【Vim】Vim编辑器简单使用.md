@@ -8,5 +8,6 @@ tags:
 - Vim
 ---
 
-[Vim 修行之路](https://harttle.land/vim-practice.html)
++ [Vim 编辑器操作](https://juejin.cn/post/6938385978004340744#heading-163)
++ [Vim 修行之路](https://harttle.land/vim-practice.html)
 

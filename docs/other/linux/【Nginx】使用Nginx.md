@@ -8,5 +8,5 @@ tags:
 
 ---
 
-## 1. 使用Nginx
+> [Nginx 从入门到实践](https://juejin.cn/post/6844904144235413512)
 
