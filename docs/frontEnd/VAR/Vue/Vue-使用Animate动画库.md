@@ -75,7 +75,7 @@ const vm = new Vue({
 ```
 
 + 3.定义`CSS`动画，使用特殊的类名
-```css3
+```css
 /* 定义动画：.name属性-。。。*/
 .v-enter-active,
 .v-leave-active {

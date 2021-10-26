@@ -879,7 +879,7 @@ module.exports = function(source) {
 
 ### 6.5 使用loader-runner调试raw-loader
 
-```cmd
+```shell
 node run-loader.js
 ```
 
