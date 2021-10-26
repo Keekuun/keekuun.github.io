@@ -9,6 +9,8 @@ tags:
 
 ## 1. Linux常用命令
 
+> [2万字系统总结，带你实现 Linux 命令自由？](https://juejin.cn/post/6938385978004340744)
+
 ### 1.文档型
 
 + `ls`： 查看文件列表
@@ -85,3 +87,9 @@ tags:
 + `ssh 用户名@地址`：连接远程服务
 
 > [Linux安装Tomcat完整步骤](https://blog.csdn.net/qq_32218457/article/details/79788800?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control)
+> 
+> [对不起，学会这些 Linux 知识后，我有点飘](https://juejin.cn/post/6881755746216706062)
+> 
+> [windows操作](https://juejin.cn/post/7020574670097219621)
+> 
+> [电脑效率工具软件](https://juejin.cn/post/6844903602817859598)

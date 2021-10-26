@@ -93,3 +93,8 @@
 + 考虑读写比，考虑反范式，考虑应用场景
 
 ## 3.3 双向关联的场景及设计原则
+
+
+> [从 SQL 到 MongoDB，这一篇就够了](https://juejin.cn/post/6844904079244656647)
+> [MongoDB快速入门，掌握这些刚刚好！](https://juejin.cn/post/6844904150635921422)
+> [前后端分离 Vue + NodeJS(Koa) + MongoDB，从产品到开发，全栈实践](https://juejin.cn/post/6844903666227347464)
