@@ -71,3 +71,5 @@ rebase过程中也会出现冲突
 > [git cherry-pick 教程](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 > 
 > [Git进阶之cherry-pick、rebase](https://juejin.cn/post/6995350132812152869)
+> 
+> [使用git rebase合并多次commit](https://github.com/zuopf769/how_to_use_git/blob/master/%E4%BD%BF%E7%94%A8git%20rebase%E5%90%88%E5%B9%B6%E5%A4%9A%E6%AC%A1commit.md)
