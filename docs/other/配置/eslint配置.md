@@ -197,7 +197,7 @@ module.exports = {
 
 通过在项目根目录创建一个 `.eslintignore` 文件告诉 ESLint 去忽略特定的文件和目录。`.eslintignore` 文件是一个纯文本文件，其中的每一行都是一个 glob 模式表明哪些路径应该忽略检测。例如，以下将忽略所有的 JavaScript 文件：
 
-```text
+```markdown
 **node_modules/**
 **/*.js
 ```
