@@ -945,10 +945,10 @@
     event-target-shim "^5.0.1"
     miniprogram-api-typings "^2.10.2"
 
-"@moefe/vue-aplayer@^2.0.0-beta.5":
+"@moefe/vue-aplayer@2.0.0-beta.5":
   version "2.0.0-beta.5"
-  resolved "https://registry.npm.taobao.org/@moefe/vue-aplayer/download/@moefe/vue-aplayer-2.0.0-beta.5.tgz#f6bbd1802562e8e30ef9106192008a90bed2a354"
-  integrity sha1-9rvRgCVi6OMO+RBhkgCKkL7So1Q=
+  resolved "https://registry.npmjs.org/@moefe/vue-aplayer/-/vue-aplayer-2.0.0-beta.5.tgz#f6bbd1802562e8e30ef9106192008a90bed2a354"
+  integrity sha512-ytzp4GStzjftuh7H1rIS/ziqwV1FO67iTLSkDxgN0J2bqlO+rBgDDr83Y+pZKBIgRUc30uu/UZHqmE4QiBHHeg==
   dependencies:
     vue "^2.5.17"
 
@@ -8561,6 +8561,11 @@ vue-property-decorator@^9.1.2:
   resolved "https://registry.npm.taobao.org/vue-property-decorator/download/vue-property-decorator-9.1.2.tgz?cache=0&sync_timestamp=1615327572569&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-property-decorator%2Fdownload%2Fvue-property-decorator-9.1.2.tgz#266a2eac61ba6527e2e68a6933cfb98fddab5457"
   integrity sha1-JmourGG6ZSfi5oppM8+5j92rVFc=
 
+vue-router@3.4.5:
+  version "3.4.5"
+  resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.4.5.tgz#d396ec037b35931bdd1e9b7edd86f9788dc15175"
+  integrity sha512-ioRY5QyDpXM9TDjOX6hX79gtaMXSVDDzSlbIlyAmbHNteIL81WIVB2e+jbzV23vzxtoV0krdS2XHm+GxFg+Nxg==
+
 vue-router@^3.4.5:
   version "3.5.1"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.5.1.tgz?cache=0&sync_timestamp=1615477493682&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.5.1.tgz#edf3cf4907952d1e0583e079237220c5ff6eb6c9"
@@ -8692,12 +8697,12 @@ vuepress-plugin-mailchimp@^1.4.1:
     jsonp "^0.2.1"
     query-string "^6.9.0"
 
-vuepress-plugin-meting@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npm.taobao.org/vuepress-plugin-meting/download/vuepress-plugin-meting-0.1.1.tgz#1a407ef9ed0f9c5f19bf2ad5edc6bc56ad7f59d0"
-  integrity sha1-GkB++e0PnF8ZvyrV7ca8Vq1/WdA=
+vuepress-plugin-meting@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npmjs.org/vuepress-plugin-meting/-/vuepress-plugin-meting-0.3.2.tgz#381f21ae79828ba9a3475876c489565d1b2362b2"
+  integrity sha512-4GJNSBJx6suQ3o2jCj+VdkQIxN7L4opz6iH4syYJiqzpndR45iq8QFRRIJ3fLk4BUF6S3dQS7QS/1HywYJsVSg==
   dependencies:
-    "@moefe/vue-aplayer" "^2.0.0-beta.5"
+    "@moefe/vue-aplayer" "2.0.0-beta.5"
 
 vuepress-plugin-nuggets-style-copy@^1.0.3:
   version "1.0.3"
