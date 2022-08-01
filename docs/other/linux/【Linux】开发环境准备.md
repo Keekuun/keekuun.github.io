@@ -69,7 +69,25 @@ tags:
   >
   > [Win10 WSL2 安装Docker](https://www.jianshu.com/p/a20c2d58eaac)
   
-  
+```bash
+# win10安装linux子系统
+
+wsl -o -l # 查看子系统
+
+  NAME            FRIENDLY NAME
+* Ubuntu          Ubuntu
+Debian          Debian GNU/Linux
+kali-linux      Kali Linux Rolling
+openSUSE-42     openSUSE Leap 42
+SLES-12         SUSE Linux Enterprise Server v12
+Ubuntu-16.04    Ubuntu 16.04 LTS
+Ubuntu-18.04    Ubuntu 18.04 LTS
+Ubuntu-20.04    Ubuntu 20.04 LTS
+
+
+# 开始安装
+wsl --install Ubuntu-20.04 
+```
 
 ## 3.linux环境
 
