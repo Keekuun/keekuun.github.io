@@ -1,27 +1,17 @@
-name: Deploy GitHub Pages
-
-# 触发条件：在 push 到 master 分支后
-on:
-  push:
-    branches:
-      - master
-
-# 任务
+name: Build and Deploy
+on: [push]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+        uses: actions/checkout@master
 
-      - name: Build
-        run: npm install && npm run docs:build
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
+      - name: vuepress-deploy
+        uses: jenkey2011/vuepress-deploy@master
+        env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/.vuepress/dist
+          TARGET_REPO: username/repo
+          TARGET_BRANCH: master
+          BUILD_SCRIPT: yarn && yarn build
+          BUILD_DIR: blog/.vuepress/dist/
