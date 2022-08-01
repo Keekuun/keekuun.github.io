@@ -74,7 +74,7 @@ module.exports = {
         server: "netease",
         // 读取歌单
         type: "playlist",
-        mid: "7604629",
+        mid: "7375263",
         // 不配置该项的话不会出现全局播放器
         aplayer: {
             // 吸底模式

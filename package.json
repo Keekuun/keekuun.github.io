@@ -41,10 +41,13 @@
     "vuepress-plugin-dynamic-title": "^1.0.0",
     "vuepress-plugin-export": "^0.2.0",
     "vuepress-plugin-flowchart": "^1.4.3",
-    "vuepress-plugin-meting": "^0.1.1",
+    "vuepress-plugin-meting": "^0.3.2",
     "vuepress-plugin-nuggets-style-copy": "^1.0.3",
     "vuepress-plugin-ribbon": "0.0.4",
     "vuepress-plugin-thirdparty-search": "^1.0.2",
     "vuepress-theme-reco": "^1.6.6"
+  },
+  "dependencies": {
+    "vue-router": "3.4.5"
   }
 }
