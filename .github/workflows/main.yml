@@ -20,8 +20,8 @@ jobs:
         run: npm install && npm run docs:build
 
       - name: Deploy
-        uses: zkkysqs/blog@master
+        uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: master
           FOLDER: docs/.vuepress/dist
