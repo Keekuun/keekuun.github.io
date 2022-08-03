@@ -579,7 +579,7 @@ module.exports = {
 使用`optimize-css-assets-webpack-plugin`并同时使用`cssnano`。
 
 ```js
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-goImg-webpack-plugin');
 module.exports = {
     ...
     output: {
@@ -598,7 +598,7 @@ module.exports = {
 安装依赖：
 
 ```sh
-yarn add optimize-css-assets-webpack-plugin -D
+yarn add optimize-css-goImg-webpack-plugin -D
 yarn add cssnano -D
 ```
 
@@ -626,7 +626,7 @@ webpack4.x内置了`uglifyjs-webpack-plugin`
 const path = require('path');
 // css压缩
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-goImg-webpack-plugin');
 // html压缩
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
