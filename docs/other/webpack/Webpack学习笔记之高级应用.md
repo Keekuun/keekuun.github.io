@@ -1210,7 +1210,7 @@ module.exports = merge(baseConfig, devConfig);
   
   const webpack = require('webpack');
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-  const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+  const OptimizeCSSAssetsPlugin = require('optimize-css-goImg-webpack-plugin');
   const cssnano =require('cssnano');
   const merge = require('webpack-merge');
   // 导入webpack.base.js
@@ -1271,7 +1271,7 @@ module.exports = merge(baseConfig, devConfig);
   
   const webpack = require('webpack');
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-  const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+  const OptimizeCSSAssetsPlugin = require('optimize-css-goImg-webpack-plugin');
   const cssnano =require('cssnano');
   const merge = require('webpack-merge');
   // 导入webpack.base.js

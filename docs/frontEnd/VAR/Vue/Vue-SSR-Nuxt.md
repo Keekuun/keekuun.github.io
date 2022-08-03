@@ -388,7 +388,7 @@ var env = createEnv("views", {
  PS：如果使用 scss 需要安装依赖 `npm install --save-dev node-sass sass-loader`
 
  ```css
- /* assets/css/normailze.css */
+ /* goImg/css/normailze.css */
  html{
      color:red;
  }
@@ -396,7 +396,7 @@ var env = createEnv("views", {
 
  ```js
  // nuxt.config.js
- css:['~assets/css/normailze.css']
+ css:['~goImg/css/normailze.css']
  ```
 
 **3. 配置 pngack 的 loader **
@@ -408,7 +408,7 @@ var env = createEnv("views", {
  build: {
      transpile: [/^element-ui/],
      extend (config, { isDev, isClient }) {
-       // 音频文件 file-loader 处理，使用 <audio :src="require('@/assets/water.mp3')" controls</audio 快速调用
+       // 音频文件 file-loader 处理，使用 <audio :src="require('@/goImg/water.mp3')" controls</audio 快速调用
        config.module.rules.push({
          test: /\.(ogg|mp3|wav|mpe?g)$/i,
          loader: 'file-loader',
@@ -603,7 +603,7 @@ var env = createEnv("views", {
  然后在 nuxt.config.js 里加入一个全局的 css 文件就可以了
 
  ```js
- css:['assets/css/main.css']
+ css:['goImg/css/main.css']
  ```
 
  这时候在页面切换的时候就会有2秒钟的动画切换效果了，但是你会发现一些页面是没有效果的，这是因为你没有是`<nuxt-link`组件来制作跳转链接，注意使用 a 标签跳转是没有动画的，这个是为什么呢？

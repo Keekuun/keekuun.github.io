@@ -1,5 +1,6 @@
 const secretKeyConfig = require('./secretKeyConfig.js');
 module.exports = {
+    'vuepress-plugin-baidu-autopush':{},
     "vuepress-plugin-auto-sidebar": {},
     // 进度条
     '@vuepress/nprogress': true,
@@ -74,7 +75,7 @@ module.exports = {
         server: "netease",
         // 读取歌单
         type: "playlist",
-        mid: "7375263",
+        mid: "2073863627",
         // 不配置该项的话不会出现全局播放器
         aplayer: {
             // 吸底模式
@@ -122,6 +123,7 @@ module.exports = {
         //     bottom: '70px',
         // },
     },
+    "pinyin-urls": {},
     // 广告通知 https://vuepress-theme-reco.recoluan.com/views/plugins/bulletinPopover.html#loader-wrapper
     // '@vuepress-reco/vuepress-plugin-bulletin-popover': {
     //     title: '迁移通知',

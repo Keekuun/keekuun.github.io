@@ -9,9 +9,10 @@ bgImageStyle: {
       color: aliceblue,
 }
 ---
+
 <Meting server="netease"
         type="playlist"
-        mid="7375263"
+        mid="2073863627"
         :lrc-type="3"
         theme="#ff0a87"
         order="random"
