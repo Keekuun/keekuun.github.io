@@ -1,5 +1,5 @@
 ---
-title: 【UniAPP】UniAPP 前端开发框架学习
+title: UniAPP 前端开发框架学习
 sidebar: auto
 isComment: true
 categories: 
