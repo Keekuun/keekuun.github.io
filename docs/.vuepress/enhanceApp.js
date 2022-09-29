@@ -5,5 +5,4 @@ export default ({
                     siteData // 站点元数据
                 }) => {
     // ...做一些其他的应用级别的优化
-    console.log('每一个不曾起舞的日子，都是对生命的辜负！')
 }

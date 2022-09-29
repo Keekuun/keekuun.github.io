@@ -1,5 +1,5 @@
 ---
-title: 【Vue】Vue Nuxt SSR
+title: Vue Nuxt SSR
 categories: 
 - Vue
 - 前端

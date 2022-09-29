@@ -1,5 +1,5 @@
 ---
-title: 【目录】Node学习笔记
+title: Node学习笔记
 sidebar: false
 isComment: false
 categories: 

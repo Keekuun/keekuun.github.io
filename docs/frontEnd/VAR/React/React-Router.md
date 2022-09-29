@@ -1,5 +1,5 @@
 ---
-title: 【React】React Router
+title: React Router
 date: 2019-11-20
 sidebar: auto
 categories: 
