@@ -1,5 +1,5 @@
 ---
-title: 【React】React-JSX
+title: React-JSX
 date: 2019-11-12
 sidebar: auto
 categories: 
