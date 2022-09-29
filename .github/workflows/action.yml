@@ -1,6 +1,6 @@
 name: release docs CI
 
-on: 
+on:
   push:
     branches:
       - master
@@ -22,7 +22,7 @@ jobs:
 
       - name: 步骤：第二步 -> 安装依赖
         run: |
-          yarn install
+          yarn install && export NODE_OPTIONS=--max_old_space_size=10240
           yarn run docs:build
         env:
           CI: true
@@ -33,4 +33,4 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs/.vuepress/dist
           CNAME: docs.zkkysqs.top
-        uses: veaba/vuepress-actions@v0.83 
+        uses: veaba/vuepress-actions@v0.83
