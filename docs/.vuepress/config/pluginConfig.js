@@ -44,13 +44,7 @@ module.exports = {
     },
     // 标签加强
     'vuepress-plugin-boxx': true,
-    // 代码复制弹窗插件
-    'vuepress-plugin-nuggets-style-copy': {
-        copyText: "复制",
-        tip: {
-            content: "复制成功!"
-        }
-    },
+    'vuepress-plugin-code-copy': true,
     'thirdparty-search': {
         thirdparty: [
             // 可选，默认 []
@@ -124,6 +118,15 @@ module.exports = {
         // },
     },
     "pinyin-urls": {},
+    // fix bug: https://github.com/mqyqingfeng/Blog/issues/272
+    '@vuepress/last-updated': {
+        transformer: (timestamp, lang) => {
+            return new Date(timestamp).toLocaleDateString();
+        }
+    },
+    "sitemap": {
+        hostname: 'https://docs.zkkysqs.top'
+    },
     // 广告通知 https://vuepress-theme-reco.recoluan.com/views/plugins/bulletinPopover.html#loader-wrapper
     // '@vuepress-reco/vuepress-plugin-bulletin-popover': {
     //     title: '迁移通知',
