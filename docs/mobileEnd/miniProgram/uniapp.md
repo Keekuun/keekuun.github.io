@@ -1,5 +1,5 @@
 ---
-title: UniAPP 前端开发框架学习
+title: UniAPP学习
 sidebar: auto
 isComment: true
 categories: 
