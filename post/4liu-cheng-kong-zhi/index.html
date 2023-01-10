@@ -1,0 +1,319 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4、流程控制 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="4、流程控制 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 流程控制之-条件语句
+1.1 判断语句 if
+if判断示例：
+// 初始化与判断写在一起： if a := 10; a == 10
+if i == '3' {			
+}
+
+if的特殊写法：
+if err := Connect(); er..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              4、流程控制
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-流程控制之-条件语句">一 流程控制之-条件语句</h2>
+<h4 id="11-判断语句-if">1.1 判断语句 if</h4>
+<p><code>if</code>判断示例：</p>
+<pre><code class="language-go">// 初始化与判断写在一起： if a := 10; a == 10
+if i == '3' {			
+}
+</code></pre>
+<p><code>if</code>的特殊写法：</p>
+<pre><code class="language-go">if err := Connect(); err != nil {         // 这里的 err!=nil 才是真正的if判断表达式
+}
+</code></pre>
+<h4 id="12-分支语句-switch">1.2 分支语句 switch</h4>
+<p>示例：</p>
+<pre><code class="language-go">switch num {
+   case 1:                          // case 中可以是表达式
+      fmt.Println(&quot;111&quot;)
+   case 2:
+      fmt.Println(&quot;222&quot;)
+   default:
+      fmt.Println(&quot;000&quot;)
+}
+</code></pre>
+<p>贴士：</p>
+<ul>
+<li>Go保留了<code>break</code>，用来跳出switch语句，上述案例的分支中默认就书写了该关键字</li>
+<li>Go也提供<code>fallthrough</code>，代表不跳出switch，后面的语句无条件执行</li>
+</ul>
+<h2 id="二-流程控制之-循环语句">二 流程控制之-循环语句</h2>
+<h4 id="21-for循环">2.1 for循环</h4>
+<p>Go只支持for一种循环语句，但是可以对应很多场景：</p>
+<pre><code class="language-go">// 传统的for循环
+for init;condition;post{
+}
+
+// for循环简化
+var i int
+for ; ; i++ {
+   if(i &gt; 10){
+      break;
+   }
+}
+
+// 类似while循环
+for condition {}
+
+// 死循环
+for{
+}
+
+// for range:一般用于遍历数组、切片、字符串、map、管道
+for k, v := range []int{1,2,3} {
+}
+
+</code></pre>
+<h4 id="22-跳出循环">2.2 跳出循环</h4>
+<p>常用的跳出循环关键字：</p>
+<ul>
+<li><code>break</code>用于函数内跳出当前<code>for</code>、<code>switch</code>、<code>select</code>语句的执行</li>
+<li><code>continue</code>用于跳出<code>for</code>循环的本次迭代。</li>
+<li><code>goto</code>可以退出多层循环</li>
+</ul>
+<p>break跳出循环案例(continue同下)：</p>
+<pre><code class="language-go">OuterLoop:
+   for i := 0; i &lt; 2; i++ {
+      for j := 0; j &lt; 5; j++ {
+         switch j {
+            case 2:
+               fmt.Println(i,j)
+               break OuterLoop
+            case 3:
+               fmt.Println(i,j)
+               break OuterLoop
+         }
+      }
+   }
+
+</code></pre>
+<p>goto跳出多重循环案例：</p>
+<pre><code class="language-go">for x:=0; x&lt;10; x++ {
+ 
+   for y:=0; y&lt;10; x++ {
+
+        if y==2 {
+            goto breakHere
+         }
+   }
+   
+}
+breakHere:
+   fmt.Println(&quot;break&quot;)
+</code></pre>
+<p>贴士：goto也可以用来统一错误处理。</p>
+<pre><code class="language-go">if err != nil {
+   goto onExit
+}
+onExit:
+   fmt.Pritln(err)
+   exitProcess()
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B9%8B-%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5">一 流程控制之-条件语句</a><br>
+*
+<ul>
+<li><a href="#11-%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5-if">1.1 判断语句 if</a></li>
+<li><a href="#12-%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5-switch">1.2 分支语句 switch</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E4%B9%8B-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5">二 流程控制之-循环语句</a><br>
+*
+<ul>
+<li><a href="#21-for%E5%BE%AA%E7%8E%AF">2.1 for循环</a></li>
+<li><a href="#22-%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF">2.2 跳出循环</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/san-shu-ju-lei-xing-fen-lei/">
+              <h3 class="post-title">
+                3、数据类型分类
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

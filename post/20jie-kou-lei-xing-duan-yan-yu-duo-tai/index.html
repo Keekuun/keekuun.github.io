@@ -1,0 +1,353 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>20、接口类型-断言与多态 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="20、接口类型-断言与多态 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 断言
+接口是编程的规范，他也可以作为函数的参数，以让函数更具备适用性。在下列示例中，有三个接口动物接口、飞翔接口、游泳接口，两个实现类鸟类与鱼类：
+
+鸟类：实现了动物接口，飞翔接口
+鱼类：实现了动物接口，游泳接口
+
+package ma..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              20、接口类型-断言与多态
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-断言">一 断言</h2>
+<p>接口是编程的规范，他也可以作为函数的参数，以让函数更具备适用性。在下列示例中，有三个接口动物接口、飞翔接口、游泳接口，两个实现类鸟类与鱼类：</p>
+<ul>
+<li>鸟类：实现了动物接口，飞翔接口</li>
+<li>鱼类：实现了动物接口，游泳接口</li>
+</ul>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+// 定义一个通用接口：动物接口
+type Animal interface {
+	Breath()			// 动物都具备 呼吸方法
+}
+
+type Flyer interface {
+	Fly()
+}
+type Swimer interface {
+	Swim()
+}
+
+// 定义一个鸟类：其呼吸的方式是在陆地
+type Bird struct {
+	Name string
+	Food string
+	Kind string
+}
+func (b *Bird) Breath() {
+	fmt.Println(&quot;鸟 在 陆地 呼吸&quot;)
+}
+func (b *Bird) Fly() {
+	fmt.Printf(&quot;%s 在 飞\n&quot;, b.Name)
+}
+
+// 定义一个鱼类：其呼吸方式是在水下
+type Fish struct {
+	Name string
+	Kind string
+}
+func (f *Fish) Breath() {
+	fmt.Println(&quot;鱼 在 水下 呼吸&quot;)
+}
+func (f *Fish) Swim() {
+	fmt.Printf(&quot;%s 在游泳\n&quot;, f.Name)
+}
+
+// 一个普通函数，参数是动物接口
+func Display(a Animal) {
+	// 直接调用接口中的方法
+	a.Breath()
+	// 调用实现类的成员：此时会报错
+	fmt.Println(a.Name)
+}
+
+func main() {
+	var b = &amp;Bird{
+		&quot;斑鸠&quot;,
+		&quot;蚂蚱&quot;,
+		&quot;鸟类&quot;
+	}
+	Display(b)
+}
+</code></pre>
+<p>接口类型无法直接访问其具体实现类的成员，需要使用断言（type assertions），对接口的类型进行判断，类型断言格式：</p>
+<pre><code class="language-go">t := i.(T)			//不安全写法：如果i没有完全实现T接口的方法，这个语句将会触发宕机
+t, ok := i.(T)		// 安全写法：如果接口未实现接口，将会把ok掷为false，t掷为T类型的0值
+</code></pre>
+<ul>
+<li>i代表接口变量</li>
+<li>T代表转换的目标类型</li>
+<li>t代表转换后的变量</li>
+</ul>
+<p>上述案例的Dsiplay就可以书写为：</p>
+<pre><code class="language-go">func Display(a Animal) {
+	// 直接调用接口中的方法
+	a.Breath()
+	// 调用实现类的成员：此时会报错
+	instance, ok := a.(*Bird)	// 注意：这里必须是 *Bird类型，因为是*Bird实现了接口，不是Bird实现了接口
+	if ok {
+		// 得到了具体的实现类，才能访问实现类的成员
+		fmt.Println(&quot;该鸟类的名字是：&quot;, instance.Name)
+	} else {
+		fmt.Println(&quot;该动物不是鸟类&quot;)
+	}
+}
+</code></pre>
+<h2 id="二-接口类型转换">二 接口类型转换</h2>
+<p>在接口定义时，其类型已经确定，因为接口的本质是方法签名的集合，如果两个接口的方法签名集合相同（顺序可以不同），则这2个接口之间不需要强制类型转换就可以相互赋值，因为go编译器在校验接口是否能赋值时，比较的是二者的方法集。</p>
+<p>在上一节中，函数Display接收的是Animal接口类型，在断言后转换为了别的类型：*Bird(实现类指针类型)：</p>
+<pre><code class="language-go">func Display(a Animal) {
+	instance, ok := a.(*Bird)		// 动物接口转换为了 *Bird实现类
+	if ok {
+		// 得到了具体的实现类，才能访问实现类的成员
+		fmt.Println(&quot;该鸟类的名字是：&quot;, instance.Name)
+	} else {
+		fmt.Println(&quot;该动物不是鸟类&quot;)
+	}
+}
+</code></pre>
+<p>其实，断言还可以将接口转换成另外一个接口：</p>
+<pre><code class="language-go">func Display(a Animal) {
+	instance, ok := a.(Flyer)			// 动物接口转换为了飞翔接口
+	if ok {
+		instance.Fly()
+	} else {
+		fmt.Println(&quot;该动物不会飞&quot;)
+	}
+
+}
+</code></pre>
+<p>一个实现类往往实现了很多接口，为了精准类型查询，可以使用switch语句来判断对象类型：</p>
+<pre><code class="language-go">var v1 interfaceP{} = ...
+switch v := v1.(type) {
+	case int:
+	case string:
+	...
+}
+</code></pre>
+<h2 id="三-多态">三 多态</h2>
+<p>多态是面向对象的三大特性之一，即一个类型具备多种具体的表现形式。</p>
+<p>上述示例中，鸟和鱼都实现了动物接口的 Breath方法，即动物的Breath方法在鸟和鱼中具备不同的体现。我们在new出动物的具体对象实例时，这个对象实例也就实现了对应自己的接口方法。</p>
+<pre><code class="language-go">// New出Animal的函数
+func NewAnimal(kind string) Animal{
+
+	switch kind {
+	case &quot;鸟类&quot;:
+		return &amp;Bird{}
+	case &quot;鱼类&quot;:
+		return &amp;Fish{}
+	default:
+		return nil
+	}
+
+}
+
+func main() {
+	// 获取的是动物接口类型，但是实现类是鸟类
+	a1 := NewAnimal(&quot;鸟类&quot;)
+	a1.Breath()		// 鸟 在 陆地 呼吸
+
+	// 获取的是动物接口类型，但是实现类是鱼类
+	a2 := NewAnimal(&quot;鱼类&quot;)
+	a2.Breath()		// 鱼 在 水下 呼吸
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E6%96%AD%E8%A8%80">一 断言</a></li>
+<li><a href="#%E4%BA%8C-%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">二 接口类型转换</a></li>
+<li><a href="#%E4%B8%89-%E5%A4%9A%E6%80%81">三 多态</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/19jie-kou-lei-xing-jie-kou-de-shi-yong/">
+              <h3 class="post-title">
+                19、接口类型-接口的使用
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

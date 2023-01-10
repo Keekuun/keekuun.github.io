@@ -1,0 +1,397 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>17、面向对象-构造函数与方法 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="17、面向对象-构造函数与方法 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 面向对象初识
+1.1 模拟构造函数
+Go和传统的面向对象语言如Java有着很大区别。结构体没有构造函数初始化功能，可以通过以下方式模拟：
+package main
+
+import (
+	&quot;fmt&quot;
+)
+
+type P..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              17、面向对象-构造函数与方法
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-面向对象初识">一 面向对象初识</h2>
+<h4 id="11-模拟构造函数">1.1 模拟构造函数</h4>
+<p>Go和传统的面向对象语言如Java有着很大区别。结构体没有构造函数初始化功能，可以通过以下方式模拟：</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+)
+
+type Person struct {
+	Name string
+	Age int
+}
+
+func NewPersonByName(name string) *Person {
+	return &amp;Person{
+		Name: name,
+	}
+}
+
+func NewPersonByAge(age int) *Person {
+	return &amp;Person{
+		Age: age,
+	}
+}
+
+func main() {
+
+	p := NewPersonByName(&quot;zs&quot;)
+	fmt.Println(p)						// {zs 0}
+
+}
+</code></pre>
+<p>贴士：因为Go没有函数重载，为了避免函数名字冲突，使用了<code>NewPersonByName</code>和<code>NewPersonByAge</code>两个不同的函数表示不同的<code>Person</code>构造过程。</p>
+<h4 id="12-父子关系结构体初始化">1.2 父子关系结构体初始化</h4>
+<p>Person可以看做父类，Student是子类，子类需要继承父类的成员：</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+)
+
+type Person struct {
+	Name string
+	Age int
+}
+
+type Student struct {
+	Person
+	ClassName string
+}
+
+//构造父类
+func NewPerson(name string, age int) *Person {
+	return &amp;Person{
+		Name: name,
+		Age: age,
+	}
+}
+
+//构造子类
+func NewStudent(classname string) *Student {
+	p := &amp;Student{}
+	p.ClassName = classname
+	return p
+}
+
+
+func main() {
+
+	s := NewStudent(&quot;一班&quot;)
+	fmt.Println(s)						// &amp;{{ 0} 一班}
+
+}
+</code></pre>
+<h4 id="13-go中的面向对象初识">1.3 Go中的面向对象初识</h4>
+<p>在Go中，可以给任意类型（除了指针）添加相应方法：</p>
+<pre><code class="language-go">type Interger int
+
+func (i Interger) Less (j Interger) bool {
+	return i &lt; j
+}
+
+func main() {
+	var i Interger = 1
+	fmt.Print(i.Less(5))
+}
+</code></pre>
+<h2 id="二-方法">二 方法</h2>
+<h4 id="21-方法">2.1 方法</h4>
+<p>Golang 中的方法是作用在指定的数据类型上的(即:和指定的数据类型绑定)，因此自定义类型，都可以有方法，而不仅仅是 struct。</p>
+<p>方法的声明和调用：</p>
+<pre><code class="language-go">func (recevier type) methodName(参数列表) (返回值列表){ 
+    //方法体
+    return 返回值
+}
+</code></pre>
+<p>方法与函数的示例：</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+)
+
+type Person struct {
+	Name string
+	Age int
+}
+
+// 一个run函数
+func run(p *Person, name string) {
+	p.Name = name
+	fmt.Println(&quot;函数 run...&quot;, p.Name)
+}
+
+// 一个run方法
+func (p *Person)run() {
+	fmt.Println(&quot;方法 run...&quot;, p.Name)
+}
+
+func main() {
+
+	// 实例化一个对象（结构体）
+	p1 := &amp;Person{
+		&quot;ruyue&quot;,
+		10,
+	}
+
+	// 执行一个普通方法
+	run(p1, &quot;张三&quot;)			// 输出 函数 run... 张三
+
+	// 执行方法
+	p1.run()						// 输出 方法 run... 张三
+
+}
+</code></pre>
+<h4 id="22-go方法本质">2.2 Go方法本质</h4>
+<p>Go的方法是一种作用于特定类型变量的函数，这种特定类型的变量叫做接收器（Receiver）。如果特定类型理解为结构体或者“类”时，接收器就类似于其他语言的this或者self。</p>
+<p>在Go中，接收器可以是任何类型，不仅仅是结构体，依此我们看出，Go中的方法和其他语言的方法类似，但是Go语言的接收器强调方法的作用对象是实例。</p>
+<p>方法与函数的区别就是：函数没有作用对象。</p>
+<p>指针接收器传入的是 struct 本身，指针接收器可以读写 struct 中的内容，在方法结束后，修改都是有效的。</p>
+<p>非指针接收器传入的是 struct 的 copy 副本，非指针接收器只能读取 struct 中的数据但是不能写入，如果写入的话也只是写入到 struct 的备份中而已。</p>
+<p>示例如下:</p>
+<pre><code class="language-go">package main
+
+import &quot;fmt&quot;
+
+type student struct {
+	age int8
+}
+
+//指针接收器
+func(s *student) ageAdd1() {
+	s.age += 1
+}
+
+//非指针接收器
+func(s student) ageAdd2() {
+	s.age += 1
+}
+
+func main() {
+	student := new(student)
+
+	student.ageAdd1()
+	fmt.Println(student.age) // 1 传入指针，原值 + 1，为 1
+
+	student.ageAdd1()
+	fmt.Println(student.age) // 2 传入指针，原值 + 1，为 2
+
+	student.ageAdd2()
+	fmt.Println(student.age) // 2 传入复制体，复制体 + 1，所以原值还是 2
+}
+</code></pre>
+<p>一般情况下，小对象由于复制时速度较快，适合使用非指针接收器，大对象因为复制性能较低，适合使用指针接收器，此时再接收器和参数之间传递时不进行复制，只传递指针。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E8%AF%86">一 面向对象初识</a><br>
+*
+<ul>
+<li><a href="#11-%E6%A8%A1%E6%8B%9F%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">1.1 模拟构造函数</a></li>
+<li><a href="#12-%E7%88%B6%E5%AD%90%E5%85%B3%E7%B3%BB%E7%BB%93%E6%9E%84%E4%BD%93%E5%88%9D%E5%A7%8B%E5%8C%96">1.2 父子关系结构体初始化</a></li>
+<li><a href="#13-go%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E8%AF%86">1.3 Go中的面向对象初识</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E6%96%B9%E6%B3%95">二 方法</a><br>
+*
+<ul>
+<li><a href="#21-%E6%96%B9%E6%B3%95">2.1 方法</a></li>
+<li><a href="#22-go%E6%96%B9%E6%B3%95%E6%9C%AC%E8%B4%A8">2.2 Go方法本质</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/16bi-bao/">
+              <h3 class="post-title">
+                16、闭包
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

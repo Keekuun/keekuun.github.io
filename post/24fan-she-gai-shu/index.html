@@ -1,0 +1,278 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>24、反射概述 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="24、反射概述 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 反射简介
+反射是指在程序运行期对程序本身进行访问和修改的能力，即可以在运行时动态获取变量的各种信息，比如变量的类型（type），类别（kind），如果是结构体变量，还可以获取到结构体本身的信息（字段与方法），通过反射，还可以修改变量的值..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              24、反射概述
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-反射简介">一 反射简介</h2>
+<p>反射是指在程序运行期对程序本身进行访问和修改的能力，即可以在运行时动态获取变量的各种信息，比如变量的类型（type），类别（kind），如果是结构体变量，还可以获取到结构体本身的信息（字段与方法），通过反射，还可以修改变量的值，可以调用关联的方法。</p>
+<p>反射常用在框架的开发上，一些常见的案例，如JSON序列化时候tag标签的产生，适配器函数的制作等，都需要用到反射。反射的两个常见使用场景：</p>
+<ul>
+<li>不知道函数的参数类型：没有约定好参数、传入类型很多，此时类型不能统一表示，需要反射</li>
+<li>不知道调用哪个函数：比如根据用户的输入来决定调用特定函数，此时需要依据函数、函数参数进行反射，在运行期间动态执行函数</li>
+</ul>
+<p>Go程序的反射系统无法获取到一个可执行文件空间中或者是一个包中的所有类型信息，需要配合使用标准库中对应的词法、语法解析器和抽象语法树( AST) 对源码进行扫描后获得这些信息。</p>
+<p>贴士：</p>
+<ul>
+<li>C，C++没有支持反射功能，只能通过 typeid 提供非常弱化的程序运行时类型信息。</li>
+<li>Java、 C#等语言都支持完整的反射功能。</li>
+<li>Lua、JavaScript类动态语言，由于其本身的语法特性就可以让代码在运行期访问程序自身的值和类型信息，因此不需要反射系统。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>在编译期间，无法对反射代码进行一些错误提示。</li>
+<li>反射影响性能</li>
+</ul>
+<h2 id="二-反射是如何实现的">二 反射是如何实现的</h2>
+<p>反射是通过接口的类型信息实现的，即反射建立在类型的基础上：当向接口变量赋予一个实体类型的时候，接口会存储实体的类型信息。</p>
+<p>Go中反射相关的包是<code>reflect</code>，在该包中，定义了各种类型，实现了反射的各种函数，通过它们可以在运行时检测类型的信息、改变类型的值。</p>
+<p>变量包括type、value两个部分（所以 <code>nil != nil</code> ），type包括两部分：</p>
+<ul>
+<li>static type：在开发时使用的类型，如int、string</li>
+<li>concrete type：是runtime系统使用的类型</li>
+</ul>
+<p>类型能够断言成功，取决于 concrete type ，如果一个reader变量，如果 concrete type 实现了 write 方法，那么它可以被类型断言为writer。</p>
+<p>Go中，反射与interface类型相关，其type是 concrete type，只有interface才有反射！每个interface变量都有一个对应的pair，pair中记录了变量的实际值和类型（value, type）。即一个接口类型变量包含2个指针，一个指向对应的 concrete type ，另一个指向实际的值 value。</p>
+<p>示例：</p>
+<pre><code class="language-go">var r io.Reader				// 定义了一个接口类型
+r, err := os.OpenFile()		// 记录接口的实际类型、实际值
+
+var w io.Writer				// 定义一个接口类型
+w = r.(io.Writer)			// 赋值时，接口内部的pair不变，所以 w 和 r 是同一类型
+</code></pre>
+<h2 id="三-go中反射初识">三 Go中反射初识</h2>
+<h3 id="31-reflect包的两个函数">3.1 reflect包的两个函数</h3>
+<p>reflect 提供了2个重要函数：</p>
+<ul>
+<li>ValueOf()：获取变量的值，即pair中的 value</li>
+<li>TypeOf()：获取变量的类型，即pair中的  concrete type</li>
+</ul>
+<pre><code class="language-go">	type Person struct {
+		Name string
+		Age int
+	}
+	p := Person{ &quot;lisi&quot;, 13}
+
+	fmt.Println(reflect.ValueOf(p))			// {lisi 13}  变量的值
+	fmt.Println(reflect.ValueOf(p).Type())	// main.Person 变量类型的对象名
+
+	fmt.Println(reflect.TypeOf(p))			//  main.Person	变量类型的对象名
+
+	fmt.Println(reflect.TypeOf(p).Name())	// Person:变量类型对象的类型名
+	fmt.Println(reflect.TypeOf(p).Kind())	// struct:变量类型对象的种类名
+
+	fmt.Println(reflect.TypeOf(p).Name() == &quot;Person&quot;)	// true
+	fmt.Println(reflect.TypeOf(p).Kind() == reflect.Struct)	//true
+</code></pre>
+<p>类型与种类的区别：</p>
+<ul>
+<li>Type是原生数据类型： int、string、bool、float32 ，以及 type 定义的类型，对应的反射获取方法是 reflect.Type 中 的 Name()</li>
+<li>Kind是对象归属的品种：Int、Bool、Float32、Chan、String、Struct、Ptr（指针）、Map、Interface、Fune、Array、Slice、Unsafe Pointer等</li>
+</ul>
+<h3 id="32-静态类型与动态类型">3.2 静态类型与动态类型</h3>
+<p>静态类型：变量声明时候赋予的类型</p>
+<pre><code class="language-go">	type MyInt int			// int 是静态类型
+	var i *int				// *int 是静态类型
+</code></pre>
+<p>动态类型：运行时给这个变量赋值时，这个值的类型即为动态类型（为nil时没有动态类型）。</p>
+<pre><code class="language-go">	var A interface{}		// 空接口 是静态类型，必须是接口类型才能实现类型动态变化
+	A = 10					// 此时静态类型为 interface{} 动态为int
+	A = &quot;hello&quot;				// 此时静态类型为 interface{} 动态为string
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%8F%8D%E5%B0%84%E7%AE%80%E4%BB%8B">一 反射简介</a></li>
+<li><a href="#%E4%BA%8C-%E5%8F%8D%E5%B0%84%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84">二 反射是如何实现的</a></li>
+<li><a href="#%E4%B8%89-go%E4%B8%AD%E5%8F%8D%E5%B0%84%E5%88%9D%E8%AF%86">三 Go中反射初识</a>
+<ul>
+<li><a href="#31-reflect%E5%8C%85%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%87%BD%E6%95%B0">3.1 reflect包的两个函数</a></li>
+<li><a href="#32-%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B">3.2 静态类型与动态类型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/23shi-jian-cao-zuo/">
+              <h3 class="post-title">
+                23、时间操作
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,636 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>5.微信小程序组件 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="5.微信小程序组件 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="微信小程序框架为开发者提供了一系列组件，开发者可以通过组合这些组件进行快速开发。
+官方文档
+组件基础概念
+1. 什么是组件？
+
+
+组件是视图层的基本组成单元。
+
+
+组件自带一些功能与微信风格的样式。
+
+
+一个组件通常包括开始标签和结束标签，..." />
+    <meta name="keywords" content="微信小程序" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              5.微信小程序组件
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-10-12
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+                  # 微信小程序
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>微信小程序框架为开发者提供了一系列组件，开发者可以通过组合这些组件进行快速开发。<br>
+<a href="https://developers.weixin.qq.com/miniprogram/dev/component/">官方文档</a></p>
+<h1 id="组件基础概念">组件基础概念</h1>
+<h2 id="1-什么是组件">1. 什么是组件？</h2>
+<ul>
+<li>
+<p>组件是视图层的基本组成单元。</p>
+</li>
+<li>
+<p>组件自带一些功能与微信风格的样式。</p>
+</li>
+<li>
+<p>一个组件通常包括<code>开始标签</code>和<code>结束标签</code>，<code>属性</code>用来修饰这个组件，<code>内容</code>在两个标签之内。</p>
+<pre><code class="language-html">&lt;tagname property=&quot;value&quot;&gt;
+  Content goes here ...
+&lt;/tagename&gt;
+</code></pre>
+<p><strong>注意：所有组件与属性都是小写，以连字符<code>-</code>连接</strong></p>
+</li>
+</ul>
+<h2 id="2-基础组件都有哪些分类">2. 基础组件都有哪些分类？</h2>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/">官方文档</a></p>
+<p>主要包含：视图容器、基础内容、表单组件、导航、媒体组件、地图、画布、开放能力等使用场景</p>
+<h2 id="3-组件共同属性有哪些">3. 组件共同属性有哪些？</h2>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>类型</th>
+<th>描述</th>
+<th>注解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>组件的唯一标示</td>
+<td>保持整个页面唯一</td>
+</tr>
+<tr>
+<td>class</td>
+<td>String</td>
+<td>组件的样式类</td>
+<td>在对应的wxss中定义的样式类</td>
+</tr>
+<tr>
+<td>style</td>
+<td>String</td>
+<td>组件的内联样式</td>
+<td>可以动态设置的内联样式</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>Boolean</td>
+<td>组件是否显示</td>
+<td>所有组件默认显示</td>
+</tr>
+<tr>
+<td>data-*</td>
+<td>Any</td>
+<td>自定义属性</td>
+<td>组件上触发的事件时，会发送给事件处理函数</td>
+</tr>
+<tr>
+<td>bind* / catch*</td>
+<td>EventHandler</td>
+<td>组件的事件</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-单个组件自定义特殊属性">4. 单个组件自定义特殊属性</h2>
+<p>几乎所有组件都有各自定义的属性，可以对该组件的功能或样式进行修饰。</p>
+<p>比如：</p>
+<h3 id="1scroll-view-组件">1.<a href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html">scroll-view 组件</a></h3>
+<pre><code class="language-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;scroll-view 
+    class=&quot;scroll-boxa&quot; 
+    scroll-y=&quot;true&quot;
+    upper-threshold=&quot;50&quot;
+    lower-threshold=&quot;50&quot;
+    scroll-top=&quot;50&quot;
+    bindscrolltoupper=&quot;scrollToUpper&quot;
+    bindscrolltolower=&quot;scrollToLower&quot;
+    bindscroll=&quot;scrollhandle&quot;
+    refresher-enabled=&quot;true&quot;
+    refresher-triggered=&quot;true&quot;
+    refresher-background=&quot;#cba007&quot;
+    bindrefresherpulling=&quot;refresherPulling&quot;
+    &gt; 
+    &lt;view class=&quot;boxa&quot;&gt;第 1 个盒子&lt;/view&gt;
+    &lt;view class=&quot;boxa&quot;&gt;第 2 个盒子&lt;/view&gt;
+    &lt;view class=&quot;boxa&quot;&gt;第 3 个盒子&lt;/view&gt;
+    &lt;view class=&quot;boxa&quot;&gt;第 4 个盒子&lt;/view&gt;
+    &lt;view class=&quot;boxa&quot;&gt;第 5 个盒子&lt;/view&gt;
+    &lt;view class=&quot;boxa&quot;&gt;第 6 个盒子&lt;/view&gt;
+  &lt;/scroll-view&gt;
+  &lt;view style=&quot;padding:80rpx 30rpx;&quot;&gt;{{msg}}&lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="language-js">data: {
+    msg:'滚动状态提示信息'
+  },
+
+  scrollToUpper(){
+    console.log(&quot;滚动到顶部了&quot;)
+    this.setData({
+      msg:'滚动到顶部了'
+    })
+  },
+  scrollToLower(){
+    console.log(&quot;滚动到底部了&quot;)
+    this.setData({
+      msg:'滚动到底部了'
+    })
+  },
+  scrollhandle(event){
+    console.log(event.detail.scrollTop)
+    this.setData({
+      msg:'滚动中，滚动距离为：'+event.detail.scrollTop
+    })
+  },
+  refresherPulling(){
+    console.log(&quot;顶部下拉刷新中...&quot;)
+    this.setData({
+      msg:'顶部下拉刷新中...'
+    })
+  },
+</code></pre>
+<pre><code class="language-css">.container{
+  background: #abcdef;
+}
+.scroll-boxa{
+  width: 100%;
+  height: 800rpx;
+  background: #007cba;
+  color: #fff;
+}
+
+.boxa{
+  width: 80%;
+  height: 300rpx;
+  line-height: 300rpx;
+  text-align: center;
+  margin: 4rpx 10%;
+  background: red;
+}
+</code></pre>
+<h3 id="2使用-cover-view-解决原生组件层级过高问题">2.使用 cover-view 解决原生组件层级过高问题</h3>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/cover-view.html">官方文档</a></p>
+<blockquote>
+<p>覆盖在原生组件之上的文本视图。</p>
+<p>可覆盖的原生组件包括 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">map</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/video.html">video</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/canvas.html">canvas</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/camera.html">camera</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/live-player.html">live-player</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/live-pusher.html">live-pusher</a></p>
+<p>只支持嵌套 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/cover-view.html">cover-view</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/cover-image.html">cover-image</a>，可在 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/cover-view.html">cover-view</a> 中使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/button.html">button</a>。</p>
+</blockquote>
+<pre><code class="language-html">&lt;view class=&quot;container&quot;&gt;
+  &lt;view class=&quot;page-body&quot;&gt;
+    &lt;view class=&quot;page-section page-section-gap&quot;&gt;
+      &lt;map
+        style=&quot;width: 100%; height: 300px;&quot;
+        latitude=&quot;{{latitude}}&quot;
+        longitude=&quot;{{longitude}}&quot;
+      &gt;
+        &lt;cover-view class=&quot;cover-view&quot;&gt;
+          &lt;cover-view class=&quot;container&quot;&gt;
+            &lt;cover-view class=&quot;flex-wrp&quot; style=&quot;flex-direction:row;&quot;&gt;
+              &lt;cover-view class=&quot;flex-item demo-text-1&quot;&gt;&lt;/cover-view&gt;
+              &lt;cover-view class=&quot;flex-item demo-text-2&quot;&gt;&lt;/cover-view&gt;
+              &lt;cover-view class=&quot;flex-item demo-text-3&quot;&gt;&lt;/cover-view&gt;
+            &lt;/cover-view&gt;
+          &lt;/cover-view&gt;
+        &lt;/cover-view&gt;
+      &lt;/map&gt;
+
+      &lt;video 
+        id=&quot;myVideo&quot; 
+        src=&quot;http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&amp;bizid=1023&amp;hy=SH&amp;fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400&quot; 
+        enable-danmu 
+        danmu-btn 
+        show-center-play-btn='{{false}}' 
+        show-play-btn=&quot;{{true}}&quot; 
+        controls
+        style=&quot;width:80%;margin:80rpx 10%;&quot;
+      &gt;&lt;/video&gt;
+
+      &lt;mfooter num=&quot;888&quot; min=&quot;8&quot; /&gt;
+
+    &lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<pre><code class="language-js">Page({
+  onShareAppMessage() {
+    return {
+      title: '自定义分享',
+      path: 'comp/cover-view/index'
+    }
+  },
+
+  data: {
+    latitude: 23.099994,
+    longitude: 113.324520,
+  }
+})
+</code></pre>
+<pre><code class="language-css">.cover-view {
+  position: absolute;
+  top: calc(50% - 150rpx);
+  left: calc(50% - 300rpx);
+  /* opacity: .7; */
+}
+
+.flex-wrp{
+  display:flex;
+}
+
+.flex-item{
+  width: 200rpx;
+  height: 300rpx;
+  font-size: 26rpx;
+}
+
+.demo-text-1 {
+  background: rgba(26, 173, 25, 0.7);
+}
+
+.demo-text-2 {
+  background: rgba(39, 130, 215, 0.7);
+}
+
+.demo-text-3 {
+  background: rgba(255, 255, 255, 0.7);
+}
+</code></pre>
+<pre><code class="language-json">{
+  &quot;usingComponents&quot;: {
+    &quot;mfooter&quot;: &quot;/components/mfooter/index&quot;
+  }
+}
+</code></pre>
+<h3 id="3使用-swiper-组件实现轮播图及左右滑动切换效果">3.使用 swiper 组件实现轮播图及左右滑动切换效果</h3>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html">官方文档</a></p>
+<pre><code class="language-html">&lt;view&gt;
+
+  &lt;swiper 
+    class=&quot;mswiper&quot;
+    indicator-dots=&quot;{{true}}&quot;
+    indicator-color=&quot;#fff&quot;
+    indicator-active-color=&quot;#666&quot;
+    autoplay=&quot;true&quot;
+    current=&quot;0&quot;
+    interval=&quot;2000&quot;
+    duration=&quot;300&quot;
+    display-multiple-items=&quot;1&quot;
+    bindchange=&quot;swiperChange&quot;
+    &gt;
+    &lt;block wx:for=&quot;{{swiperList}}&quot; wx:for-item=&quot;item&quot; wx:for-index=&quot;index&quot; wx:key=&quot;*this&quot;&gt;
+      &lt;swiper-item class=&quot;mswiper-item mswiper-item-{{index}}&quot;&gt;
+        {{item}}
+      &lt;/swiper-item&gt;
+    &lt;/block&gt;
+  &lt;/swiper&gt;
+
+  &lt;view style=&quot;text-align:center;&quot;&gt;当前显示的索引模块是：{{currentIndex}}&lt;/view&gt;
+
+&lt;/view&gt; 
+</code></pre>
+<pre><code class="language-js">Page({
+  data:{
+    currentIndex: 0,
+    swiperList:[
+      'Page 1',
+      'Page 2',
+      'Page 3'
+    ]
+  },
+  swiperChange(event){
+    console.log(event.detail.current)
+    this.setData({
+      currentIndex: event.detail.current
+    })
+  }
+})
+</code></pre>
+<pre><code class="language-css">.mswiper{
+  height: 400rpx;
+  width: 600rpx;
+  margin:60rpx 72rpx;
+  border: 3rpx solid #ccc;
+  text-align: center;
+  color: #fff;
+}
+.mswiper-item{
+  line-height: 400rpx;
+}
+.mswiper-item-0{
+  background-color: red;
+}
+.mswiper-item-1{
+  background-color: green;
+}
+.mswiper-item-2{
+  background-color: blue;
+}
+</code></pre>
+<h1 id="自定义组件">自定义组件</h1>
+<p>+<code> Component(Object object)</code><br>
+创建自定义组件，接受一个 Object 类型的参数<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html">官方文档</a></p>
+<ul>
+<li>父组件相关代码</li>
+</ul>
+<pre><code class="language-html">&lt;!--farm/ucomp/index.wxml--&gt;
+&lt;view style=&quot;margin:30rpx 30rpx;&quot;&gt;
+  当前页面引入了自定义组件 ： mfooter
+&lt;/view&gt;
+&lt;view style=&quot;margin:30rpx 30rpx;&quot;&gt;
+  通信数据 ： {{showInfo}}
+&lt;/view&gt;
+
+&lt;view style=&quot;margin:30rpx 30rpx;background:#007cba;color:#fff;padding:20rpx;&quot;&gt;组件第一次调用&lt;/view&gt;
+&lt;mfooter num=&quot;888&quot; min=&quot;8&quot; bind:footerEvent=&quot;childTruggerEventA&quot;/&gt;
+&lt;view style=&quot;margin:30rpx 30rpx;background:#007cba;color:#fff;padding:20rpx;&quot;&gt;组件第二次调用&lt;/view&gt;
+&lt;mfooter num=&quot;999&quot; min=&quot;9&quot; bind:footerEvent=&quot;childTruggerEventB&quot;/&gt;
+</code></pre>
+<pre><code class="language-js">  data: {
+    showInfo:'初始化父组件显示信息'
+  },
+
+  childTruggerEventA(event){
+    console.log(&quot;888 的组件触发了父组件的事件&quot;)
+    console.log(&quot;接收到组件的数据是：&quot;+event.detail)
+    this.setData({
+      showInfo:&quot;接收到组件的数据是：&quot;+event.detail
+    })
+  },
+  childTruggerEventB(event){
+    console.log(&quot;999 的组件触发了父组件的事件&quot;)
+    console.log(&quot;接收到组件的数据是：&quot;+event.detail)
+    this.setData({
+      showInfo:&quot;接收到组件的数据是：&quot;+event.detail
+    })
+  }
+</code></pre>
+<pre><code class="language-json">{
+  &quot;usingComponents&quot;: {
+    &quot;mfooter&quot;: &quot;/components/mfooter/index&quot;
+  }
+}
+</code></pre>
+<ul>
+<li>子组件相关代码</li>
+</ul>
+<pre><code class="language-html">&lt;view style=&quot;margin:30rpx 30rpx;&quot; bindtap=&quot;callParentInfoChange&quot;&gt;
+  传递过来的 num 参数是： {{ num }}
+&lt;/view&gt;
+&lt;view style=&quot;margin:30rpx 30rpx;&quot; bindtap=&quot;callParentInfoChange&quot;&gt;
+  传递过来的 min 参数是： {{ min }}
+&lt;/view&gt;
+&lt;view class=&quot;header&quot;&gt;
+  学而时习之，不亦说乎！
+&lt;/view&gt;
+</code></pre>
+<pre><code class="language-js">// components/header/index.js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    num: Number,
+    min: {
+      type: Number,
+      value: 0,
+      observer: function (newVal, oldVal) {
+        // 属性值变化时执行 可省略
+      }
+    }
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+    name:&quot;蜡笔小新&quot;
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    callParentInfoChange(){
+      console.log(this.data.min)
+      this.triggerEvent('footerEvent', this.data.min) //myevent自定义名称事件，父组件中使用
+    }
+  }
+})
+</code></pre>
+<pre><code class="language-json">{
+  &quot;component&quot;: true,
+  &quot;usingComponents&quot;: {}
+}
+</code></pre>
+<pre><code class="language-css">/* components/header/index.wxss */
+.header{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background-color: #007cba;
+  color: #fff;
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%BB%84%E4%BB%B6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5">组件基础概念</a>
+<ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%84%E4%BB%B6">1. 什么是组件？</a></li>
+<li><a href="#2-%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%88%86%E7%B1%BB">2. 基础组件都有哪些分类？</a></li>
+<li><a href="#3-%E7%BB%84%E4%BB%B6%E5%85%B1%E5%90%8C%E5%B1%9E%E6%80%A7%E6%9C%89%E5%93%AA%E4%BA%9B">3. 组件共同属性有哪些？</a></li>
+<li><a href="#4-%E5%8D%95%E4%B8%AA%E7%BB%84%E4%BB%B6%E8%87%AA%E5%AE%9A%E4%B9%89%E7%89%B9%E6%AE%8A%E5%B1%9E%E6%80%A7">4. 单个组件自定义特殊属性</a>
+<ul>
+<li><a href="#1scroll-view-%E7%BB%84%E4%BB%B6">1.scroll-view 组件</a></li>
+<li><a href="#2%E4%BD%BF%E7%94%A8-cover-view-%E8%A7%A3%E5%86%B3%E5%8E%9F%E7%94%9F%E7%BB%84%E4%BB%B6%E5%B1%82%E7%BA%A7%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98">2.使用 cover-view 解决原生组件层级过高问题</a></li>
+<li><a href="#3%E4%BD%BF%E7%94%A8-swiper-%E7%BB%84%E4%BB%B6%E5%AE%9E%E7%8E%B0%E8%BD%AE%E6%92%AD%E5%9B%BE%E5%8F%8A%E5%B7%A6%E5%8F%B3%E6%BB%91%E5%8A%A8%E5%88%87%E6%8D%A2%E6%95%88%E6%9E%9C">3.使用 swiper 组件实现轮播图及左右滑动切换效果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6">自定义组件</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/4wei-xin-xiao-cheng-xu-ji-chu-er/">
+              <h3 class="post-title">
+                4.微信小程序事件绑定
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

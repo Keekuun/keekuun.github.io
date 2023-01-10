@@ -1,0 +1,520 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3.微信小程序基础 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="3.微信小程序基础 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="目录结构
+小程序包含一个描述整体程序的 app 和多个描述各自页面的 page。
+project
+|—pages
+|   |—index
+|   |   |—index.json        index 页面配置
+|   |   |—in..." />
+    <meta name="keywords" content="微信小程序" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              3.微信小程序基础
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-10-10
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+                  # 微信小程序
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h1 id="目录结构"><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/structure.html">目录结构</a></h1>
+<p>小程序包含一个描述整体程序的 app 和多个描述各自页面的 page。</p>
+<pre><code>project
+|—pages
+|   |—index
+|   |   |—index.json        index 页面配置
+|   |   |—index.js          index 页面逻辑
+|   |   |—index.wxml        index 页面结构（html） 
+|   |   |—index.wxss        index 页面样式
+|   |__log
+|   |   |—log.json           log 页面配置
+|   |   |—log.js             log 页面逻辑
+|   |   |—log.wxml           log 页面结构（html） 
+|   |   |—log.wxss           log 页面样式
+|—app.js                     小程序逻辑代码
+|—app.json                   小程序全局配置
+|—app.wxss                   小程序公共样式表
+</code></pre>
+<blockquote>
+<p>注意：为了方便开发者减少配置项，描述页面的四个文件必须具有相同的路径与文件名。</p>
+</blockquote>
+<h1 id="全局配置">全局配置<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html">👉</a></h1>
+<p>小程序根目录下的 <code>app.json</code> 文件用来对微信小程序进行全局配置。文件内容为一个 JSON 对象。具体配置参考官网<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html">👉</a></p>
+<pre><code class="language-json">{
+  // 基础页面配置
+  &quot;pages&quot;: [
+    &quot;pages/farm/index&quot;,
+    &quot;pages/comp/index&quot;,
+    &quot;pages/api/index&quot;,
+    &quot;pages/other/index&quot;
+  ],
+  // 分包页面配置
+  &quot;subpackages&quot;: [
+    {
+      &quot;root&quot;: &quot;comp&quot;,
+      &quot;pages&quot;: [
+        &quot;scroll-view/index&quot;
+      ]
+    }
+  ],
+  // 页面配置规则
+  &quot;preloadRule&quot;: {
+    &quot;pages/farm/index&quot;: {
+      &quot;network&quot;: &quot;all&quot;,
+      &quot;packages&quot;: [
+        &quot;farm&quot;
+      ]
+    }
+  },
+  // 默认启动路径
+  &quot;entryPagePath&quot;: &quot;pages/farm/index&quot;,
+  // 全局默认窗口表现（可以被页面表现覆盖）
+  &quot;window&quot;: {
+    &quot;backgroundTextStyle&quot;: &quot;light&quot;,
+    &quot;navigationBarBackgroundColor&quot;: &quot;#f1f1f1&quot;,
+    &quot;navigationBarTitleText&quot;: &quot;金迅教育 · 微信小程序&quot;,
+    &quot;navigationBarTextStyle&quot;: &quot;black&quot;
+  },
+  // 底部导航栏目配置
+  &quot;tabBar&quot;: {
+		&quot;color&quot;: &quot;#000&quot;,
+		&quot;selectedColor&quot;: &quot;#0050FF&quot;,
+		&quot;list&quot;: [
+			{
+				&quot;iconPath&quot;: &quot;/static/tabbar-icons/store.png&quot;,
+				&quot;selectedIconPath&quot;: &quot;/static/tabbar-icons/store_s.png&quot;,
+				&quot;text&quot;: &quot;框架&quot;,
+				&quot;pagePath&quot;: &quot;pages/farm/index&quot;
+      },
+      {
+				&quot;iconPath&quot;: &quot;/static/tabbar-icons/home.png&quot;,
+				&quot;selectedIconPath&quot;: &quot;/static/tabbar-icons/home_s.png&quot;,
+				&quot;text&quot;: &quot;组件&quot;,
+				&quot;pagePath&quot;: &quot;pages/comp/index&quot;
+			},
+			{
+				&quot;iconPath&quot;: &quot;/static/tabbar-icons/sns.png&quot;,
+				&quot;selectedIconPath&quot;: &quot;/static/tabbar-icons/sns_s.png&quot;,
+				&quot;text&quot;: &quot;API&quot;,
+				&quot;pagePath&quot;: &quot;pages/api/index&quot;
+			},
+			{
+				&quot;iconPath&quot;: &quot;/static/tabbar-icons/user.png&quot;,
+				&quot;selectedIconPath&quot;: &quot;/static/tabbar-icons/user_s.png&quot;,
+				&quot;text&quot;: &quot;其他&quot;,
+				&quot;pagePath&quot;: &quot;pages/other/index&quot;
+			}
+		]
+	},
+  // 小程序接口权限配置
+  &quot;permission&quot;: {
+    &quot;scope.userLocation&quot;: {
+      &quot;desc&quot;: &quot;你的位置信息将用于小程序位置接口的效果展示&quot;
+    }
+  },
+  // weui 组件库相关配置
+  &quot;style&quot;: &quot;v2&quot;,
+  &quot;useExtendedLib&quot;: {
+    &quot;weui&quot;: true
+  },
+  // 网络超时时间配置
+  &quot;networkTimeout&quot;: {
+    &quot;request&quot;: 10000,
+    &quot;downloadFile&quot;: 10000
+  },
+  // 是否开启调试模式
+  &quot;debug&quot;: true,
+  // 指明 sitemap 配置文件位置
+  &quot;sitemapLocation&quot;: &quot;sitemap.json&quot;
+}
+</code></pre>
+<h1 id="页面配置">页面配置<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html">👉</a></h1>
+<p><code>app.json</code> 中的部分配置，也支持对单个页面进行配置，可以在页面对应的<code> .json</code> 文件来对本页面的表现进行配置。<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html">👉</a></p>
+<p>页面中配置项在当前页面会覆盖 <code>app.json</code> 中相同的配置项（样式相关的配置项属于<code> app.json</code> 中的 <code>window</code> 属性，但这里不需要额外指定 <code>window</code> 字段），具体的取值和含义可参考<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html">全局配置文档</a>中说明。</p>
+<p><strong>配置示例:</strong></p>
+<pre><code class="language-json">{
+  &quot;navigationBarBackgroundColor&quot;: &quot;#ffffff&quot;,
+  &quot;navigationBarTextStyle&quot;: &quot;black&quot;,
+  &quot;navigationBarTitleText&quot;: &quot;微信接口功能演示&quot;,
+  &quot;backgroundColor&quot;: &quot;#eeeeee&quot;,
+  &quot;backgroundTextStyle&quot;: &quot;light&quot;
+}
+</code></pre>
+<blockquote>
+<p>注：并不是所有 <code>app.json</code> 中的配置都可以在页面覆盖或单独指定，仅限于本文档包含的选项。<br>
+注：iOS/Android 客户端 7.0.0 以下版本，<code>navigationStyle</code> 只在 <code>app.json</code> 中生效。</p>
+</blockquote>
+<h1 id="sitemap-配置">sitemap 配置<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/sitemap.html">👉</a></h1>
+<p>小程序根目录下的 <code>sitemap.json</code> 文件用于配置小程序及其页面是否允许被微信索引，文件内容为一个 JSON 对象，如果没有<code>sitemap.json</code>，则默认为所有页面都允许被索引。</p>
+<pre><code class="language-json">{
+  &quot;rules&quot;:[{
+    &quot;action&quot;: &quot;allow&quot;,  // 命中该规则的页面是否能被索引
+    &quot;page&quot;: &quot;path/to/page&quot;, // * 表示所有页面，不能作为通配符使用
+    &quot;params&quot;: [&quot;a&quot;, &quot;b&quot;],
+    &quot;matching&quot;: &quot;exact&quot;
+  }, {
+    &quot;action&quot;: &quot;disallow&quot;,
+    &quot;page&quot;: &quot;path/to/page&quot;
+  }]
+}
+</code></pre>
+<h1 id="框架接口">框架接口<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html">👉</a></h1>
+<h2 id="1小程序app生命周期函数">1.小程序App&amp;生命周期函数</h2>
+<ul>
+<li><code>App({})</code>注册小程序。接受一个 Object 参数，其指定小程序的生命周期回调等。<br>
+<code>App()</code> 必须在 <code>app.js</code> 中调用，必须调用且只能调用一次。不然会出现无法预期的后果。</li>
+</ul>
+<pre><code class="language-ts">// app.ts
+App&lt;IAppOption&gt;({
+  globalData: {msg: 'Hello weixin mini program!'},
+  onLaunch(options) {
+    console.log('onLaunch', options);
+    
+    // 展示本地存储能力
+    const logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
+
+    // 登录
+    wx.login({
+      success: res =&gt; {
+        console.log(res.code)
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      },
+    })
+  },
+  onShow(options) {
+    console.log('onShow', options.path); 
+  },
+  onHide() {
+    console.log('onHide');
+  },
+  onError(err) {
+    console.log('onError', err);
+  },
+  onPageNotFound(options) {
+    console.log('onPageNotFound', options);
+    wx.redirectTo({url: '/'})
+  },
+  onUnhandledRejection(options) {
+    console.log('onPageNotFound', options);
+  },
+  onThemeChange(options) {
+    console.log('onThemeChange', options);
+  }
+})
+</code></pre>
+<p><strong>生命周期函数</strong></p>
+<ul>
+<li><code>onLaunch(Object object)</code><br>
+小程序初始化完成时触发，全局只触发一次。参数也可以使用 <code>wx.getLaunchOptionsSync</code> 获取。</li>
+</ul>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/life-cycle/wx.getLaunchOptionsSync.html">wx.getLaunchOptionsSync</a> 一致</p>
+<ul>
+<li><code>onShow(Object object)</code><br>
+小程序启动，或从后台进入前台显示时触发。也可以使用<code> wx.onAppShow</code> 绑定监听。</li>
+</ul>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onAppShow.html">wx.onAppShow</a> 一致</p>
+<ul>
+<li>
+<p><code>onHide()</code><br>
+小程序从前台进入后台时触发。也可以使用 <code>wx.onAppHide</code> 绑定监听。</p>
+</li>
+<li>
+<p><code>onError(String error)</code><br>
+小程序发生脚本错误或 API 调用报错时触发。也可以使用 <code>wx.onError</code> 绑定监听。</p>
+</li>
+</ul>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onError.html">wx.onError</a> 一致</p>
+<ul>
+<li><code>onPageNotFound(Object object)</code><br>
+基础库 1.9.90 开始支持，低版本需做兼容处理。</li>
+</ul>
+<p>小程序要打开的页面不存在时触发。也可以使用 <code>wx.onPageNotFound</code>绑定监听。注意事项请参考 <code>wx.onPageNotFound</code>。</p>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onPageNotFound.html">wx.onPageNotFound</a> 一致</p>
+<p>示例代码：</p>
+<pre><code class="language-js">App({
+  onPageNotFound(res) {
+    wx.redirectTo({
+      url: 'pages/...'
+    }) // 如果是 tabbar 页面，请使用 wx.switchTab
+  }
+})
+</code></pre>
+<p>+<code> onUnhandledRejection(Object object)</code><br>
+基础库 2.10.0 开始支持，低版本需做兼容处理。</p>
+<p>小程序有未处理的 <code>Promise</code> 拒绝时触发。也可以使用 <code>wx.onUnhandledRejection</code> 绑定监听。注意事项请参考 <code>wx.onUnhandledRejection</code>。</p>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onUnhandledRejection.html">wx.onUnhandledRejection</a> 一致</p>
+<ul>
+<li><code>onThemeChange(Object object)</code><br>
+基础库 2.11.0 开始支持，低版本需做兼容处理。</li>
+</ul>
+<p>系统切换主题时触发。也可以使用 <code>wx.onThemeChange</code> 绑定监听。</p>
+<p>参数：与 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onThemeChange.html">wx.onThemeChange</a> 一致</p>
+<h1 id="数据绑定">数据绑定<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/data.html">👉</a></h1>
+<p>框架的核心是一个响应的数据绑定系统，可以让数据与视图非常简单地保持同步。当做数据修改的时候，只需要在逻辑层修改数据，视图层就会做相应的更新。</p>
+<p>视图层<code>demo.wxml</code>:</p>
+<pre><code class="language-html">&lt;view&gt;Hello {{name}}&lt;/view&gt;
+&lt;button bindtap=&quot;changeName&quot;&gt;click me&lt;/button&gt;
+</code></pre>
+<p>逻辑层<code>demo.js</code>:</p>
+<pre><code class="language-js">// data
+const helloData = {
+    name: 'weixin',
+}
+
+// Register a page
+Page({
+    data: helloData,
+    changeName() {
+        this.setData({name: 'world'})
+    },
+</code></pre>
+<h2 id="1简单绑定">1.简单绑定</h2>
+<pre><code class="language-html">&lt;view&gt; {{ message }} &lt;/view&gt;
+</code></pre>
+<pre><code class="language-js">Page({
+    data: {
+        message: 'hello world'
+    }
+})
+</code></pre>
+<h2 id="2组件属性需要在双引号之内">2.组件属性(需要在双引号之内)</h2>
+<pre><code class="language-html">&lt;view id=&quot;item-{{id}}&quot;&gt;&lt;/view&gt;    
+</code></pre>
+<h2 id="3控制属性需要在双引号之内-wxif">3.控制属性(需要在双引号之内<code> wx:if</code>)</h2>
+<pre><code class="language-html">&lt;view wx:if=&quot;visible&quot;&gt;&lt;/view&gt;
+</code></pre>
+<h2 id="4关键字需要在双引号之内">4.关键字(需要在双引号之内)</h2>
+<pre><code class="language-html">&lt;checkbox checked=&quot;{{true}}&quot;&gt;&lt;/checkbox&gt;
+</code></pre>
+<h2 id="5运算">5.运算</h2>
+<pre><code class="language-html">&lt;!-- 三元运算符 --&gt;
+&lt;view hidden=&quot;{{flag ? true : false}}&quot;&gt;&lt;/view&gt;
+&lt;!-- 算术运算 --&gt;
+&lt;view&gt;{{ 1+ 2}}{{a + b}}&lt;/view&gt;
+&lt;!-- 逻辑判断 --&gt;
+&lt;view wx:if=&quot;{{length &gt; 0}}&quot;&gt;&lt;/view&gt;
+&lt;!-- 字符串运算 --&gt;
+&lt;view&gt;{{&quot;hello&quot; + name}}&lt;/view&gt;
+&lt;!-- 属性取值 --&gt;
+&lt;view&gt;{{object.key}} {{array[0]}}&lt;/view&gt;
+</code></pre>
+<h2 id="6组合">6.组合</h2>
+<p>也可以在 Mustache 内直接进行组合，构成新的对象或者数组。</p>
+<pre><code class="language-html">&lt;view wx:for=&quot;{{[zero, 1, 2, 3, 4]}}&quot;&gt; {{item}} &lt;/view&gt;
+
+&lt;view wx:for=&quot;{{[1,2,3]}} &quot;&gt;
+  {{item}}
+&lt;/view&gt;
+
+&lt;template is=&quot;objectCombine&quot; data=&quot;{{for: a, bar: b}}&quot;&gt;&lt;/template&gt;
+</code></pre>
+<pre><code class="language-js">Page({
+    data: {
+        zero: 0,
+        a: 1,
+        b: 2
+    }
+})
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">目录结构</a></li>
+<li><a href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE">全局配置👉</a></li>
+<li><a href="#%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE">页面配置👉</a></li>
+<li><a href="#sitemap-%E9%85%8D%E7%BD%AE">sitemap 配置👉</a></li>
+<li><a href="#%E6%A1%86%E6%9E%B6%E6%8E%A5%E5%8F%A3">框架接口👉</a>
+<ul>
+<li><a href="#1%E5%B0%8F%E7%A8%8B%E5%BA%8Fapp%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0">1.小程序App&amp;生命周期函数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A">数据绑定👉</a>
+<ul>
+<li><a href="#1%E7%AE%80%E5%8D%95%E7%BB%91%E5%AE%9A">1.简单绑定</a></li>
+<li><a href="#2%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7%E9%9C%80%E8%A6%81%E5%9C%A8%E5%8F%8C%E5%BC%95%E5%8F%B7%E4%B9%8B%E5%86%85">2.组件属性(需要在双引号之内)</a></li>
+<li><a href="#3%E6%8E%A7%E5%88%B6%E5%B1%9E%E6%80%A7%E9%9C%80%E8%A6%81%E5%9C%A8%E5%8F%8C%E5%BC%95%E5%8F%B7%E4%B9%8B%E5%86%85-wxif">3.控制属性(需要在双引号之内<code> wx:if</code>)</a></li>
+<li><a href="#4%E5%85%B3%E9%94%AE%E5%AD%97%E9%9C%80%E8%A6%81%E5%9C%A8%E5%8F%8C%E5%BC%95%E5%8F%B7%E4%B9%8B%E5%86%85">4.关键字(需要在双引号之内)</a></li>
+<li><a href="#5%E8%BF%90%E7%AE%97">5.运算</a></li>
+<li><a href="#6%E7%BB%84%E5%90%88">6.组合</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/2wei-xin-xiao-cheng-xu-sheng-ming-zhou-qi/">
+              <h3 class="post-title">
+                2.微信小程序架构
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

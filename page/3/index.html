@@ -1,0 +1,417 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="每一个不曾起舞的日子，都是对生命的辜负！" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/6shu-zhi-lei-xing/">
+        <h2 class="post-title">6、数据类型-数值类型 </h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/5yun-suan-fu/">
+        <h2 class="post-title">5、运算符</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/4liu-cheng-kong-zhi/">
+        <h2 class="post-title">4、流程控制</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/san-shu-ju-lei-xing-fen-lei/">
+        <h2 class="post-title">3、数据类型分类</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        <h2 id="一-数据类型分类">一 数据类型分类</h2>
+<p>值类型：基本数据类型是Go语言实际的原子，复合数据类型是由不同的方式组合基本类型构造出来的数据类型，如：数组，slice，map，结构体</p>
+<pre><code>    整型    int8,uint               # 基础类型之数字类型
+    浮点型  float32，float64         # 基础类型之数字类型
+    复数                            # 基础类型之数字类型
+    布尔型  bool                    # 基础类型，只能存true/false，占据1个字节，不能转换为整型，0和1也不能转换为布尔
+    字符串  string                  # 基础类型
+    数组                            # 复合类型 
+    结构体  struct                  # 复合类型
+</code></pre>
+<p>引用类型：即保存的是对程序中一个变量的或状态的间接引用，对其修改将影响所有该引用的拷贝</p>
+<pre><code>    指针    *
+    切片    slice
+    字典    map
+    函数    func
+    管道    chan
+    接口    interface
+</code></pre>
+<p>贴士：Go语言没有字符型，可以使用byte来保存单个字母</p>
+<h2 id="二-零值机制">二 零值机制</h2>
+<p>Go变量初始化会自带默认值，不像其他语言为空，下面列出各种数据类型对应的0值：</p>
+<pre><code class="language-go">    int     0
+    int8    0
+    int32   0
+    int64   0
+    uint    0x0
+    rune    0           //rune的实际类型是 int32
+    byte    0x0         // byte的实际类型是 uint8
+    float32 0           //长度为 4 byte
+    float64 0           //长度为 8 byte
+    bool    false
+    string  &quot;&quot;
+</code></pre>
+<h2 id="三-格式化输出">三 格式化输出</h2>
+<p>常用格式化输出：</p>
+<pre><code>    %%	%字面量
+    %b	二进制整数值，基数为2，或者是一个科学记数法表示的指数为2的浮点数
+    %c	该值对应的unicode字符
+    %d	十进制数值，基数为10
+    %e	科学记数法e表示的浮点或者复数
+    %E	科学记数法E表示的浮点或者附属
+    %f	标准计数法表示的浮点或者附属
+    %o	8进制度
+    %p	十六进制表示的一个地址值
+    %s	输出字符串或字节数组
+    %T	输出值的类型，注意int32和int是两种不同的类型，编译器不会自动转换，需要类型转换。
+    %v	值的默认格式表示
+    %+v	类似%v，但输出结构体时会添加字段名
+    %#v	值的Go语法表示
+    %t	单词true或false
+    %q	该值对应的单引号括起来的go语法字符字面值，必要时会采用安全的转义表示
+    %x	表示为十六进制，使用a-f
+    %X	表示为十六进制，使用A-F
+    %U	表示为Unicode格式：U+1234，等价于&quot;U+%04X&quot;  
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">type User struct {
+    Name string
+    Age int
+}
+user : = User{
+    &quot;overnote&quot;,
+    1,
+}
+fmt.Printf(&quot;%%\n&quot;)                   // %
+fmt.Printf(&quot;%b\n&quot;, 16)               // 10000
+fmt.Printf(&quot;%c\n&quot;, 65)               // A
+fmt.Printf(&quot;%c\n&quot;, 0x4f60)           // 你
+fmt.Printf(&quot;%U\n&quot;, '你')              // U+4f60
+fmt.Printf(&quot;%x\n&quot;, '你')              // 4f60
+fmt.Printf(&quot;%X\n&quot;, '你')              // 4F60
+fmt.Printf(&quot;%d\n&quot;, 'A')              // 65
+fmt.Printf(&quot;%t\n&quot;, 1 &gt; 2)            // false
+fmt.Printf(&quot;%e\n&quot;, 4396.7777777)     // 4.396778e+03 默认精度6位
+fmt.Printf(&quot;%20.3e\n&quot;, 4396.7777777) //            4.397e+03 设置宽度20,精度3,宽度一般用于对齐
+fmt.Printf(&quot;%E\n&quot;, 4396.7777777)     // 4.396778E+03
+fmt.Printf(&quot;%f\n&quot;, 4396.7777777)     // 4396.777778
+fmt.Printf(&quot;%o\n&quot;, 16)               // 20
+fmt.Printf(&quot;%p\n&quot;, []int{1})         // 0xc000016110
+fmt.Printf(&quot;Hello %s\n&quot;, &quot;World&quot;)    // Hello World
+fmt.Printf(&quot;Hello %q\n&quot;, &quot;World&quot;)    // Hello &quot;World&quot;
+fmt.Printf(&quot;%T\n&quot;, 3.0)              // float64
+fmt.Printf(&quot;%v\n&quot;, user)             // {overnote 1}
+fmt.Printf(&quot;%+v\n&quot;, user)            // {Name:overnote Age:1}
+fmt.Printf(&quot;%#v\n&quot;, user)            // main.User{Name:&quot;overnote&quot;, Age:1}
+</code></pre>
+
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/er-biao-shi-fu-yu-bian-liang/">
+        <h2 class="post-title">2、标识符与变量</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/yi-go-yu-yan-jie-shao/">
+        <h2 class="post-title">1 、Go语言介绍</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2023-01-04
+        </span>
+        <span>
+          6 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+            # go基础
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/5wei-xin-xiao-cheng-xu-zu-jian/">
+        <h2 class="post-title">5.微信小程序组件</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-10-12
+        </span>
+        <span>
+          9 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+            # 微信小程序
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/4wei-xin-xiao-cheng-xu-ji-chu-er/">
+        <h2 class="post-title">4.微信小程序事件绑定</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-10-12
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+            # 微信小程序
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/3wei-xin-xiao-cheng-xu/">
+        <h2 class="post-title">3.微信小程序基础</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-10-10
+        </span>
+        <span>
+          9 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+            # 微信小程序
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://keekuun.github.io/post/2wei-xin-xiao-cheng-xu-sheng-ming-zhou-qi/">
+        <h2 class="post-title">2.微信小程序架构</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2022-09-30
+        </span>
+        <span>
+          7 min read
+        </span>
+        
+          <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+            # 微信小程序
+          </a>
+        
+      </div>
+      
+        <a href="https://keekuun.github.io/post/2wei-xin-xiao-cheng-xu-sheng-ming-zhou-qi/" class="post-feature-image" style="background-image: url('https://res.wx.qq.com/wxdoc/dist/assets/img/4-1.ad156d1c.png')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
+
+    
+        <div class="pagination-container">
+  
+    <a href="https://keekuun.github.io/page/2/" class="prev-page">上一页</a>
+  
+  
+    <a href="https://keekuun.github.io/page/4/" class="next-page">下一页</a>
+  
+</div>
+
+    
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+  </body>
+</html>

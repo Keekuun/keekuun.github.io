@@ -1,0 +1,248 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>8、数据类型-数组 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="8、数据类型-数组 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 数组
+1.1 数组的声明
+数组是一段固定长度的连续内存区域。数组的长度定义后不可更改，长度使用 len() 获取。
+var arr1 [10]int					//定义长度为10的整型数组，很少这样使用
+arr2 [5]int := [5..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              8、数据类型-数组
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-数组">一 数组</h2>
+<h4 id="11-数组的声明">1.1 数组的声明</h4>
+<p>数组是一段固定长度的连续内存区域。数组的长度定义后不可更改，长度使用 len() 获取。</p>
+<pre><code class="language-go">var arr1 [10]int					//定义长度为10的整型数组，很少这样使用
+arr2 [5]int := [5]int{1,2,3,4,5}	//定义并初始化
+arr3 := [5]int{1,2,3,4,5}			//自动推导并初始化
+arr4 := [5]int{1,2}					//指定总长度，前几位被初始化，没有的使用零值
+arr5 := [5]int{2:10, 4:11}			//有选择的初始化，没被初始化的使用零值
+arr6 := [...]int{2,3,4}				//自动计算长度
+</code></pre>
+<h4 id="12-数组常用操作">1.2 数组常用操作</h4>
+<pre><code>arr[:]      代表所有元素
+arr[:5]     代表前五个元素，即区间的左闭右开
+arr[5:]     代表从第5个开始（不包含第5个）
+len(arr)    数组的长度
+</code></pre>
+<p>贴士：上述操作会引发类型的变化，数组将会转化为Go中新的数据类型slice，见09节</p>
+<h4 id="13-数组的遍历">1.3 数组的遍历</h4>
+<p>方式一：for循环遍历</p>
+<pre><code class="language-go">arr := [3]int{1,2,3}
+
+for i := 0; i &lt; len(arr); i++ {
+	fmt.Println(arr[i])
+}
+</code></pre>
+<p>方式二：for-range遍历</p>
+<pre><code class="language-go">arr := [3]int{1,2,3}
+
+for k, v := range arr {
+	fmt.Println(k)	//元素位置	
+	fmt.Println(v)	//元素值
+}
+</code></pre>
+<h4 id="14-数组使用注意事项">1.4 数组使用注意事项</h4>
+<p>数组创建完长度就固定，不可以再追加元素；</p>
+<p>长度是数组类型的一部分，因此<code>[3]int</code>与<code>[4]int</code>是不同的类型；</p>
+<p>数组之间的赋值是值的赋值，即当把一个数组作为参数传入函数的时候，传入的其实是该函数的副本，而不是他的指针。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E6%95%B0%E7%BB%84">一 数组</a><br>
+*
+<ul>
+<li><a href="#11-%E6%95%B0%E7%BB%84%E7%9A%84%E5%A3%B0%E6%98%8E">1.1 数组的声明</a></li>
+<li><a href="#12-%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C">1.2 数组常用操作</a></li>
+<li><a href="#13-%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86">1.3 数组的遍历</a></li>
+<li><a href="#14-%E6%95%B0%E7%BB%84%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">1.4 数组使用注意事项</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/7zi-fu-chuan/">
+              <h3 class="post-title">
+                7、数据类型-字符串
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

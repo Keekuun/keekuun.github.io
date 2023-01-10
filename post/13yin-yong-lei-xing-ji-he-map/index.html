@@ -1,0 +1,316 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>13、引用类型-集合(map) | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="13、引用类型-集合(map) | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 集合map
+1.1 map的创建
+Go内置了map类型，map是一个无序键值对集合（也有一些书籍翻译为字典）。
+普通创建：
+// 声明一个map类型，[]内的类型指任意可以进行比较的类型 int指值类型
+m := map[string]..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              13、引用类型-集合(map)
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-集合map">一 集合map</h2>
+<h4 id="11-map的创建">1.1 map的创建</h4>
+<p>Go内置了map类型，map是一个无序键值对集合（也有一些书籍翻译为字典）。</p>
+<p>普通创建：</p>
+<pre><code class="language-go">// 声明一个map类型，[]内的类型指任意可以进行比较的类型 int指值类型
+m := map[string]int{&quot;a&quot;:1,&quot;b&quot;:2}
+fmt.Print(m[&quot;a&quot;])
+</code></pre>
+<p>make方式创建map：</p>
+<pre><code class="language-go">type Person struct{
+	ID string
+	Name string
+}
+
+func main() {
+
+	var m map[string] Person				
+	m = make(map[string] Person)
+	m[&quot;123&quot;] = Person{&quot;123&quot;,&quot;Tom&quot;}
+	p,isFind := m[&quot;123&quot;]
+	fmt.Println(isFind)		//true
+	fmt.Println(p)			//{123 Tom}
+
+}
+</code></pre>
+<p>注意：golang中map的 key 通常 key 为 int 、string，但也可以是其他类型如：bool、数字、string、指针、channel，还可以是只包含前面几个类型的接口、结构体、数组。slice、map、function由于不能使用 == 来判断，不能作为map的key。</p>
+<h4 id="12-map的使用">1.2 map的使用</h4>
+<p>通过key操作元素：</p>
+<pre><code class="language-go">var numbers map[string]int
+numbers = make(map[string]int)
+numbers[&quot;one&quot;] = 1 					//赋值
+numbers[&quot;ten&quot;] = 10 				//赋值
+numbers[&quot;three&quot;] = 3
+delete(numbers, &quot;ten&quot;) 				// 删除key为 ten 的元素
+
+fmt.Println(&quot;第三个数字是: &quot;, numbers[&quot;three&quot;]) 	// 读取数据
+</code></pre>
+<p>map的遍历：同数组一样，使用for-range 的结构遍历</p>
+<p>注意：</p>
+<ul>
+<li>map是无序的，每次打印出来的map都会不一样，它不能通过index获取，而必须通过key获取；</li>
+<li>map的长度是不固定的，也就是和slice一样，也是一种引用类型</li>
+<li>内置的len函数同样适用于map，返回map拥有的key的数量</li>
+<li>go没有提供清空元素的方法，可以重新make一个新的map，不用担心垃圾回收的效率，因为go中并行垃圾回收效率比写一个清空函数高效很多</li>
+<li>map和其他基本类型不同，它不是thread-safe，在多个go-routine存取时，必须使用mutex lock机制</li>
+</ul>
+<h4 id="13-并发安全的map">1.3 并发安全的map</h4>
+<p>演示并发读写map的问题：</p>
+<pre><code class="language-go">package main
+
+func main() {
+
+	m := make(map[int]int)
+
+	go func() {			
+		for {				//无限写入
+			m[1] = 1
+		}
+	}()
+
+	go func() {
+		for {				//无限读取
+			_ = m[1]
+		}
+	}()
+
+	for {}					//无限循环，让并发程序在后台执行
+}
+</code></pre>
+<p>编译会有错误提示：<code>fatal error: concurrent map read and map write</code>，即出现了并发读写，因为用两个并发程序不断的对map进行读和写，产生了竞态问题。map内部会对这种错误进行检查并提前发现。</p>
+<p>Go内置的map只有读是线程安全的，读写是线程不安全的。</p>
+<p>需要并发读写时，一般都是加锁，但是这样做性能不高，在go1.9版本中提供了更高效并发安全的sync.Map。</p>
+<p>sync.Map的特点：</p>
+<ul>
+<li>无须初始化，直接声明即可</li>
+<li>sync.Map不能使用map的方式进行取值和设值操作，而是使用sync.Map的方法进行调用。Store表示存储，Load表示获取，Delete表示删除。</li>
+<li>使用Range配合一个回调函数进行遍历操作，通过回调函数返回内部遍历出来的值，需要继续迭代时，返回true，终止迭代返回false。</li>
+</ul>
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+	&quot;sync&quot;
+)
+
+func main() {
+
+	var scene sync.Map
+
+	//保存键值对
+	scene.Store(&quot;id&quot;,1)
+	scene.Store(&quot;name&quot;,&quot;lisi&quot;)
+
+	//根据键取值
+	fmt.Println(scene.Load(&quot;name&quot;))			
+
+	//遍历
+	scene.Range(func(k, v interface{}) bool{
+		fmt.Println(k,v)
+		return true
+	})
+
+}
+</code></pre>
+<p>注意：map没有提供获取map数量的方法，可以在遍历时手动计算。sync.Map为了并发安全。损失了一定的性能。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E9%9B%86%E5%90%88map">一 集合map</a><br>
+*
+<ul>
+<li><a href="#11-map%E7%9A%84%E5%88%9B%E5%BB%BA">1.1 map的创建</a></li>
+<li><a href="#12-map%E7%9A%84%E4%BD%BF%E7%94%A8">1.2 map的使用</a></li>
+<li><a href="#13-%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E7%9A%84map">1.3 并发安全的map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/12yin-yong-lei-xing-qie-pian/">
+              <h3 class="post-title">
+                12、引用类型-切片(slice)
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

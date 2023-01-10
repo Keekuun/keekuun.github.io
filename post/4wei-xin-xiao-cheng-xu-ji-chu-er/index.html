@@ -1,0 +1,289 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4.微信小程序事件绑定 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="4.微信小程序事件绑定 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="事件绑定
+1. 什么是小程序事件绑定？
+事件就是用户的一些操作行为，如长按，点击，拖动，触摸屏幕等，都是事件。专业的讲，如下：
+
+事件是视图层到逻辑层的通讯方式。
+事件可以将用户的行为反馈到逻辑层进行处理。
+事件可以绑定在组件上，当组件触发..." />
+    <meta name="keywords" content="微信小程序" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              4.微信小程序事件绑定
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-10-12
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+                  # 微信小程序
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h1 id="事件绑定">事件绑定</h1>
+<h2 id="1-什么是小程序事件绑定">1. 什么是小程序事件绑定？</h2>
+<p>事件就是用户的一些操作行为，如长按，点击，拖动，触摸屏幕等，都是事件。专业的讲，如下：</p>
+<ol>
+<li>事件是视图层到逻辑层的通讯方式。</li>
+<li>事件可以将用户的行为反馈到逻辑层进行处理。</li>
+<li>事件可以绑定在组件上，当组件触发事件，就会执行逻辑层中对应的事件处理函数。</li>
+<li>事件分为：冒泡事件 和 非冒泡事件，<code>bind</code>事件绑定不会阻止冒泡事件向上冒泡，<code>catch</code>事件绑定可以阻止冒泡事件向上冒泡</li>
+<li>事件对象可以携带额外信息，如id, dataset, touches。</li>
+</ol>
+<h2 id="2-小程序事件都有哪些">2. 小程序事件都有哪些？</h2>
+<ul>
+<li>点击事件 tap</li>
+<li>长按事件 longtap</li>
+<li>触摸事件 touchstart ，touchend，touchmove，touchcancel</li>
+<li>其他事件，如：submit，input...</li>
+</ul>
+<h2 id="3-小程序事件绑定如何传递参数">3. 小程序事件绑定如何传递参数？</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.w3cschool.cn/weixinapp/weixinapp-event.html#type">type</a></td>
+<td>String</td>
+<td>事件类型</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/weixinapp/weixinapp-event.html#timestamp">timeStamp</a></td>
+<td>Integer</td>
+<td>事件生成时的时间戳</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/weixinapp/weixinapp-event.html#target">target</a></td>
+<td>Object</td>
+<td>触发事件的组件的一些属性值集合</td>
+</tr>
+<tr>
+<td><a href="https://www.w3cschool.cn/weixinapp/weixinapp-event.html#currenttarget">currentTarget</a></td>
+<td>Object</td>
+<td>当前组件的一些属性值集合</td>
+</tr>
+</tbody>
+</table>
+<p>在组件中可以定义数据，这些数据将会通过事件传递给 SERVICE。书写方式：以<code>data-</code>开头，多个单词由连字符<code>-</code>链接，不能有大写(大写会自动转成小写)如<code>data-element-type</code>，最终在 event.target.dataset 中会将连字符转成驼峰<code>elementType</code>。</p>
+<pre><code class="language-html">&lt;button 
+  data-alpha-beta=&quot;1&quot; 
+  data-alphaBeta=&quot;2&quot; 
+  bindtap=&quot;bindViewTap&quot;
+  style=&quot;margin-top:40rpx;&quot;&gt; 点击事件测试 &lt;/button&gt;
+
+&lt;view class=&quot;info&quot;&gt;
+  事件类型是：{{eventTag.type}}
+&lt;/view&gt;
+
+&lt;view class=&quot;info&quot;&gt;
+  传递参数 alphaBeta ：{{eventTag.target.dataset.alphaBeta}}
+&lt;/view&gt;
+
+&lt;view class=&quot;info&quot;&gt;
+  传递参数 alphabeta ：{{eventTag.target.dataset.alphabeta}}
+&lt;/view&gt;
+</code></pre>
+<pre><code class="language-js">Page({
+  data:{
+    eventTag:{}
+  },
+  bindViewTap:function(event){
+    this.setData({
+      eventTag: event
+    })
+    console.log(event)
+    event.target.dataset.alphaBeta === 1 // - 会转为驼峰写法
+    event.target.dataset.alphabeta === 2 // 大写会转为小写
+  }
+})
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">事件绑定</a>
+<ul>
+<li><a href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">1. 什么是小程序事件绑定？</a></li>
+<li><a href="#2-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8B%E4%BB%B6%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B">2. 小程序事件都有哪些？</a></li>
+<li><a href="#3-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0">3. 小程序事件绑定如何传递参数？</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/3wei-xin-xiao-cheng-xu/">
+              <h3 class="post-title">
+                3.微信小程序基础
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

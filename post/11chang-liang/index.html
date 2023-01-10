@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>11、常量 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="11、常量 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 常量
+常量：在编译阶段就确定下来的值，程序运行时无法改变。
+定义方式：
+const A = 3
+const PI float32 = 3.1415
+const mask = 1 &lt;&lt; 3						//常量与表达式		
+
+错..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              11、常量
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-常量">一 常量</h2>
+<p>常量：在编译阶段就确定下来的值，程序运行时无法改变。</p>
+<p>定义方式：</p>
+<pre><code class="language-go">const A = 3
+const PI float32 = 3.1415
+const mask = 1 &lt;&lt; 3						//常量与表达式		
+</code></pre>
+<p>错误写法：常量赋值是一个编译期行为，右边的值不能出现在运行时才能得到结果的值。</p>
+<pre><code class="language-go">const HOME = os.GetEnv(&quot;HOME&quot;)
+</code></pre>
+<h2 id="二-无类型常量">二 无类型常量</h2>
+<p>一个常量可以有任意一个确定的基础类型，例如int或float64，但是许多常量并没有一个明确的基础类型。</p>
+<p>无类型常量的作用：</p>
+<ul>
+<li>编译器会为这些没有明确基础类型的数字常量提供比基础类型更高精度的算术运算，可以认为至少有256bit的运算精度</li>
+<li>无类型的常量可以直接用于更多的表达式而不需要显式的类型转换</li>
+</ul>
+<p>示例：math.Pi无类型的浮点数常量，可以直接用于任意需要浮点数或复数的地方：</p>
+<pre><code class="language-Go">var x float32 = math.Pi
+var y float64 = math.Pi
+var z complex128 = math.Pi
+</code></pre>
+<p>如果math.Pi被确定为特定类型，比如float64，那么结果精度可能会不一样，同时对于需要float32或complex128类型值的地方则会强制需要一个明确的类型转换：</p>
+<pre><code class="language-Go">const Pi64 float64 = math.Pi
+
+var x float32 = float32(Pi64)
+var y float64 = Pi64
+var z complex128 = complex128(Pi64)
+</code></pre>
+<p>对于常量面值，不同的写法可能会对应不同的类型。例如0、0.0、0i和<code>\u0000</code>虽然有着相同的常量值，但是它们分别对应无类型的整数、无类型的浮点数、无类型的复数和无类型的字符等不同的常量类型。同样，true和false也是无类型的布尔类型，字符串面值常量是无类型的字符串类型。</p>
+<p>前面说过除法运算符/会根据操作数的类型生成对应类型的结果。因此，不同写法的常量除法表达式可能对应不同的结果：</p>
+<pre><code class="language-Go">var f float64 = 212
+fmt.Println((f - 32) * 5 / 9)     // &quot;100&quot;; (f - 32) * 5 is a float64
+fmt.Println(5 / 9 * (f - 32))     // &quot;0&quot;;   5/9 is an untyped integer, 0
+fmt.Println(5.0 / 9.0 * (f - 32)) // &quot;100&quot;; 5.0/9.0 is an untyped float
+</code></pre>
+<p>只有常量可以是无类型的。当一个无类型的常量被赋值给一个变量的时候，就像下面的第一行语句，或者出现在有明确类型的变量声明的右边，如下面的其余三行语句，无类型的常量将会被隐式转换为对应的类型，如果转换合法的话。</p>
+<pre><code class="language-Go">var f float64 = 3 + 0i // untyped complex -&gt; float64
+f = 2                  // untyped integer -&gt; float64
+f = 1e123              // untyped floating-point -&gt; float64
+f = 'a'                // untyped rune -&gt; float64
+</code></pre>
+<p>上面的语句相当于:</p>
+<pre><code class="language-Go">var f float64 = float64(3 + 0i)
+f = float64(2)
+f = float64(1e123)
+f = float64('a')
+</code></pre>
+<p>无论是隐式或显式转换，将一种类型转换为另一种类型都要求目标可以表示原始值。对于浮点数和复数，可能会有舍入处理：</p>
+<pre><code class="language-Go">const (
+	deadbeef = 0xdeadbeef // untyped int with value 3735928559
+	a = uint32(deadbeef)  // uint32 with value 3735928559
+	b = float32(deadbeef) // float32 with value 3735928576 (rounded up)
+	c = float64(deadbeef) // float64 with value 3735928559 (exact)
+	d = int32(deadbeef)   // compile error: constant overflows int32
+	e = float64(1e309)    // compile error: constant overflows float64
+	f = uint(-1)          // compile error: constant underflows uint
+)
+</code></pre>
+<p>对于一个没有显式类型的变量声明（包括简短变量声明），常量的形式将隐式决定变量的默认类型，就像下面的例子：</p>
+<pre><code class="language-Go">i := 0      		// untyped integer;        implicit int(0)
+r := '\000' 		// untyped rune;           implicit rune('\000')
+f := 0.0    		// untyped floating-point; implicit float64(0.0)
+c := 0i     		// untyped complex;        implicit complex128(0i)
+</code></pre>
+<p>注意有一点不同：无类型整数常量转换为int，它的内存大小是不确定的，但是无类型浮点数和复数常量则转换为内存大小明确的float64和complex128。<br>
+如果不知道浮点数类型的内存大小是很难写出正确的数值算法的，因此Go语言不存在整型类似的不确定内存大小的浮点数和复数类型。</p>
+<p>如果要给变量一个不同的类型，我们必须显式地将无类型的常量转化为所需的类型，或给声明的变量指定明确的类型，像下面例子这样：</p>
+<pre><code class="language-Go">var i = int8(0)
+var i int8 = 0
+</code></pre>
+<p>当尝试将这些无类型的常量转为一个接口值时（见第7章），这些默认类型将显得尤为重要，因为要靠它们明确接口对应的动态类型。</p>
+<pre><code class="language-Go">fmt.Printf(&quot;%T\n&quot;, 0)      		// &quot;int&quot;
+fmt.Printf(&quot;%T\n&quot;, 0.0)    		// &quot;float64&quot;
+fmt.Printf(&quot;%T\n&quot;, 0i)     		// &quot;complex128&quot;
+fmt.Printf(&quot;%T\n&quot;, '\000') 		// &quot;int32&quot; (rune)
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%B8%B8%E9%87%8F">一 常量</a></li>
+<li><a href="#%E4%BA%8C-%E6%97%A0%E7%B1%BB%E5%9E%8B%E5%B8%B8%E9%87%8F">二 无类型常量</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/10shu-ju-lei-xing-zhuan-huan/">
+              <h3 class="post-title">
+                10、数据类型转换
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

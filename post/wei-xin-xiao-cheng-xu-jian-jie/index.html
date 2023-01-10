@@ -1,0 +1,292 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1.微信小程序简介 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="1.微信小程序简介 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+小程序是一种全新的连接用户与服务的方式，它可以在微信内被便捷地获取和传播，同时具有出色的使用体验。
+
+发展由来
+
+1.微信最初也是通过webview作为web的主要入口，通过js-sdk实现web端的api交互，比如：图片预览等需要依赖原..." />
+    <meta name="keywords" content="微信小程序" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              1.微信小程序简介
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-30
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/gmRt76XqF/" class="post-tag">
+                  # 微信小程序
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <blockquote>
+<p>小程序是一种全新的连接用户与服务的方式，它可以在微信内被便捷地获取和传播，同时具有出色的使用体验。</p>
+</blockquote>
+<h1 id="发展由来">发展由来</h1>
+<ul>
+<li>1.微信最初也是通过webview作为web的主要入口，通过js-sdk实现web端的api交互，比如：图片预览等需要依赖原生功能实现一些web无法实现的功能。</li>
+<li>2.js-sdk解决了移动web能力不足的问题，但是移动web的体验依然依然糟糕。比如：受限于设备性能和网络速度出现的白屏问题。</li>
+<li>3.为了解决诸如此类的问题，出现了增强版本的JS-SDK，其中有一个重要功能，称之为【“微信web资源离线存储”】</li>
+<li>4.复杂的页面场景下，依然会出现白屏问题，原因表现为页面切换的生硬感以及点击的迟滞感。</li>
+<li>5.于是，微信小程序应运而生，一个可解决js-sdk无法解决的问题以及给开发者及用户一个很好体验感的系统</li>
+</ul>
+<h1 id="小程序优势">小程序优势</h1>
+<ul>
+<li>1.快速的加载 —— 白屏时间几乎可以忽略</li>
+<li>2.更强大的功能 —— 微信api更多，抢原生饭碗</li>
+<li>3.原生的体验 —— 体验更好，产品大卖</li>
+<li>4.易用且安全的微信数据开放 —— 站在巨人的肩膀上</li>
+<li>5.高效和简单的开发 —— 开发效率更高</li>
+</ul>
+<p>也就是说，通过微信小程序能力，弥补了移动web的缺陷，同时有更多微信的api可调用，功能大大的增强了，它拥有web开发的效率还有原生的体验。简直就是坐上了✈️✈️</p>
+<h1 id="小程序与web">小程序与web</h1>
+<p>小程序和普通web开发有很大的相似性，小程序主要的开发语言是js，但是二者是有区别的</p>
+<ul>
+<li>1.api差异：普通web开发依赖于浏览器，可以使用浏览器中的DOM、BOM的api。小程序的逻辑层和渲染层是分开的，逻辑层运行在JSCore中，并没有完整的浏览器对象，所以缺少相关的Dom Bom的api</li>
+<li>2.线程不同：普通网页开发的逻辑层和渲染层是互斥的，可以说明的是长时间的脚本运行会导致页面无响应；而小程序的逻辑层和渲染层是分开的，分别运行在不同的线程中。</li>
+<li>3.宿主环境差异：网页开发时可以依赖各种浏览器，搭配一些辅助工具和编辑器即可。而小程序开发则需要申请小程序账号并安装开发者工具、配置项目等过程来完成。</li>
+<li>4.<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/env.html">小程序的运行环境</a>：微信小程序运行在多种平台上：iOS/iPadOS 微信客户端、Android 微信客户端、Windows PC 微信客户端、Mac 微信客户端、小程序硬件框架和用于调试的微信开发者工具等。</li>
+</ul>
+<p>不同运行环境下，脚本执行环境以及用于组件渲染的环境是不同的，性能表现也存在差异：</p>
+<table>
+<thead>
+<tr>
+<th>运行环境</th>
+<th>逻辑层</th>
+<th>视图层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISO</td>
+<td>JavaScriptCore</td>
+<td>WKWebView</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>V8</td>
+<td>XWeb 引擎</td>
+</tr>
+<tr>
+<td>Windows</td>
+<td>Chromium内核</td>
+<td>Chromium内核</td>
+</tr>
+<tr>
+<td>小程序开发者工具</td>
+<td><a href="https://nwjs.io/">NW.js</a></td>
+<td>Chrome Webview</td>
+</tr>
+</tbody>
+</table>
+<h1 id="小程序和-app">小程序和 APP</h1>
+<ul>
+<li>
+<p>从企业应用开发实践来讲，微信小程序和 APP 二者各有千秋。毋庸置疑，技术永远只是一个折中的解决方案，我们需要多维度权衡的角度很多，比如：「团队学习门槛」、「开发实施成本」、「开发周期管理」、「用户获客成本」、「流量传播推广」、「数据挖掘分析」、「品牌效应管理」等，所以，最终咱们还是要结合企业的实际需求来做决策。</p>
+</li>
+<li>
+<p>用户：减轻内存，用完即可关闭，不占用空间</p>
+</li>
+<li>
+<p>商户：线上线下结合，实现互联网的转型</p>
+</li>
+<li>
+<p>创业者：创业简单，应用广泛，尤其是公众号创业者，直接小程序+公众号，打造微信生态圈，小程序依托庞大的生态圈天生拥有庞大的自然流量，同时小程序也拥有众多线上营销功能，前途还是很光明的！</p>
+</li>
+<li>
+<p>小程序流量入口：微信搜索、附近小程序、线下小程序、小程序二维码、公众号内链、转发小程序、公众号关联小程序、商家公众号平台自定义菜单、绑定关联通知、微信发现入口</p>
+</li>
+</ul>
+<h1 id="小程序特点">小程序特点</h1>
+<ul>
+<li>对于普通用户，可以通过二维码扫描、搜索或者朋友分享可以直接打开，加上优秀的体验，小程序使得服务提供者的触达能力变得更强。</li>
+<li>对于开发者，小程序具有快速加载和渲染的能力，加之配套的与能力、运维能力和数据汇总能力，使得开发者不需要处理琐碎的工作，精力放于具体的业务逻辑的开发上。</li>
+<li>小程序的模式使得微信可以开放更多的数据，开发者可以获得用户的一些基本信息，甚至可以获取微信群的基本信息，使得小程序的开放能力变得更强。</li>
+</ul>
+<p><strong>体验小程序</strong><br>
+<img src="https://res.wx.qq.com/wxdoc/dist/assets/img/demo.ef5c5bef.jpg" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%8F%91%E5%B1%95%E7%94%B1%E6%9D%A5">发展由来</a></li>
+<li><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8A%BF">小程序优势</a></li>
+<li><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%8Eweb">小程序与web</a></li>
+<li><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%92%8C-app">小程序和 APP</a></li>
+<li><a href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%89%B9%E7%82%B9">小程序特点</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

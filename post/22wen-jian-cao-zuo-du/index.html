@@ -1,0 +1,342 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>22、文件操作-读 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="22、文件操作-读 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 文件读取
+文件读写的接口位于io包，file文件类是这些接口的实现类。
+1.1 直接读取 read()
+read() 实现的是按字节数读取：
+	readByte := make([]byte, 128)			// 指定要读取的长度
+	f..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              22、文件操作-读
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-文件读取">一 文件读取</h2>
+<p>文件读写的接口位于io包，file文件类是这些接口的实现类。</p>
+<h3 id="11-直接读取-read">1.1 直接读取 read()</h3>
+<p>read() 实现的是按字节数读取：</p>
+<pre><code class="language-go">	readByte := make([]byte, 128)			// 指定要读取的长度
+	for {
+		n, err := f.Read(readByte)			// 将数据读取如切片，返回值 n 是实际读取到的字节数
+		if err != nil &amp;&amp; err != io.EOF{		// 如果读到了文件末尾：EOF 即 end of file
+			fmt.Println(&quot;read file : &quot;, err)
+			break
+		}
+
+		fmt.Println(&quot;read: &quot;, string(readByte[:n]))
+		if n &lt; 128 {
+			fmt.Println(&quot;read end&quot;)
+			break
+		}
+	}
+</code></pre>
+<h3 id="12-bufio的写操作">1.2 bufio的写操作</h3>
+<p>bufio封装了io.Reader、io.Writer接口对象，并创建了另一个也实现了该接口的对象：bufio.Reader、bufio.Writer。通过该实现，bufio实现了文件的缓冲区设计，可以大大提高文件I/O的效率。</p>
+<p>使用bufio读取文件时，先将数据读入内存的缓冲区（缓冲区一般比要比程序中设置的文件接收对象要大），这样就可以有效降低直接I/O的次数。</p>
+<p><code>bufio.Read([]byte)</code>相当于读取大小<code>len(p)</code>的内容：</p>
+<ul>
+<li>当缓冲区有内容时，将缓冲区内容全部填入p并清空缓冲区</li>
+<li>当缓冲区没有内容且<code>len(p)&gt;len(buf)</code>，即要读取的内容比缓冲区还要大，直接去文件读取即可</li>
+<li>当缓冲区没有内容且<code>len(p)&lt;len(buf)</code>，即要读取的内容比缓冲区小，读取文件内容并填满缓冲区，并将p填满</li>
+<li>以后再次读取时，缓冲区有内容，将缓冲区内容全部填入p并清空缓冲区（和第一步一致）</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">	// 创建读对象
+	reader := bufio.NewReader(f)
+
+	// 读一行数据
+	byt, _ := reader.ReadBytes('\n')			
+	fmt.Println(string(byt))
+</code></pre>
+<p>ReadString() 函数也具有同样的功能，且能直接读取到字符串数据，无需转换，示例：读取大文件的全部数据</p>
+<pre><code class="language-go">	reader := bufio.NewReader(f)
+	for {										// 按照缓冲区读取：读取到特定字符结束
+		str, err := reader.ReadString('\n')		// 按行读取
+		if err != nil &amp;&amp; err != io.EOF {
+			fmt.Println(&quot;read err: &quot;, err)
+			break
+		}
+		fmt.Println(&quot;str = &quot;, str)
+		if err == io.EOF {
+			fmt.Print(&quot;read end&quot;)
+			break
+		}
+	}
+</code></pre>
+<p>在Unix设计思想中，一切皆文件，命令行输入也可以作为文件读入：</p>
+<pre><code class="language-go">	reader := bufio.NewReader(os.Stdin)
+	s, _ := reader.ReadString(&quot;-&quot;)		// 假设命令行以 - 开始
+</code></pre>
+<p>缓冲的思想：通过bufio，数据被写入用户缓冲，再进入系统缓冲，最后由操作系统将系统缓冲区的数据写入磁盘。</p>
+<h3 id="13-ioioutil-包文件读取">1.3 io/ioutil 包文件读取</h3>
+<p>ioutil直接读取文件：</p>
+<pre><code class="language-go">	ret, err := ioutil.ReadFile(&quot;test.txt&quot;)
+	if err != nil {
+		fmt.Println(&quot;read err :&quot;, err)
+		return
+	}
+	fmt.Println(string(ret))
+</code></pre>
+<h3 id="二-文件写入">二 文件写入</h3>
+<h3 id="21-直接写">2.1 直接写</h3>
+<pre><code class="language-go">	f, err := os.OpenFile(&quot;test.txt&quot;, os.O_CREATE | os.O_WRONLY, os.ModePerm)
+	if err != nil {
+		fmt.Println(&quot;open err:&quot;, err)
+		return
+	}
+	defer f.Close()
+
+	n, err := f.Write([]byte(&quot;hello world&quot;))
+	if err != nil {
+		fmt.Println(&quot;write err:&quot;, err)
+	}
+	fmt.Println(n)								// 每次都会从头开始重新写入
+</code></pre>
+<p>上述案例中，如果我们不想每次写入都会从头开始重新写入，那么需要将打开模式修改为：<code>os.O_CREATE | os.O_WRONLY | os.O_APPEND</code></p>
+<h3 id="22-bufio的写操作">2.2 bufio的写操作</h3>
+<pre><code class="language-go">	writer := bufio.NewWriter(f)
+	_, err = writer.WriteString(&quot;hello world!&quot;)
+	if err != nil {
+		fmt.Println(&quot;write err:&quot;, err)
+		return
+	}
+	writer.Flush()		// 必须刷新缓冲区：将缓冲区的内容写入文件中。如果不刷新，则只会在内容超出缓冲区大小时写入
+</code></pre>
+<h3 id="23-ioioutil-包文件写入">2.3  io/ioutil 包文件写入</h3>
+<pre><code class="language-go">	s := &quot;你好世界&quot;
+	err := ioutil.WriteFile(&quot;test.txt&quot;, []byte(s), os.ModePerm)
+</code></pre>
+<h2 id="三-文件读取偏移量">三 文件读取偏移量</h2>
+<p>文件读取时，是可以控制光标位置的：</p>
+<pre><code class="language-go">	f, err := os.OpenFile(&quot;test.txt&quot;, os.O_RDWR, os.ModePerm)
+	if err != nil {
+		fmt.Println(&quot;open err:&quot;, err)
+		return
+	}
+	defer f.Close()
+
+	// 读取前五个字节，假设读取的文件内容为： hello world!
+	bs := []byte{0}		// 创建1个字节的切片
+	_, err = f.Read(bs)
+	if err != nil {
+		fmt.Println(&quot;read err:&quot;, err)
+		return
+	}
+	fmt.Println(&quot;读到的数据是：&quot;, string(bs))	// h
+
+	// 移动光标
+	_, err = f.Seek(4, io.SeekStart)		// 光标从开始位置(h之前)，移动4位，到达o之前
+	if err != nil {
+		fmt.Println(&quot;seek err:&quot;, err)
+		return
+	}
+	_, err = f.Read(bs)
+	if err != nil {
+		fmt.Println(&quot;read err:&quot;, err)
+		return
+	}
+	fmt.Println(&quot;读到的数据是：&quot;, string(bs))		// o
+</code></pre>
+<p>通过记录光标的位置，可以实现断点续传：假设已经下载了1KB文件，即本地临时文件存储了1KB，此时断电，重启后通过本地文件大小、Seek()方法获取到上次读取文件的光标位置即可实现继续下载！</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96">一 文件读取</a>
+<ul>
+<li><a href="#11-%E7%9B%B4%E6%8E%A5%E8%AF%BB%E5%8F%96-read">1.1 直接读取 read()</a></li>
+<li><a href="#12-bufio%E7%9A%84%E5%86%99%E6%93%8D%E4%BD%9C">1.2 bufio的写操作</a></li>
+<li><a href="#13-ioioutil-%E5%8C%85%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96">1.3 io/ioutil 包文件读取</a></li>
+<li><a href="#%E4%BA%8C-%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5">二 文件写入</a></li>
+<li><a href="#21-%E7%9B%B4%E6%8E%A5%E5%86%99">2.1 直接写</a></li>
+<li><a href="#22-bufio%E7%9A%84%E5%86%99%E6%93%8D%E4%BD%9C">2.2 bufio的写操作</a></li>
+<li><a href="#23-ioioutil-%E5%8C%85%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5">2.3  io/ioutil 包文件写入</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%81%8F%E7%A7%BB%E9%87%8F">三 文件读取偏移量</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/21wen-jian-cao-zuo-xie/">
+              <h3 class="post-title">
+                21、文件操作-写
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

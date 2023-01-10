@@ -1,0 +1,393 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>7、数据类型-字符串 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="7、数据类型-字符串 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 字符
+Golang 中没有专门的字符类型，如果要存储单个字符(字母)，一般使用 byte 来保存，且使用单引号包裹。
+var c1 byte = 'a'
+var c2 byte = '0'
+fmt.Println(&quot;c1=&q..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              7、数据类型-字符串
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-字符">一 字符</h2>
+<p>Golang 中没有专门的字符类型，如果要存储单个字符(字母)，一般使用 byte 来保存，且使用单引号包裹。</p>
+<pre><code class="language-go">var c1 byte = 'a'
+var c2 byte = '0'
+fmt.Println(&quot;c1=&quot;, c1)					//输出 97   
+fmt.Println(&quot;c2=&quot;, c2)					//输出48
+fmt.Printf(&quot;c1=%c,c2=%c\n&quot;, c1, c2)	    //输出原值 a 0
+
+//var c3 byte = '北'
+//fmt.Printf(&quot;c3=%c&quot;, c3)					// 溢出错误:overflows byte
+</code></pre>
+<p>贴士：</p>
+<ul>
+<li>字符类型也可以用<code>d%</code>打印为整型</li>
+<li>如果我们保存的字符在 ASCII 表的,比如[0-1, a-z,A-Z..]直接可以保存到 byte</li>
+<li>如果我们保存的字符对应码值大于 255,这时我们可以考虑使用 int 类型保存</li>
+<li>如果我们需要安装字符的方式输出，这时我们需要格式化输出，即 fmt.Printf(“%c”, c1)</li>
+<li>字符可以和整型进行运算</li>
+</ul>
+<h2 id="二-字符串">二 字符串</h2>
+<p>传统的字符串是由字符组成的，而Go的字符串是由单个字节连接起来的，即Go字符串是一串固定长度的字符连接起来的字符序列。</p>
+<p>字符串在Go语言中是基本类型，内容在初始化后不能修改。</p>
+<p>Go中的字符串都是采用UTF-8字符集编码，使用一对双引号<code>&quot;&quot;</code>或反引号<code>``</code>定义。<code>``</code>可以额外解析换行，即其没有字符转义功能。</p>
+<pre><code class="language-go">var str1 string
+str1 = &quot;Hello &quot;
+str2 := &quot; World!&quot;
+
+fmt.Println(str1[0])     	// 输出字符串第一个字符 72
+fmt.Println(len(str1))   	// 输出长度 6
+fmt.Println(str1 + str2) 	// 输出不带空格的
+
+// 字符串不可变，编译报错： cannot assign to 因为
+// str1[0] = 'c'			
+</code></pre>
+<p>由于Go中的字符串不可直接改变，可以使用下列两种方式进行修改：</p>
+<p>方式一：通过转换为字节数组<code>[]byte</code>类型，构造一个临时字符串</p>
+<pre><code class="language-go">str := &quot;hello&quot;
+
+strTemp := []byte(str)
+fmt.Println(&quot;strTemp=&quot;, strTemp)			// [104 101 108 108 111]
+
+strTemp[0] = 'c'
+strResult := string(strTemp)
+fmt.Println(&quot;strResult=&quot;, strResult)		// strResult= cello
+</code></pre>
+<p>方式二：使用切片</p>
+<pre><code class="language-go">str := &quot;hello&quot;
+str = &quot;c&quot;+ str[1:]		// 1: 表示从第1位开始到最后
+</code></pre>
+<p>Go和Java等语言一样，字符串默认是不可变的，这样保证了线程安全，大家使用的都是只读对象，无须加锁，且能很方便的共享内存，不必使用写时复制。</p>
+<h2 id="三-字符串常用操作">三 字符串常用操作</h2>
+<h4 id="31-len函数与字符串遍历">3.1 len()函数与字符串遍历</h4>
+<p>len()函数是go语言的内建函数，可以用来获取字符串、切片、通道等的长度。</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+	&quot;unicode/utf8&quot;
+)
+
+func main() {
+
+	str1 := &quot;hello world&quot;
+	str2 := &quot;你好，&quot;
+
+	fmt.Println(len(str1))							// 11
+	fmt.Println(len(str2))							// 9
+	fmt.Println(utf8.RuneCountInString(str2))		// 3
+}
+</code></pre>
+<p>第一个函数输出11很容易理解，第二个函数却输出了9，理论上我们会认为应该是3才对。这是因为Go的字符串都是以UTF-8格式保存，每个中文占据3个字节。Go中计算UTF-8字符串格式的长度应该使用<code>utf8.RuneCountInString</code>。</p>
+<p>字符串遍历方式一：使用字节数组，注意每个中文在UTF-8中占据3个字节</p>
+<pre><code class="language-go">str := &quot;hello&quot;
+for i := 0; i &lt; len(str); i++ {
+	fmt.Println(i,str[i])
+}
+</code></pre>
+<p>字符串遍历方式二：range关键字只是第一种遍历方式的简写</p>
+<pre><code class="language-go">str := &quot;你好&quot;
+for i,ch := range str {
+	fmt.Println(i,ch)
+}
+</code></pre>
+<p><strong>注意</strong>：由于上述len()函数本身原因，Unicode字符遍历需要使用range。</p>
+<h4 id="32-string函数类型转换">3.2 string()函数类型转换</h4>
+<p>go的内建函数 <code>string()</code>可以将其他类型转变为字符串类型：</p>
+<pre><code class="language-go">num := 12
+fmt.Printf(&quot;%T \n&quot;, string(num))			// string
+</code></pre>
+<h4 id="33-字符串连接">3.3 字符串连接</h4>
+<p>使用<code>+</code>能够连接字符串。但是该操作并不高效（因为字符串在Go中是基本类型，每次拼接都是拷贝了内存！）。Go1.10提供了类似Java的StringBuilder机制来进行高效字符串连接：</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;strings&quot;
+	&quot;fmt&quot;
+)
+
+func main() {
+
+	str1 := &quot;hello &quot;
+	str2 := &quot; world&quot;
+
+	//创建字节缓冲
+	var stringBuilder strings.Builder
+
+	//把字符串写入缓冲
+	stringBuilder.WriteString(str1)
+	stringBuilder.WriteString(str2)
+
+	//将缓冲以字符串形式输出
+	fmt.Println(stringBuilder.String())
+
+}
+</code></pre>
+<p>在1.10版本前，可以使用bytes.Buffer拼接字符串（因为字符串其实是字节数组）：</p>
+<pre><code class="language-go">	var buf bytes.Buffer
+	buf.WriteString(&quot;hello&quot;)
+	fmt.Println(buf.String())
+</code></pre>
+<h2 id="四-strings包相关函数">四 strings包相关函数</h2>
+<p>strings包提供了字符串的一些常见操作函数：</p>
+<pre><code class="language-go">//查找s在字符串str中的索引
+Index(str, s string) int 
+
+//判断str是否包含s
+Contains(str, s string) bool
+
+//通过字符串str连接切片 s
+Join(s []string, str string) string
+
+//替换字符串str中old字符串为new字符串，n表示替换的次数，小于0全部替换
+Replace(str,old,new string,n int) string
+
+//字符串str按照s分割，返回切片
+Split(str,s string)[]string
+
+// 去除头部、尾部指定的字符串
+Trim(s string, cutset string) string
+
+// 去除空格，返回切片
+Fields(s string) []string
+</code></pre>
+<h2 id="五-strconv包的字符串转换函数">五 strconv包的字符串转换函数</h2>
+<p>在Java中遇到 <code>&quot;你好&quot; + 123</code>会将 <code>+</code>转变为连接符。而Go语言要求 <code>+</code> 号两边数据的数据类型必须一致，这使得类似的操作变得比较不便，Go提供了strconv包用于字符串与基本类型之间的转换，常用函数有Append、Format、Parse。</p>
+<pre><code class="language-Go">package main
+
+import (
+	&quot;fmt&quot;
+	&quot;strconv&quot;
+)
+
+func main() {
+
+	// Append 系列函数将整数等转换为字符串后，添加到现有的字节数组中
+	str1 := make([]byte, 0, 100)
+	str1 = strconv.AppendInt(str1, 4567, 10)
+	str1 = strconv.AppendBool(str1, false)
+	str1 = strconv.AppendQuote(str1, &quot;abcdefg&quot;)
+	str1 = strconv.AppendQuoteRune(str1, '单')
+	fmt.Println(string(str1))						// 4567false&quot;abcdefg&quot;'单'
+
+	// Format 系列函数把其他类型的转换为字符串
+	a := strconv.FormatBool(false)
+	b := strconv.FormatFloat(123.23, 'g', 12, 64)
+	c := strconv.FormatInt(1234, 10)
+	d := strconv.FormatUint(12345, 10)
+	e := strconv.Itoa(1023)
+	fmt.Println(a, b, c, d, e)						// false 123.23 1234 12345 1023
+
+	// Parse 系列函数把字符串转换为其他类型
+	f, _ := strconv.ParseBool(&quot;false&quot;)
+	g, _ := strconv.ParseFloat(&quot;123.23&quot;, 64)
+	h, _ := strconv.ParseInt(&quot;1234&quot;, 10, 64)
+	i, _ := strconv.ParseUint(&quot;12345&quot;, 10, 64)
+	j, _ := strconv.Atoi(&quot;1023&quot;)
+	fmt.Println(f, g, h, i, j)					// false 123.23 1234 12345 1023
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%AD%97%E7%AC%A6">一 字符</a></li>
+<li><a href="#%E4%BA%8C-%E5%AD%97%E7%AC%A6%E4%B8%B2">二 字符串</a></li>
+<li><a href="#%E4%B8%89-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C">三 字符串常用操作</a><br>
+*
+<ul>
+<li><a href="#31-len%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%81%8D%E5%8E%86">3.1 len()函数与字符串遍历</a></li>
+<li><a href="#32-string%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2">3.2 string()函数类型转换</a></li>
+<li><a href="#33-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%9E%E6%8E%A5">3.3 字符串连接</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-strings%E5%8C%85%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0">四 strings包相关函数</a></li>
+<li><a href="#%E4%BA%94-strconv%E5%8C%85%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0">五 strconv包的字符串转换函数</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/6shu-zhi-lei-xing/">
+              <h3 class="post-title">
+                6、数据类型-数值类型 
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

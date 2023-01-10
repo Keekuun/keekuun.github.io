@@ -1,0 +1,412 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>15、函数简介 | 月上秦少</title>
+<link rel="shortcut icon" href="https://keekuun.github.io/favicon.ico?v=1673334329593">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://keekuun.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="15、函数简介 | 月上秦少 - Atom Feed" href="https://keekuun.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="一 函数
+1.1 函数声明
+函数声明格式：
+func 函数名字 (参数列表) (返回值列表）{
+	// 函数体
+	return 返回值列表
+}
+
+注意：
+
+函数名首字母小写为私有，大写为公有；
+参数列表可以有0-多个，多参数使用逗号分隔，不..." />
+    <meta name="keywords" content="go基础" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://keekuun.github.io">
+  <img class="avatar" src="https://keekuun.github.io/images/avatar.png?v=1673334329593" alt="">
+  </a>
+  <h1 class="site-title">
+    月上秦少
+  </h1>
+  <p class="site-description">
+    每一个不曾起舞的日子，都是对生命的辜负！
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              15、函数简介
+            </h2>
+            <div class="post-info">
+              <span>
+                2023-01-04
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+                <a href="https://keekuun.github.io/tag/rrlRBFK-6/" class="post-tag">
+                  # go基础
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <h2 id="一-函数">一 函数</h2>
+<h4 id="11-函数声明">1.1 函数声明</h4>
+<p>函数声明格式：</p>
+<pre><code class="language-go">func 函数名字 (参数列表) (返回值列表）{
+	// 函数体
+	return 返回值列表
+}
+</code></pre>
+<p>注意：</p>
+<ul>
+<li>函数名首字母小写为私有，大写为公有；</li>
+<li>参数列表可以有0-多个，多参数使用逗号分隔，不支持默认参数；</li>
+<li>返回值列表返回值类型可以不用写变量名</li>
+<li>如果只有一个返回值且不声明类型，可以省略返回值列表与括号</li>
+<li>如果有返回值，函数内必须有return</li>
+</ul>
+<p>Go中函数常见写法：</p>
+<pre><code class="language-go">//无返回值，默认返回0，所以也可以写为 func fn() int {}
+func fn(){}  
+
+//Go推荐给函数返回值起一个变量名
+func fn1() (result int) {
+	return 1
+}
+
+//第二种返回值写法
+func fn2() (result int) {
+	result = 1
+	return 
+}
+
+//多返回值情
+func fn3() (int, int, int) {
+   return 1,2,3
+}
+
+//Go返回值推荐多返回值写法：
+func fn4() (a int, b int, c int) {		多个参数类型如果相同，可以简写为： a,b int
+   a , b, c = 1, 2, 3
+   return 
+}
+
+</code></pre>
+<h4 id="12-值传递和引用传递">1.2 值传递和引用传递</h4>
+<p>不管是值传递还是引用传递，传递给函数的都是变量的副本，不同的是，值传递的是值的拷贝，引用传递的是地址的拷贝，一般来说，地址拷贝效率高，因为数据量小，而值拷贝决定拷贝的 数据大小，数据越大，效率越低。</p>
+<p>如果希望函数内的变量能修改函数外的变量，可以传入变量的地址&amp;，函数内以指针的方式操作变量。</p>
+<h4 id="13-可变参数">1.3 可变参数</h4>
+<p>可变参数变量是一个包含所有参数的切片。如果要在多个可变参数中传递参数 ，可以在传递时在可变参数变量中默认添 加“ ...”，将切片中的元素进行传递，而不是传递可变参数变量本身。</p>
+<p>示例：对可变参数列表进行遍历</p>
+<pre><code class="language-go">func joinStrings(slist ...string) string {
+	var buf bytes.Buffer
+	for _, s := range slist {
+		buf.WriteString(s)
+	}
+	return buf.String()
+}
+
+func main() {
+	fmt.Println(joinStrings(&quot;pig&quot;, &quot; and&quot;, &quot; bird&quot;))
+}
+</code></pre>
+<p>示例：参数传递</p>
+<pre><code class="language-go">// 实际打印函数
+func rawPrint(rawList ...interface{}) {
+	for _, a := range rawList {
+		fmt.Println(a)
+	}
+}
+
+// 封装打印函数
+func print(slist ...interface{})  {
+	// 将slist可变参数切片完整传递给下一个函数
+	rawPrint(slist...)
+}
+
+func main() {
+	print(1,2,3)
+}
+</code></pre>
+<h4 id="14-匿名函数">1.4 匿名函数</h4>
+<p>匿名函数可以看做函数字面量，所有直接使用函数类型变量的地方都可以由匿名函数代替。匿名函数可以直接赋值给函数变量，可以当做实参，也可以作为返回值使用，还可以直接被调用。</p>
+<pre><code class="language-go">func main()  {
+
+   a := 3
+   f1 := func(num int) {    		// f1 即为匿名函数
+      fmt.Println(num) 			// 匿名函数访问外部变量
+   }
+   f1(a)
+
+   func() {         			// 匿名函数自调
+      fmt.Println(a)
+   }()
+
+}
+
+//匿名函数实战：取最大值,最小值
+x, y := func(i,j int) (max,min int) {
+   if i &gt; j {
+      max = i
+      min = j
+   } else {
+      max = j
+      min = i
+   }
+   return
+}(10,20)
+fmt.Println(x + ' ' + y)
+
+</code></pre>
+<h4 id="15-函数类型">1.5 函数类型</h4>
+<p>函数去掉函数名、参数名和{}后的结果即是函数类型，可以使用%T打印该结果。</p>
+<p>两个函数类型相同的前提是：拥有相同的形参列表和返回值列表，且列表元素的次序、类型都相同，形参名可以不同。</p>
+<p>示例：</p>
+<pre><code class="language-go">func mathSum(a, b int) int {
+	return a + b
+}
+
+func mathSub(a, b int) int {
+	return a - b
+}
+
+//定义一个函数类型
+type MyMath func(int, int) int
+
+//定义的函数类型作为参数使用
+func Test(f MyMath, a , b int) int{
+	return f(a,b)
+}
+</code></pre>
+<p>通常可以把函数类型当做一种引用类型，实际函数类型变量和函数名都可以当做指针变量，只想函数代码开始的位置，没有初始化的函数默认值是nil。</p>
+<h2 id="二-go函数特性总结">二 Go函数特性总结</h2>
+<ul>
+<li>支持有名称的返回值；</li>
+<li>不支持默认值参数；</li>
+<li>不支持重载；</li>
+<li>不支持命名函数嵌套，匿名函数可以嵌套；</li>
+<li>Go函数从实参到形参的传递永远是值拷贝，有时函数调用后实参指向的值发生了变化，是因为参数传递的是指针的拷贝，实参是一个指针变量，传递给形参的是这个指针变量的副本，实质上仍然是值拷贝；</li>
+<li>Go函数支持不定参数；</li>
+</ul>
+<h2 id="三-两个特殊函数">三 两个特殊函数</h2>
+<h4 id="31-init函数">3.1 init函数</h4>
+<p>Go语言中，除了可以在全局声明中初始化实体，也可以在init函数中初始化。init函数是一个特殊的函数，它会在包完成初始化后自动执行，执行优先级高于main函数，并且不能手动调用init函数，每一个文件可以有多个init函数，初始化过程会根据包的依赖关系顺序单线程执行。</p>
+<pre><code class="language-go">package main
+import (
+	&quot;fmt&quot;
+)
+func init() {
+	//在这里可以书写一些初始化操作
+	fmt.Println(&quot;init...&quot;)
+}
+func main() {
+	fmt.Println(&quot;main...&quot;)
+}
+</code></pre>
+<h4 id="32-new函数">3.2 new函数</h4>
+<p>new函数可以用来创建变量。表达式<code>new(T)</code>将创建一个T类型的匿名变量，初始化为T类型的零值，然后返回变量地址，返回的指针类型为<code>*T</code>：</p>
+<pre><code class="language-go">	p := new(int)		// p 为 *int类型，只想匿名的int变量
+	fmt.Println(*p)		// &quot;0&quot;
+	*p = 2				// 设置 int匿名变量值为2
+	fmt.Println(*p)
+</code></pre>
+<p>new函数还可以用来为结构体创建实例：</p>
+<pre><code class="language-go">type file struct {
+
+}
+f := new(file)
+</code></pre>
+<p>贴士：new函数其实是语法糖，不是新概念，如下所示的两个函数其实拥有相同的行为。</p>
+<pre><code class="language-go">func newInt1() *int {
+	return new(int)
+}
+
+func newInt2() *int {
+	var dummy int
+	return &amp;dummy
+}
+</code></pre>
+<p>注意：<code>new</code>只是一个预定义函数，并不是一个关键字，所以<code>new</code>也有可能会被项目定义为别的类型。</p>
+<h4 id="33-make函数">3.3 make函数</h4>
+<p>make函数经常用来创建切片、Map、管道：</p>
+<pre><code class="language-go">	m1 := map[string]int{}
+	m2 := make(map[string]int, 10)
+</code></pre>
+<p>上面展示了两种map的创建方式，其不同点是第一种创建方式无法预估长度，当长度超过了当前长度时，会引起内存的拷贝！！第二种创建方式直接限定了长度，这样能有效提升性能！</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E5%87%BD%E6%95%B0">一 函数</a><br>
+*
+<ul>
+<li><a href="#11-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E">1.1 函数声明</a></li>
+<li><a href="#12-%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92">1.2 值传递和引用传递</a></li>
+<li><a href="#13-%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0">1.3 可变参数</a></li>
+<li><a href="#14-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0">1.4 匿名函数</a></li>
+<li><a href="#15-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B">1.5 函数类型</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-go%E5%87%BD%E6%95%B0%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93">二 Go函数特性总结</a></li>
+<li><a href="#%E4%B8%89-%E4%B8%A4%E4%B8%AA%E7%89%B9%E6%AE%8A%E5%87%BD%E6%95%B0">三 两个特殊函数</a><br>
+*
+<ul>
+<li><a href="#31-init%E5%87%BD%E6%95%B0">3.1 init函数</a></li>
+<li><a href="#32-new%E5%87%BD%E6%95%B0">3.2 new函数</a></li>
+<li><a href="#33-make%E5%87%BD%E6%95%B0">3.3 make函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://keekuun.github.io/post/13yin-yong-lei-xing-zhi-zhen-pointer/">
+              <h3 class="post-title">
+                14、引用类型-指针(pointer)
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+
+          
+            <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.1/dist/disqusjs.css">
+<script src="https://unpkg.com/disqusjs@1.1/dist/disqus.js"></script>
+
+<div id="disqus_thread"></div>
+
+<script>
+
+var options = {
+  shortname: 'post',
+  apikey: 'K9Sp4R8JTdllk55SiHAdK9ipfGhz2lU3suCOLeGoaxm5xNdXACJKI1ZOufZpWSdV',
+}
+if ('') {
+  options.api = ''
+}
+var dsqjs = new DisqusJS(options)
+
+</script>
+
+          
+        
+
+        <div class="site-footer">
+  Powered by &nbsp; <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+&nbsp;&nbsp;©<a href="https://docs.zkkysqs.top" target="_blank">月上秦少</a>
+  <a class="rss" href="https://keekuun.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
