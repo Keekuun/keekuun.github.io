@@ -1,8 +1,12 @@
 ---
-title: 真香！vue-cli-service项目升级vite sidebar: auto date: 2023-1-10 isComment: true categories:
-
+title: 真香！vue-cli-service项目升级vite
+sidebar: auto 
+date: 2023-1-10 
+isComment: true 
+categories:
 - Vue
-- 前端 tags:
+- 前端 
+tags:
 - Vite
 - Vue
 
