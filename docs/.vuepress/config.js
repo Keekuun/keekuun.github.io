@@ -4,7 +4,7 @@ const themeConfig = require('./config/themeConfig');
 module.exports = {
     title: '月上秦少',
     // gitee pages必须加上仓库名称
-    base: '/blog/',
+    // base: '/blog/',
     description: '每一个不曾起舞的日子，都是对生命的辜负！',
     locales: {
         '/': {
