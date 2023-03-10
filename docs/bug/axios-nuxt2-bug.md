@@ -88,7 +88,7 @@ function request(url, options, extendsOptions) {
 
 + 1.由于后端有接口没有支持`https`,而项目`baseurl`配置的是`https`,就造成了这个问题。
 + 2.axios报错信息未做日志记录，项目虽然接入了sentry,但是这里的错误信息并没有捕获到
-+ 3.axios的这个错误导致了nuxt服务的崩溃，nuxt健壮性。。。
++ 3.axios的这个错误导致了nuxt服务的崩溃，`@nuxt/devalue`健壮性。。。
 >
 > `try catch`和`window.onerror`是无法捕捉`Promise`错误的（因为是异步）
 而当 `Promise` 被 `reject` 且没有 `reject` 处理器的时候，会触发 `unhandledrejection` 事件
@@ -96,7 +96,7 @@ function request(url, options, extendsOptions) {
 Sentry这边只收集没有被reject的错误即`window.unhandledrejection`
 
 # 5.按图索骥
-既然，`nuxt`使用`axios`报错了，项目也是使用`catch`去捕获处理了，那么按理说`nuxt`服务应该成功运行啊，为什么会爆栈呢？
+虽然`axios`报错了，但是使用`catch`去捕获了错误，那么按理说`node`服务应该成功运行啊，为什么会爆栈呢？
 
 于是，去github查看nuxt的[httpadapter](https://github.com/nuxt/nuxt/issues?q=httpadapter) 相关issue还很多，着实惊出一身冷汗！
 
