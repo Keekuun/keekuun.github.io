@@ -748,19 +748,100 @@ where student.SId = A.SId
 ```
 
 #### 21 查询男生、女生人数
+```sql
+select Ssex, count(*) from student group by Ssex;
 
++------+----------+
+| Ssex | count(*) |
++------+----------+
+| 女   |        5 |
+| 男   |        7 |
++------+----------+
+```
 #### 22 查询名字中含有「风」字的学生信息
 
+```sql
+select * from student where Sname like '%风%';
+
++------+-------+---------------------+------+----------+
+| SId  | Sname | Sage                | Ssex | Sdept    |
++------+-------+---------------------+------+----------+
+| 03   | 孙风  | 1990-05-20 00:00:00 | 男   | 计算机系 |
++------+-------+---------------------+------+----------+
+```
 #### 23 查询同名同性学生名单，并统计同名人数
+
+```sql
+select Sname, Ssex, count(*) from student group by Sname, Ssex having count(*) > 1;
+
++-------+------+----------+
+| Sname | Ssex | count(*) |
++-------+------+----------+
+| 李四  | 女   |        2 |
++-------+------+----------+
+```
 
 #### 24 查询 1990 年出生的学生名单
 
+```sql
+select * from student where year(Sage) = 1990;
+
++------+-------+---------------------+------+----------+
+| SId  | Sname | Sage                | Ssex | Sdept    |
++------+-------+---------------------+------+----------+
+| 01   | 赵雷  | 1990-01-01 00:00:00 | 男   | 计算机系 |
+| 02   | 钱电  | 1990-12-21 00:00:00 | 男   | 计算机系 |
+| 03   | 孙风  | 1990-05-20 00:00:00 | 男   | 计算机系 |
+| 04   | 李云  | 1990-08-06 00:00:00 | 男   | 计算机系 |
++------+-------+---------------------+------+----------+
+```
+
 #### 25 查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列
+```sql
+select Score.CId, avg(Score.score) as '平均成绩'
+from Score
+group by Score.CId
+order by avg(Score.score) DESC, Score.CId ASC;
+```
+
 
 #### 26 查询平均成绩大于等于 85 的所有学生的学号、姓名和平均成绩
 
+```sql
+select student.SId, student.Sname, avg(score.score) as '平均成绩'
+from student, score
+where student.SId = score.SId
+group by student.SId, student.Sname
+having avg(score.score) >= 85;
+
+| SId  | Sname | 平均成绩 |
+|------|-------|----------|
+| 01   | 赵雷  | 87.5000  |
+| 02   | 钱电  | 87.1667  |
+| 03   | 孙风  | 80.0000  |
+| 07   | 郑竹  | 89.5000  |
+| 05   | 周梅  | 86.5000  |
+
+```
+
 #### 27 查询课程名称为「数学」，且分数低于 60 的学生姓名和分数
 
+```sql
+select student.Sname, score.score
+from student, score, course
+where student.SId = score.SId
+  and score.CId = course.CId
+  and course.Cname = '数学'
+  and score.score < 60;
+
++-------+-------+
+| Sname | score |
++-------+-------+
+| 李云  |  50.0 |
+| 吴兰  |  31.0 |
+| 赵雷  |  30.0 |
++-------+-------+
+```
 #### 28 查询所有学生的课程及分数情况（存在学生没成绩，没选课的情况）
 
 #### 29 查询任何一门课程成绩在 70 分以上的姓名、课程名称和分数
