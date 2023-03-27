@@ -843,6 +843,14 @@ where student.SId = score.SId
 +-------+-------+
 ```
 #### 28 查询所有学生的课程及分数情况（存在学生没成绩，没选课的情况）
+```sql
+select student.SId, student.Sname, course.CId, course.Cname, IFNULL(score.score, '暂无成绩') as '分数'
+from student
+         left join score on student.SId = score.SId
+         left join course on score.CId = course.CId
+order by student.SId, course.CId;
+
+```
 
 #### 29 查询任何一门课程成绩在 70 分以上的姓名、课程名称和分数
 
