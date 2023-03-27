@@ -14,15 +14,15 @@ tags:
 
 # 真香！vue-cli-service项目升级vite
 
-## ![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/095afad2-2fff-4dc5-88bb-9366d8abcf01.png)
+## ![image](../../../../images/vue/vite/1.png)
 
 ## 1、项目概览
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/5db8b61f-f73a-435b-9c87-81afc4ab9429.png)
+![image](../../../../images/vue/vite/2.png)
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/9261e685-febb-4297-b87c-6ddea0be312b.png)
+![image](../../../../images/vue/vite/3.png)
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/aaf4306e-485c-4eb9-bbe1-fcd6c36c0081.png)
+![image](../../../../images/vue/vite/4.png)
 
 admin-web管理后台是我们业务的管理中心，开发、运营、产品等工作人员会频繁使用，是我们目前业务的核心配置中心，这个项目从建立之初一直更新迭代，迄今为止有**655**次commits,**681**
 次CI，可见更新次数还是很频繁的。随着日积月累，代码量越来越多，vue单页面已经有了**100+** pages，**30+** vuecomponents，因此启动速度越来越慢。
@@ -39,8 +39,7 @@ admin-web管理后台是我们业务的管理中心，开发、运营、产品�
 
 * **最小耗时：10s**
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/d2fc5dc7-3249-4dc6-b2b5-1acc21c8bebf.png)
-
+![image](../../../../images/vue/vite/5.png)
 2.使用vite启动：
 
 * **平均耗时：2s**
@@ -49,8 +48,7 @@ admin-web管理后台是我们业务的管理中心，开发、运营、产品�
 
 * **最小耗时：1s**
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/b9c8fa34-72b7-4e80-b817-4a714c01afdf.png)
-
+![image](../../../../images/vue/vite/6.png)
 **可见启动速度提升差不多10倍，平均每次启动节省约13s。**
 
 **下面介绍项目改造过程：**
@@ -828,12 +826,10 @@ export default defineConfig({
 
 切换vite前，正常显示：
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/d49a8fec-d6d3-431f-b08f-5eb329e3d849.png)
-
+![image](../../../../images/vue/vite/8.png)
 使用vite后图标不见了：
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/f25ee98a-2f91-49f8-a7b3-86976f34e0f9.png)
-
+![image](../../../../images/vue/vite/9.png)
 这里是我解决`require`和`require.context`之后正常加载时的页面，这个两个问题如果没有解决的话，页面是直接进入不了的。所以前提是把这两个问题解决了才行。
 
 打开控制台发现js并没有报错，只是svg没有成功显示的问题。
@@ -892,17 +888,13 @@ export default defineConfig({
 ### 11.videojs报错导致Maximum call stack size exceeded
 
 1.使用vite之后`videojs-contrib-hls`（用来播放m3u8视频的videojs插件）报错：
-
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/3c878394-1820-43b6-b28d-ca4c4e47e5dd.png)
+![image](../../../../images/vue/vite/10.png)
 
 2.注释掉`videojs-contrib-hls`，只要打开引入了`videojs`组件的页面就卡住了：
-
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/6d1b63c1-d29d-4a4b-a75b-c5e9898ec999.png)
+![image](../../../../images/vue/vite/11.png)
 
 3.然后我尝试使用CDN的方式引入，视频可以成功播放了，但是还是有error
-
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/f4a14d73-5288-4d86-b763-caf9141da1f4.png)
-
+![image](../../../../images/vue/vite/12.png)
 `index.html`增加cdn
 
 ```html
@@ -1066,8 +1058,7 @@ export default {
 ```
 
 4.解决第3步的报错，切换了其他版本还是有这个错误，于是打算把[videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)源码clone一份看看报错的地方能不能修改下源码，发现[README.md](https://github.com/videojs/videojs-contrib-hls#notice-this-project-will-be-deprecated-and-is-succeeded-by-videojs-http-streaming-vhs-supports-hls-and-dash-and-is-built-into-videojs-7-see-the-videojs-7-blog-post)：
-
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/1c43e243-baff-4e38-b263-21d1aac2b639.png)
+![image](../../../../images/vue/vite/13.png)
 
 [Video.js Blog | Video.js (videojs.com)](https://videojs.com/blog/video-js-7-is-here/)博客显示videojs7使用[videojs/http-streaming](https://github.com/videojs/http-streaming)插件来替代[videojs-contrib-hls](https://github.com/videojs/videojs-contrib-hls)。
 
@@ -1076,11 +1067,10 @@ export default {
 刚巧项目中的videojs也是7.x版本，于是我切换了[videojs/http-streaming](https://github.com/videojs/http-streaming)CDN,看了[官方DEMO](https://jsbin.com/gejugat/edit?html,output),需要把标签video替换为video-js，成功解决error，但是多了一个warning，
 问题不大
 
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/a78f196d-97ad-43f1-acd2-f5c0a7c7c081.png)
+![image](../../../../images/vue/vite/15.png)
 
 这个就先忍了吧^\_^
-
-![image](https://alidocs.oss-cn-zhangjiakou.aliyuncs.com/res/W4j6OJVBQVpgO3p8/img/172e2ad1-bdee-4809-8ba2-09605177569f.png)
+![image](../../../../images/vue/vite/14.png)
 
 最终的index.html
 
