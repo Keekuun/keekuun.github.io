@@ -1,3 +1,11 @@
+---
+title: shell入门
+categories:
+- shell
+tags:
+- shell
+---
+
 Shell脚本编程30分钟入门
 ====================
 > [源自：30min_guides](https://github.com/qinjx/30min_guides/edit/master/shell.md)
