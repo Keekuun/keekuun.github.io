@@ -96,20 +96,22 @@ module.exports = [
             },
             {
                 text: '', items: [
-                    {text: 'Vue3', link: 'https://www.yuque.com/hugsun/vue3'},
-                    {text: 'vue3js', link: 'https://vue3js.cn/start/'},
-                    {text: 'Node', link: 'https://www.yuque.com/hugsun/node'},
+                    {text: 'Vue', link: 'https://vue3js.cn/'},
+                    {text: 'Angular', link: 'https://angular.io/docs'},
+                    {text: 'React', link: 'https://react.dev/'},
+                    {text: 'NextJS', link: 'https://nextjs.org/docs'},
+                    {text: 'NodeJS', link: 'https://nodejs.org/en/docs'},
                 ],
             },
+            // {
+            //     text: '', items: [
+            //         {text: 'Geekbang', link: 'https://time.geekbang.org/dashboard/course'},
+            //         {text: 'Kaikeba', link: 'https://learn.kaikeba.com/home'},
+            //     ],
+            // },
             {
                 text: '', items: [
-                    {text: 'Geekbang', link: 'https://time.geekbang.org/dashboard/course'},
-                    {text: 'Kaikeba', link: 'https://learn.kaikeba.com/home'},
-                ],
-            },
-            {
-                text: '', items: [
-                    {text: 'Reading', link: 'http://lxqnsys.com/pdf/'},
+                    // {text: 'Reading', link: 'http://lxqnsys.com/pdf/'},
                     {text: 'Awesome Books', link: 'https://github.com/guanpengchn/awesome-books'},
                     {text: 'Programming Books', link: 'https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md'},
                 ],
