@@ -10,7 +10,7 @@
 # redis 启动
 window打开redis安装包目录，在cmd中执行命令：
 ```bash
-.\redis-server.exe .\redis.windows.conf
+redis-server.exe redis.windows.conf
 ```
 # redis简单命令
 
