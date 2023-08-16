@@ -134,20 +134,20 @@ export default async function useHttpRequest<T>(
   return { execute, pending, error: rawData, ...rest }
 }
 
-export function useHttpPost<T>(url: string, body = {}, needProxy = true) {
-  return useHttpRequest<T>(url, { method: 'POST', body }, needProxy)
+export function useHttpPost<T>(url: string, body = {}) {
+  return useHttpRequest<T>(url, { method: 'POST', body })
 }
 
-export function useHttpGet<T>(url: string, params = {}, needProxy = true) {
-  return useHttpRequest<T>(url, { method: 'GET', params }, needProxy)
+export function useHttpGet<T>(url: string, params = {}) {
+  return useHttpRequest<T>(url, { method: 'GET', params })
 }
 
-export function useHttpDelete<T>(url: string, body = {}, needProxy = true) {
-  return useHttpRequest<T>(url, { method: 'DELETE', body }, needProxy)
+export function useHttpDelete<T>(url: string, body = {}) {
+  return useHttpRequest<T>(url, { method: 'DELETE', body })
 }
 
-export function useHttpPut<T>(url: string, body = {}, needProxy = true) {
-  return useHttpRequest<T>(url, { method: 'PUT', body }, needProxy)
+export function useHttpPut<T>(url: string, body = {}) {
+  return useHttpRequest<T>(url, { method: 'PUT', body })
 }
 
 ```
@@ -356,8 +356,8 @@ const stringify = (str) => JSON.stringify(str)
 
 // 注入JSBridge
 function injectJSBridge(callback) {
-  if (window.FBrowserCommonBridge) {
-    callback(window.FBrowserCommonBridge)
+  if (window.JSBridge) {
+    callback(window.JSBridge)
   }
   if (isIOS()) {
     if (window.WKWVJBCallbacks) {
@@ -430,7 +430,7 @@ export default callJSBridge
 ### 2.6 打包配置
 + env环境变量
 
-为了适配多环境部署，我们需要区分`开发环境（development）`、`测试环境（test）`、生产环境（production）`。
+为了适配多环境部署，我们需要区分`开发环境（development）`、`测试环境（test）`、`生产环境（production）`。
 
 在官网搜索`env`，可以看到文档[`.env File`](https://nuxt.com/docs/guide/directory-structure/env#env-file)
 
@@ -696,7 +696,9 @@ sendDingTalkNotifications
 EchoGreen "========== 结束通知 ==========="
 ```
 
-这样的话，每次`commit`成功之后，`gitlab`自动构建，并通知到钉钉，可以愉快的魔域啦！
+这样的话，每次`commit`成功之后，`gitlab`自动构建，并通知到钉钉，可以愉快的写代码(看妹子)啦！
+
+![美女](../../../../images/vue/ding.jpg)
 
 ## 4.兼容折磨
 nuxt3官方文档对兼容低版本浏览器几乎没有什么说明，想到nuxt3使用的是vite打包，那么我们可以去vite官网找解决方案：
