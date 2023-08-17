@@ -880,3 +880,5 @@ export default defineNitroPlugin((nitroApp) => {
 
 ## 6.nitro
 > [Create web servers that run anywhere.](https://www.nitropack.org/)
+
+> 【开源地址】： [nuxt3-template](https://gitee.com/keekuun/create-ikun/tree/master/template-nuxt3)
