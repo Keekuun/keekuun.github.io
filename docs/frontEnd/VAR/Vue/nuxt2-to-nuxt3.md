@@ -640,6 +640,8 @@ CMD ["node", "./server/index.mjs"]
 
 通过`docker`分层级部署，可以增加缓存，提升构建速度。
 
+> 本项目走的是ssr方式，所以部署区别于spa部署。spa一般将打包后的静态文件通过nginx部署，ssr部署需要使用node服务，可以使用[pm2守护进程进行docker部署](https://pm2.io/docs/runtime/integration/docker/)。这个项目由于使用docker部署在k8s中，就不必要使用pm2了。
+
 + `./scripts/notify.sh`配置
 
 ```bash
