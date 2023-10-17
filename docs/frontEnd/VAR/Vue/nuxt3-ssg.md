@@ -164,3 +164,5 @@ ENV PORT 80
 CMD ["nginx", "-g","daemon off;"]
 ```
 可以在docker desktop环境中，执行：`docker build ./ -f .\nginx.Dockerfile --build-arg ENV_NAME=prod -t nuxtApp`进行测试。
+
+> [template-nuxt3](https://gitee.com/keekuun/create-ikun/tree/master/template-nuxt3)
