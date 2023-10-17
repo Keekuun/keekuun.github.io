@@ -48,7 +48,7 @@
     "vuepress-theme-reco": "^1.6.17"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001522",
+    "caniuse-lite": "^1.0.30001549",
     "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-pinyin-urls": "^1.0.8",
     "vuepress-plugin-sitemap": "^2.3.1"
