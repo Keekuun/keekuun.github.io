@@ -180,3 +180,5 @@ ENV PORT 3000
 
 CMD ["npm", "run", "start:pm2"]
 ```
+
+> [template-nuxt3](https://gitee.com/keekuun/create-ikun/tree/master/template-nuxt3)
