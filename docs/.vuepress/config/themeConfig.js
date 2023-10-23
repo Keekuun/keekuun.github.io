@@ -66,7 +66,7 @@ module.exports = {
     // },
     lastUpdated: '上次更新',
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: 'https://gitee.com/keekuun/blog',
+    repo: 'https://github.com/Keekuun/keekuun.github.io',
     // 以下为可选的编辑链接选项
     // 假如文档不是放在仓库的根目录下：
     docsDir: 'docs',
