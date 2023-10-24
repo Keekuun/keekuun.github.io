@@ -1,5 +1,5 @@
 ---
-title: 真香！h5项目由nuxt2重构为nuxt3
+title: h5项目由nuxt2重构为nuxt3
 sidebar: auto
 date: 2023-08-10
 isComment: true
