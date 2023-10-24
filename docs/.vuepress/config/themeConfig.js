@@ -71,6 +71,6 @@ module.exports = {
     // 假如文档不是放在仓库的根目录下：
     docsDir: 'docs',
     // 默认是 false, 设置为 true 来启用
-    editLinks: false,
+    editLinks: true,
     // editLinkText: '在 Gitee 上编辑此页',
 };
