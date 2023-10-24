@@ -1,5 +1,5 @@
 ---
-title: 解决React请求竞态bug
+title: React请求竞态
 date: 2023-10-17
 sidebar: auto
 categories: 
