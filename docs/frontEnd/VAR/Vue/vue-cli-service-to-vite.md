@@ -18,7 +18,7 @@ tags:
 
 ## 1、项目概览
 
-![image](../../../../images/vue/vite/2.png)
+![image](https://camo.githubusercontent.com/694ff24dbcc09b29a423c9e2fc2cb70af218d3e33388ed31868058ba948817e3/68747470733a2f2f7770696d672e77616c6c7374636e2e636f6d2f61353839346331622d663661662d343536652d383264662d3131353164613038333962662e706e67)
 
 ![image](../../../../images/vue/vite/3.png)
 
@@ -26,6 +26,8 @@ tags:
 
 admin-web管理后台是我们业务的管理中心，开发、运营、产品等工作人员会频繁使用，是我们目前业务的核心配置中心，这个项目从建立之初一直更新迭代，迄今为止有**655**次commits,**681**
 次CI，可见更新次数还是很频繁的。随着日积月累，代码量越来越多，vue单页面已经有了**100+** pages，**30+** vuecomponents，因此启动速度越来越慢。
+
+> 项目源自：https://github.com/PanJiaChen/vue-element-admin/
 
 ## 2、vue-cli-service和vite启动速度对比
 
@@ -1090,8 +1092,8 @@ export default {
 <div id="app"></div>
 <!-- built files will be auto injected -->
 <script type="module" src="/src/main.js"></script>
-<script src="https://unpkg.com/video.js/dist/video.js"></script>
-<script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.21.1/video.min.js" defer></script>
+<script src="https://unpkg.com/browse/@videojs/http-streaming@2.6.0/dist/videojs-http-streaming.min.js" defer></script>
 </body>
 </html>
 ```
@@ -1099,6 +1101,8 @@ export default {
 > 在解决这个问题之前，我内心是崩溃的，找了诸多方式都无法解决，就差一点儿就放弃了，行百里者半九十，我坚持找解决方案，最终终于成功了，点个赞！
 
 >  为了渐进升级，目前保留\`vue-cli-service\`和\`vite\`共存，两者都可以使用，后续可以把\`vue-cli-service\`相关的依赖和代码删除即可
+
+> video组件推荐使用[xgplayer](https://github.com/bytedance/xgplayer)
 
 ## 6.生产环境vite
 为了在生产环境使用vite构建，我们需要把项目中部分代码优化一下：
