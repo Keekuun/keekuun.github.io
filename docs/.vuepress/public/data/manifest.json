@@ -2,7 +2,7 @@
   "name": "月上秦少",
   "short_name": "秦少",
   "description": "每一个不曾起舞的日子，都是对生命的辜负！",
-  "theme_color": "#fff",
+  "theme_color": "",
   "background_color": "#fff",
   "display": "standalone",
   "Scope": "/",

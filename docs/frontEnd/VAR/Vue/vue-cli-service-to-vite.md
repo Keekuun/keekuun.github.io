@@ -1,5 +1,5 @@
 ---
-title: 真香！vue-cli-service项目升级vite
+title: vue-cli-service项目升级vite
 sidebar: auto 
 date: 2023-1-10 
 isComment: true 
@@ -12,7 +12,7 @@ tags:
 
 ---
 
-# 真香！vue-cli-service项目升级vite
+# vue-cli-service项目升级vite
 
 ## ![image](../../../../images/vue/vite/1.png)
 
@@ -483,7 +483,7 @@ admin-web管理后台是我们业务的管理中心，开发、运营、产品�
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" href="/favicon.ico"/>
   <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-  <title>melon admin</title>
+  <title>web admin</title>
 </head>
 <body>
 <div id="app"></div>
@@ -523,7 +523,7 @@ export default defineConfig({
       https: false,
       port: 8088,
       proxy: {
-        '/melon.admin.s': {
+        '/api': {
           // 路径中有 /api 的请求都会走这个代理 , 可以自己定义一个,下面移除即可
           target: 'https://xxx.xxx.com', // 目标代理接口地址,实际跨域要访问的接口,这个地址会替换掉 axios.defaults.baseURL
           // target: 'http://localhost:9000', // 目标代理接口地址,实际跨域要访问的接口,这个地址会替换掉 axios.defaults.baseURL
@@ -638,7 +638,7 @@ vite以esm的形式加载js文件，**需要手动引入**一下。
   <link rel="icon" href="/favicon.ico"/>
   <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
   <!--    标题直接配置在儿-->
-  <title>melon admin</title>
+  <title>web admin</title>
 </head>
 <body>
 <div id="app"></div>
@@ -846,7 +846,7 @@ export default defineConfig({
 </div>
 ```
 
-可以看到这里使用了[svg<use> - SVG: Scalable Vector Graphics | MDN (mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use)
+可以看到这里使用了[svg:Scalable Vector Graphics | MDN(mozilla.org)](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/use)
 
 搜索_svg:use vite，_找到解决方案[在vite中使用svg(vue) - 掘金 (juejin.cn)](https://juejin.cn/post/7036949769842851854)：
 
@@ -908,7 +908,7 @@ export default defineConfig({
   <link rel="icon" href="/favicon.ico"/>
   <!-- 新增 -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.21.1/alt/video-js-cdn.min.css" rel="stylesheet"/>
-  <title>melon admin</title>
+  <title>web admin</title>
 </head>
 <body>
 <div id="app"></div>
@@ -1084,7 +1084,7 @@ export default {
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" href="/favicon.ico"/>
   <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-  <title>melon admin</title>
+  <title>web admin</title>
 </head>
 <body>
 <div id="app"></div>
@@ -1100,7 +1100,35 @@ export default {
 
 >  为了渐进升级，目前保留\`vue-cli-service\`和\`vite\`共存，两者都可以使用，后续可以把\`vue-cli-service\`相关的依赖和代码删除即可
 
-## 6.参考文档
+## 6.生产环境vite
+为了在生产环境使用vite构建，我们需要把项目中部分代码优化一下：
++ 1.项目中使用`require`方式导入的包，全部修改未esm的`import`，
++ 2.为了多环境测试部署，需要配置环境变量，使用vite的配置：
+分别创建`.env.development`、`.env.test`、`.env.production`
+
+比如：`.env.development`
+```markdown
+NODE_ENV=development
+
+# just a flag
+ENV='development'
+# base api
+VUE_APP_BASE_API='/'
+```
++ 3.打包脚本：`package.json`
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build:prod": "vite build --mode production",
+    "build:test": "vite build --mode test",
+    "preview": "vite preview"
+  }
+}
+```
+
+
+## 7.参考文档
 
 + [Home | Vite中文网 (vitejs.cn)](https://vitejs.cn/)
 
