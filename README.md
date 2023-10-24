@@ -2,7 +2,7 @@
 
 Blog demo for vuepress-theme-reco
 
-博客首页：https://docs.zkkysqs.top/
+博客首页：https://blog.zkkysqs.top/
 ## Experience
 
 **npx**
