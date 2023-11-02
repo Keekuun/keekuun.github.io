@@ -1,7 +1,12 @@
 ---
 title: 【人月神话】
+sidebar: auto
 date: 2023-11-02
+
 categories:
+- 人月神话
+
+tags:
 - 人月神话
 ---
 
@@ -26,3 +31,5 @@ categories:
 + [第 17 章 再论《没有银弹》 （"No Silver Bullet"Refired）](./ch17.md)
 + [第 18 章 《人月神话》的观点：是或非？（Propositions of the Mythical Man-Month: True or False？）](./ch18.md)
 + [第 19 章 20 年后的人月神话（The Mythical Man-Month after 20 Years）](./ch19.md)
+
+> [《人月神话》书摘](https://zhuanlan.zhihu.com/p/27521161)
