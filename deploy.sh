@@ -26,7 +26,7 @@ git push -f https://github.com/Keekuun/keekuun.github.io.git master:gh-pages
 
 
 # coding
-#echo 'docs.zkkysqs.top' > CNAME
+#echo 'blog.zkkysqs.top' > CNAME
 #git add -A
 #git commit -m 'deploy'
 #git push -f git@e.coding.net:keekuun/notes/blog.git master:gh-pages # 发布到coding

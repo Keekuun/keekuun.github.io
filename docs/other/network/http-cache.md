@@ -108,7 +108,7 @@ HTTP缓存分为强缓存和协商缓存。
 
 `1.HTML采用协商缓存，用户每次请求index.html不拿浏览器缓存，直接请求服务器，这样就保证资源更新了，用户能马上访问到新资源，如果服务端返回304，这时候再拿浏览器的缓存的index.html。`
 
-`2.JS/CSS/IMG采用强缓存，打包的时候给文件名加上hash值`，见[【webpack学习系列笔记-文件指纹策略】](https://docs.zkkysqs.top/other/webpack/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8.html#_6-文件指纹策略-chunkhash、contenthash和hash)
+`2.JS/CSS/IMG采用强缓存，打包的时候给文件名加上hash值`，见[【webpack学习系列笔记-文件指纹策略】](https://blog.zkkysqs.top/other/webpack/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8.html#_6-文件指纹策略-chunkhash、contenthash和hash)
 
 ### 2.1 nodejs服务器设置缓存:
 
@@ -175,7 +175,7 @@ resp.setDateHeader("Expires", System.currentTimeMillis() + exp.longValue() * 100
 >
 >  [彻底弄懂HTTP缓存机制及原理](https://www.cnblogs.com/chenqf/p/6386163.html)
 >
->  [【webpack学习系列笔记-文件指纹策略】](https://docs.zkkysqs.top/other/webpack/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8.html#_6-文件指纹策略-chunkhash、contenthash和hash)
+>  [【webpack学习系列笔记-文件指纹策略】](https://blog.zkkysqs.top/other/webpack/Webpack%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%9F%BA%E7%A1%80%E5%BA%94%E7%94%A8.html#_6-文件指纹策略-chunkhash、contenthash和hash)
 >
 >  [【HTTP 304状态码的详细讲解】](https://blog.csdn.net/huwei2003/article/details/70139062?utm_medium=distribute.pc_relevant.none-task-blog-title-1&spm=1001.2101.3001.4242)
 >
