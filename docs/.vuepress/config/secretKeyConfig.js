@@ -9,6 +9,6 @@ module.exports = {
         Indices: 'zkkysqs-blog',
     },
     googleAnalytics: {
-        ga: 'UA-147067935-1c',
+        ga: 'UA-147067935-1',
     }
 };

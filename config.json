@@ -1,7 +1,7 @@
 {
     "index_name": "zkkysqs-blog",
     "start_urls": [
-      "https://docs.zkkysqs.top/"
+      "https://blog.zkkysqs.top/"
     ],
     "selectors": {
       "lvl0": {
