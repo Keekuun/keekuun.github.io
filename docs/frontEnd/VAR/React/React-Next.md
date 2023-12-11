@@ -9,6 +9,7 @@ tags:
 - JS
 - React
 - ssr
+- nextjs
 ---
 ## next.config.js配置：
 ```js
