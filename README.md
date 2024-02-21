@@ -1,6 +1,6 @@
-# vuepress-theme-reco-demo
+# vuepress blog
 
-Blog demo for vuepress-theme-reco
+vuepress theme use vuepress-theme-reco
 
 博客首页：https://blog.zkkysqs.top/
 ## Experience
