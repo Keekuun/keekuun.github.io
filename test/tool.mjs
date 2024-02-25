@@ -1,7 +1,6 @@
 export function genRandomNumArr(n = 10) {
   return new Array(n).fill(0).map(d => {
-    let randomNum = ~~(Math.random() * 100)
-    return randomNum
+    return ~~(Math.random() * 100)
   })
 }
 
