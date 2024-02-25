@@ -104,7 +104,7 @@ function selectionSort1(nums) {
     let minIndex = i
 
     for (let j = i + 1; j < n; j++) {
-      if(nums[j] < nums[minIndex]) {
+      if (nums[j] < nums[minIndex]) {
         minIndex = j
       }
     }
@@ -120,16 +120,16 @@ function selectionSort2(nums) {
   let left = 0;
   let right = n - 1
 
-  while(left < right) {
+  while (left < right) {
     let minIndex = left
 
-    for(let i=left + 1; i<=right; i++) {
-      if(nums[i] < nums[minIndex]) {
+    for (let i = left + 1; i <= right; i++) {
+      if (nums[i] < nums[minIndex]) {
         minIndex = i
       }
     }
 
-    if(minIndex !== left) {
+    if (minIndex !== left) {
       [nums[minIndex], nums[left]] = [nums[left], nums[minIndex]]
     }
 
@@ -143,28 +143,28 @@ function selectionSort3(nums) {
   let left = 0
   let right = nums.length - 1
 
-  while(left < right) {
+  while (left < right) {
     let minIndex = left
     let maxIndex = right
 
-    for(let i=left; i <= right; i++) {
-      if(nums[i] < nums[minIndex]) {
+    for (let i = left; i <= right; i++) {
+      if (nums[i] < nums[minIndex]) {
         minIndex = i
       }
-      if(nums[i] > nums[maxIndex]) {
+      if (nums[i] > nums[maxIndex]) {
         maxIndex = i
       }
     }
 
-    if(minIndex !== left) {
+    if (minIndex !== left) {
       [nums[minIndex], nums[left]] = [nums[left], nums[minIndex]]
     }
 
-    if(maxIndex === left) {
+    if (maxIndex === left) {
       maxIndex = minIndex
     }
 
-    if(maxIndex !== right) {
+    if (maxIndex !== right) {
       [nums[maxIndex], nums[right]] = [nums[right], nums[maxIndex]]
     }
 
@@ -179,7 +179,7 @@ function selectionSort3(nums) {
 function insertionSort(nums) {
   let n = nums.length
   // 假设前1个数已经有序
-  for(let i=1; i<n; i++) {
+  for (let i = 1; i < n; i++) {
     // 取出后续的数插到已排序队列中进来
     // for(let j=i; j>0; j--) {
     //   if(nums[j] < nums[j-1]) {
@@ -187,8 +187,8 @@ function insertionSort(nums) {
     //   }
     // }
 
-    for(let j=0; j<i; j++) {
-      if(nums[i] < nums[j]) {
+    for (let j = 0; j < i; j++) {
+      if (nums[i] < nums[j]) {
         [nums[i], nums[j]] = [nums[j], nums[i]]
       }
     }
@@ -202,10 +202,10 @@ function insertionSort(nums) {
 function bubbleSort1(nums) {
   let n = nums.length
 
-  for(let i=n-1; i>0; i--) {
-    for(let j=0; j<i; j++) {
-      if(nums[j] > nums[j+1]) {
-        [nums[j], nums[j+1]] = [nums[j+1], nums[j]]
+  for (let i = n - 1; i > 0; i--) {
+    for (let j = 0; j < i; j++) {
+      if (nums[j] > nums[j + 1]) {
+        [nums[j], nums[j + 1]] = [nums[j + 1], nums[j]]
       }
     }
   }
@@ -223,33 +223,33 @@ function mergeSort(nums) {
     // 临时存放数组
     const temp = new Array(right - left + 1)
     let i = left // 左数组遍历指针
-    let j = mid+1//右数组遍历指针
+    let j = mid + 1//右数组遍历指针
     let k = 0 // 临时数组指针
 
-    while(i<=mid && j<=right) {
-      if(_nums[i] < _nums[j]) {
+    while (i <= mid && j <= right) {
+      if (_nums[i] < _nums[j]) {
         temp[k++] = _nums[i++]
       } else {
-       temp[k++] = _nums[j++]
+        temp[k++] = _nums[j++]
       }
     }
 
-    while(i<=mid) {
+    while (i <= mid) {
       temp[k++] = _nums[i++]
     }
-    while(j<=right) {
+    while (j <= right) {
       temp[k++] = _nums[j++]
     }
 
-    for(let t=0; t<temp.length; t++) {
-      _nums[left+t] = temp[t]
+    for (let t = 0; t < temp.length; t++) {
+      _nums[left + t] = temp[t]
     }
   }
 
   // 区间 [left, right]
   function _sort(_nums, left, right) {
     // 终止条件
-    if(left >= right) return
+    if (left >= right) return
 
     // 分而治之
     let mid = ~~((left + right) / 2)
@@ -258,6 +258,7 @@ function mergeSort(nums) {
 
     _merge(_nums, left, mid, right)
   }
+
   _sort(nums, 0, nums.length - 1)
   return nums
 }
@@ -273,13 +274,13 @@ function quickSort(nums) {
     let i = left
     let j = right
 
-    while(i < j) {
+    while (i < j) {
       // 从右往左找到首个小于基准的数
-      while(i < j && _nums[j] >= _nums[left]) {
+      while (i < j && _nums[j] >= _nums[left]) {
         j--
       }
       // 从左往右找到首个大于基准的数
-      while(i < j && _nums[i] <= _nums[left]) {
+      while (i < j && _nums[i] <= _nums[left]) {
         i++
       }
 
@@ -293,7 +294,7 @@ function quickSort(nums) {
   }
 
   function _sort(_nums, left, right) {
-    if(left >= right) return
+    if (left >= right) return
 
     const pivotIndex = _partition(_nums, left, right)
 
@@ -311,5 +312,42 @@ function quickSort(nums) {
 // testFunc(quickSort)
 
 function heapSort(nums) {
+  let n = nums.length
 
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    _siftDown(nums, n, i)
+  }
+
+  for (let i = n - 1; i >= 0; i--) {
+    _swap(nums, i, 0)
+    _siftDown(nums, i, 0)
+  }
+
+  function _swap(_nums, i, j) {
+    [_nums[i], _nums[j]] = [_nums[j], _nums[i]]
+  }
+
+  function _siftDown(_nums, n, i) {
+    while(true) {
+      let l = 2 * i + 1
+      let r = 2 * i + 2
+      let ma = i
+
+      if(l < n && _nums[l] > _nums[ma]) {
+        ma = l
+      }
+      if(r < n && _nums[r] > _nums[ma]) {
+        ma = r
+      }
+      if(ma === i) break
+
+      _swap(_nums, ma, i)
+
+      i = ma
+    }
+  }
+
+  return nums
 }
+
+// testFunc(heapSort)
