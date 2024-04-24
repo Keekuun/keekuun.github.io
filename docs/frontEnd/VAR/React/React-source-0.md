@@ -1,4 +1,4 @@
-# 源码阅读主备工作
+# 源码阅读准备工作
 
 ## 1.看[react官方仓库](https://github.com/facebook/react)README.md
 

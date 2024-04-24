@@ -7,7 +7,7 @@ module.exports = [
         link: '/categories/前端/',
         items: [
             {
-                text: '', items: [
+                text: '前端基础', items: [
                     // {text: 'HTML', link: '/tag/HTML/'},
                     {text: 'CSS', link: '/tag/CSS/'},
                     {text: 'JS', link: '/tag/JS/'},
@@ -16,15 +16,16 @@ module.exports = [
             },
 
             {
-                text: '', items: [
-                    {text: 'vue', link: '/tag/Vue/'},
+                text: 'VAR', items: [
+                    {text: 'vue', link: '/categories/Vue/'},
                     // {text: 'angular', link: '/tag/Angular/'},
-                    {text: 'react', link: '/tag/React/'}
+                    {text: 'react', link: '/categories/React/'}
                 ]
             },
             {
-                text: '', items: [
-                    {text: '移动端', link: '/categories/移动端/'},
+                text: '移动端', items: [
+                    {text: 'miniProgram', link: '/categories/移动端/'},
+                    {text: 'flutter', link: '/categories/flutter/'},
                 ],
             },
         ]
@@ -33,12 +34,17 @@ module.exports = [
         text: '后端',
         icon: 'reco-coding',
         link: '/categories/后端/',
-        // items: [
-        //     {
-        //         text: 'Node', items: [
-        //             {text: 'node基础', link: '/backEnd/node/'},
-        //         ]
-        //     },
+        items: [
+            {
+                text: '', items: [
+                    {text: 'node', link: '/backEnd/node/'},
+                ]
+            },
+            {
+                text: '', items: [
+                    {text: 'golang', link: '/backEnd/go/'},
+                ]
+            },
             // {
             //     text: 'Java', items: [
             //         {text: 'Java基础', link: '/backEnd/java/'},
@@ -57,7 +63,7 @@ module.exports = [
             //         {text: 'Mongodb', link: '/dataBase/mongodb/'}
             //     ]
             // },
-        // ]
+        ]
     },
     {
         text: '其他',
