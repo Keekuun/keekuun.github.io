@@ -3,7 +3,7 @@ module.exports = [
     ['link', {rel: 'icon', href: './favicon.ico'}],
     // 移动栏优化
     ['meta', {name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
-    ['meta', {name: 'keywords', content: 'vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang'}],
+    ['meta', {name: 'keywords', content: 'vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang, flutter'}],
     ['meta', {name: 'copyright', content: '月上秦少'}],
     ['meta', {name: 'robots', content: 'all'}],
     // pwa
