@@ -1,8 +1,11 @@
 # vuepress blog
 
-vuepress theme use vuepress-theme-reco
+[![Build and Deploy](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml)
 
 博客首页：https://blog.zkkysqs.top/
+
+![keekuun's GitHub stats](https://github-readme-stats.vercel.app/api?username=Keekuun&show_icons=true&theme=tokyonight&count_private=true&hide=contribs,prs)
+
 ## Experience
 
 **npx**
