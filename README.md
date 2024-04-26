@@ -1,6 +1,7 @@
 # vuepress blog
 
 [![Build and Deploy](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml)
+[![Open in GitHub](https://img.shields.io/github/last-commit/Keekuun/keekuun.github.io)](https://github.com/Keekuun/keekuun.github.io)
 
 博客首页：https://blog.zkkysqs.top/
 
