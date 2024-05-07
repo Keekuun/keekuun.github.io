@@ -1,5 +1,5 @@
 export function genRandomNumArr(n = 10) {
-  return new Array(n).fill(0).map(d => {
+  return new Array(n).fill(0).map(() => {
     return ~~(Math.random() * 100)
   })
 }
