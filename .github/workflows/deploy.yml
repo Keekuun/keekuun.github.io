@@ -21,6 +21,9 @@ jobs:
           # 选择要使用的 node 版本
           node-version: "20.13"
 
+      - name: Install pnpm
+        run: corepack enable
+
       # 缓存 node_modules
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -31,11 +34,10 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.ymal') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
-
       # 如果缓存没有命中，安装依赖
       - name: Install dependencies
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: corepack enable &&　pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       # 运行构建脚本
       - name: Build VuePress site
