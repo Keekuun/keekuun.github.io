@@ -22,7 +22,7 @@ jobs:
           node-version: "20.13"
 
       - name: Install pnpm
-        run: corepack enable
+        run: npm install -g pnpm
 
       # 缓存 node_modules
       - name: Cache dependencies
