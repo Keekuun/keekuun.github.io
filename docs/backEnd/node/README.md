@@ -43,5 +43,3 @@ tags:
 + Mongoose：ODM（object relation model），不用直接操作数据库，通过操作对象的形式来实现数据库的操作。
 
 + 更进一步使用[nextjs框架](https://docs.nestjs.cn/)完美支持typescript
-
-<iframe src="https://docs.nestjs.cn/" height="500px" width="100%"/>
