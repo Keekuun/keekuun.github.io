@@ -613,11 +613,10 @@ select *, DENSE_RANK() over (PARTITION BY Score.CId ORDER BY Score.score DESC) a
 select student.*, s.sumScore, s.scoreRank
 from student
          left join (select score.SId,
-                           RANK() over (order by sum(score.score) DESC) as scoreRank,
-                           sum(score.score)                                   as sumScore
+                           RANK() over (order by sum(score.score) DESC) as scoreRank, sum(score.score) as sumScore
                     from score
-                    group by score.SId
-) as s on student.SId = s.SId order by s.sumScore DESC;
+                    group by score.SId) as s on student.SId = s.SId
+order by s.sumScore DESC;
 
 +------+-------+---------------------+------+----------+-----------+
 | SId  | Sname | Sage                | Ssex | sumScore | scoreRank |
@@ -643,11 +642,10 @@ from student
 select student.*, s.sumScore, s.scoreRank
 from student
          left join (select score.SId,
-                           DENSE_RANK() over (order by sum(score.score) DESC) as scoreRank,
-                           sum(score.score)                                   as sumScore
+                           DENSE_RANK() over (order by sum(score.score) DESC) as scoreRank, sum(score.score) as sumScore
                     from score
-                    group by score.SId
-) as s on student.SId = s.SId order by s.sumScore DESC;
+                    group by score.SId) as s on student.SId = s.SId
+order by s.sumScore DESC;
 
 +------+-------+---------------------+------+----------+-----------+
 | SId  | Sname | Sage                | Ssex | sumScore | scoreRank |
@@ -863,6 +861,13 @@ where student.SId = score.SId
 ```
 
 #### 30 查询不及格的课程
+```sql
+select student.Sname, course.Cname, score.score
+from student, score, course
+where student.SId = score.SId
+  and score.score < 60
+  and score.CId = course.CId;
+```
 
 #### 31 查询课程编号为 01 且课程成绩在 80 分以上的学生的学号和姓名
 
