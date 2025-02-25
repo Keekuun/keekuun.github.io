@@ -854,6 +854,14 @@ order by student.SId, course.CId;
 
 #### 29 查询任何一门课程成绩在 70 分以上的姓名、课程名称和分数
 
+```sql
+select student.Sname, course.Cname, score.score
+from student, score, course
+where student.SId = score.SId
+  and score.score >= 70
+  and score.CId = course.CId;
+```
+
 #### 30 查询不及格的课程
 
 #### 31 查询课程编号为 01 且课程成绩在 80 分以上的学生的学号和姓名
