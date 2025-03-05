@@ -2,7 +2,7 @@ const pluginConfig = require('./config/pluginConfig.js');
 const headConfig = require('./config/headConfig.js');
 const themeConfig = require('./config/themeConfig');
 module.exports = {
-    title: '月上秦少',
+    title: '前端Jeek',
     // gitee pages必须加上仓库名称
     // base: '/blog/',
     description: '每一个不曾起舞的日子，都是对生命的辜负！',
@@ -12,7 +12,7 @@ module.exports = {
         }
     },
     // author
-    author: '月上秦少',
+    author: '前端Jeek',
     theme: 'vuepress-theme-reco',
     head: headConfig,
     themeConfig: themeConfig,

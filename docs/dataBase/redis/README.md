@@ -1,3 +1,14 @@
+---
+title: redis安装
+date: 2023-3-31
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- redis
+- database
+---
+
 # redis 安装
 + [Redis的安装-windows](https://blog.csdn.net/weixin_44893902/article/details/123087435)
 + [Redis Release for windows](https://github.com/tporadowski/redis/releases)

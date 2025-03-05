@@ -19,7 +19,8 @@ module.exports = [
                 text: 'VAR', items: [
                     {text: 'vue', link: '/categories/Vue/'},
                     // {text: 'angular', link: '/tag/Angular/'},
-                    {text: 'react', link: '/categories/React/'}
+                    {text: 'react', link: '/categories/React/'},
+                    {text: 'nextjs', link: '/categories/nextjs/'},
                 ]
             },
             {
@@ -38,6 +39,7 @@ module.exports = [
             {
                 text: '', items: [
                     {text: 'node', link: '/backEnd/node/'},
+                    {text: 'nestjs', link: '/backEnd/nestjs/'},
                 ]
             },
             {
@@ -45,24 +47,19 @@ module.exports = [
                     {text: 'golang', link: '/backEnd/go/'},
                 ]
             },
-            // {
-            //     text: 'Java', items: [
-            //         {text: 'Java基础', link: '/backEnd/java/'},
-            //         {text: 'Java进阶', link: '/backEnd/java/1'}
-            //     ]
-            // },
-            // {
-            //     text: 'Python', items: [
-            //         {text: 'Python基础', link: '/backEnd/python/'},
-            //         {text: 'Python进阶', link: '/backEnd/python/1'}
-            //     ]
-            // },
-            // {
-            //     text: 'DataBase', items: [
-            //         {text: 'Mysql', link: '/dataBase/mysql/'},
-            //         {text: 'Mongodb', link: '/dataBase/mongodb/'}
-            //     ]
-            // },
+            {
+                text: '', items: [
+                    {text: 'python', link: '/backEnd/python/'},
+                ]
+            },
+            {
+                text: 'Database', items: [
+                    {text: 'Mysql', link: '/dataBase/mysql/'},
+                    {text: 'Postgres', link: '/dataBase/postgres/'},
+                    {text: 'Mongodb', link: '/dataBase/mongodb/'},
+                    {text: 'Redis', link: '/dataBase/redis/'},
+                ]
+            },
         ]
     },
     {

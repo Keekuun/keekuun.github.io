@@ -1,3 +1,15 @@
+---
+title: docker 安装并启动 postgres
+date: 2024-12-3
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- postgres
+- docker
+- database
+---
+
 # docker 安装并启动 postgres
 
 ```bash
