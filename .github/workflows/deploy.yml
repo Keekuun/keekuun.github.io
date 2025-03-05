@@ -5,20 +5,21 @@ on:
     branches:
       - master
 
-permissions:
-  contents: write
-
 jobs:
-  publish:
-    runs-on: ubuntu-latest
+  docs:
+    runs-on: ubuntu-latest # 指定运行所需要的虚拟机环境（必填）
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        use: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # 选择要使用的 node 版本
           node-version: "16.8"
-          cache: 'npm'
 
       # 缓存 node_modules
       - name: Cache dependencies
@@ -42,10 +43,16 @@ jobs:
 
       - name: Set VuePress CNAME
         run: cd docs/.vuepress/dist && echo 'blog.zkkysqs.top' > CNAME && cd -
+
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
-        with:
-          target_branch: gh-pages
-          build_dir: docs/.vuepress/dist
+        # 环境变量
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          build_dir: docs/.vuepress/dist
