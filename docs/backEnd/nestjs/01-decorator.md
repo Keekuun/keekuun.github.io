@@ -11,7 +11,7 @@ tags:
 ---
 
 ## 装饰器简介
-ES2016 装饰器是一个返回**函数**的表达式，可以接受目标、名称和属性描述符作为参数。您通过在装饰器前加上 @ 字符并放置在您要装饰的内容顶部来应用它。装饰器可以为类、方法或属性定义。
+ES2016 装饰器是一个返回**函数**的表达式，可以接受目标、名称和属性描述符作为参数。您通过在装饰器前加上 `@` 字符并放置在您要装饰的内容顶部来应用它。装饰器可以为类、方法或属性定义。
 
 **装饰器本质就是函数**，主要用于:
 
@@ -53,9 +53,10 @@ function readonly(target, name, descriptor) {
 Nest 就是围绕**装饰器**的语言特性构建的。
 
 ## 装饰器类别
-装饰器主要分为：
+装饰器主要分为：类装饰器、方法装饰器、参数装饰器、属性装饰器、访问器装饰器。
+
 + **类装饰器**：应用于类声明之前，用于修改类的行为或元数据。
-1. 作用对象：类（classes）
+1. 作用对象：类（classes）， 函数签名：`type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void;`
 2. 促发时机：在类实例化前执行（实例化阶段）
 3. 典型用途：
     - 自动注册
@@ -74,7 +75,7 @@ export class CatsModule {}
 ```
 
 + **方法装饰器**：应用于方法声明之前，用于修改方法的行为或元数据。
-1. 作用对象：方法（methods）
+1. 作用对象：方法（methods），函数签名：`type MethodDecorator = <T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;`
 2. 促发时机：在方法执行前执行（非实例化阶段）
 3. 典型用途：
    - 权限验证
@@ -93,7 +94,7 @@ export class CatsController {
 }
 ```
 + **参数装饰器**：应用于方法参数声明之前，用于修改参数的行为或元数据。
-1. 作用对象：方法参数（method parameters）
+1. 作用对象：方法参数（method parameters），函数签名：`type ParameterDecorator = (target: Object, propertyKey: string | symbol, parameterIndex: number) => void;`
 2. 促发时机：在方法执行前执行（非实例化阶段）
 3. 典型用途：
    - 参数验证
@@ -114,7 +115,7 @@ export class CatsController {
 
 
 + **属性装饰器**：应用于属性声明之前，用于修改属性的行为或元数据。
-1. 作用对象：类属性（class properties）
+1. 作用对象：类属性（class properties），函数签名：`type PropertyDecorator = (target: Object, propertyKey: string | symbol) => void;`
 2. 触发时机：在类定义时执行（非实例化阶段）
 3. 典型用途：
    - 添加元数据（Metadata）
@@ -138,6 +139,153 @@ class CreateCatDto {
 
 ```
 
++ **访问器装饰器**：应用于类的访问器声明之前，用于修改访问器行为的元数据。
+1. 作用对象：类访问器（class accessors），函数签名：`type AccessorDecorator = <T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T> | void;`
+2. 促发时机：在访问器定义时执行（非实例化阶段）
+3. 典型用途：
+   - 缓存装饰器
+```ts
+class TMac{
+   private _name:string;
+   constructor(name:string){
+      this._name = name;
+   }
+   // getter访问器
+   get name(){
+      return this._name
+   }
+   // setter访问器
+   @visitDecorator
+   set name(name:string){
+      this._name = name;
+   }
+}
+
+//访问器装饰器
+function visitDecorator(target:any,key:string,descriptor:PropertyDescriptor){
+   descriptor.writable = false;
+}
+```
+
+> 不允许同时装饰一个成员的get和set访问器。取而代之的是，一个成员的所有装饰的必须应用在文档顺序的第一个访问器上。这是因为，在装饰器应用于一个属性描述符时，它联合了get和set访问器，而不是分开声明的。简而言之：上述代码中name方法实际为一个属性，在setter写装饰器和在getter上写装饰器最终的效果都是一样的，两个上边都写，就会造成重复。
+
+
+## 装饰器执行顺序
+方法装饰器、属性装饰器、访问器装饰器，按照**从上到下**的顺序执行，优先于 类装饰器执行。
+
+如果存在多个装饰器，按照 **从下到上**的 顺序执行。
+
+```ts
+@classDecorator1
+@classDecorator2
+export class MyClass {
+   private name: string;
+   constructor(name: string) {
+      this.name = name
+   }
+
+   @methodDecorator1
+   @methodDecorator2
+   method(@paramDecorator1 @paramDecorator2 param: string) {
+      console.log('method', param);
+   }
+
+   @propertyDecorator1
+   @propertyDecorator2
+   property: string = 'property';
+
+   @accessorDecorator1
+   @accessorDecorator2
+   get accessor() {
+      return 'accessor';
+   }
+}
+
+function classDecorator1(target: Function) {
+   console.log('classDecorator1', target);
+}
+
+function classDecorator2(target: Function) {
+   console.log('classDecorator2', target);
+}
+
+function methodDecorator1(target: Object, name: string, descriptor: PropertyDescriptor) {
+   console.log('methodDecorator1', target, name, descriptor);
+   return descriptor;
+}
+
+function methodDecorator2(target: Object, name: string, descriptor: PropertyDescriptor) {
+   console.log('methodDecorator2', target, name, descriptor);
+   return descriptor;
+}
+
+function paramDecorator1(target: Object, name: string, paramIndex: number) {
+   console.log('paramDecorator1', target, name, paramIndex);
+}
+
+function paramDecorator2(target: Object, name: string, paramIndex: number) {
+   console.log('paramDecorator2', target, name, paramIndex);
+}
+
+function propertyDecorator1(target: Object, name: string) {
+   console.log('propertyDecorator1', target, name);
+}
+
+function propertyDecorator2(target: Object, name: string) {
+   console.log('propertyDecorator2', target, name);
+}
+
+function accessorDecorator1(target: Object, name: string, descriptor: PropertyDescriptor) {
+   console.log('propertyDecorator2', target, name, descriptor);
+   return descriptor;
+}
+
+function accessorDecorator2(target: Object, name: string, descriptor: PropertyDescriptor) {
+   console.log('propertyDecorator2', target, name, descriptor);
+   return descriptor;
+}
+
+
+const myClass = new MyClass('myClass')
+myClass.method('method params')
+```
+输出结果：
+```bash
+paramDecorator2 {} method 0
+paramDecorator1 {} method 0
+methodDecorator2 {} method {
+  value: [Function: method],
+  writable: true,
+  enumerable: false,
+  configurable: true
+}
+methodDecorator1 {} method {
+  value: [Function: method],
+  writable: true,
+  enumerable: false,
+  configurable: true
+}
+propertyDecorator2 {} property
+propertyDecorator1 {} property
+accessorDecorator2 {} accessor {
+  get: [Function: get accessor],
+  set: undefined,
+  enumerable: false,
+  configurable: true
+}
+accessorDecorator1 {} accessor {
+  get: [Function: get accessor],
+  set: undefined,
+  enumerable: false,
+  configurable: true
+}
+classDecorator2 [class MyClass]
+classDecorator1 [class MyClass]
+method method params
+```
+
+> 装饰器在编译时运行，因此它们不能用于运行时动态创建和修改代码。
+> 装饰器不能用于运行时动态创建和修改代码。
 
 ## nestjs 常用装饰器
 
