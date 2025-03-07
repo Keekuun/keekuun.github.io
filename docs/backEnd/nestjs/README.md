@@ -3,19 +3,23 @@ title: nestjs快速入门
 date: 2025-3-5
 categories:
   - 后端
+  - nestjs
 tags:
   - nestjs
   - node
 ---
 
+[[toc]]
+
 # nestjs快速入门
 
 ## 一、nest 简介
 
-nestjs是一个基于nodejs的框架，用于快速开发web应用，它提供了一套完整的工具和框架，用于构建可扩展的web应用程序。
+Nest（NestJS）是一个用于构建高效、可扩展的 Node.js 服务器端应用的框架。它使用渐进式 JavaScript，用 TypeScript 构建并完全支持 TypeScript（同时仍允许开发者使用纯 JavaScript 进行编码）并结合了面向对象编程（OOP）、函数式编程（FP）和函数式响应式编程（FRP）的元素。
 
-nestjs的核心概念是模块（module），模块是nestjs的核心构建块，用于组织应用程序的不同部分。每个模块都是一个独立的单元，它包含控制器（controllers）、服务（services）、实体（entities）、数据访问层（data
-access layers）等。
+在底层，Nest 使用了强大的 HTTP 服务器框架，如 **Express**（默认）和可选的 **Fastify**！
+
+Nest 提供了一种开箱即用的**应用程序架构**，允许开发者和团队创建高度可测试、可扩展、松耦合且易于维护的应用程序。该架构深受 Angular 启发。
 
 > [nestjs官网](https://docs.nestjs.com/)
 
