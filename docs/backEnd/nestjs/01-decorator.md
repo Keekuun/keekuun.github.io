@@ -8,6 +8,7 @@ tags:
     - nestjs
     - node
     - ES6
+    - decorator
 ---
 
 ## 装饰器简介
@@ -171,9 +172,11 @@ function visitDecorator(target:any,key:string,descriptor:PropertyDescriptor){
 
 
 ## 装饰器执行顺序
-方法装饰器、属性装饰器、访问器装饰器，按照**从上到下**的顺序执行，优先于 类装饰器执行。
+方法装饰器、属性装饰器、访问器装饰器，按照**从上到下**的顺序执行（根据定义的位置），优先于 类装饰器执行, 即类装饰器最后执行。
 
-如果存在多个装饰器，按照 **从下到上**的 顺序执行。
+参数装饰器优先于方法装饰器执行。
+
+如果存在多个装饰器，按照 **从下到上(从右到左)**的 顺序执行。
 
 ```ts
 @classDecorator1
@@ -429,7 +432,38 @@ Nest框架的装饰器可以分为以下三类：**核心类装饰器**、**HTTP
 + `@Exports()`：用于将模块中的提供者暴露给其他模块。
 + `@Global()`：用于标识一个模块为全局模块，使得其提供者在整个应用程序中可见。
 
-## nestjs 自定义装饰器
+## 自定义装饰器
+
+### 设置默认值
+```ts
+function defaultValue<T extends Record<string, any>>(defaults: T) {
+    return function <C extends new (...args: any[]) => any>(constructor: C) {
+        return class extends constructor {
+            constructor(...args: any[]) {
+                super(...args)
+                Object.entries(defaults).forEach(([key, value]) => {
+                    if (this[key] === undefined) {
+                        this[key] = value
+                    }
+                })
+            }
+        }
+    }
+}
+
+@defaultValue({
+    theme: 'dark',
+    language: 'zh-CN'
+})
+class Settings {
+    [key: string]: any
+}
+
+const settings = new Settings()
+
+console.log('settings.theme', settings.theme) // settings.theme dark
+console.log('settings.language', settings?.language) // settings.theme dark
+```
 
 ### 版本化路由装饰器
 + 基础版
