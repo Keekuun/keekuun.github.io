@@ -1,4 +1,4 @@
-import {genRandomNumArr, testFunc} from "./tool.mjs"
+import {genRandomN    umArr, testFunc} from "./tool.mjs"
 
 function bubbleSort(data) {
   if (data.length < 2) return data;
