@@ -9,7 +9,7 @@ module.exports = {
     huawei: true,
     authorAvatar: '/images/avatar.png',
     type: 'blog',
-    author: '月上秦少',
+    author: '前端Jeek',
     logo: '/images/avatar.png',
     record: 'MIT License',
     startYear: '2018',

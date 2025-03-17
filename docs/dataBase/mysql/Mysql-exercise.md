@@ -1,3 +1,14 @@
+---
+title: Mysql练习
+date: 2022-8-1
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- sql
+- database
+---
+
 ## [Mysql练习](https://blog.csdn.net/original_recipe/article/details/91958663)
 
 > [inner join 与 left join 之间的区别](https://www.cnblogs.com/assasion/p/7768931.html)

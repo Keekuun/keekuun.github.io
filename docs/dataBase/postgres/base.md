@@ -1,3 +1,14 @@
+---
+title: postgres 基操
+date: 2024-12-3
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- postgres
+- database
+---
+
 # postgres 基操
 
 首先进入 postgres docker 容器：

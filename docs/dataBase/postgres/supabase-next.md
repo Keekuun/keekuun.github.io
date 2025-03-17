@@ -1,3 +1,15 @@
+---
+title: 使用 Next.js Server Actions 操作 Supabase
+date: 2025-2-25
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- supabase
+- nextjs
+- database
+---
+
 ## 使用 Next.js Server Actions 操作 Supabase 
 
 在 Next.js 13 及以上版本中，Server Actions 提供了一种在服务器端处理表单提交和其他操作的方式，而无需编写额外的 API 路由。结合 Supabase，你可以在 Server Actions 中直接操作数据库，从而简化代码结构并提高安全性。以下是详细的步骤和示例，展示如何在 Next.js 中使用 Server Actions 操作 Supabase。

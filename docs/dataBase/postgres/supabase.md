@@ -1,3 +1,14 @@
+---
+title: Supabase 快速上手
+date: 2025-2-25
+sidebar: auto
+categories: 
+- 数据库
+tags: 
+- supabase
+- database
+---
+
 ### Supabase 快速上手
 
 Supabase 是一个开源的、实时的、无服务器的数据库平台，提供 PostgreSQL 数据库、实时监听、认证、存储等功能。以下是 Supabase 的快速上手指南，帮助你快速开始使用 Supabase。
