@@ -23,7 +23,7 @@ psql -U root
 ## 查看数据库
 
 ```bash
-\l;
+\l
 
 List of databases
     Name     | Owner | Encoding | Locale Provider |  Collate   |   Ctype    | ICU Locale | ICU Rules | Access privileges 
@@ -42,7 +42,7 @@ List of databases
 ## 进入数据库
 
 ```bash
-\c simple_bank;
+\c simple_bank
 
 You are now connected to database "simple_bank" as user "root".
 ```
@@ -50,7 +50,7 @@ You are now connected to database "simple_bank" as user "root".
 ## 查看数据库所有表
 
 ```bash
-\dt;
+\dt
              List of relations
  Schema |       Name        | Type  | Owner 
 --------+-------------------+-------+-------
@@ -64,7 +64,7 @@ You are now connected to database "simple_bank" as user "root".
 ## 查看表结构
 
 ```bash
-\d accounts;
+\d accounts
                                        Table "public.accounts"
    Column   |           Type           | Collation | Nullable |               Default                
 ------------+--------------------------+-----------+----------+--------------------------------------
@@ -85,13 +85,13 @@ Referenced by:
 ## 创建数据库
 
 ```bash
-CREATE DATABASE db_demo;
+CREATE DATABASE db_demo
 ```
 
 ## 删除数据库
 
 ```bash
-DROP DATABASE db_demo;
+DROP DATABASE db_demo
 ```
 
 ## 创建表
@@ -118,19 +118,19 @@ CHECK (deleted_at IS NULL OR deleted_at >= created_at),
 ## 删除表
 
 ```bash
-DROP TABLE users;
+DROP TABLE users
 ```
 
 ## 插入数据
 
 ```bash
-INSERT INTO users (name, email, password) VALUES ('John Doe', 'john@example.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('John Doe', 'john@example.com', 'password')
 ```
 
 ## 查询数据
 
 ```bash
-SELECT * FROM users;
+SELECT * FROM users
 id |       name        |        email         | password | created_at | updated_at | deleted_at
 ----+------------------+---------------------+----------+------------+------------+------------
  1 | John Doe         | john@example.com    | password | ...
@@ -140,31 +140,31 @@ id |       name        |        email         | password | created_at | updated_
 ## 更新数据
 
 ```bash
-UPDATE users SET name = 'Jane Smith' WHERE id = 2;
+UPDATE users SET name = 'Jane Smith' WHERE id = 2
 ```
 
 ## 删除数据
 
 ```bash
-DELETE FROM users WHERE id = 2;
+DELETE FROM users WHERE id = 2
 ```
 
 ## 统计数据
 
 ```bash
-SELECT COUNT(*) FROM users;
+SELECT COUNT(*) FROM users
 ```
 
 ## 聚合数据
 
 ```bash
-SELECT MAX(balance) FROM accounts;
+SELECT MAX(balance) FROM accounts
 ```
 
 ## 排序数据
 
 ```bash
-SELECT * FROM users ORDER BY id DESC;
+SELECT * FROM users ORDER BY id DESC
 ```
 
 
@@ -172,7 +172,8 @@ SELECT * FROM users ORDER BY id DESC;
 ## 退出
 
 ```bash
-simple_bank=# \q;
+simple_bank=# \q
 Bye
 ```
 
+> ！命令结尾不要加分号
