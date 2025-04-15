@@ -10,6 +10,17 @@ tags:
   - class-transformer
 ---
 
+## what
+`class-validator` 是一个用于验证数据的库，它允许使用基于装饰器和非装饰器的验证方式，内部使用 [validator.js](https://github.com/validatorjs/validator.js) 来执行验证，并且可以在浏览器和 Node.js 平台上使用。
+
++ 主要特性
+  + 装饰器验证：可以使用装饰器对类的属性进行验证，方便快捷。
+  + 跨平台支持：支持在浏览器和 Node.js 环境中使用。
+  + 丰富的验证规则：提供了多种内置的验证规则，如 Contains、IsInt、Length、IsEmail 等。
+  + 嵌套对象验证：支持对嵌套对象进行验证。
+  + 自定义验证：可以创建自定义的验证类和装饰器。
+  + 服务容器支持：可以使用服务容器来管理依赖。
+
 ## why [class-validator](https://github.com/typestack/class-validator)
 
 1. **数据验证需求**  
@@ -110,3 +121,61 @@ async function validateOrRejectExample(input) {
 - `@Max()`：验证属性是否小于或等于指定的最大值。
 - `@Length()`：验证属性的长度是否在指定的范围内。
 - `@Contains()`：验证属性是否包含指定的子字符串。
+
+## nestjs中使用class-validator
+在 NestJS 中，`class-validator` 可以与控制器和管道一起使用，以实现数据验证。以下是一个示例：
+
+`app.module.ts`:
+```typescript
+import { Module } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { UsersController } from './users.controller';
+
+@Module({
+  imports: [],
+  controllers: [UsersController],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
+})
+export class AppModule {}    
+```
+
+`users.controller.ts`:
+```ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { CreateUserDto } from './create-user.dto';
+
+@Controller('users')
+export class UsersController {
+  @Post()
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return { message: 'User created successfully', data: createUserDto };
+  }
+}    
+```
+
+`create-user.dto.ts`:
+```ts
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+export class CreateUserDto {
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  username: string;
+  
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+  
+  @IsNotEmpty()
+  @IsString()
+  password: string;
+}
+```
+
+当传入的数据不符合验证规则时，`ValidationPipe` 会抛出一个 `BadRequestException` 异常。NestJS 会自动将这个异常转换为 HTTP 400 响应，并返回详细的验证错误信息。
