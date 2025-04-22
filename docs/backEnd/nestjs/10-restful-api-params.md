@@ -143,6 +143,8 @@ export class AppController {
 
 ```
 
+> `@Res({ passthrough: true })` 的作用是 禁用 NestJS 的自动响应处理机制，使开发者能够完全手动控制 HTTP 响应对象（如 Express 的 Response 对象）
+
 ## cookie 传参
 Cookie 参数用于在客户端和服务器之间传递少量数据。在 NestJS 中，cookie 参数并没有对应的装饰器，需要安装 `cookie-parser` 中间件，然后使用 `@Req()` 装饰器结合 `request.cookies` 来获取这些参数。
 
@@ -198,3 +200,5 @@ export class AppController {
 }
 
 ```
+
+> [官方案例](https://docs.nestjs.com/controllers#full-resource-sample)
