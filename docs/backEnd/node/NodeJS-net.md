@@ -301,3 +301,40 @@ const client = net.createConnection({ path: '/tmp/echo.sock' });
 - 返回: [boolean](http://nodejs.cn/s/jFbvuT)
 
 如果输入是 IPv6 地址则返回 `true`，否则返回 `false`。
+
+
+## 5.应用：端口占用检测
+在 Node.js 中，我们可以使用 net 模块来检测端口是否被占用。以下是一个简单的示例：
+
+```ts
+import { createServer } from 'node:net';
+
+// 检查端口是否可用
+async function isPortAvailable(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const server = createServer();
+    server.once('error', () => {
+      server.close();
+      resolve(false);
+    });
+    server.once('listening', () => {
+      server.close();
+      resolve(true);
+    });
+    server.listen(port);
+  });
+}
+
+// 获取可用端口
+async function getAvailablePort(startPort: number): Promise<number> {
+  let port = startPort;
+  while (!(await isPortAvailable(port))) {
+    port++;
+  }
+  return port;
+}
+
+// 使用
+const startPort = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+```
+流行的 npm 包 [detect-port](https://github.com/node-modules/detect-port/blob/master/src/detect-port.ts), 也是通过 net 模块实现的。
