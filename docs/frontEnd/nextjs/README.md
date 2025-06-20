@@ -1,5 +1,5 @@
 ---
-title: nextjs简介
+title: Next.js：React 的全栈框架
 date: 2025-3-5
 categories:
 - 前端
