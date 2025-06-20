@@ -13,6 +13,7 @@ tags:
 - nuxt
 - docker
 - 重构
+- 兼容性
 ---
 
 # h5项目由nuxt2重构为nuxt3
