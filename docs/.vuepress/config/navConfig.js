@@ -20,7 +20,7 @@ module.exports = [
                     {text: 'vue', link: '/categories/Vue/'},
                     // {text: 'angular', link: '/tag/Angular/'},
                     {text: 'react', link: '/categories/React/'},
-                    {text: 'nextjs', link: '/categories/nextjs/'},
+                    {text: 'nextjs', link: '/categories/Next.js/'},
                 ]
             },
             {
