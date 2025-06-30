@@ -1,6 +1,7 @@
 ---
 title: Next.js 使用Zustand 管理状态
 sidebar: auto
+date: 2025-6-23
 categories: 
 - Next.js
 - 前端

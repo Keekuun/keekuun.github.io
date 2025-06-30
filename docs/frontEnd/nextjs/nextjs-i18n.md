@@ -1,6 +1,7 @@
 ---
 title: Next.js 国际化（i18n）的最佳实践
 sidebar: auto
+date: 2025-6-20
 categories: 
 - Next.js
 - 前端

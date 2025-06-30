@@ -1,6 +1,7 @@
 ---
 title: Next.js (App Router) 渲染方式
 sidebar: auto
+date: 2025-6-20
 categories: 
 - Next.js
 - 前端

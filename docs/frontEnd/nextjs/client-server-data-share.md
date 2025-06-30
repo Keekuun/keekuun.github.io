@@ -1,6 +1,7 @@
 ---
 title: Next.js 服务端和客户端共享数据或状态
 sidebar: auto
+date: 2025-6-23
 categories: 
 - Next.js
 - 前端
