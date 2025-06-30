@@ -1,6 +1,6 @@
 {
   "name": "keekuun.github.io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "每一个不曾起舞的日子，都是对生命的辜负！",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "docs:build": "vuepress build docs",
     "deploy": "bash deploy.sh",
     "deploy-win": "auto-deploy.bat",
-    "pdf": "vuepress export docs"
+    "pdf": "vuepress export docs",
+    "release": "git checkout master && git pull origin master && npx bumpp && git push origin master && git push --tags"
   },
   "keywords": [
     "blog",
