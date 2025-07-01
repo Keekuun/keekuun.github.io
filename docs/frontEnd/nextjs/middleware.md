@@ -11,15 +11,15 @@ tags:
 
 本文将详细解析 Next.js 中间件（Middleware）。它是 Next.js 框架中一个极其强大且灵活的功能，理解它对于构建复杂的、高性能的现代 Web 应用至关重要。
 
-### 什么是 Next.js 中间件？
+## 什么是 Next.js 中间件？
 
 简单来说，Next.js 中间件是一个在**请求到达服务器、但尚未完成处理（例如尚未进行页面渲染或 API 路由执行）之前**运行的函数。
 
 你可以把它想象成一个站应用入口处的“**智能交通警察**”或“**门卫**”。它能够检查每一个传入的请求，并根据你定义的规则，在请求继续前进之前对其进行处理、重写、重定向或者直接拦截。
 
-![middleware.png](middleware.png)
+![middleware.png](./../../../images/nextjs/middleware.png)
 
-#### 核心特性
+### 核心特性
 
 1.  **运行在 Edge (边缘计算)**: 这是中间件最显著的特点。当部署在 Vercel 等支持 Edge Functions 的平台上时，中间件代码会在离用户最近的服务器上执行，而不是在单一的源服务器上。这使得响应速度极快，延迟极低。
 2.  **在缓存之前执行**: 中间件在 Next.js 的缓存层之前运行。这意味着你可以动态修改即将从缓存中提供的响应，例如根据用户地理位置提供不同内容。
@@ -28,13 +28,13 @@ tags:
 
 ---
 
-### 如何创建和配置中间件？
+## 如何创建和配置中间件？
 
 1.  **创建文件**: 在你的项目根目录（与 `pages` 或 `app` 目录同级）下创建 `middleware.ts` 文件。
 2.  **编写函数**: 在该文件中，导出一个名为 `middleware` 的函数。
 3.  **配置 `matcher`**: 导出一个 `config` 对象，其中的 `matcher` 属性告诉 Next.js 这个中间件应该在哪些路径上运行。**这是至关重要的性能优化点**，可以避免中间件在不必要的路径（如 `/_next/static`, `/_next/image`, `favicon.ico`）上运行。
 
-#### `middleware.ts` 的基本结构
+### `middleware.ts` 的基本结构
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -62,7 +62,7 @@ export const config = {
 };
 ```
 
-#### `NextResponse` 的核心 API
+### `NextResponse` 的核心 API
 
 *   `NextResponse.next()`: 继续请求处理链。如果需要修改请求头或响应头，可以在 `next()` 的基础上进行。
 *   `NextResponse.redirect(url)`: 将用户重定向到另一个 URL。浏览器地址栏会改变。
@@ -71,11 +71,11 @@ export const config = {
 
 ---
 
-### 常用的实用案例
+## 常用的实用案例
 
 下面是一些最常见且强大的中间件应用场景。
 
-#### 案例 1: 认证与受保护的路由 (Authentication)
+### 案例 1: 认证与受保护的路由 (Authentication)
 
 这是最经典的应用。如果用户未登录，则将他们从受保护的页面（如 `/dashboard`）重定向到登录页 (`/login`)。
 
@@ -111,7 +111,7 @@ export const config = {
 };
 ```
 
-#### 案例 2: A/B 测试 (A/B Testing)
+### 案例 2: A/B 测试 (A/B Testing)
 
 根据用户的 cookie 或其他标识，将一部分流量无缝地导向页面的新版本，而用户不会察觉 URL 的变化。
 
@@ -148,7 +148,7 @@ export const config = {
 };
 ```
 
-#### 案例 3: 国际化 (i18n) 路由
+### 案例 3: 国际化 (i18n) 路由
 
 根据浏览器 `Accept-Language` 头自动检测用户偏好语言，并将其重定向到相应的语言路径（如 `/en` 或 `/zh`）。
 
@@ -199,7 +199,7 @@ export const config = {
 };
 ```
 
-#### 案例 4: 地理位置定位 (Geolocation)
+### 案例 4: 地理位置定位 (Geolocation)
 
 根据用户的地理位置（由 Vercel 平台提供）提供定制内容或重定向。
 
@@ -228,8 +228,8 @@ export const config = {
 ```
 
 
-#### 案例 5: CORS 处理
-##### 为什么使用中间件处理 CORS？
+### 案例 5: CORS 处理
+#### 为什么使用中间件处理 CORS？
 
 1.  **集中管理 (Centralization)**: 所有 API 路由的 CORS 策略都定义在 `middleware.ts` 这一个文件中。修改、添加或删除允许的源，只需改动一处。
 2.  **边缘执行 (Edge Execution)**: 中间件在 Edge 环境运行。对于 CORS 的 `OPTIONS` 预检（pre-flight）请求，可以在离用户最近的服务器上就快速响应，无需将请求传递到后端的源服务器，从而降低延迟。
@@ -238,7 +238,7 @@ export const config = {
 
 ---
 
-##### 创建并编写 `middleware.ts`
+#### 创建并编写 `middleware.ts`
 ```typescript
 // middleware.ts
 
@@ -304,7 +304,7 @@ export const config = {
 };
 ```
 
-### 总结与最佳实践
+## 总结与最佳实践
 
 *   **精简 `matcher`**: 永远通过 `matcher` 将中间件的执行范围限制在绝对必要的路径上，这是最重要的性能优化手段。
 *   **保持轻量**: 中间件会给每个匹配的请求增加一点延迟。逻辑应尽可能快地执行完毕。避免在中间件中进行复杂的、耗时的计算或 API 调用。
