@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://gitee.com/keekuun/keekuun.github.io/compare/v1.6.0...v1.6.1) (2025-07-01)
+
+
+### ✏️ Documentation | 文档
+
+* 更新 Next.js 中间件文档的标题层级和图片路径 ([6a65b62](https://gitee.com/keekuun/keekuun.github.io/commit/6a65b62858fba8ac2f236360a1d1a1a0f8622a76))
+
 ## [1.6.0](https://gitee.com/keekuun/keekuun.github.io/compare/v1.3.0...v1.6.0) (2025-07-01)
 
 
