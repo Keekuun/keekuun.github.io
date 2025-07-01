@@ -17,7 +17,7 @@ tags:
 
 你可以把它想象成一个站应用入口处的“**智能交通警察**”或“**门卫**”。它能够检查每一个传入的请求，并根据你定义的规则，在请求继续前进之前对其进行处理、重写、重定向或者直接拦截。
 
-![Next.js Middleware Flow](https://nextjs.org/docs/images/middleware-chart.png)
+![middleware.png](middleware.png)
 
 #### 核心特性
 
