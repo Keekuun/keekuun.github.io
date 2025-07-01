@@ -20,6 +20,29 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **package.json:** 移除 packageManager 字段 ([fbb6397](https://gitee.com/keekuun/keekuun.github.io/commit/fbb63975dd74bde64360b19d16caba814a09e3ba))
 
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+* **release:** 1.4.0 ([9fb3179](https://gitee.com/keekuun/keekuun.github.io/commit/9fb31791cb6db520d3a65d895b78c4f93777b253))
+
+## [1.4.0](https://gitee.com/keekuun/keekuun.github.io/compare/v1.3.0...v1.4.0) (2025-07-01)
+
+
+### ✨ Features | 新功能
+
+* **docs:** 新增Next.js线上白屏问题排查指南 ([a5ce139](https://gitee.com/keekuun/keekuun.github.io/commit/a5ce139d06ae2aa25351b3f7e1621e73b5fa1de7))
+
+
+### ✏️ Documentation | 文档
+
+* 更新nextjs中间件文档中的图片引用 ([7b956cb](https://gitee.com/keekuun/keekuun.github.io/commit/7b956cb8f54656d02b7996b7da5c50af5fbdeb99))
+* **frontEnd/nextjs:** 新增Next.js配置Sentry文档 ([45d1655](https://gitee.com/keekuun/keekuun.github.io/commit/45d1655214f82943a7e49e81e4992d4adc0f60d2))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **package.json:** 移除 packageManager 字段 ([fbb6397](https://gitee.com/keekuun/keekuun.github.io/commit/fbb63975dd74bde64360b19d16caba814a09e3ba))
+
 ## [1.3.0](https://gitee.com/keekuun/keekuun.github.io/compare/v1.2.0...v1.3.0) (2025-07-01)
 
 
