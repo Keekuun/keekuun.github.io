@@ -10,7 +10,7 @@ tags:
 - PWA
 ---
 
-## **一、前置知识**
+## **一、技术调研**
 在开始配置 PWA 之前，我们需要了解一些基本概念和技术：
 - **PWA（Progressive Web App）**：渐进式 Web 应用，结合了网页和移动应用的优点，支持离线访问、推送通知等功能。
 - **Service Worker**：浏览器后台运行的脚本，负责处理网络请求、缓存资源等。
@@ -24,6 +24,8 @@ tags:
 - **用户体验**：提供类似原生应用的交互体验，如全屏模式、启动画面等。
 - **SEO 优化**：确保 PWA 在搜索引擎中可被索引。
 - **测试和调试**：使用 Chrome DevTools 等工具测试 PWA 功能。
+
+[查看`next-pwa`、`@serwist/next`、`next-offline` npm 对比](https://npm-compare.com/zh-CN/@serwist/next,next-pwa), 虽然 `next-pwa` 下载量和star数量最多，但是它更新时间在三年前几乎不维护了，而 `@serwist/next` 是目前最活跃的 PWA 插件，提供了更好的支持和功能，文档也很丰富，关键是对最新版 next.js 支持度很好。所以推荐使用 `@serwist/next` 插件来配置 PWA。
 
 ## **二、安装依赖**
 
