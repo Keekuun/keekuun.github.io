@@ -78,6 +78,9 @@ export default function CartInfo({ quantity, formattedPrice }: CartInfoProps) {
 ---
 
 ### 2. 高级用法 (发挥 ICU 的真正威力)
+![ICU Message Format](../../../images/nextjs/i18n-icu.webp)
+
+> [ICU Message Syntax Tester](https://simplelocalize.io/tools/icu-message-syntax-tester/)
 
 ICU Message Format 的强大远不止于此。下面是几个能显著提升你 i18n 代码质量的高级实践。
 
