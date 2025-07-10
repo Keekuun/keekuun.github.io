@@ -203,3 +203,5 @@ app.delete('/some-resource/:id', (req: Request, res: Response) => {
     *   **不使用 Express 时**：如果你直接使用 Node.js 的原生 `http` 模块创建服务器，那你**只能**使用 `res.end()`。
 
 3. 当然，如果是`express v4.8` 以上，推荐使用 [res.sendFile(path [, options] [, fn])](https://expressjs.com/en/5x/api.html#res.sendFile)来专门处理文件。
+
+> 项目：[基于 Puppeteer 的 PDF 文档生成服务](https://github.com/Keekuun/puppeteer-pdf)
