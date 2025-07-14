@@ -7,6 +7,7 @@ categories:
 - 前端
 tags: 
 - Next.js
+- i18n
 ---
 
 在 Next.js 中实现国际化，核心要解决三个问题：

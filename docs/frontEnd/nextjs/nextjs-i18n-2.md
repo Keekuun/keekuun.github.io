@@ -7,6 +7,7 @@ categories:
 - 前端
 tags:
 - Next.js
+- i18n
 ---
 
 在实际应用中，几乎所有的翻译文案都需要动态插入内容，比如用户名、数量、价格、日期等。我们称之为**插值 (Interpolation)** 或 **插槽 (Slots)**。
