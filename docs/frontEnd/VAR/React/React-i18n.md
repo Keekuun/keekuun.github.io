@@ -18,7 +18,7 @@ tags:
 
 ---
 
-## 为 React SPA 添加 i18n步骤指南：
+## 步骤指南：
 
 我们将按照以下步骤进行：
 
@@ -37,13 +37,17 @@ tags:
 *   `react-i18next`: 连接 i18next 和 React 的桥梁。
 *   `i18next-browser-languagedetector`: 自动检测用户浏览器语言的插件。
 *   `i18next-http-backend`: 从服务器懒加载翻译文件的插件，能有效减小初始包体积。
+*   `i18next-icu`: 使用 ICU 语法定义复杂文本(处理单复数、货币等)
 
 ```bash
 # 使用 npm
-npm install i18next react-i18next i18next-browser-languagedetector i18next-http-backend
+npm install i18next react-i18next i18next-browser-languagedetector i18next-http-backend i18next-icu
 
 # 或者使用 yarn
-yarn add i18next react-i18next i18next-browser-languagedetector i18next-http-backend
+yarn add i18next react-i18next i18next-browser-languagedetector i18next-http-backend i18next-icu
+
+# 或者使用 pnpm
+pnpm add i18next react-i18next i18next-browser-languagedetector i18next-http-backend i18next-icu
 ```
 
 ### 第 2 步：创建翻译文件
@@ -96,11 +100,13 @@ yarn add i18next react-i18next i18next-browser-languagedetector i18next-http-bac
 ```typescript
 // src/i18n.ts
 import i18n from 'i18next';
+import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpApi from 'i18next-http-backend';
 
 i18n
+  .use(ICU)
   // 注入 http-backend 插件，用于懒加载翻译文件
   .use(HttpApi)
   // 注入 language-detector 插件，自动检测语言
@@ -225,6 +231,17 @@ function App() {
 export default App;
 ```
 
+ICU 格式示例：
+
+在翻译文件中使用 ICU 语法定义复杂文本, 例如处理英语单复数：
+```json
+{
+  "message": "{name} has {numPhotos, plural, =0 {no photos.} =1 {one photo.} other {# photos.}}"
+}
+```
+
+> [ICU Message Syntax Tester](https://simplelocalize.io/tools/icu-message-syntax-tester/)
+
 #### 第 6 步：创建语言切换器
 
 这个组件允许用户手动更改应用的语言。
@@ -303,7 +320,7 @@ declare module 'react-i18next' {
 
 ---
 
-### 总结
+## 总结
 
 现在已经为 React SPA 成功集成了一个功能完备、可扩展且类型安全的 i18n 系统。
 
