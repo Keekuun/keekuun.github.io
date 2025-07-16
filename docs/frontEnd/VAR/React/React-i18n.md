@@ -190,6 +190,7 @@ root.render(
 
 现在，我们可以在任何组件中使用 `useTranslation` hook 来获取翻译函数 `t` 和 i18n 实例。
 
++ 函数组件：
 ```typescript
 // src/App.tsx
 import React from 'react';
@@ -229,6 +230,38 @@ function App() {
 }
 
 export default App;
+```
+
++ 类组件：
+```typescript
+ // MyComponent.js
+import React, { Component } from 'react';
+import { withTranslation } from 'react-i18next';
+
+class MyComponent extends Component {
+  render() {
+    const { t, i18n } = this.props;
+
+    // 切换语言的方法
+    const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+    };
+
+    return (
+      <div>
+        <h1>{t('welcome')}</h1>
+        <p>{t('description', { appName: 'MyApp' })}</p>
+        <p>{t('message', { name: 'Alice', numPhotos: 3 })}</p>
+
+    <button onClick={() => changeLanguage('en')}>English</button>
+    <button onClick={() => changeLanguage('zh')}>中文</button>
+    </div>
+  );
+  }
+}
+
+// 使用 withTranslation 高阶组件包装组件
+export default withTranslation()(MyComponent);
 ```
 
 ICU 格式示例：
