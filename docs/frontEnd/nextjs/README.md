@@ -85,3 +85,5 @@ Next.js 内置了大量性能优化策略，开发者无需手动配置：
 ### 总结
 
 Next.js 并不是要取代 React，而是**增强 React**。它通过提供一套经过深思熟虑的、生产级别的解决方案（渲染、路由、API、性能优化），将开发者从繁琐的工程化配置中解放出来，使其可以更加专注于业务逻辑和用户界面的构建。可以说，它为如何构建现代、高性能的 Web 应用树立了一个行业标杆。
+
+> [Next-js-Boilerplate](https://github.com/ixartz/Next-js-Boilerplate)
