@@ -241,4 +241,43 @@ React.createElement(component, props, ...children);
 + JSX在不同的平台提供不同的编译器，可以跨平台（React Native）
 
   
+## 编译器
+jsx 通过编译器转为浏览器可以认识（js 引擎）的js代码，使用 [babel](https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.42&spec=false&loose=false&code_lz=Q&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.28.1&externalPlugins=&assumptions=%7B%7D): `@babel/preset-react` 和 `plugin-transform-react-jsx`来完成编译转换。
+```jsx
+const App = () => <div>hello world</div>
+```
+通过上述编译器编译为：
+```js
+import { jsx as _jsx } from "react/jsx-runtime";
+const App = () => /*#__PURE__*/_jsx("div", {
+  children: "hello world"
+});
+```
 
+在 React 运行时，处理为 [ReactElement](https://github.com/facebook/react/blob/main/packages/react/src/jsx/ReactJSXElement.js#L173)， 也就是 虚拟DOM:
+```jsx
+function ReactElement(
+        type,
+        key,
+        self,
+        source,
+        owner,
+        props,
+        debugStack,
+        debugTask,
+) {
+    // ...简化代码
+    const element = {
+      // This tag allows us to uniquely identify this as a React Element
+      $$typeof: REACT_ELEMENT_TYPE,
+
+      // Built-in properties that belong on the element
+      type,
+      key,
+      ref,
+
+      props,
+    };
+  return element
+}
+```
