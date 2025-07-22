@@ -1,6 +1,6 @@
 ---
 title: PNPM Workspace 管理 Monorepo 实践
-date: 2027-7-16
+date: 2025-7-16
 sidebar: auto
 categories: 
 - 工程化
