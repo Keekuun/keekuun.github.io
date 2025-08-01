@@ -1,0 +1,117 @@
+// 导入包含混合器定义的文件
+@use "./var";
+
+/* 侧边栏整体样式 */
+#VPSidebarNav {
+    transition: all 0.3s ease;
+}
+
+/* 侧边栏缩放效果 */
+.group:has([role="button"]) .VPSidebarItem.level-0 .items {
+    padding-left: 15px !important;
+    border-left: 1px solid var(--vp-c-divider);
+    border-radius: 2px;
+    transition: all 0.25s ease;
+}
+
+/* 侧边栏项基本样式 */
+#VPSidebarNav .VPSidebarItem > .item {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+#VPSidebarNav .VPSidebarItem > .item:hover {
+    transform: translateX(4px);
+}
+
+/* 侧边栏项激活状态 */
+#VPSidebarNav .VPSidebarItem.is-active > .item {
+    // color: var(--vp-c-brand);
+    color: rgb(192, 2, 230);
+
+    font-weight: 500;
+}
+
+/* 侧边栏项图标基本样式 */
+#VPSidebarNav .VPSidebarItem > .item::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: cover;
+    margin-right: 6px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+#VPSidebarNav .VPSidebarItem > .item:hover::before {
+    transform: scale(1.1);
+}
+
+/* 文档项图标 - 折叠状态 */
+#VPSidebarNav .VPSidebarItem:not(.is-link).collapsed > .item::before {
+    background-image: url("/svg/document.svg");
+}
+
+/* 文档项图标 - 展开状态 */
+#VPSidebarNav .VPSidebarItem:not(.is-link) > .item::before {
+    background-image: url("/svg/document-open.svg");
+}
+
+/* 链接项图标 */
+#VPSidebarNav .VPSidebarItem.is-link > .item::before {
+    background-image: url("/svg/file.svg");
+}
+
+/* 深色模式支持 */
+.dark #VPSidebarNav .VPSidebarItem > .item::before {
+    filter: brightness(0.8);
+}
+
+.dark #VPSidebarNav .VPSidebarItem.is-active > .item::before {
+    filter: brightness(1) hue-rotate(180deg);
+}
+
+/* 侧边栏展开/折叠动画 */
+#VPSidebarNav .VPSidebarItem .items {
+    transition:
+        max-height 0.3s ease-out,
+        opacity 0.2s ease-out;
+    overflow: hidden;
+}
+
+#VPSidebarNav .VPSidebarItem.is-active .items,
+#VPSidebarNav .VPSidebarItem:hover .items {
+    opacity: 1;
+    transition:
+        max-height 0.5s ease-in,
+        opacity 0.3s ease-in;
+}
+
+//使用混合器为侧边栏一级标题应用渐变文本
+.VPSidebarItem.level-0 .text {
+    // @include var.text-gradient;
+    color: var(--vp-c-brand-1) !important;
+}
+
+// 您可能还想为其他元素应用相同的渐变效果
+.VPSidebarItem.level-0 .item:hover .text {
+    @include var.text-gradient;
+    opacity: 0.9;
+}
+
+// 或者为激活状态的侧边栏项应用渐变
+.VPSidebarItem.level-0.is-active .text {
+    @include var.text-gradient;
+    font-weight: 600;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .group:has([role="button"]) .VPSidebarItem.level-0 .items {
+        padding-left: 10px !important;
+    }
+}

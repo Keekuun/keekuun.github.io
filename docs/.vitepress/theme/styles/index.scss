@@ -1,0 +1,20 @@
+// 新语法 (推荐)
+@use "./code-bg.scss" as *; // 代码块背景样式
+@use "./iframe.scss" as *; // iframe样式
+
+@use "./var.scss" as *; ///自定义变量
+@use "./hidden.scss" as *; //隐藏横条
+@use "./hyde-banner-desc-gradient.scss" as *; // 首页打字机渐变文字颜色
+@use "./vp-code.scss" as *; //代码块
+// @use "./vp-code-group.scss" as *; //代码组
+@use "./vp-code-title.scss" as *; //代码块标题
+@use "./font.scss" as *; // 字体
+@use "./hyde-homeCardSort.scss" as *; // 文字在悬停时会出现下划线动画
+@use "./Container/container-hyde.scss" as *; // container-hyde容器
+
+@use "./vp-img-shadow.scss" as *; // 图片阴影
+@use "./vp-code-shadow.scss" as *; // 代码块阴影
+
+@use "./scrollBar.scss" as *; // 滚动条样式
+@use "./sidebar.scss" as *; // 侧边栏样式
+@use "./rainbow.scss" as *; // 文本/滚动条等彩虹渐变
