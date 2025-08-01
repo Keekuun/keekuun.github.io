@@ -1,7 +1,7 @@
 ---
 title: Next.js 中的 React.cache 函数详解
 sidebar: auto
-date: 2025-6-11
+date: 2025-06-11
 categories: 
 - Next.js
 - 前端

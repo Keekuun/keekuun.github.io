@@ -1,6 +1,6 @@
 ---
 title: Supabase 快速上手
-date: 2025-2-25
+date: 2025-02-25
 sidebar: auto
 categories: 
 - 数据库

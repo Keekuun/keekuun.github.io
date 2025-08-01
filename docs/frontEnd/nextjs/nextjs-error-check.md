@@ -1,7 +1,7 @@
 ---
 title: Next.js 线上白屏问题排查指南（Sentry监控版）
 sidebar: auto
-date: 2025-7-1
+date: 2025-07-1
 categories: 
 - Next.js
 - 前端

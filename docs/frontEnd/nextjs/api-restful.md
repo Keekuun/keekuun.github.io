@@ -1,7 +1,7 @@
 ---
 title: Next.js 实践 Restful API
 sidebar: auto
-date: 2025-7-1
+date: 2025-07-1
 categories: 
 - Next.js
 - 前端

@@ -1,6 +1,6 @@
 ---
 title: GitHub Actions 自动化构建并发布 Release 版本
-date: 2025-7-25
+date: 2025-07-25
 categories: 
 - CI/CD
 tags: 

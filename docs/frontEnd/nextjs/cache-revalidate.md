@@ -1,7 +1,7 @@
 ---
 title: Next.js 缓存与重新验证机制
 sidebar: auto
-date: 2025-6-11
+date: 2025-06-11
 categories: 
 - Next.js
 - 前端

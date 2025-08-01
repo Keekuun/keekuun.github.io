@@ -1,7 +1,7 @@
 ---
 title: Next.js 配置 PWA
 sidebar: auto
-date: 2025-7-2
+date: 2025-07-2
 categories: 
 - Next.js
 - 前端

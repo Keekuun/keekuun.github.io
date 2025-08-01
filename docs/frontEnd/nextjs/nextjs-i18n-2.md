@@ -1,7 +1,7 @@
 ---
 title: Next.js 国际化（i18n）的动态插槽
 sidebar: auto
-date: 2025-6-20
+date: 2025-06-20
 categories:
 - Next.js
 - 前端

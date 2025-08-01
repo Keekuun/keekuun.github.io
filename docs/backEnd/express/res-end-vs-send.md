@@ -1,6 +1,6 @@
 ---
 title: Express 响应返回函数 `res.send` VS `res.end`
-date: 2025-7-10
+date: 2025-07-10
 categories:
 - 后端
 tags:

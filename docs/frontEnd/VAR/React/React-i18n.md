@@ -1,6 +1,6 @@
 ---
 title: React SPA i18n国际化方案
-date: 2025-7-12
+date: 2025-07-12
 sidebar: auto
 categories: 
 - React

@@ -1,6 +1,6 @@
 ---
 title: nestjs基础之class-transformer
-date: 2025-3-7
+date: 2025-03-7
 categories:
   - 后端
   - nestjs

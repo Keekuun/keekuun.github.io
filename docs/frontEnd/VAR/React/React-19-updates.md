@@ -1,6 +1,6 @@
 ---
 title: React19 版本主要有那些更新
-date: 2025-7-20
+date: 2025-07-20
 sidebar: auto
 categories:
 - React

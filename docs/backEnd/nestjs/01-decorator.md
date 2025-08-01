@@ -1,6 +1,6 @@
 ---
 title: nestjs基础之装饰器
-date: 2025-3-6
+date: 2025-03-6
 categories:
     - 后端
     - nestjs

@@ -1,6 +1,6 @@
 ---
 title: React 19 如何进行异常捕获
-date: 2025-7-20
+date: 2025-07-20
 sidebar: auto
 categories:
 - React

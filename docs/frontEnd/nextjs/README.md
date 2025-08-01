@@ -1,6 +1,6 @@
 ---
 title: Next.js：React 的全栈框架
-date: 2025-3-5
+date: 2025-03-5
 categories:
 - 前端
 tags:

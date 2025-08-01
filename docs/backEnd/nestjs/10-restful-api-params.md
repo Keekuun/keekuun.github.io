@@ -1,6 +1,6 @@
 ---
 title: nestjs Restful Api路由参数
-date: 2025-4-21
+date: 2025-04-21
 categories:
   - 后端
   - nestjs

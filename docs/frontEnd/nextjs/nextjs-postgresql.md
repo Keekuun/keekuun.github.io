@@ -1,7 +1,7 @@
 ---
 title: Next.js 与 PostgreSQL 全栈开发入门
 sidebar: auto
-date: 2025-6-30
+date: 2025-06-30
 categories: 
 - Next.js
 - 前端

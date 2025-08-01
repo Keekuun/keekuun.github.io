@@ -1,7 +1,7 @@
 ---
 title: Next.js 配置 Sentry
 sidebar: auto
-date: 2025-7-1
+date: 2025-07-1
 categories: 
 - Next.js
 - 前端

@@ -1,6 +1,6 @@
 ---
 title: nestjs基础之class-validator
-date: 2025-3-8
+date: 2025-03-8
 categories:
   - 后端
   - nestjs

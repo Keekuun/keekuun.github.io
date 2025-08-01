@@ -1,6 +1,6 @@
 ---
 title: nestjs快速入门
-date: 2025-3-5
+date: 2025-03-5
 categories:
   - 后端
   - nestjs
