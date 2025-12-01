@@ -16,33 +16,48 @@ tags:
 
 ### 一、基础乐观更新模式（带回滚）
 
+React 19 的 `useOptimistic` 返回 `[optimisticState, addOptimisticUpdate]`，第二个参数是一个 reducer，用于描述如何根据“乐观动作”推导新状态。因此需要定义动作类型，并在失败时派发一个显式的回滚动作，避免旧版本 `setState` 写法导致示例错误。
+
 ```tsx
 import { useState, useOptimistic } from 'react';
 
-function TodoList({ todos }: { todos: Todo[] }) {
-  const [optimisticTodos, setOptimisticTodos] = useOptimistic(
-    todos,
-    (state, newTodo: Todo) => [...state, newTodo]
-  );
+type OptimisticAction =
+  | { type: 'add'; todo: Todo }
+  | { type: 'rollback'; snapshot: Todo[] };
 
+function TodoList({ todos }: { todos: Todo[] }) {
   const [error, setError] = useState<Error | null>(null);
 
+  const [optimisticTodos, updateOptimisticTodos] = useOptimistic(
+    todos,
+    (state, action: OptimisticAction) => {
+      if (action.type === 'add') {
+        return [...state, action.todo];
+      }
+      if (action.type === 'rollback') {
+        return action.snapshot;
+      }
+      return state;
+    }
+  );
+
   async function addTodo(newTodo: Todo) {
-    // 1. 保存当前状态到ref（不会触发渲染）
-    let rollbackData = todos;
-  
+    // 1. 保存当前快照，确保可以精确回滚
+    const rollbackSnapshot = optimisticTodos;
+
     // 2. 乐观更新UI
-    setOptimisticTodos(newTodo);
-  
+    updateOptimisticTodos({ type: 'add', todo: newTodo });
+
     try {
       // 3. 实际API调用
-      await fetch('/api/todos', {
+      const response = await fetch('/api/todos', {
         method: 'POST',
-        body: JSON.stringify(newTodo)
+        body: JSON.stringify(newTodo),
       });
+      if (!response.ok) throw new Error('Create todo failed');
     } catch (err) {
-      // 5. 失败时回滚
-      setOptimisticTodos(rollbackData);
+      // 4. 失败时回滚
+      updateOptimisticTodos({ type: 'rollback', snapshot: rollbackSnapshot });
       setError(err as Error);
     }
   }

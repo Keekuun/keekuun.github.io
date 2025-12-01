@@ -44,7 +44,7 @@ CSR 是传统 React 单页应用（SPA）的模式。服务器发送一个近乎
     ```
 3.  浏览器下载并执行 `app.js`。
 4.  JavaScript 代码（例如在 `useEffect` Hook 中）向 API 发起数据请求。
-5.  数据返回后，React 将数据和组件结合，在浏览器中生成 DOM，并挂载到 `<div id="root">moverride>。
+5.  数据返回后，React 将数据和组件结合，在浏览器中生成 DOM，并挂载到 `<div id="root"></div>`。
 6.  页面最终变得可见且可交互。
 
 #### Next.js 中的实现 (App Router)
