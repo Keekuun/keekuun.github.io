@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>shell进阶 | 前端Jeek</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="manifest" href="./data/manifest.json">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/MouseClickEffect.js"></script>
+    <meta name="description" content="每一个不曾起舞的日子，都是对生命的辜负！">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="keywords" content="vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang, flutter">
+    <meta name="copyright" content="前端Jeek">
+    <meta name="robots" content="all">
+    
+    <link rel="preload" href="/assets/css/0.styles.748bddee.css" as="style"><link rel="preload" href="/assets/js/app.6215ff8a.js" as="script"><link rel="preload" href="/assets/js/7.11327cc2.js" as="script"><link rel="preload" href="/assets/js/2.00aee375.js" as="script"><link rel="preload" href="/assets/js/1.3a9b40e4.js" as="script"><link rel="preload" href="/assets/js/23.1f39d0eb.js" as="script"><link rel="preload" href="/assets/js/55.4f1e67a3.js" as="script"><link rel="prefetch" href="/assets/js/10.3e4ca091.js"><link rel="prefetch" href="/assets/js/100.a4b30aad.js"><link rel="prefetch" href="/assets/js/101.0613a96d.js"><link rel="prefetch" href="/assets/js/102.f7628c1c.js"><link rel="prefetch" href="/assets/js/103.1f9fabdf.js"><link rel="prefetch" href="/assets/js/104.16992962.js"><link rel="prefetch" href="/assets/js/105.e65ef529.js"><link rel="prefetch" href="/assets/js/106.0b67fead.js"><link rel="prefetch" href="/assets/js/107.ce486384.js"><link rel="prefetch" href="/assets/js/108.9301e3af.js"><link rel="prefetch" href="/assets/js/109.ba8579b4.js"><link rel="prefetch" href="/assets/js/11.75b5a637.js"><link rel="prefetch" href="/assets/js/110.4b8cb06f.js"><link rel="prefetch" href="/assets/js/111.971eb2af.js"><link rel="prefetch" href="/assets/js/112.508ee53c.js"><link rel="prefetch" href="/assets/js/113.198cf9cd.js"><link rel="prefetch" href="/assets/js/114.448458e9.js"><link rel="prefetch" href="/assets/js/115.9691ed08.js"><link rel="prefetch" href="/assets/js/116.05388cc6.js"><link rel="prefetch" href="/assets/js/117.d2e28824.js"><link rel="prefetch" href="/assets/js/118.5387677a.js"><link rel="prefetch" href="/assets/js/119.ecf21116.js"><link rel="prefetch" href="/assets/js/120.7b1d5c9e.js"><link rel="prefetch" href="/assets/js/121.24f10ee8.js"><link rel="prefetch" href="/assets/js/122.8b9ebba0.js"><link rel="prefetch" href="/assets/js/123.d1afa67e.js"><link rel="prefetch" href="/assets/js/124.6d4095c5.js"><link rel="prefetch" href="/assets/js/125.7df8e2b9.js"><link rel="prefetch" href="/assets/js/126.10f7c79f.js"><link rel="prefetch" href="/assets/js/127.6d76daab.js"><link rel="prefetch" href="/assets/js/128.0b0c711f.js"><link rel="prefetch" href="/assets/js/129.8a03fa85.js"><link rel="prefetch" href="/assets/js/130.9af6e6e5.js"><link rel="prefetch" href="/assets/js/131.62a8ca20.js"><link rel="prefetch" href="/assets/js/132.e295bcde.js"><link rel="prefetch" href="/assets/js/133.534824c6.js"><link rel="prefetch" href="/assets/js/134.c301cd9f.js"><link rel="prefetch" href="/assets/js/135.d5ca0af4.js"><link rel="prefetch" href="/assets/js/136.372471fa.js"><link rel="prefetch" href="/assets/js/137.c955b440.js"><link rel="prefetch" href="/assets/js/138.52b410b9.js"><link rel="prefetch" href="/assets/js/139.ec9f7e25.js"><link rel="prefetch" href="/assets/js/140.dbd6ccd2.js"><link rel="prefetch" href="/assets/js/141.330d5172.js"><link rel="prefetch" href="/assets/js/142.ec1d1dad.js"><link rel="prefetch" href="/assets/js/143.320b64a9.js"><link rel="prefetch" href="/assets/js/144.1c336a83.js"><link rel="prefetch" href="/assets/js/145.ceb2f940.js"><link rel="prefetch" href="/assets/js/146.7253b55f.js"><link rel="prefetch" href="/assets/js/147.0f5dcb40.js"><link rel="prefetch" href="/assets/js/148.07917418.js"><link rel="prefetch" href="/assets/js/149.e0e9410b.js"><link rel="prefetch" href="/assets/js/15.2d08fb15.js"><link rel="prefetch" href="/assets/js/150.005be68b.js"><link rel="prefetch" href="/assets/js/151.598d34e1.js"><link rel="prefetch" href="/assets/js/152.71ea3d25.js"><link rel="prefetch" href="/assets/js/153.8a07f8ea.js"><link rel="prefetch" href="/assets/js/154.bf24789d.js"><link rel="prefetch" href="/assets/js/155.366e52dd.js"><link rel="prefetch" href="/assets/js/156.cea009da.js"><link rel="prefetch" href="/assets/js/157.3f9e2e85.js"><link rel="prefetch" href="/assets/js/158.20432239.js"><link rel="prefetch" href="/assets/js/159.d44e220d.js"><link rel="prefetch" href="/assets/js/16.1e2f92be.js"><link rel="prefetch" href="/assets/js/160.337339ef.js"><link rel="prefetch" href="/assets/js/161.ba75b446.js"><link rel="prefetch" href="/assets/js/162.196925dd.js"><link rel="prefetch" href="/assets/js/163.d695d91b.js"><link rel="prefetch" href="/assets/js/164.af932254.js"><link rel="prefetch" href="/assets/js/165.eea6e6f0.js"><link rel="prefetch" href="/assets/js/166.aee69940.js"><link rel="prefetch" href="/assets/js/167.613c49d5.js"><link rel="prefetch" href="/assets/js/168.a0d5a8ba.js"><link rel="prefetch" href="/assets/js/169.b868075d.js"><link rel="prefetch" href="/assets/js/17.07d56fc3.js"><link rel="prefetch" href="/assets/js/170.6ddc9cc1.js"><link rel="prefetch" href="/assets/js/171.0f9def72.js"><link rel="prefetch" href="/assets/js/172.446bb79e.js"><link rel="prefetch" href="/assets/js/173.ff78aa80.js"><link rel="prefetch" href="/assets/js/174.6f9acebe.js"><link rel="prefetch" href="/assets/js/175.2ca58144.js"><link rel="prefetch" href="/assets/js/176.396ca5af.js"><link rel="prefetch" href="/assets/js/177.f294a5c4.js"><link rel="prefetch" href="/assets/js/178.d43be5ef.js"><link rel="prefetch" href="/assets/js/179.82d9da1e.js"><link rel="prefetch" href="/assets/js/18.5eb8e005.js"><link rel="prefetch" href="/assets/js/180.e2d5e7fa.js"><link rel="prefetch" href="/assets/js/181.eef8103b.js"><link rel="prefetch" href="/assets/js/182.44d02625.js"><link rel="prefetch" href="/assets/js/183.1d572013.js"><link rel="prefetch" href="/assets/js/184.6252e0a4.js"><link rel="prefetch" href="/assets/js/185.5903dc9a.js"><link rel="prefetch" href="/assets/js/186.cc00b2ad.js"><link rel="prefetch" href="/assets/js/187.ed03faa7.js"><link rel="prefetch" href="/assets/js/188.22141097.js"><link rel="prefetch" href="/assets/js/189.f91ace88.js"><link rel="prefetch" href="/assets/js/19.16311af7.js"><link rel="prefetch" href="/assets/js/190.34dff5fa.js"><link rel="prefetch" href="/assets/js/191.e015097c.js"><link rel="prefetch" href="/assets/js/192.9af7a92c.js"><link rel="prefetch" href="/assets/js/193.6edb93b4.js"><link rel="prefetch" href="/assets/js/194.cd9b769c.js"><link rel="prefetch" href="/assets/js/195.f12b2f4d.js"><link rel="prefetch" href="/assets/js/196.953277f9.js"><link rel="prefetch" href="/assets/js/197.41ece02d.js"><link rel="prefetch" href="/assets/js/198.7008b8ee.js"><link rel="prefetch" href="/assets/js/199.55c66eac.js"><link rel="prefetch" href="/assets/js/20.8075ec35.js"><link rel="prefetch" href="/assets/js/200.d3d86844.js"><link rel="prefetch" href="/assets/js/201.b19d06ed.js"><link rel="prefetch" href="/assets/js/202.146bd1fd.js"><link rel="prefetch" href="/assets/js/203.8958319d.js"><link rel="prefetch" href="/assets/js/204.930288d9.js"><link rel="prefetch" href="/assets/js/205.8ae5b571.js"><link rel="prefetch" href="/assets/js/206.0fb41c0d.js"><link rel="prefetch" href="/assets/js/207.cca8187b.js"><link rel="prefetch" href="/assets/js/208.213b7930.js"><link rel="prefetch" href="/assets/js/209.bdb9dd1b.js"><link rel="prefetch" href="/assets/js/21.40d089f3.js"><link rel="prefetch" href="/assets/js/210.e72165c7.js"><link rel="prefetch" href="/assets/js/211.b7659acd.js"><link rel="prefetch" href="/assets/js/212.c4610c19.js"><link rel="prefetch" href="/assets/js/213.b65b6d93.js"><link rel="prefetch" href="/assets/js/214.ce4e5647.js"><link rel="prefetch" href="/assets/js/215.ad8e7eed.js"><link rel="prefetch" href="/assets/js/216.77e8d009.js"><link rel="prefetch" href="/assets/js/217.7af37ff4.js"><link rel="prefetch" href="/assets/js/218.8db6104f.js"><link rel="prefetch" href="/assets/js/219.5a74e962.js"><link rel="prefetch" href="/assets/js/22.b0f502a3.js"><link rel="prefetch" href="/assets/js/220.7dea0e68.js"><link rel="prefetch" href="/assets/js/221.093021b8.js"><link rel="prefetch" href="/assets/js/222.c0382937.js"><link rel="prefetch" href="/assets/js/223.3591acb3.js"><link rel="prefetch" href="/assets/js/224.20af7830.js"><link rel="prefetch" href="/assets/js/225.9efdf47e.js"><link rel="prefetch" href="/assets/js/226.7a4de2bd.js"><link rel="prefetch" href="/assets/js/227.a8530546.js"><link rel="prefetch" href="/assets/js/228.4001f23e.js"><link rel="prefetch" href="/assets/js/229.ece6e783.js"><link rel="prefetch" href="/assets/js/230.96a98244.js"><link rel="prefetch" href="/assets/js/231.45b04f44.js"><link rel="prefetch" href="/assets/js/232.73ffe7bc.js"><link rel="prefetch" href="/assets/js/233.733cdfc5.js"><link rel="prefetch" href="/assets/js/234.abfbaf2b.js"><link rel="prefetch" href="/assets/js/235.c675073f.js"><link rel="prefetch" href="/assets/js/236.393e967e.js"><link rel="prefetch" href="/assets/js/237.4f42a6f7.js"><link rel="prefetch" href="/assets/js/238.ed4e3482.js"><link rel="prefetch" href="/assets/js/239.93c1ee5c.js"><link rel="prefetch" href="/assets/js/24.9fd95f3c.js"><link rel="prefetch" href="/assets/js/240.f68ce809.js"><link rel="prefetch" href="/assets/js/241.bb5549af.js"><link rel="prefetch" href="/assets/js/242.f63ed1a9.js"><link rel="prefetch" href="/assets/js/243.82e4690d.js"><link rel="prefetch" href="/assets/js/244.1df5b8e5.js"><link rel="prefetch" href="/assets/js/245.8210a626.js"><link rel="prefetch" href="/assets/js/246.81c6a202.js"><link rel="prefetch" href="/assets/js/247.a6a80b7d.js"><link rel="prefetch" href="/assets/js/248.93d3f5f8.js"><link rel="prefetch" href="/assets/js/249.9cfd1317.js"><link rel="prefetch" href="/assets/js/25.ca34edab.js"><link rel="prefetch" href="/assets/js/250.f11ca7e7.js"><link rel="prefetch" href="/assets/js/251.65bf41e9.js"><link rel="prefetch" href="/assets/js/252.6384b38c.js"><link rel="prefetch" href="/assets/js/253.24ae47b5.js"><link rel="prefetch" href="/assets/js/254.89a70773.js"><link rel="prefetch" href="/assets/js/255.6ae899aa.js"><link rel="prefetch" href="/assets/js/256.27c8fc49.js"><link rel="prefetch" href="/assets/js/257.7a2a1f9f.js"><link rel="prefetch" href="/assets/js/258.54c1be3e.js"><link rel="prefetch" href="/assets/js/259.e3ef7eb5.js"><link rel="prefetch" href="/assets/js/26.1c281e1e.js"><link rel="prefetch" href="/assets/js/260.5efebd40.js"><link rel="prefetch" href="/assets/js/261.d6d070a4.js"><link rel="prefetch" href="/assets/js/262.e04802ea.js"><link rel="prefetch" href="/assets/js/263.be28fef9.js"><link rel="prefetch" href="/assets/js/264.a0e7938f.js"><link rel="prefetch" href="/assets/js/265.f5d6011d.js"><link rel="prefetch" href="/assets/js/266.d9dfc5a8.js"><link rel="prefetch" href="/assets/js/267.6396459d.js"><link rel="prefetch" href="/assets/js/268.fbbb006c.js"><link rel="prefetch" href="/assets/js/269.010e6f28.js"><link rel="prefetch" href="/assets/js/27.12ca3942.js"><link rel="prefetch" href="/assets/js/270.61695ad3.js"><link rel="prefetch" href="/assets/js/271.37d54a6e.js"><link rel="prefetch" href="/assets/js/272.3736a7da.js"><link rel="prefetch" href="/assets/js/273.b4eff726.js"><link rel="prefetch" href="/assets/js/274.f5b10931.js"><link rel="prefetch" href="/assets/js/275.d6f3460b.js"><link rel="prefetch" href="/assets/js/276.4bfe7260.js"><link rel="prefetch" href="/assets/js/277.b5e73ea0.js"><link rel="prefetch" href="/assets/js/278.4bed1bd0.js"><link rel="prefetch" href="/assets/js/279.6d131b7a.js"><link rel="prefetch" href="/assets/js/28.061d391c.js"><link rel="prefetch" href="/assets/js/280.306355db.js"><link rel="prefetch" href="/assets/js/281.898aabea.js"><link rel="prefetch" href="/assets/js/282.228298fa.js"><link rel="prefetch" href="/assets/js/283.aa971517.js"><link rel="prefetch" href="/assets/js/284.fb664b0c.js"><link rel="prefetch" href="/assets/js/285.553cecac.js"><link rel="prefetch" href="/assets/js/286.1128ab18.js"><link rel="prefetch" href="/assets/js/287.7f7ba07e.js"><link rel="prefetch" href="/assets/js/288.26c31cad.js"><link rel="prefetch" href="/assets/js/289.62eda281.js"><link rel="prefetch" href="/assets/js/29.5c538b3a.js"><link rel="prefetch" href="/assets/js/290.6a4547b5.js"><link rel="prefetch" href="/assets/js/291.4a26ead3.js"><link rel="prefetch" href="/assets/js/292.c72ba157.js"><link rel="prefetch" href="/assets/js/293.2049d7ce.js"><link rel="prefetch" href="/assets/js/294.c4ffa803.js"><link rel="prefetch" href="/assets/js/295.91061e8a.js"><link rel="prefetch" href="/assets/js/296.04a70514.js"><link rel="prefetch" href="/assets/js/297.2ab09b08.js"><link rel="prefetch" href="/assets/js/298.bed34f28.js"><link rel="prefetch" href="/assets/js/299.bf641449.js"><link rel="prefetch" href="/assets/js/3.aa256e84.js"><link rel="prefetch" href="/assets/js/30.8eb675e6.js"><link rel="prefetch" href="/assets/js/300.ef7cf2b1.js"><link rel="prefetch" href="/assets/js/301.6cca7dcf.js"><link rel="prefetch" href="/assets/js/302.5223c7b5.js"><link rel="prefetch" href="/assets/js/303.a9036b95.js"><link rel="prefetch" href="/assets/js/304.9f1d0cb8.js"><link rel="prefetch" href="/assets/js/305.60bd4fa0.js"><link rel="prefetch" href="/assets/js/306.6dbaff66.js"><link rel="prefetch" href="/assets/js/307.f672e1c3.js"><link rel="prefetch" href="/assets/js/308.ad1d2649.js"><link rel="prefetch" href="/assets/js/309.f3ed6140.js"><link rel="prefetch" href="/assets/js/31.b61624ed.js"><link rel="prefetch" href="/assets/js/310.f0e192f2.js"><link rel="prefetch" href="/assets/js/311.1a841b77.js"><link rel="prefetch" href="/assets/js/312.742e1e42.js"><link rel="prefetch" href="/assets/js/313.ffe8ad31.js"><link rel="prefetch" href="/assets/js/314.faf111bc.js"><link rel="prefetch" href="/assets/js/315.fd3cd494.js"><link rel="prefetch" href="/assets/js/316.1dbe5f36.js"><link rel="prefetch" href="/assets/js/317.7d80f561.js"><link rel="prefetch" href="/assets/js/318.3e50257d.js"><link rel="prefetch" href="/assets/js/319.7aa3143b.js"><link rel="prefetch" href="/assets/js/32.7c607c6b.js"><link rel="prefetch" href="/assets/js/320.d2490912.js"><link rel="prefetch" href="/assets/js/321.b596a3c6.js"><link rel="prefetch" href="/assets/js/322.442896a5.js"><link rel="prefetch" href="/assets/js/323.fa1cf7ff.js"><link rel="prefetch" href="/assets/js/324.523eac46.js"><link rel="prefetch" href="/assets/js/325.968d95d2.js"><link rel="prefetch" href="/assets/js/326.1cd9da40.js"><link rel="prefetch" href="/assets/js/327.bdff4365.js"><link rel="prefetch" href="/assets/js/328.46a3916c.js"><link rel="prefetch" href="/assets/js/329.a93f9bc0.js"><link rel="prefetch" href="/assets/js/33.daf7a620.js"><link rel="prefetch" href="/assets/js/330.a393c8ae.js"><link rel="prefetch" href="/assets/js/331.05cf0006.js"><link rel="prefetch" href="/assets/js/332.64dc37af.js"><link rel="prefetch" href="/assets/js/333.77acbacc.js"><link rel="prefetch" href="/assets/js/334.065a75fa.js"><link rel="prefetch" href="/assets/js/335.2e4953d9.js"><link rel="prefetch" href="/assets/js/336.88d2c95e.js"><link rel="prefetch" href="/assets/js/337.06e57f85.js"><link rel="prefetch" href="/assets/js/338.b23405a3.js"><link rel="prefetch" href="/assets/js/339.2fe67814.js"><link rel="prefetch" href="/assets/js/34.fb8f1943.js"><link rel="prefetch" href="/assets/js/340.e10ec05c.js"><link rel="prefetch" href="/assets/js/341.0b5a8ce7.js"><link rel="prefetch" href="/assets/js/342.f3c6067d.js"><link rel="prefetch" href="/assets/js/343.ddbdcc21.js"><link rel="prefetch" href="/assets/js/344.a1366806.js"><link rel="prefetch" href="/assets/js/345.cc633185.js"><link rel="prefetch" href="/assets/js/346.be70b04c.js"><link rel="prefetch" href="/assets/js/347.786c5173.js"><link rel="prefetch" href="/assets/js/348.364fc0cf.js"><link rel="prefetch" href="/assets/js/349.142124fb.js"><link rel="prefetch" href="/assets/js/35.0df3ec8b.js"><link rel="prefetch" href="/assets/js/350.6c649428.js"><link rel="prefetch" href="/assets/js/351.25b2c323.js"><link rel="prefetch" href="/assets/js/352.6179cc2d.js"><link rel="prefetch" href="/assets/js/353.bbabc2b9.js"><link rel="prefetch" href="/assets/js/354.13bb1244.js"><link rel="prefetch" href="/assets/js/355.113c2f47.js"><link rel="prefetch" href="/assets/js/356.7462850b.js"><link rel="prefetch" href="/assets/js/357.3c3dbbd1.js"><link rel="prefetch" href="/assets/js/358.b135e9d6.js"><link rel="prefetch" href="/assets/js/359.07fc4a4f.js"><link rel="prefetch" href="/assets/js/36.0ea7e330.js"><link rel="prefetch" href="/assets/js/360.b69d8377.js"><link rel="prefetch" href="/assets/js/361.aaaf5246.js"><link rel="prefetch" href="/assets/js/362.5537608e.js"><link rel="prefetch" href="/assets/js/363.524ba2ba.js"><link rel="prefetch" href="/assets/js/364.389d3e32.js"><link rel="prefetch" href="/assets/js/365.56b5f49b.js"><link rel="prefetch" href="/assets/js/366.84fe578c.js"><link rel="prefetch" href="/assets/js/367.07dddb6c.js"><link rel="prefetch" href="/assets/js/368.47c53670.js"><link rel="prefetch" href="/assets/js/369.b77ab4b3.js"><link rel="prefetch" href="/assets/js/37.04b155a3.js"><link rel="prefetch" href="/assets/js/38.537f1aa7.js"><link rel="prefetch" href="/assets/js/39.cb05fa66.js"><link rel="prefetch" href="/assets/js/4.5dfccc8e.js"><link rel="prefetch" href="/assets/js/40.8ae4f980.js"><link rel="prefetch" href="/assets/js/41.db63188e.js"><link rel="prefetch" href="/assets/js/42.70ef906b.js"><link rel="prefetch" href="/assets/js/43.62c34d86.js"><link rel="prefetch" href="/assets/js/44.a6b3acc4.js"><link rel="prefetch" href="/assets/js/45.d7a753ff.js"><link rel="prefetch" href="/assets/js/46.f6a96982.js"><link rel="prefetch" href="/assets/js/47.3f15c487.js"><link rel="prefetch" href="/assets/js/48.46af317c.js"><link rel="prefetch" href="/assets/js/49.ff2b8b1a.js"><link rel="prefetch" href="/assets/js/5.8a2ef02b.js"><link rel="prefetch" href="/assets/js/50.76415cc1.js"><link rel="prefetch" href="/assets/js/51.0b53377d.js"><link rel="prefetch" href="/assets/js/52.df8eeb02.js"><link rel="prefetch" href="/assets/js/53.f29429cb.js"><link rel="prefetch" href="/assets/js/54.904d4630.js"><link rel="prefetch" href="/assets/js/56.b4017b1e.js"><link rel="prefetch" href="/assets/js/57.48ba4683.js"><link rel="prefetch" href="/assets/js/58.9e511e06.js"><link rel="prefetch" href="/assets/js/59.fb59f146.js"><link rel="prefetch" href="/assets/js/6.1d5fbbc3.js"><link rel="prefetch" href="/assets/js/60.642e0d6e.js"><link rel="prefetch" href="/assets/js/61.fabf131e.js"><link rel="prefetch" href="/assets/js/62.a5541045.js"><link rel="prefetch" href="/assets/js/63.349d1ced.js"><link rel="prefetch" href="/assets/js/64.91d3607d.js"><link rel="prefetch" href="/assets/js/65.6e573ae9.js"><link rel="prefetch" href="/assets/js/66.6924376d.js"><link rel="prefetch" href="/assets/js/67.b06bccae.js"><link rel="prefetch" href="/assets/js/68.a70d12a6.js"><link rel="prefetch" href="/assets/js/69.2022e0ab.js"><link rel="prefetch" href="/assets/js/70.0bb66f77.js"><link rel="prefetch" href="/assets/js/71.edbcb8ea.js"><link rel="prefetch" href="/assets/js/72.5a3c4f8f.js"><link rel="prefetch" href="/assets/js/73.e520a662.js"><link rel="prefetch" href="/assets/js/74.cbc2cdbc.js"><link rel="prefetch" href="/assets/js/75.9127c410.js"><link rel="prefetch" href="/assets/js/76.a1c764fe.js"><link rel="prefetch" href="/assets/js/77.ebebdb84.js"><link rel="prefetch" href="/assets/js/78.12c2619b.js"><link rel="prefetch" href="/assets/js/79.719e1ba0.js"><link rel="prefetch" href="/assets/js/8.42a516ca.js"><link rel="prefetch" href="/assets/js/80.6a1d09c2.js"><link rel="prefetch" href="/assets/js/81.fa5d7f62.js"><link rel="prefetch" href="/assets/js/82.6b3de7e3.js"><link rel="prefetch" href="/assets/js/83.2f0785aa.js"><link rel="prefetch" href="/assets/js/84.e038a79d.js"><link rel="prefetch" href="/assets/js/85.5ee06ccf.js"><link rel="prefetch" href="/assets/js/86.9d185697.js"><link rel="prefetch" href="/assets/js/87.9ada2a62.js"><link rel="prefetch" href="/assets/js/88.c602e690.js"><link rel="prefetch" href="/assets/js/89.fef8a42c.js"><link rel="prefetch" href="/assets/js/9.fb614957.js"><link rel="prefetch" href="/assets/js/90.13eba952.js"><link rel="prefetch" href="/assets/js/91.474065b7.js"><link rel="prefetch" href="/assets/js/92.0500fc52.js"><link rel="prefetch" href="/assets/js/93.de53ee35.js"><link rel="prefetch" href="/assets/js/94.1b13245b.js"><link rel="prefetch" href="/assets/js/95.9befea70.js"><link rel="prefetch" href="/assets/js/96.eaac63cd.js"><link rel="prefetch" href="/assets/js/97.68586bff.js"><link rel="prefetch" href="/assets/js/98.f8e04ee8.js"><link rel="prefetch" href="/assets/js/99.5d2ac299.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.e2f7b939.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.c49b3f6b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.748bddee.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>前端Jeek</h3> <p class="description" data-v-59e6cb88>每一个不曾起舞的日子，都是对生命的辜负！</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>前端Jeek</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/avatar.png" alt="前端Jeek" class="logo"> <span class="site-name">前端Jeek</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>VAR</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  react
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  nextjs
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  miniProgram
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  node
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  golang
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  Mysql
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  Mongodb
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/webgl/" class="nav-link"><i class="undefined"></i>
+  webgl
+</a></li><li class="dropdown-item"><!----> <a href="/categories/后端/" class="nav-link"><i class="undefined"></i>
+  后端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/人月神话/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/CI/CD/" class="nav-link"><i class="undefined"></i>
+  CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Label Studio/" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li><li class="dropdown-item"><!----> <a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  移动端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/k8s/" class="nav-link"><i class="undefined"></i>
+  k8s
+</a></li><li class="dropdown-item"><!----> <a href="/categories/浏览器缓存/" class="nav-link"><i class="undefined"></i>
+  浏览器缓存
+</a></li><li class="dropdown-item"><!----> <a href="/categories/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络和安全/" class="nav-link"><i class="undefined"></i>
+  网络和安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/shell/" class="nav-link"><i class="undefined"></i>
+  shell
+</a></li><li class="dropdown-item"><!----> <a href="/categories/源码阅读/" class="nav-link"><i class="undefined"></i>
+  源码阅读
+</a></li><li class="dropdown-item"><!----> <a href="/categories/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工具/" class="nav-link"><i class="undefined"></i>
+  工具
+</a></li><li class="dropdown-item"><!----> <a href="/categories/wasm/" class="nav-link"><i class="undefined"></i>
+  wasm
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      资源
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://leetcode-cn.com/u/zkkysqs/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Leetcode
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.nowcoder.com/profile/9027587" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Nowcoder
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bookstack.cn/read/tcp-udp-ip/1.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  网络编程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://developers.google.com/web/fundamentals/performance/get-started" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Google Developer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://developers.google.cn/web/tools/chrome-devtools/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Chrome DevTools
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://vue3js.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Angular
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  React
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NextJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NodeJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/guanpengchn/awesome-books" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Awesome Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Programming Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://docschina.org/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Docschina
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Tool
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/avatar.png" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    前端Jeek
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>309</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>97</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>VAR</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  react
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  nextjs
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  miniProgram
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  node
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  golang
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  Mysql
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  Mongodb
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/webgl/" class="nav-link"><i class="undefined"></i>
+  webgl
+</a></li><li class="dropdown-item"><!----> <a href="/categories/后端/" class="nav-link"><i class="undefined"></i>
+  后端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/人月神话/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/CI/CD/" class="nav-link"><i class="undefined"></i>
+  CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Label Studio/" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li><li class="dropdown-item"><!----> <a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  移动端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/k8s/" class="nav-link"><i class="undefined"></i>
+  k8s
+</a></li><li class="dropdown-item"><!----> <a href="/categories/浏览器缓存/" class="nav-link"><i class="undefined"></i>
+  浏览器缓存
+</a></li><li class="dropdown-item"><!----> <a href="/categories/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络和安全/" class="nav-link"><i class="undefined"></i>
+  网络和安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/shell/" class="nav-link"><i class="undefined"></i>
+  shell
+</a></li><li class="dropdown-item"><!----> <a href="/categories/源码阅读/" class="nav-link"><i class="undefined"></i>
+  源码阅读
+</a></li><li class="dropdown-item"><!----> <a href="/categories/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工具/" class="nav-link"><i class="undefined"></i>
+  工具
+</a></li><li class="dropdown-item"><!----> <a href="/categories/wasm/" class="nav-link"><i class="undefined"></i>
+  wasm
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      资源
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://leetcode-cn.com/u/zkkysqs/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Leetcode
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.nowcoder.com/profile/9027587" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Nowcoder
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bookstack.cn/read/tcp-udp-ip/1.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  网络编程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://developers.google.com/web/fundamentals/performance/get-started" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Google Developer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://developers.google.cn/web/tools/chrome-devtools/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Chrome DevTools
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://vue3js.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Angular
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  React
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NextJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NodeJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/guanpengchn/awesome-books" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Awesome Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Programming Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://docschina.org/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Docschina
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Tool
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Shell</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/other/shell/" aria-current="page" class="sidebar-link">shell入门</a></li><li><a href="/other/shell/1.html" class="sidebar-link">shell基础</a></li><li><a href="/other/shell/2.html" aria-current="page" class="active sidebar-link">shell进阶</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>shell进阶</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>前端Jeek</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page" style="padding-right:0;"><section style="display:;"><div class="page-title"><h1 class="title">shell进阶</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>前端Jeek</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2021/12/6</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/other/shell/2.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>shell</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="一、输入输出"><a href="#一、输入输出" class="header-anchor">🌙</a> 一、输入输出</h1> <h2 id="echo"><a href="#echo" class="header-anchor">🌙</a> echo</h2> <ol><li>回声，用于打印输出工作
+<ol><li>-n： 可以不换行</li> <li>-e：对字符进行转义，\t    ===》 enable</li> <li><img src="/assets/img/1585703937444.f84158f6.png" alt="1585703937444"></li></ol></li></ol> <h2 id="printf"><a href="#printf" class="header-anchor">🌙</a> printf</h2> <ol><li>printf &quot;%d,%s\n&quot; 10 &quot;你好&quot;</li> <li>注意10 和 “你好” 两个参数之间，没有逗号</li></ol> <p>3</p> <h2 id="管道"><a href="#管道" class="header-anchor">🌙</a> 管道|</h2> <ol><li><p>使用| 可以将多个命令拼接在一起</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">cat</span> /etc/passwd  <span class="token operator">|</span> <span class="token function">grep</span> itcast <span class="token operator">|</span> <span class="token function">cut</span> -d: <span class="token parameter variable">-f4</span>
+<span class="token number">1000</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li> <li><p>原理：将前一个命令的标准输出作为后一个命令的标准输入</p></li> <li><p>标准错误输出是不会被管道传递的</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cp</span> <span class="token operator">|</span> <span class="token function">grep</span> information.  <span class="token comment"># 这个是不生效的</span>
+<span class="token function">cp</span>  <span class="token parameter variable">--help</span> <span class="token operator">|</span> <span class="token function">grep</span> existing <span class="token parameter variable">--color</span>  <span class="token comment">#这个是正确用法</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><img src="/assets/img/1585704600675.a7429dcf.png" alt="1585704600675"></p></li> <li><p>并不是所有的命令都可以接受|的数据，比如说ls</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>  <span class="token function">find</span> <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/01-shell-basic/ <span class="token operator">|</span> <span class="token function">ls</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>需求：实现一个接收管道输出的命令：读取标准输入，将标准输入的数据转成大写，然后输出：</p> <div class="language-c line-numbers-mode"><pre class="language-c"><code><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;ctype.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> ch<span class="token operator">=</span><span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>ch <span class="token operator">!=</span> <span class="token constant">EOF</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">putchar</span><span class="token punctuation">(</span><span class="token function">toupper</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ch <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div></li> <li><p>经常与more和less使用</p> <ol><li>more，只可以单向查阅</li> <li>less可以双向查阅</li> <li>ctrl + f(前)，ctrl+B（后）</li></ol></li></ol> <h2 id="tee"><a href="#tee" class="header-anchor">🌙</a> tee</h2> <p>作用之一：</p> <ol><li><p>将标准输出重新输出到指定的文件</p></li> <li><p>公司服务器打印log，希望能够在屏幕上打印，同时保存到文件：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">ping</span> www.baidu.com <span class="token operator">|</span> <span class="token function">tee</span> ping.log
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>如果想动态查看ping.log文件内容</p> <ol><li>vim ping.log， 然后输入:e，可以随时刷新</li> <li>tail -f ping.log，动态刷新</li> <li>alias tailf=tail -f</li></ol></li></ol> <p>作用之二：</p> <p>当修改了一个文件很多内容，但是没有修改权限的时候，可以直接使用tee命令来激活sudo 权限，从而完成修改</p> <p><img src="/assets/img/1585705922820.4fee1e23.png" alt="1585705922820"></p> <h2 id="重定向"><a href="#重定向" class="header-anchor">🌙</a> 重定向</h2> <ol><li><p>cmd &gt; 1.txt  ， 将输出写入到1.txt，每一次都是重新覆盖，等同于: cmd 1&gt; 1.txt（常用）</p></li> <li><p>cmd &gt; &gt; 1.txt，将输出追加到1.txt</p></li> <li><blockquote><p>&gt;, &gt;&gt; 两者只能将标准输出重定向到文件，而标准错误输出无法直接写入</p></blockquote></li> <li><p>案例：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>$  <span class="token function">cp</span> <span class="token operator">&gt;</span> cp.txt
+cp: missing <span class="token function">file</span> operand
+Try <span class="token string">'cp --help'</span> <span class="token keyword">for</span> <span class="token function">more</span> information.
+
+<span class="token function">cat</span> cp.txt 返回空
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li> <li><p>文件描述符：</p> <ol><li>标准输入文件描述符：0</li> <li>标准输出文件描述符：1</li> <li>标准错误输出文件描述符：2</li></ol></li> <li><p>如果想将错误的信息重定向到文件，需要使用文件描述符2</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cp</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span> cperr.txt  <span class="token comment">#2&gt; 表示对错误信息重定向</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>==如何将正确输出和错误输出都写入到一个文件中？(最常用)==</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cp</span> <span class="token operator">&gt;</span> /tmp/cperr1.txt <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>写一段c代码，里面同时输出：stdout, stderr</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token comment">#include&lt;stdio.h&gt;</span>
+
+int <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    //写一段c代码，里面同时输出：stdout, stderr
+    fprintf<span class="token punctuation">(</span>stdout, <span class="token string">&quot;this is stdout<span class="token entity" title="\n">\n</span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> //fd <span class="token number">1</span>
+    fprintf<span class="token punctuation">(</span>stderr, <span class="token string">&quot;this is stderr<span class="token entity" title="\n">\n</span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> //fd <span class="token number">2</span>
+
+    <span class="token builtin class-name">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>结果：</p> <p><img src="/assets/img/1585707830592.81f5b29c.png" alt="1585707830592"></p></li> <li><p>使用重定向进行输入</p> <p>cmd &lt; file</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cat</span> <span class="token operator">&lt;</span> /etc/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p>其他：</p> <ol><li>cmd &lt; &amp;fd</li> <li>cmd &gt; &amp;fd</li> <li>cmd &lt; &amp;-</li></ol></li></ol> <h1 id="二、函数"><a href="#二、函数" class="header-anchor">🌙</a> 二、函数</h1> <h2 id="函数"><a href="#函数" class="header-anchor">🌙</a> 函数</h2> <ol><li><p>==没有参数列，没有返回值，return返回的是状态码，使用$?查看==</p></li> <li><p>定义函数：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token keyword">function</span> <span class="token function-name function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token comment">#这个return的值，表示这个函数之后之后返回的状态码，而不出返回值，</span>
+	<span class="token comment">#不能通过a=test()来获取100值</span>
+	<span class="token comment">#可以通过echo $?来获取</span>
+	<span class="token builtin class-name">return</span> <span class="token number">100</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">#function去掉</span>
+<span class="token function-name function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+<span class="token comment">#去掉括号 </span>
+<span class="token keyword">function</span> <span class="token function-name function">test</span>
+<span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">#function和()至少保留一个，否则无法识别成函数ss</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div></li> <li><p>案例：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token keyword">function</span> <span class="token function-name function">test1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token number">200</span>
+    <span class="token comment">#a=100</span>
+        <span class="token comment">#这个return的值，表示这个函数之后之后返回的状态码，而不出返回值，</span>
+        <span class="token comment">#不能通过a=test()来获取100值</span>
+        <span class="token comment">#可以通过echo $?来获取</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token parameter variable">-eq</span> <span class="token number">100</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">return</span> <span class="token number">0</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;hello test1&quot;</span>
+        <span class="token builtin class-name">return</span> <span class="token number">100</span>
+    <span class="token keyword">fi</span>
+<span class="token punctuation">}</span>
+<span class="token comment">#function去掉</span>
+<span class="token function-name function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;hello test2&quot;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">#去掉括号</span>
+<span class="token keyword">function</span> <span class="token function-name function">test3</span>
+<span class="token punctuation">{</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;hello test3&quot;</span>
+        <span class="token comment">#如果函数没有return值，那么最后一条执行命令的状态码，就是这个函数的状态码</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token comment">#function和()至少保留一个，否则无法识别成函数ss</span>
+
+<span class="token assign-left variable">v1</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span>test1<span class="token variable">`</span></span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> <span class="token parameter variable">-eq</span> <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;test1执行成功! a=100&quot;</span>
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;test1执行之后，a!=100&quot;</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment">#echo &quot;test1 的返回状态码:&quot; $?</span>
+<span class="token comment">#echo &quot;v1 : &quot; &quot;$v1&quot;</span>
+
+test2
+test3
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br></div></div><p><img src="/assets/img/1585709515511.06597ce5.png" alt="1585709515511"></p></li> <li><p>小结：</p> <ol><li><p>执行状态$?看return的返回值，如果没有返回值，则以最后一条命令的返回值为准</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function-name function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token builtin class-name">echo</span> <span class="token string">&quot;hello test2&quot;</span>
+    <span class="token function">cp</span>  <span class="token comment">#echo $? 1</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li> <li><p>return修饰的状态码只能是数字</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token keyword">function</span> <span class="token function-name function">test3</span>
+<span class="token punctuation">{</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;hello test3&quot;</span>
+
+    <span class="token comment">#./functest.sh: line 26: return: beijing: numeric argument required</span>
+    <span class="token builtin class-name">return</span> <span class="token string">&quot;beijing&quot;</span> <span class="token comment">#这是错误的用法，必须是数字</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></li></ol></li> <li><p>函数参数：</p> <ol><li><p>调用方法与命令一样，也是$1, $2 ..</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function-name function">test4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;test4 函数参数为: <span class="token variable">$1</span>, <span class="token variable">$2</span>&quot;</span>
+<span class="token punctuation">}</span>
+
+test4 <span class="token string">&quot;hello&quot;</span> <span class="token string">&quot;world&quot;</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></li></ol></li> <li><p>案例：递归遍历指定目录的文件!</p></li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment">#案例：递归遍历指定目录的文件!</span>
+<span class="token comment">#目录由用户通过命令行传入：</span>
+
+<span class="token comment">#./recursive.sh ..</span>
+
+<span class="token function-name function">recursive</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">#接收用户输入的目录</span>
+    <span class="token comment">#currDir=&quot;$1&quot;</span>
+    <span class="token builtin class-name">local</span> <span class="token assign-left variable">currDir</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;====&gt; 当前目录为:&quot;</span> <span class="token string">&quot;<span class="token variable">$currDir</span>&quot;</span>
+
+    <span class="token comment">#遍历当前目录</span>
+    <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">ls</span> $currDir<span class="token variable">`</span></span>
+    <span class="token keyword">do</span>
+        <span class="token comment">#这样才是有效的路径，后续才能正确判断性质</span>
+        <span class="token comment">#item=&quot;$currDir+&quot;/&quot;+$i&quot;  &lt;&lt;=== 这是错误的，  /usr/+/+test.txt</span>
+        <span class="token assign-left variable">item</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$currDir</span>/<span class="token variable">$i</span>&quot;</span>
+        <span class="token comment">#echo &quot;item: &quot; $item</span>
+
+        <span class="token comment">#如果i是文件，则打印</span>
+        <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-f</span> <span class="token string">&quot;<span class="token variable">$item</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">&quot;文件找到: <span class="token variable">$item</span>&quot;</span>
+        <span class="token keyword">elif</span> <span class="token punctuation">[</span> <span class="token parameter variable">-d</span> <span class="token string">&quot;<span class="token variable">$item</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
+        <span class="token comment">#如果i是文件夹，则递归遍历</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">&quot;文件夹找到:&quot;</span> <span class="token string">&quot;<span class="token variable">$item</span>&quot;</span>
+            recursive <span class="token variable">$item</span>
+        <span class="token keyword">else</span>
+            <span class="token builtin class-name">echo</span> <span class="token string">&quot;未知文件:&quot;</span> <span class="token string">&quot;<span class="token variable">$item</span>&quot;</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">done</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">#判读输入参数的个数</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$#</span> <span class="token parameter variable">-ne</span> <span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Usage: recursive &lt;文件目录&gt;&quot;</span>
+    <span class="token builtin class-name">exit</span>
+<span class="token keyword">fi</span>
+
+recursive <span class="token variable">$1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br></div></div><h2 id="调试"><a href="#调试" class="header-anchor">🌙</a> 调试</h2> <p>shell调试参数：</p> <ul><li><p>-n 帮助我们快速检查脚本的语法，而不是逐条执行</p> <ul><li><p>脚本如果很大，中间执行过程很长，如果不能实现发现脚本错误，会浪费时间</p></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">bash</span> <span class="token parameter variable">-n</span> ./recursive.sh
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li> <li><p><img src="/assets/img/1585713051107.67de0e8b.png" alt="1585713051107"></p></li></ul></li> <li><p>-x，执行脚本的同时将代码执行过程打印到屏幕，便于追踪</p> <ul><li><p>bash -x recursive.sh  ==》 作用于整个脚本</p></li> <li><p>可以在代码中，对指定的代码段进行调试</p> <ul><li><p>set -x  ==&gt; 启动调试</p></li> <li><p>xxxx</p></li> <li><p>set +x  ==&gt; 停止调试</p> <p><img src="/assets/img/1585713439412.0a32a574.png" alt="1585713439412"></p></li></ul></li></ul></li> <li><p>-v，一边执行脚本，一边打印错误输出（很少用）</p></li></ul> <p>shift 8  ==&gt; *， 快速定位当前光标所值单词（向下寻找,n）</p> <p>shift 3 ==&gt; #，  快速定位当前光标所值单词（向上寻找,n）</p> <h1 id="三、正则表达式"><a href="#三、正则表达式" class="header-anchor">🌙</a> 三、正则表达式</h1> <ol><li><p>以S开头的字符串</p> <ol><li><p>^： 可以限定一个字符开头</p></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>目标：ShelloShello world
+表达式：^Shello
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li></ol></li> <li><p>以数字结尾的字符串</p> <ol><li><p>$:可以限定结尾</p></li> <li><p>表示数字方式：</p> <ol><li>[0123456789]</li> <li>[0-9]</li></ol></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>目标：helloworld9
+表达式：helloworld<span class="token punctuation">[</span><span class="token number">0</span>-9<span class="token punctuation">]</span>$
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li></ol></li> <li><p>匹配空字符串(没有任何字符)</p> <ol><li>^$</li></ol></li> <li><p>字符串只包含三个数字</p> <ol><li>三个数字：[0-9][0-9][0-9]</li></ol></li> <li><p>字符串只有3到5个字母</p> <ol><li>字母表示：
+<ol><li>[a-zA-Z]， 中间不要加空格</li> <li>三个到五个字母：[a-zA-Z]{3,5}</li></ol></li> <li>重复次数{m, n}：
+<ol><li>匹配前面修饰字符的次数，最少m次，最多n次</li></ol></li></ol></li> <li><p>匹配不是a-z的任意字符</p></li> <li><p>^ 在[]内部的时候，表示取反（注意，不是限定开头）</p></li> <li><p>^[^0-9] :  以非数字开头的字符</p></li> <li><p>内反，外头</p></li> <li><p>[^a-z]    &lt;&lt;&lt;===</p></li> <li><p>字符串有0到1个数字或者字母或者下划线</p> <ol><li><p>表示0-1的方法</p> <ol><li>{0,1}</li> <li>? : 表示0,1个</li></ol></li> <li><p>[a-zA-Z0-9_]?</p></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>内容
+hello
+hello1
+hello*
+
+正则：
+hello<span class="token punctuation">[</span>a-zA-Z0-9_<span class="token punctuation">]</span>?
+
+匹配结果：
+hello
+hello1
+hello
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div></li></ol></li> <li><p>字符串有1个或多个空白符号(\t\n\r等)</p> <ol><li><p>\s  ==》 代表空格</p></li> <li><p>+：一个或多个</p></li> <li><div class="language- line-numbers-mode"><pre class="language-text"><code>内容：hello      world
+
+正则：hello\s+world
+
+结果：hello      world
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></li></ol></li> <li><p>字符串有0个或者若干个任意字符(除了\n)</p> <ol><li><p>.: 点，代表任意字符，除了\n</p></li> <li><p>*：星号，重复前一个字符0-n次</p></li> <li><p>匹配任意字符，任意次数：通常做法，是：   .*   ==&gt; 相当于通配符里面的 *</p></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>内容：hello     asdfaasdfasdfadfasdfasdf asdfasdfasdf   world
+正则：hello.*world
+结果：hello     asdfaasdfasdfadfasdfasdf asdfasdfasdf   world
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li> <li><p>.{,}  ==&gt; 与 .*效果相同</p></li></ol></li> <li><p>小结：</p> <ol><li>?    ===&gt; 重复前面一个字符0-1</li> <li>+     ===&gt; 重复前面一个字符1-n</li> <li>*     ===&gt; 重复前面一个字符0-n</li> <li>.     ===&gt; 表示任意字符</li> <li>^    ===&gt; 限定以某个字符开头</li> <li>[^a-z] ===&gt; 在方括号内，表示取反(非a-z的任意字符)</li> <li>$   ===&gt; 限定以某个字符结尾</li> <li>数字 ====》 [0123456789]  或[0-9]</li> <li>字母 ===&gt; [abcd]  [a-zA-Z]</li></ol></li> <li><p>匹配0或任意多组ABC，比如ABC，ABCABCABC</p> <ol><li>使用()进行分组，组成新的匹配单元</li> <li>(ABC)*</li></ol></li> <li><p>字符串要么是ABC，要么是123</p> <ol><li><p>（ABC|123）</p></li> <li><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>内容：
+ABC
+ABCABCABCD 
+<span class="token number">123456</span>
+hellowlrd
+
+
+正则：（ABC<span class="token operator">|</span><span class="token number">123</span>）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></li></ol></li> <li><p>字符串只有一个点号</p> <ol><li>^\.$</li></ol></li> <li><p>匹配十进制3位整数  ：</p> <ol><li>0~999 ， 5，  10 ， 200， 999</li> <li>分段匹配：
+<ol><li>一位数：
+<ol><li>[0-9]</li></ol></li> <li>二位数：
+<ol><li>[1-9][0-9]</li></ol></li> <li>三位数：
+<ol><li>[1-9][0-9]{2}</li></ol></li> <li>整合：
+<ol><li>^ ([0-9]|[1-9][0-9]{1,2})$</li></ol></li></ol></li></ol></li> <li><p>匹配0-255的整数， ip地址</p> <ol><li>分段
+<ol><li>一位：[0-9]</li> <li>二位：[1-9][0-9]</li> <li>三位：
+<ul><li>100- 199
+<ul><li>1[0-9]{2}</li></ul></li> <li>200-249
+<ul><li>2[0-4][0-9]</li></ul></li> <li>250-255
+<ul><li>25[0-5]</li></ul></li></ul></li> <li>整合：
+<ul><li><code>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</code></li> <li>192.168.1.1</li></ul></li></ol></li></ol></li> <li><p>匹配端口号</p> <ol><li>0~65536</li></ol></li> <li><p>email</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token punctuation">[</span><span class="token punctuation">\</span>w<span class="token operator">!</span><span class="token comment">#$%&amp;'*+/=?^_`{|}~-]+(?:\.[\w!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li></ol> <p>三种正则表达式：</p> <ol><li><p>基础正则：（不使用）  ==》 +?* 都当成普通字符来处理</p></li> <li><p>扩展正则：（我们默认使用这个）==》 +?*  当成特殊字符</p></li> <li><p>Perl正则：</p> <ol><li><p>+？*是特殊字符</p></li> <li><p>\d ==》 数字 [0-9]</p></li> <li><p>\w ==&gt; 字符[a-zA-Z]</p></li> <li><p>用法\d{3}\w    可以匹配：212c</p></li></ol></li></ol> <h1 id="四、其他命令"><a href="#四、其他命令" class="header-anchor">🌙</a> 四、其他命令</h1> <h2 id="sort-排序"><a href="#sort-排序" class="header-anchor">🌙</a> sort（排序）</h2> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token parameter variable">-f</span> 忽略字符大小写
+<span class="token parameter variable">-n</span> 按照数值比较
+<span class="token parameter variable">-t</span> 分割字符
+<span class="token parameter variable">-k</span> 指定分割之后比较的字段
+<span class="token parameter variable">-u</span> 只显示一次
+<span class="token parameter variable">-r</span> 反向排序
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>使用:分割之后，截取第三段，以数字的值进行比较，反向打印</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">sort</span> <span class="token function">passwd</span> -t: <span class="token parameter variable">-k3</span> <span class="token parameter variable">-n</span> <span class="token parameter variable">-r</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="uniq-删除重复"><a href="#uniq-删除重复" class="header-anchor">🌙</a> uniq（删除重复）</h2> <p>uniq.txt</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code>xiaoliu <span class="token number">99</span> <span class="token function">man</span> <span class="token number">25</span>
+xiaowen <span class="token number">98</span> <span class="token function">man</span> <span class="token number">24</span>
+xiaoliu <span class="token number">99</span> <span class="token function">man</span> <span class="token number">25</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>去重方式，需要重复的两行挨着才能去重，一般和sort配合使用</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cat</span> uniq.txt <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585728928962.8ad2d5c8.png" alt="1585728928962"></p> <h2 id="wc"><a href="#wc" class="header-anchor">🌙</a> wc</h2> <p>-l: 统计文件的行数   &lt;==最常用</p> <p>-c:统计字符</p> <p>-w:统计单词数量</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> duke ~$  <span class="token function">wc</span> /etc/passwd <span class="token parameter variable">-l</span>    
+<span class="token number">32</span> /etc/passwd
+ duke ~$  <span class="token function">wc</span> /etc/passwd <span class="token parameter variable">-c</span>
+<span class="token number">1694</span> /etc/passwd
+ duke ~$  <span class="token function">wc</span> /etc/passwd <span class="token parameter variable">-w</span>
+<span class="token number">49</span> /etc/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="grep"><a href="#grep" class="header-anchor">🌙</a> grep</h2> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">grep</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span>
+主要参数：  <span class="token function">grep</span> --help可查看
+	-c：只输出匹配行的计数。
+	-i：不区分大小写。
+	-h：查询多文件时不显示文件名。
+	-l：查询多文件时只输出包含匹配字符的文件名。
+	-n：显示匹配行及 行号。
+	-s：不显示不存在或无匹配文本的错误信息。
+	-v：显示不包含匹配文本的所有行。
+	<span class="token parameter variable">--color</span><span class="token operator">=</span>auto ：可以将找到的关键词部分加上颜色的显示。
+	-r: 表示递归查询
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>-i 忽略大小写，NOLOGIN一行也打印了</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">grep</span> <span class="token parameter variable">-i</span> nologin  <span class="token function">passwd</span>  <span class="token parameter variable">--color</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585729617786.38452a99.png" alt="1585729617786"></p> <p>使用拓展正则[0-9].*</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token string">&quot;[0-9].*bin&quot;</span>  <span class="token function">passwd</span>  <span class="token parameter variable">--color</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585729669579.5da9830b.png" alt="1585729669579"></p> <p>如果想使用Perl正则，需要指定-P开关</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token parameter variable">-P</span>  <span class="token string">&quot;\d.*bin&quot;</span>  <span class="token function">passwd</span>  <span class="token parameter variable">--color</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585729746483.61401a74.png" alt="1585729746483"></p> <p>使用-r进行递归查询</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">grep</span> <span class="token parameter variable">-i</span> <span class="token parameter variable">-P</span>  <span class="token string">&quot;\d.*bin&quot;</span>  *  <span class="token parameter variable">--color</span>  <span class="token parameter variable">-r</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">cat</span> /etc/passwd <span class="token operator">|</span> <span class="token function">grep</span> root
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="find"><a href="#find" class="header-anchor">🌙</a> find</h2> <p>语法：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">find</span> pathname <span class="token parameter variable">-options</span> <span class="token punctuation">[</span>-print <span class="token parameter variable">-exec</span> <span class="token parameter variable">-ok</span> <span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol><li>通过名字查找</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">find</span> ./shell  <span class="token parameter variable">-name</span> <span class="token string">&quot;*.txt&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585730153353.55ce5461.png" alt="1585730153353"></p> <ol start="2"><li>通过权限查找</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">find</span> ./shell/ <span class="token parameter variable">-perm</span> <span class="token number">755</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><ol start="3"><li>通过类型查找</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">find</span> ./shell <span class="token parameter variable">-type</span> f <span class="token string">&quot;*.txt&quot;</span>   <span class="token comment">#文件类型</span>
+<span class="token function">find</span> ./shell/ <span class="token parameter variable">-type</span> d <span class="token parameter variable">-name</span> <span class="token string">&quot;*.txt&quot;</span>  <span class="token comment">#文件夹类型</span>
+ 
+<span class="token parameter variable">-type</span> 查找某一类型的文件，诸如：
+b - 块设备文件。
+d - 目录。
+c - 字符设备文件。
+p - 管道文件。
+l - 符号链接文件。
+f - 普通文件。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><ol start="4"><li>指定查找深度</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">find</span> / <span class="token parameter variable">-maxdepth</span> <span class="token number">2</span> <span class="token parameter variable">-type</span> d
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585730644065.1bef9ced.png" alt="1585730644065"></p> <ol start="5"><li>不区分文件名字大小写，使用-iname</li></ol> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">find</span> ./shell <span class="token parameter variable">-type</span> f <span class="token parameter variable">-iname</span> <span class="token string">&quot;*.txt&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><img src="/assets/img/1585730967939.4463534c.png" alt="1585730967939"></p> <ol start="6"><li><p>对find查找到的文件，进行处理，使用</p> <ol><li><p>-exec: 直接执行</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">find</span> ./shell <span class="token parameter variable">-type</span> f <span class="token parameter variable">-iname</span> <span class="token string">&quot;*.txt&quot;</span> <span class="token parameter variable">-exec</span> <span class="token function">rm</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span><span class="token punctuation">}</span> 替换为传入的数据
+<span class="token punctuation">\</span><span class="token punctuation">;</span> 表示命令结束
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li> <li><p>-ok：逐个确认</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token function">find</span> ./shell <span class="token parameter variable">-type</span> f <span class="token parameter variable">-iname</span> <span class="token string">&quot;*.txt&quot;</span> <span class="token parameter variable">-ok</span> <span class="token function">rm</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></li></ol></li> <li><p>按照日期查询</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token parameter variable">-atime</span> <span class="token builtin class-name">:</span> 访问时间
+-mtime: 修改时间， 内容修改
+-ctime: 不是创建时间，而是状态修改时间，权限，所有者
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language-sh line-numbers-mode"><pre class="language-sh"><code> <span class="token function">find</span> ./shell/ <span class="token parameter variable">-mtime</span> +1   
+ -1: -n表示在n天之内修改的
+ +1: +n表示在n天以前修改的
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li></ol> <p>参数列表：</p> <div class="language-sh line-numbers-mode"><pre class="language-sh"><code><span class="token parameter variable">-name</span> 按照文件名查找文件。
+<span class="token parameter variable">-perm</span> 按照文件权限来查找文件。
+
+<span class="token parameter variable">-size</span> n：<span class="token punctuation">[</span>c<span class="token punctuation">]</span> 查找文件长度为n块的文件，带有c时表示文件长度以字节计。
+<span class="token parameter variable">-depth</span> 在查找文件时，首先查找当前目录中的文件，然后再在其子目录中查找。
+
+
+<span class="token parameter variable">-prune</span> 使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被
+find命令忽略。
+<span class="token parameter variable">-user</span> 按照文件属主来查找文件。
+<span class="token parameter variable">-group</span> 按照文件所属的组来查找文件。
+<span class="token parameter variable">-mtime</span> <span class="token parameter variable">-n</span> +n 按照文件的更改时间来查找文件，-n表示文件更改时间距现在n天以内，+n表示文件更改时间距现在
+n天以前。find命令还有-atime和-ctime 选项，但它们都和-m time选项。
+<span class="token parameter variable">-nogroup</span> 查找无有效所属组的文件，即该文件所属的组在/etc/groups中不存在。
+<span class="token parameter variable">-nouser</span> 查找无有效属主的文件，即该文件的属主在/etc/passwd中不存在。
+<span class="token parameter variable">-newer</span> file1 <span class="token operator">!</span> file2 查找更改时间比文件file1新但比文件file2旧的文件。
+<span class="token parameter variable">-fstype</span> 查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配
+置文件中包含了本系统中有关文件系统的信息。
+<span class="token parameter variable">-mount</span> 在查找文件时不跨越文件系统mount点。
+<span class="token parameter variable">-follow</span> 如果find命令遇到符号链接文件，就跟踪至链接所指向的文件。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><div class="language-sh line-numbers-mode"><pre class="language-sh"><code>pathname: find命令所查找的目录路径。例如用.来表示当前目录，用/来表示系统根目录，递归查找。
+-print： find命令将匹配的文件输出到标准输出。
+-exec： find命令对匹配的文件执行该参数所给出的shell命令。相应命令的形式为<span class="token string">'command'</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>，注意<span class="token punctuation">{</span><span class="token punctuation">}</span>内部无空格，和<span class="token punctuation">\</span>；之间含有一个空格分隔符。
+-ok： 和-exec的作用相同，只不过以一种更为安全的模式来执行该参数所给出的shell命令，在执行每一个命令之前，都会给出提示，让用户来确定是否执行。只有用户明确输入y才会执行后边的语句
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>head、tail、scp、xargs、sed、awk</p></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Keekuun/keekuun.github.io/edit/master/docs/other/shell/2.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">9/29/2022</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/other/shell/1.html" class="prev">
+          shell基础
+        </a></span> <!----></p></div> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:0;" data-v-b57cc07c data-v-7dd95ae2></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><!----><canvas id="vuepress-canvas-ribbon"></canvas><div></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 前端Jeek
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-5775ee02></i></div> <canvas id="banniang" width="150" height="220" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.6215ff8a.js" defer></script><script src="/assets/js/7.11327cc2.js" defer></script><script src="/assets/js/2.00aee375.js" defer></script><script src="/assets/js/1.3a9b40e4.js" defer></script><script src="/assets/js/23.1f39d0eb.js" defer></script><script src="/assets/js/55.4f1e67a3.js" defer></script>
+  </body>
+</html>

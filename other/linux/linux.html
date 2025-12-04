@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux系统简单使用 | 前端Jeek</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="./favicon.ico">
+    <link rel="manifest" href="./data/manifest.json">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/MouseClickEffect.js"></script>
+    <meta name="description" content="每一个不曾起舞的日子，都是对生命的辜负！">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="keywords" content="vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang, flutter">
+    <meta name="copyright" content="前端Jeek">
+    <meta name="robots" content="all">
+    
+    <link rel="preload" href="/assets/css/0.styles.748bddee.css" as="style"><link rel="preload" href="/assets/js/app.6215ff8a.js" as="script"><link rel="preload" href="/assets/js/7.11327cc2.js" as="script"><link rel="preload" href="/assets/js/2.00aee375.js" as="script"><link rel="preload" href="/assets/js/1.3a9b40e4.js" as="script"><link rel="preload" href="/assets/js/349.142124fb.js" as="script"><link rel="preload" href="/assets/js/55.4f1e67a3.js" as="script"><link rel="prefetch" href="/assets/js/10.3e4ca091.js"><link rel="prefetch" href="/assets/js/100.a4b30aad.js"><link rel="prefetch" href="/assets/js/101.0613a96d.js"><link rel="prefetch" href="/assets/js/102.f7628c1c.js"><link rel="prefetch" href="/assets/js/103.1f9fabdf.js"><link rel="prefetch" href="/assets/js/104.16992962.js"><link rel="prefetch" href="/assets/js/105.e65ef529.js"><link rel="prefetch" href="/assets/js/106.0b67fead.js"><link rel="prefetch" href="/assets/js/107.ce486384.js"><link rel="prefetch" href="/assets/js/108.9301e3af.js"><link rel="prefetch" href="/assets/js/109.ba8579b4.js"><link rel="prefetch" href="/assets/js/11.75b5a637.js"><link rel="prefetch" href="/assets/js/110.4b8cb06f.js"><link rel="prefetch" href="/assets/js/111.971eb2af.js"><link rel="prefetch" href="/assets/js/112.508ee53c.js"><link rel="prefetch" href="/assets/js/113.198cf9cd.js"><link rel="prefetch" href="/assets/js/114.448458e9.js"><link rel="prefetch" href="/assets/js/115.9691ed08.js"><link rel="prefetch" href="/assets/js/116.05388cc6.js"><link rel="prefetch" href="/assets/js/117.d2e28824.js"><link rel="prefetch" href="/assets/js/118.5387677a.js"><link rel="prefetch" href="/assets/js/119.ecf21116.js"><link rel="prefetch" href="/assets/js/120.7b1d5c9e.js"><link rel="prefetch" href="/assets/js/121.24f10ee8.js"><link rel="prefetch" href="/assets/js/122.8b9ebba0.js"><link rel="prefetch" href="/assets/js/123.d1afa67e.js"><link rel="prefetch" href="/assets/js/124.6d4095c5.js"><link rel="prefetch" href="/assets/js/125.7df8e2b9.js"><link rel="prefetch" href="/assets/js/126.10f7c79f.js"><link rel="prefetch" href="/assets/js/127.6d76daab.js"><link rel="prefetch" href="/assets/js/128.0b0c711f.js"><link rel="prefetch" href="/assets/js/129.8a03fa85.js"><link rel="prefetch" href="/assets/js/130.9af6e6e5.js"><link rel="prefetch" href="/assets/js/131.62a8ca20.js"><link rel="prefetch" href="/assets/js/132.e295bcde.js"><link rel="prefetch" href="/assets/js/133.534824c6.js"><link rel="prefetch" href="/assets/js/134.c301cd9f.js"><link rel="prefetch" href="/assets/js/135.d5ca0af4.js"><link rel="prefetch" href="/assets/js/136.372471fa.js"><link rel="prefetch" href="/assets/js/137.c955b440.js"><link rel="prefetch" href="/assets/js/138.52b410b9.js"><link rel="prefetch" href="/assets/js/139.ec9f7e25.js"><link rel="prefetch" href="/assets/js/140.dbd6ccd2.js"><link rel="prefetch" href="/assets/js/141.330d5172.js"><link rel="prefetch" href="/assets/js/142.ec1d1dad.js"><link rel="prefetch" href="/assets/js/143.320b64a9.js"><link rel="prefetch" href="/assets/js/144.1c336a83.js"><link rel="prefetch" href="/assets/js/145.ceb2f940.js"><link rel="prefetch" href="/assets/js/146.7253b55f.js"><link rel="prefetch" href="/assets/js/147.0f5dcb40.js"><link rel="prefetch" href="/assets/js/148.07917418.js"><link rel="prefetch" href="/assets/js/149.e0e9410b.js"><link rel="prefetch" href="/assets/js/15.2d08fb15.js"><link rel="prefetch" href="/assets/js/150.005be68b.js"><link rel="prefetch" href="/assets/js/151.598d34e1.js"><link rel="prefetch" href="/assets/js/152.71ea3d25.js"><link rel="prefetch" href="/assets/js/153.8a07f8ea.js"><link rel="prefetch" href="/assets/js/154.bf24789d.js"><link rel="prefetch" href="/assets/js/155.366e52dd.js"><link rel="prefetch" href="/assets/js/156.cea009da.js"><link rel="prefetch" href="/assets/js/157.3f9e2e85.js"><link rel="prefetch" href="/assets/js/158.20432239.js"><link rel="prefetch" href="/assets/js/159.d44e220d.js"><link rel="prefetch" href="/assets/js/16.1e2f92be.js"><link rel="prefetch" href="/assets/js/160.337339ef.js"><link rel="prefetch" href="/assets/js/161.ba75b446.js"><link rel="prefetch" href="/assets/js/162.196925dd.js"><link rel="prefetch" href="/assets/js/163.d695d91b.js"><link rel="prefetch" href="/assets/js/164.af932254.js"><link rel="prefetch" href="/assets/js/165.eea6e6f0.js"><link rel="prefetch" href="/assets/js/166.aee69940.js"><link rel="prefetch" href="/assets/js/167.613c49d5.js"><link rel="prefetch" href="/assets/js/168.a0d5a8ba.js"><link rel="prefetch" href="/assets/js/169.b868075d.js"><link rel="prefetch" href="/assets/js/17.07d56fc3.js"><link rel="prefetch" href="/assets/js/170.6ddc9cc1.js"><link rel="prefetch" href="/assets/js/171.0f9def72.js"><link rel="prefetch" href="/assets/js/172.446bb79e.js"><link rel="prefetch" href="/assets/js/173.ff78aa80.js"><link rel="prefetch" href="/assets/js/174.6f9acebe.js"><link rel="prefetch" href="/assets/js/175.2ca58144.js"><link rel="prefetch" href="/assets/js/176.396ca5af.js"><link rel="prefetch" href="/assets/js/177.f294a5c4.js"><link rel="prefetch" href="/assets/js/178.d43be5ef.js"><link rel="prefetch" href="/assets/js/179.82d9da1e.js"><link rel="prefetch" href="/assets/js/18.5eb8e005.js"><link rel="prefetch" href="/assets/js/180.e2d5e7fa.js"><link rel="prefetch" href="/assets/js/181.eef8103b.js"><link rel="prefetch" href="/assets/js/182.44d02625.js"><link rel="prefetch" href="/assets/js/183.1d572013.js"><link rel="prefetch" href="/assets/js/184.6252e0a4.js"><link rel="prefetch" href="/assets/js/185.5903dc9a.js"><link rel="prefetch" href="/assets/js/186.cc00b2ad.js"><link rel="prefetch" href="/assets/js/187.ed03faa7.js"><link rel="prefetch" href="/assets/js/188.22141097.js"><link rel="prefetch" href="/assets/js/189.f91ace88.js"><link rel="prefetch" href="/assets/js/19.16311af7.js"><link rel="prefetch" href="/assets/js/190.34dff5fa.js"><link rel="prefetch" href="/assets/js/191.e015097c.js"><link rel="prefetch" href="/assets/js/192.9af7a92c.js"><link rel="prefetch" href="/assets/js/193.6edb93b4.js"><link rel="prefetch" href="/assets/js/194.cd9b769c.js"><link rel="prefetch" href="/assets/js/195.f12b2f4d.js"><link rel="prefetch" href="/assets/js/196.953277f9.js"><link rel="prefetch" href="/assets/js/197.41ece02d.js"><link rel="prefetch" href="/assets/js/198.7008b8ee.js"><link rel="prefetch" href="/assets/js/199.55c66eac.js"><link rel="prefetch" href="/assets/js/20.8075ec35.js"><link rel="prefetch" href="/assets/js/200.d3d86844.js"><link rel="prefetch" href="/assets/js/201.b19d06ed.js"><link rel="prefetch" href="/assets/js/202.146bd1fd.js"><link rel="prefetch" href="/assets/js/203.8958319d.js"><link rel="prefetch" href="/assets/js/204.930288d9.js"><link rel="prefetch" href="/assets/js/205.8ae5b571.js"><link rel="prefetch" href="/assets/js/206.0fb41c0d.js"><link rel="prefetch" href="/assets/js/207.cca8187b.js"><link rel="prefetch" href="/assets/js/208.213b7930.js"><link rel="prefetch" href="/assets/js/209.bdb9dd1b.js"><link rel="prefetch" href="/assets/js/21.40d089f3.js"><link rel="prefetch" href="/assets/js/210.e72165c7.js"><link rel="prefetch" href="/assets/js/211.b7659acd.js"><link rel="prefetch" href="/assets/js/212.c4610c19.js"><link rel="prefetch" href="/assets/js/213.b65b6d93.js"><link rel="prefetch" href="/assets/js/214.ce4e5647.js"><link rel="prefetch" href="/assets/js/215.ad8e7eed.js"><link rel="prefetch" href="/assets/js/216.77e8d009.js"><link rel="prefetch" href="/assets/js/217.7af37ff4.js"><link rel="prefetch" href="/assets/js/218.8db6104f.js"><link rel="prefetch" href="/assets/js/219.5a74e962.js"><link rel="prefetch" href="/assets/js/22.b0f502a3.js"><link rel="prefetch" href="/assets/js/220.7dea0e68.js"><link rel="prefetch" href="/assets/js/221.093021b8.js"><link rel="prefetch" href="/assets/js/222.c0382937.js"><link rel="prefetch" href="/assets/js/223.3591acb3.js"><link rel="prefetch" href="/assets/js/224.20af7830.js"><link rel="prefetch" href="/assets/js/225.9efdf47e.js"><link rel="prefetch" href="/assets/js/226.7a4de2bd.js"><link rel="prefetch" href="/assets/js/227.a8530546.js"><link rel="prefetch" href="/assets/js/228.4001f23e.js"><link rel="prefetch" href="/assets/js/229.ece6e783.js"><link rel="prefetch" href="/assets/js/23.1f39d0eb.js"><link rel="prefetch" href="/assets/js/230.96a98244.js"><link rel="prefetch" href="/assets/js/231.45b04f44.js"><link rel="prefetch" href="/assets/js/232.73ffe7bc.js"><link rel="prefetch" href="/assets/js/233.733cdfc5.js"><link rel="prefetch" href="/assets/js/234.abfbaf2b.js"><link rel="prefetch" href="/assets/js/235.c675073f.js"><link rel="prefetch" href="/assets/js/236.393e967e.js"><link rel="prefetch" href="/assets/js/237.4f42a6f7.js"><link rel="prefetch" href="/assets/js/238.ed4e3482.js"><link rel="prefetch" href="/assets/js/239.93c1ee5c.js"><link rel="prefetch" href="/assets/js/24.9fd95f3c.js"><link rel="prefetch" href="/assets/js/240.f68ce809.js"><link rel="prefetch" href="/assets/js/241.bb5549af.js"><link rel="prefetch" href="/assets/js/242.f63ed1a9.js"><link rel="prefetch" href="/assets/js/243.82e4690d.js"><link rel="prefetch" href="/assets/js/244.1df5b8e5.js"><link rel="prefetch" href="/assets/js/245.8210a626.js"><link rel="prefetch" href="/assets/js/246.81c6a202.js"><link rel="prefetch" href="/assets/js/247.a6a80b7d.js"><link rel="prefetch" href="/assets/js/248.93d3f5f8.js"><link rel="prefetch" href="/assets/js/249.9cfd1317.js"><link rel="prefetch" href="/assets/js/25.ca34edab.js"><link rel="prefetch" href="/assets/js/250.f11ca7e7.js"><link rel="prefetch" href="/assets/js/251.65bf41e9.js"><link rel="prefetch" href="/assets/js/252.6384b38c.js"><link rel="prefetch" href="/assets/js/253.24ae47b5.js"><link rel="prefetch" href="/assets/js/254.89a70773.js"><link rel="prefetch" href="/assets/js/255.6ae899aa.js"><link rel="prefetch" href="/assets/js/256.27c8fc49.js"><link rel="prefetch" href="/assets/js/257.7a2a1f9f.js"><link rel="prefetch" href="/assets/js/258.54c1be3e.js"><link rel="prefetch" href="/assets/js/259.e3ef7eb5.js"><link rel="prefetch" href="/assets/js/26.1c281e1e.js"><link rel="prefetch" href="/assets/js/260.5efebd40.js"><link rel="prefetch" href="/assets/js/261.d6d070a4.js"><link rel="prefetch" href="/assets/js/262.e04802ea.js"><link rel="prefetch" href="/assets/js/263.be28fef9.js"><link rel="prefetch" href="/assets/js/264.a0e7938f.js"><link rel="prefetch" href="/assets/js/265.f5d6011d.js"><link rel="prefetch" href="/assets/js/266.d9dfc5a8.js"><link rel="prefetch" href="/assets/js/267.6396459d.js"><link rel="prefetch" href="/assets/js/268.fbbb006c.js"><link rel="prefetch" href="/assets/js/269.010e6f28.js"><link rel="prefetch" href="/assets/js/27.12ca3942.js"><link rel="prefetch" href="/assets/js/270.61695ad3.js"><link rel="prefetch" href="/assets/js/271.37d54a6e.js"><link rel="prefetch" href="/assets/js/272.3736a7da.js"><link rel="prefetch" href="/assets/js/273.b4eff726.js"><link rel="prefetch" href="/assets/js/274.f5b10931.js"><link rel="prefetch" href="/assets/js/275.d6f3460b.js"><link rel="prefetch" href="/assets/js/276.4bfe7260.js"><link rel="prefetch" href="/assets/js/277.b5e73ea0.js"><link rel="prefetch" href="/assets/js/278.4bed1bd0.js"><link rel="prefetch" href="/assets/js/279.6d131b7a.js"><link rel="prefetch" href="/assets/js/28.061d391c.js"><link rel="prefetch" href="/assets/js/280.306355db.js"><link rel="prefetch" href="/assets/js/281.898aabea.js"><link rel="prefetch" href="/assets/js/282.228298fa.js"><link rel="prefetch" href="/assets/js/283.aa971517.js"><link rel="prefetch" href="/assets/js/284.fb664b0c.js"><link rel="prefetch" href="/assets/js/285.553cecac.js"><link rel="prefetch" href="/assets/js/286.1128ab18.js"><link rel="prefetch" href="/assets/js/287.7f7ba07e.js"><link rel="prefetch" href="/assets/js/288.26c31cad.js"><link rel="prefetch" href="/assets/js/289.62eda281.js"><link rel="prefetch" href="/assets/js/29.5c538b3a.js"><link rel="prefetch" href="/assets/js/290.6a4547b5.js"><link rel="prefetch" href="/assets/js/291.4a26ead3.js"><link rel="prefetch" href="/assets/js/292.c72ba157.js"><link rel="prefetch" href="/assets/js/293.2049d7ce.js"><link rel="prefetch" href="/assets/js/294.c4ffa803.js"><link rel="prefetch" href="/assets/js/295.91061e8a.js"><link rel="prefetch" href="/assets/js/296.04a70514.js"><link rel="prefetch" href="/assets/js/297.2ab09b08.js"><link rel="prefetch" href="/assets/js/298.bed34f28.js"><link rel="prefetch" href="/assets/js/299.bf641449.js"><link rel="prefetch" href="/assets/js/3.aa256e84.js"><link rel="prefetch" href="/assets/js/30.8eb675e6.js"><link rel="prefetch" href="/assets/js/300.ef7cf2b1.js"><link rel="prefetch" href="/assets/js/301.6cca7dcf.js"><link rel="prefetch" href="/assets/js/302.5223c7b5.js"><link rel="prefetch" href="/assets/js/303.a9036b95.js"><link rel="prefetch" href="/assets/js/304.9f1d0cb8.js"><link rel="prefetch" href="/assets/js/305.60bd4fa0.js"><link rel="prefetch" href="/assets/js/306.6dbaff66.js"><link rel="prefetch" href="/assets/js/307.f672e1c3.js"><link rel="prefetch" href="/assets/js/308.ad1d2649.js"><link rel="prefetch" href="/assets/js/309.f3ed6140.js"><link rel="prefetch" href="/assets/js/31.b61624ed.js"><link rel="prefetch" href="/assets/js/310.f0e192f2.js"><link rel="prefetch" href="/assets/js/311.1a841b77.js"><link rel="prefetch" href="/assets/js/312.742e1e42.js"><link rel="prefetch" href="/assets/js/313.ffe8ad31.js"><link rel="prefetch" href="/assets/js/314.faf111bc.js"><link rel="prefetch" href="/assets/js/315.fd3cd494.js"><link rel="prefetch" href="/assets/js/316.1dbe5f36.js"><link rel="prefetch" href="/assets/js/317.7d80f561.js"><link rel="prefetch" href="/assets/js/318.3e50257d.js"><link rel="prefetch" href="/assets/js/319.7aa3143b.js"><link rel="prefetch" href="/assets/js/32.7c607c6b.js"><link rel="prefetch" href="/assets/js/320.d2490912.js"><link rel="prefetch" href="/assets/js/321.b596a3c6.js"><link rel="prefetch" href="/assets/js/322.442896a5.js"><link rel="prefetch" href="/assets/js/323.fa1cf7ff.js"><link rel="prefetch" href="/assets/js/324.523eac46.js"><link rel="prefetch" href="/assets/js/325.968d95d2.js"><link rel="prefetch" href="/assets/js/326.1cd9da40.js"><link rel="prefetch" href="/assets/js/327.bdff4365.js"><link rel="prefetch" href="/assets/js/328.46a3916c.js"><link rel="prefetch" href="/assets/js/329.a93f9bc0.js"><link rel="prefetch" href="/assets/js/33.daf7a620.js"><link rel="prefetch" href="/assets/js/330.a393c8ae.js"><link rel="prefetch" href="/assets/js/331.05cf0006.js"><link rel="prefetch" href="/assets/js/332.64dc37af.js"><link rel="prefetch" href="/assets/js/333.77acbacc.js"><link rel="prefetch" href="/assets/js/334.065a75fa.js"><link rel="prefetch" href="/assets/js/335.2e4953d9.js"><link rel="prefetch" href="/assets/js/336.88d2c95e.js"><link rel="prefetch" href="/assets/js/337.06e57f85.js"><link rel="prefetch" href="/assets/js/338.b23405a3.js"><link rel="prefetch" href="/assets/js/339.2fe67814.js"><link rel="prefetch" href="/assets/js/34.fb8f1943.js"><link rel="prefetch" href="/assets/js/340.e10ec05c.js"><link rel="prefetch" href="/assets/js/341.0b5a8ce7.js"><link rel="prefetch" href="/assets/js/342.f3c6067d.js"><link rel="prefetch" href="/assets/js/343.ddbdcc21.js"><link rel="prefetch" href="/assets/js/344.a1366806.js"><link rel="prefetch" href="/assets/js/345.cc633185.js"><link rel="prefetch" href="/assets/js/346.be70b04c.js"><link rel="prefetch" href="/assets/js/347.786c5173.js"><link rel="prefetch" href="/assets/js/348.364fc0cf.js"><link rel="prefetch" href="/assets/js/35.0df3ec8b.js"><link rel="prefetch" href="/assets/js/350.6c649428.js"><link rel="prefetch" href="/assets/js/351.25b2c323.js"><link rel="prefetch" href="/assets/js/352.6179cc2d.js"><link rel="prefetch" href="/assets/js/353.bbabc2b9.js"><link rel="prefetch" href="/assets/js/354.13bb1244.js"><link rel="prefetch" href="/assets/js/355.113c2f47.js"><link rel="prefetch" href="/assets/js/356.7462850b.js"><link rel="prefetch" href="/assets/js/357.3c3dbbd1.js"><link rel="prefetch" href="/assets/js/358.b135e9d6.js"><link rel="prefetch" href="/assets/js/359.07fc4a4f.js"><link rel="prefetch" href="/assets/js/36.0ea7e330.js"><link rel="prefetch" href="/assets/js/360.b69d8377.js"><link rel="prefetch" href="/assets/js/361.aaaf5246.js"><link rel="prefetch" href="/assets/js/362.5537608e.js"><link rel="prefetch" href="/assets/js/363.524ba2ba.js"><link rel="prefetch" href="/assets/js/364.389d3e32.js"><link rel="prefetch" href="/assets/js/365.56b5f49b.js"><link rel="prefetch" href="/assets/js/366.84fe578c.js"><link rel="prefetch" href="/assets/js/367.07dddb6c.js"><link rel="prefetch" href="/assets/js/368.47c53670.js"><link rel="prefetch" href="/assets/js/369.b77ab4b3.js"><link rel="prefetch" href="/assets/js/37.04b155a3.js"><link rel="prefetch" href="/assets/js/38.537f1aa7.js"><link rel="prefetch" href="/assets/js/39.cb05fa66.js"><link rel="prefetch" href="/assets/js/4.5dfccc8e.js"><link rel="prefetch" href="/assets/js/40.8ae4f980.js"><link rel="prefetch" href="/assets/js/41.db63188e.js"><link rel="prefetch" href="/assets/js/42.70ef906b.js"><link rel="prefetch" href="/assets/js/43.62c34d86.js"><link rel="prefetch" href="/assets/js/44.a6b3acc4.js"><link rel="prefetch" href="/assets/js/45.d7a753ff.js"><link rel="prefetch" href="/assets/js/46.f6a96982.js"><link rel="prefetch" href="/assets/js/47.3f15c487.js"><link rel="prefetch" href="/assets/js/48.46af317c.js"><link rel="prefetch" href="/assets/js/49.ff2b8b1a.js"><link rel="prefetch" href="/assets/js/5.8a2ef02b.js"><link rel="prefetch" href="/assets/js/50.76415cc1.js"><link rel="prefetch" href="/assets/js/51.0b53377d.js"><link rel="prefetch" href="/assets/js/52.df8eeb02.js"><link rel="prefetch" href="/assets/js/53.f29429cb.js"><link rel="prefetch" href="/assets/js/54.904d4630.js"><link rel="prefetch" href="/assets/js/56.b4017b1e.js"><link rel="prefetch" href="/assets/js/57.48ba4683.js"><link rel="prefetch" href="/assets/js/58.9e511e06.js"><link rel="prefetch" href="/assets/js/59.fb59f146.js"><link rel="prefetch" href="/assets/js/6.1d5fbbc3.js"><link rel="prefetch" href="/assets/js/60.642e0d6e.js"><link rel="prefetch" href="/assets/js/61.fabf131e.js"><link rel="prefetch" href="/assets/js/62.a5541045.js"><link rel="prefetch" href="/assets/js/63.349d1ced.js"><link rel="prefetch" href="/assets/js/64.91d3607d.js"><link rel="prefetch" href="/assets/js/65.6e573ae9.js"><link rel="prefetch" href="/assets/js/66.6924376d.js"><link rel="prefetch" href="/assets/js/67.b06bccae.js"><link rel="prefetch" href="/assets/js/68.a70d12a6.js"><link rel="prefetch" href="/assets/js/69.2022e0ab.js"><link rel="prefetch" href="/assets/js/70.0bb66f77.js"><link rel="prefetch" href="/assets/js/71.edbcb8ea.js"><link rel="prefetch" href="/assets/js/72.5a3c4f8f.js"><link rel="prefetch" href="/assets/js/73.e520a662.js"><link rel="prefetch" href="/assets/js/74.cbc2cdbc.js"><link rel="prefetch" href="/assets/js/75.9127c410.js"><link rel="prefetch" href="/assets/js/76.a1c764fe.js"><link rel="prefetch" href="/assets/js/77.ebebdb84.js"><link rel="prefetch" href="/assets/js/78.12c2619b.js"><link rel="prefetch" href="/assets/js/79.719e1ba0.js"><link rel="prefetch" href="/assets/js/8.42a516ca.js"><link rel="prefetch" href="/assets/js/80.6a1d09c2.js"><link rel="prefetch" href="/assets/js/81.fa5d7f62.js"><link rel="prefetch" href="/assets/js/82.6b3de7e3.js"><link rel="prefetch" href="/assets/js/83.2f0785aa.js"><link rel="prefetch" href="/assets/js/84.e038a79d.js"><link rel="prefetch" href="/assets/js/85.5ee06ccf.js"><link rel="prefetch" href="/assets/js/86.9d185697.js"><link rel="prefetch" href="/assets/js/87.9ada2a62.js"><link rel="prefetch" href="/assets/js/88.c602e690.js"><link rel="prefetch" href="/assets/js/89.fef8a42c.js"><link rel="prefetch" href="/assets/js/9.fb614957.js"><link rel="prefetch" href="/assets/js/90.13eba952.js"><link rel="prefetch" href="/assets/js/91.474065b7.js"><link rel="prefetch" href="/assets/js/92.0500fc52.js"><link rel="prefetch" href="/assets/js/93.de53ee35.js"><link rel="prefetch" href="/assets/js/94.1b13245b.js"><link rel="prefetch" href="/assets/js/95.9befea70.js"><link rel="prefetch" href="/assets/js/96.eaac63cd.js"><link rel="prefetch" href="/assets/js/97.68586bff.js"><link rel="prefetch" href="/assets/js/98.f8e04ee8.js"><link rel="prefetch" href="/assets/js/99.5d2ac299.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.e2f7b939.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.c49b3f6b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.748bddee.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>前端Jeek</h3> <p class="description" data-v-59e6cb88>每一个不曾起舞的日子，都是对生命的辜负！</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>前端Jeek</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/avatar.png" alt="前端Jeek" class="logo"> <span class="site-name">前端Jeek</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>VAR</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  react
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  nextjs
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  miniProgram
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  node
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  golang
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  Mysql
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  Mongodb
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/webgl/" class="nav-link"><i class="undefined"></i>
+  webgl
+</a></li><li class="dropdown-item"><!----> <a href="/categories/后端/" class="nav-link"><i class="undefined"></i>
+  后端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/人月神话/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/CI/CD/" class="nav-link"><i class="undefined"></i>
+  CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Label Studio/" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li><li class="dropdown-item"><!----> <a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  移动端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/k8s/" class="nav-link"><i class="undefined"></i>
+  k8s
+</a></li><li class="dropdown-item"><!----> <a href="/categories/浏览器缓存/" class="nav-link"><i class="undefined"></i>
+  浏览器缓存
+</a></li><li class="dropdown-item"><!----> <a href="/categories/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络和安全/" class="nav-link"><i class="undefined"></i>
+  网络和安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/shell/" class="nav-link"><i class="undefined"></i>
+  shell
+</a></li><li class="dropdown-item"><!----> <a href="/categories/源码阅读/" class="nav-link"><i class="undefined"></i>
+  源码阅读
+</a></li><li class="dropdown-item"><!----> <a href="/categories/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工具/" class="nav-link"><i class="undefined"></i>
+  工具
+</a></li><li class="dropdown-item"><!----> <a href="/categories/wasm/" class="nav-link"><i class="undefined"></i>
+  wasm
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      资源
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://leetcode-cn.com/u/zkkysqs/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Leetcode
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.nowcoder.com/profile/9027587" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Nowcoder
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bookstack.cn/read/tcp-udp-ip/1.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  网络编程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://developers.google.com/web/fundamentals/performance/get-started" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Google Developer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://developers.google.cn/web/tools/chrome-devtools/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Chrome DevTools
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://vue3js.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Angular
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  React
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NextJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NodeJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/guanpengchn/awesome-books" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Awesome Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Programming Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://docschina.org/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Docschina
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Tool
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><img src="/images/avatar.png" alt="author-avatar" class="personal-img" data-v-1fad0c41> <h3 class="name" data-v-1fad0c41>
+    前端Jeek
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>309</h3> <h6 data-v-1fad0c41>文章</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>97</h3> <h6 data-v-1fad0c41>标签</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>前端基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>VAR</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  react
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  nextjs
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  miniProgram
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  node
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  golang
+</a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  Mysql
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  Mongodb
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      分类
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/webgl/" class="nav-link"><i class="undefined"></i>
+  webgl
+</a></li><li class="dropdown-item"><!----> <a href="/categories/后端/" class="nav-link"><i class="undefined"></i>
+  后端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/nestjs/" class="nav-link"><i class="undefined"></i>
+  nestjs
+</a></li><li class="dropdown-item"><!----> <a href="/categories/人月神话/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/其他/" class="nav-link"><i class="undefined"></i>
+  其他
+</a></li><li class="dropdown-item"><!----> <a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-item"><!----> <a href="/categories/CI/CD/" class="nav-link"><i class="undefined"></i>
+  CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  flutter
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Label Studio/" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li><li class="dropdown-item"><!----> <a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  移动端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/categories/k8s/" class="nav-link"><i class="undefined"></i>
+  k8s
+</a></li><li class="dropdown-item"><!----> <a href="/categories/浏览器缓存/" class="nav-link"><i class="undefined"></i>
+  浏览器缓存
+</a></li><li class="dropdown-item"><!----> <a href="/categories/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络和安全/" class="nav-link"><i class="undefined"></i>
+  网络和安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/shell/" class="nav-link"><i class="undefined"></i>
+  shell
+</a></li><li class="dropdown-item"><!----> <a href="/categories/源码阅读/" class="nav-link"><i class="undefined"></i>
+  源码阅读
+</a></li><li class="dropdown-item"><!----> <a href="/categories/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/categories/工具/" class="nav-link"><i class="undefined"></i>
+  工具
+</a></li><li class="dropdown-item"><!----> <a href="/categories/wasm/" class="nav-link"><i class="undefined"></i>
+  wasm
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      资源
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://leetcode-cn.com/u/zkkysqs/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Leetcode
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://www.nowcoder.com/profile/9027587" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Nowcoder
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://www.bookstack.cn/read/tcp-udp-ip/1.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  网络编程
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://developers.google.com/web/fundamentals/performance/get-started" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Google Developer
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://developers.google.cn/web/tools/chrome-devtools/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Chrome DevTools
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://vue3js.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Vue
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Angular
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://react.dev/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  React
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nextjs.org/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NextJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://nodejs.org/en/docs" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  NodeJS
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://github.com/guanpengchn/awesome-books" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Awesome Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Programming Books
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li><li class="dropdown-item"><h4></h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="https://docschina.org/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Docschina
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-subitem"><a href="https://tool.lu/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Tool
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/other/linux/QA.html" class="sidebar-link">1.Cannot connect to the Docker daemon ...</a></li><li><a href="/other/linux/linux.html" aria-current="page" class="active sidebar-link">Linux系统简单使用</a></li><li><a href="/other/linux/pre-linux.html" class="sidebar-link">环境的搭建</a></li><li><a href="/other/linux/vim.html" class="sidebar-link">Vim编辑器简单使用</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Linux系统简单使用</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>前端Jeek</span>
+          
+        <span data-v-59e6cb88>2018 - </span>
+        2025
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page" style="padding-right:0;"><section style="display:;"><div class="page-title"><h1 class="title">Linux系统简单使用</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>前端Jeek</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2020/11/30</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/other/linux/linux.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>Linux</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="_1-linux常用命令"><a href="#_1-linux常用命令" class="header-anchor">🌙</a> 1. Linux常用命令</h2> <blockquote><p><a href="https://juejin.cn/post/6938385978004340744" target="_blank" rel="noopener noreferrer">2万字系统总结，带你实现 Linux 命令自由？<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote> <h3 id="_1-文档型"><a href="#_1-文档型" class="header-anchor">🌙</a> 1.文档型</h3> <p>1.文件操作</p> <ul><li><code>ls</code>： 查看文件列表</li> <li><code>ls -la</code>：查看所有目录以及详细信息</li> <li><code>less 文件名</code>：分页显示文件内容</li> <li><code>head 文件名</code>：显示文件的头几行</li> <li><code>tail 文件名</code>：显示文件的末几行</li> <li><code>touch文件名</code> ：创建文件</li> <li><code>cat [-n 显示行号] 文件名</code> ：查看文件内容</li> <li><code>echo ‘内容’ &gt;&gt; 文件名</code> ：给文件追加内容</li> <li><code>echo ‘内容' &gt; 文件名</code> ：覆盖文件内容</li> <li><code>rm 文件</code> ：删除文件</li> <li><code>rm -r 目录</code>： 删除目录</li> <li><code>rm -rf 文件/目录</code> ：强制删除</li> <li><code>vi 文件</code> ：进入Vim编辑状态</li> <li><code>mkdir [-p 创建多级目录] 目录名</code> ：创建目录</li> <li><code>cp old_file new_file</code>：拷贝文件</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">cp</span> <span class="token function">file</span> <span class="token function">dir</span> <span class="token comment">#拷贝文件到dir目录下 </span>
+<span class="token function">cp</span> <span class="token function">file</span> dir/file1 <span class="token comment">#拷贝文件到dir目录下,并重命名 </span>
+<span class="token function">cp</span> *.js <span class="token function">dir</span>	<span class="token comment">#把当前目录下所有js文件拷贝到dir目录下</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul><li><code>mv file dir</code>：将file移动到dir目录下</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">mv</span> new_folder one	 <span class="token comment"># 将 new_folder 文件夹移动到one目录下</span>
+<span class="token function">mv</span> *.txt folder	 <span class="token comment"># 把当前目录下所有 txt 文件移动到 folder 目录下</span>
+<span class="token function">mv</span> <span class="token function">file</span> new_file	 <span class="token comment"># file 文件重命名为 new_file</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul><li><code>rm file</code>：删除 file 文件</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">rm</span> f1 f2 f3 <span class="token comment"># 同时删除 f1 f2 f3 3个文件</span>
+
+<span class="token comment"># 参数</span>
+<span class="token parameter variable">-i</span> <span class="token comment">#向用户确认是否删除</span>
+<span class="token parameter variable">-f</span> <span class="token comment">#文件强制删除</span>
+<span class="token parameter variable">-d</span> <span class="token comment">#删除空目录</span>
+<span class="token parameter variable">-r</span> <span class="token comment">#递归删除文件夹，著名的删除操作 rm -rf</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><ul><li><code>ln f1 f2</code>：创建f2为f1的硬链接（同步修改）</li> <li><code>ln -s f1 f2</code>：创建f2为f1的软链接（快捷键）</li></ul> <p>2.目录操作</p> <ul><li><code>cd \</code> ：目录切换到根目录</li> <li><code>pwd</code>：查看当前所在路径</li> <li><code>which 命令</code>: 查看可执行文件所在路径</li> <li><code>du</code>: 列举目录大小信息</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">du</span>
+<span class="token parameter variable">-h</span> <span class="token comment"># 适合人类阅读的；</span>
+<span class="token parameter variable">-a</span> <span class="token comment"># 同时列举出目录下文件的大小信息；</span>
+<span class="token parameter variable">-s</span> <span class="token comment"># 只显示总计大小，不显示具体信息。</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>3.权限</p> <ul><li><code>sudo 命令</code>: 以root身份运行命令</li> <li><code>su 用户名</code>: 切换用户，需要root权限</li> <li><code>chown</code>：改变文件的所有者，需要root权限</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">chown</span> lion file.txt	<span class="token comment"># 把其它用户创建的file.txt转让给lion用户</span>
+<span class="token function">chown</span> lion:bar file.txt	<span class="token comment"># 把file.txt的用户改为lion，群组改为bar</span>
+
+<span class="token comment"># -R 递归设置子目录和子文件， chown -R lion:lion /home/frank 把 frank 文件夹的用户和群组都改为 lion</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ul><li><code>chmod -R 777 /home</code>：递归地修改文件访问权限</li></ul> <p>4.权限解读：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token punctuation">[</span>root@xxx /<span class="token punctuation">]</span><span class="token comment"># ls -l</span>
+total <span class="token number">64</span>
+lrwxrwxrwx    <span class="token number">1</span> root root     <span class="token number">7</span> Feb  <span class="token number">9</span> <span class="token number">20</span>:18 bin -<span class="token operator">&gt;</span> usr/bin
+dr-xr-xr-x.   <span class="token number">5</span> root root  <span class="token number">4096</span> Jul <span class="token number">21</span> <span class="token number">17</span>:26 boot
+drwxr-xr-x   <span class="token number">17</span> root root  <span class="token number">2980</span> Jul  <span class="token number">8</span> <span class="token number">14</span>:41 dev
+drwxr-xr-x.  <span class="token number">91</span> root root  <span class="token number">4096</span> Aug  <span class="token number">1</span> <span class="token number">10</span>:31 etc
+drwxr-xr-x.   <span class="token number">2</span> root root  <span class="token number">4096</span> Feb  <span class="token number">9</span> <span class="token number">20</span>:18 home
+lrwxrwxrwx    <span class="token number">1</span> root root     <span class="token number">7</span> Feb  <span class="token number">9</span> <span class="token number">20</span>:18 lib -<span class="token operator">&gt;</span> usr/lib
+-rw-r--r--    <span class="token number">1</span> root root    <span class="token number">15</span> Aug  <span class="token number">1</span> <span class="token number">14</span>:24 hello.txt
+
+<span class="token punctuation">..</span>. <span class="token punctuation">..</span>. <span class="token punctuation">..</span>.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>其中 drwxr-xr-x 表示文件或目录的权限。让我们一起来解读它具体代表什么？
+
+d ：表示目录，就是说这是一个目录，普通文件是 - ，链接是 l 。
+r ：【4】read 表示文件可读。
+w ：【2】write 表示文件可写，一般有写的权限，就有删除的权限。
+x ：【1】execute 表示文件可执行。
+- ：表示没有相应权限。
+
+
+理解这句权限 d rwx r-x r-x 的意思：
+
+d:【文件属性】它是一个文件夹；
+rwx:【所有者】它的所有者具有：读、写、执行权限；
+r-x:【群组用户】它的群组用户具有：读、执行的权限，没有写的权限；
+r-x:【其他用户】它的其它用户具有：读、执行的权限，没有写的权限。
+
+
+chmod 640 hello.txt
+<span class="token title important"><span class="token punctuation">#</span> 数字权限分析</span>
+6 = 4 + 2 + 0 表示所有者具有 rw 权限
+4 = 4 + 0 + 0 表示群组用户具有 r 权限
+0 = 0 + 0 + 0 表示其它用户没有权限
+
+对应文字权限为：-rw-r-----
+
+
+<span class="token title important"><span class="token punctuation">#</span> 字母权限分析</span>
+
+u ： user 的缩写，用户的意思，表示所有者。
+g ： group 的缩写，群组的意思，表示群组用户。
+o ： other 的缩写，其它的意思，表示其它用户。
+a ： all 的缩写，所有的意思，表示所有用户。
++ ：加号，表示添加权限。
+- ：减号，表示去除权限。
+= ：等于号，表示分配权限。
+
+chmod u+rx file	--&gt; 文件file的所有者增加读和运行的权限
+chmod g+r file	--&gt; 文件file的群组用户增加读的权限
+chmod o-r file	--&gt; 文件file的其它用户移除读的权限
+chmod g+r o-r file	--&gt; 文件file的群组用户增加读的权限，其它用户移除读的权限
+chmod go-r file	--&gt; 文件file的群组和其他用户移除读的权限
+chmod +x file	--&gt; 文件file的所有用户增加运行的权限
+chmod u=rwx,g=r,o=- file	--&gt; 文件file的所有者分配读写和执行的权限，群组其它用户分配读的权限，其他用户没有任何权限
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><p>5.进阶操作</p> <ul><li><code>grep</code>:查找</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>grep text file # text代表要搜索的文本，file代表供搜索的文件
+
+-i 忽略大小写， grep -i path /etc/profile
+-n 显示行号，grep -n path /etc/profile
+-v 只显示搜索文本不在的那些行，grep -v path /etc/profile
+-r 递归查找， grep -r hello /etc ，Linux 中还有一个 rgrep 命令，作用相当于 grep -r
+
+<span class="token title important"><span class="token punctuation">#</span> 实例</span>
+[root@xxx ~]# grep path /etc/profile
+pathmunge () {
+pathmunge /usr/sbin
+pathmunge /usr/local/sbin
+pathmunge /usr/local/sbin after
+pathmunge /usr/sbin after
+unset -f pathmunge
+
+<span class="token title important"><span class="token punctuation">#</span> 使用正则</span>
+grep -E path /etc/profile --&gt; 完全匹配path
+grep -E ^path /etc/profile --&gt; 匹配path开头的字符串
+grep -E [Pp]ath /etc/profile --&gt; 匹配path或Path
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><ul><li><code>sort</code>:对文件进行排序</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>sort hello.txt # 对name.txt文件内容进行排序
+
+
+-o 将排序后的文件写入新文件， sort -o name_sorted.txt name.txt ；
+-r 倒序排序， sort -r name.txt ；
+-R 随机排序， sort -R name.txt ；
+-n 对数字进行排序，默认是把数字识别成字符串的，因此 138 会排在 25 前面，如果添加了 -n 数字排序的话，则 25 会在 138 前面。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><ul><li><code>wc</code>：<code>world count</code>统计单词数目、行数、字符数，字节数等</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>[root@xxx test]# wc hello.txt
+<span class="token title important"><span class="token punctuation">#</span> 行：9 单词数：10 字节数：48</span>
+9 10 48 hello.txt
+
+-l 只统计行数， wc -l hello.txt
+-w 只统计单词数， wc -w hello.txt
+-c 只统计字节数， wc -c hello.txt
+-m 只统计字符数， wc -m hello.txt
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><ul><li><code>uniq</code>: 删除文件中的重复内容(只能去除连续重复的行数)</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>uniq name.txt # 去除name.txt重复的行数，并打印到屏幕上
+uniq name.txt uniq_name.txt # 把去除重复后的文件保存为 uniq_name.txt
+
+-c 统计重复行数， uniq -c name.txt ；
+-d 只显示重复的行数， uniq -d name.txt 。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ul><li><code>cut</code>剪切</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>cut -c 2-4 name.txt # 剪切每一行第二到第四个字符
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>输出重定向</p> <ul><li><code>&gt;</code>重定向(表示重定向到新的文件)</li> <li><code>&gt;&gt;</code>输出重定向(表示重定向到文件末尾)</li> <li><code>2&gt;</code>输出重定向(标准错误输出)</li> <li><code>2&gt;&gt;</code>输出重定向(标准错误输出（追加到文件末尾）同 &gt;&gt; 相似。)</li></ul> <p>输入重定向</p> <ul><li><code>&lt;</code>符号用于指定命令的输入</li> <li><code>&lt;&lt;</code>将键盘的输入重定向为某个命令的输入。</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>cat &lt; name.csv # 指定命令的输入为 name.csv
+
+cat name.csv 表示 cat 命令接收的输入是 notes.csv 文件名，那么要先打开这个文件，然后打印出文件内容。
+cat &lt; name.csv 表示 cat 命令接收的输入直接是 notes.csv 这个文件的内容， cat 命令只负责将其内容打印，打开文件并将文件内容传递给 cat 命令的工作则交给终端完成。
+
+
+sort -n &lt;&lt; END # 输入这个命令之后，按下回车，终端就进入键盘输入模式，其中END为结束命令（这个可以自定义）
+
+wc -m &lt;&lt; END # 统计输入的单词
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>管道</p> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>cut -d , -f 1 name.csv | sort &gt; sorted_name.txt
+<span class="token title important"><span class="token punctuation">#</span> 第一步获取到的 name 列表，通过管道符再进行排序，最后输出到sorted_name.txt</span>
+
+du | sort -nr | head
+<span class="token title important"><span class="token punctuation">#</span> du 表示列举目录大小信息</span>
+<span class="token title important"><span class="token punctuation">#</span> sort 进行排序,-n 表示按数字排序，-r 表示倒序</span>
+<span class="token title important"><span class="token punctuation">#</span> head 前10行文件</span>
+
+grep log -Ir /var/log | cut -d : -f 1 | sort | uniq
+<span class="token title important"><span class="token punctuation">#</span> grep log -Ir /var/log 表示在log文件夹下搜索 /var/log 文本，-r 表示递归，-I 用于排除二进制文件</span>
+<span class="token title important"><span class="token punctuation">#</span> cut -d : -f 1 表示通过冒号进行剪切，获取剪切的第一部分</span>
+<span class="token title important"><span class="token punctuation">#</span> sort 进行排序</span>
+<span class="token title important"><span class="token punctuation">#</span> uniq 进行去重</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>进程</p> <ul><li><code>w</code>：快速了解系统中目前有哪些用户登录着，以及他们在干什么</li> <li><code>ps</code>:用于显示当前系统中的进程， ps 命令显示的进程列表不会随时间而更新，是静态的，是运行 ps 命令那个时刻的状态或者说是一个进程快照。</li> <li><code>top</code>：获取进程的动态列表。</li> <li><code>kill</code>: 杀死进程（结束一个进程， kill + PID）</li> <li><code>bg</code>:使一个“后台暂停运行”的进程，状态改为“后台运行”。</li> <li><code>fg</code>:使进程转为前台运行，用法和 bg 命令类似。</li> <li><code>jobs</code>:显示当前终端后台进程状态。</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>[root@xxx test]# w
+ 15:21:21 up 72 days, 22:51,  1 user,  load average: 0.00, 0.02, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+root     pts/0    183.2.223.26     21Jul22  0.00s  0.17s  0.00s w
+[root@xxx test]# ps
+    PID TTY          TIME CMD
+ 108772 pts/0    00:00:00 bash
+ 160515 pts/0    00:00:00 ps
+
+kill 956 # 结束进程号为956的进程
+kill 956 957 # 结束多个进程
+kill -9 7291 # 强制结束进程
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>守护进程</p> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>
+一个运行起来的程序被称为进程。在 Linux 中有些进程是特殊的，它不与任何进程关联，不论用户的身份如何，都在后台运行，这些进程的父进程是 PID 为1的进程， PID 为1的进程只在系统关闭时才会被销毁。它们会在后台一直运行等待分配工作。我们将这类进程称之为守护进程 daemon 。
+守护进程的名字通常会在最后有一个 d ，表示 daemon 守护的意思，例如 systemd 、httpd 。
+
+systemd 常用命令：
+systemctl start nginx # 启动服务
+systemctl stop nginx # 停止服务
+systemctl restart nginx # 重启服务
+systemctl status nginx # 查看服务状态
+systemctl reload nginx # 重载配置文件(不停止服务的情况)
+systemctl enable nginx # 开机自动启动服务
+systemctl disable nginx # 开机不自动启动服务
+systemctl is-enabled nginx # 查看服务是否开机自动启动
+systemctl list-unit-files --type=service # 查看各个级别下服务的启动和禁用情况
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>6.文件解压缩</p> <ul><li><code>tar</code>归档</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>归档
+tar -cvf sort.tar sort/ # 将sort文件夹归档为sort.tar
+tar -cvf archive.tar file1 file2 file3 # 将 file1 file2 file3 归档为archive.tar
+
+-cvf 表示 create（创建）+ verbose（细节）+ file（文件），创建归档文件并显示操作细节；
+-tf 显示归档里的内容，并不解开归档；
+-rvf 追加文件到归档， tar -rvf archive.tar file.txt ；
+-xvf 解开归档， tar -xvf archive.tar 。
+
+压缩
+tar -zcvf archive.tar.gz archive/ # 将archive文件夹归档并压缩
+tar -zxvf archive.tar.gz # 将archive.tar.gz归档压缩文件解压
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><ul><li><code>gzip / gunzip</code>:“压缩/解压”归档，默认用 gzip 命令，压缩后的文件后缀名为 .tar.gz 。</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>gzip archive.tar # 压缩
+gunzip archive.tar.gz # 解压
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li><p><code>zcat、zless、zmore</code>查看压缩的文件（<code>cat less more</code>查看未压缩文件）</p></li> <li><p><code>zip/unzip</code>“压缩/解压” zip 文件（ zip 压缩文件一般来自 windows 操作系统）。</p></li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">#</span> Red Hat 一族中的安装方式</span>
+yum install zip 
+yum install unzip 
+
+unzip archive.zip # 解压 .zip 文件
+unzip -l archive.zip # 不解开 .zip 文件，只看其中内容
+
+zip -r sort.zip sort/ # 将sort文件夹压缩为 sort.zip，其中-r表示递归
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>7.网络</p> <ul><li><p><code>ifconfig</code>查看 ip 网络相关信息,如果命令不存在的话， 执行命令 yum install net-tools 安装。</p></li> <li><p><code>host</code>:ip 地址和主机名的互相转换。</p></li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>安装
+yum install bind-utils
+
+[root@xxx ~]# host github.com
+baidu.com has address 13.229.188.59
+
+[root@xxx ~]# host github.com
+github.com has address 20.205.243.166
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ul><li><code>ssh</code>连接远程服务器</li></ul> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code>ssh 用户@ip:port
+
+1、ssh root@172.20.10.1:22 # 端口号可以省略不写，默认是22端口
+2、输入连接密码后就可以操作远端服务器了
+
+配置 ssh:
+全局 ssh 服务端的配置： /etc/ssh/sshd_config ；
+全局 ssh 客户端的配置： /etc/ssh/ssh_config（很少修改）；
+当前用户 ssh 客户端的配置： ~/.ssh/config 。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ul><li><code>wget</code>下载器
+wget 非常稳定，如果是由于网络原因下载失败， wget 会不断尝试，直到整个文件下载完毕。</li></ul> <h3 id="_2-硬件型"><a href="#_2-硬件型" class="header-anchor">🌙</a> 2.硬件型</h3> <p>系统：</p> <ul><li><p><code>lsb_release -a</code> ：查看linux版本</p></li> <li><p><code>top</code> ：查看系统CPU资源和内存资源</p></li></ul> <p>磁盘</p> <ul><li><code>df -Th</code> ：查看磁盘</li></ul> <p>进程</p> <ul><li><code>ps -ef | grep docker</code>：查看docker进程</li> <li><code>kill -9 2736</code>：关闭进程2736</li></ul> <p>服务</p> <ul><li><code>service docker status</code>：查看docker运行状态</li> <li><code>service docker stop</code>：关闭docker</li> <li><code>service docker restart</code>：重启docker</li> <li><code>service –status -all</code>：查看所有状态</li></ul> <p>网络</p> <ul><li><code>ping -c 4 链接</code>：查看网络连接,发送4个包</li> <li><code>ip address</code>：IP相关信息</li></ul> <h3 id="_3-功能型"><a href="#_3-功能型" class="header-anchor">🌙</a> 3.功能型</h3> <p>压缩</p> <ul><li><code>tar zcvf 压缩之后文件名 被压缩文件名</code>：压缩文件</li></ul> <p>解压</p> <ul><li><code>tar -zxvf 压缩包名</code>：解压<code>.gz</code>文件</li></ul> <p>下载</p> <blockquote><p><a href="https://www.cnblogs.com/zq8421/p/10037532.html" target="_blank" rel="noopener noreferrer">yum、apt-get、wget的区别<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote> <ul><li><p><code>wget 资源链接</code>：下载资源</p></li> <li><p><code>apt-get install nginx</code>：安装nginx</p></li> <li><p>yum: centos(RedHat系列)自带的包管理工具</p></li> <li><p>apt-get：Ubuntu(Debian系列)自带的包管理工具</p></li> <li><p>wget：两者都可以下载安装的下载工具，作用类似于迅雷</p></li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">apt-get</span> update  
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">wget</span>  
+<span class="token function">wget</span> <span class="token parameter variable">--version</span>
+
+<span class="token function">sudo</span> yum <span class="token function">install</span> <span class="token function">wget</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ul><li>yum常用命令</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>yum update <span class="token operator">|</span> yum upgrade <span class="token comment"># 更新软件包</span>
+yum search <span class="token function">node</span> <span class="token comment"># 搜索软件包node</span>
+yum <span class="token function">install</span> mysql <span class="token comment"># 安装mysql</span>
+yum remove <span class="token function">docker</span> <span class="token comment"># 删除docker </span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><a href="https://ohmyz.sh/#install" target="_blank" rel="noopener noreferrer">【使用zsh自动纠错命令】<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p>远程</p> <ul><li><code>ssh 用户名@地址</code>：连接远程服务</li></ul> <blockquote><p><a href="https://blog.csdn.net/qq_32218457/article/details/79788800?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control" target="_blank" rel="noopener noreferrer">Linux安装Tomcat完整步骤<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://juejin.cn/post/6881755746216706062" target="_blank" rel="noopener noreferrer">对不起，学会这些 Linux 知识后，我有点飘<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://juejin.cn/post/7020574670097219621" target="_blank" rel="noopener noreferrer">windows操作<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://juejin.cn/post/6844903602817859598" target="_blank" rel="noopener noreferrer">电脑效率工具软件<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></blockquote></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Keekuun/keekuun.github.io/edit/master/docs/other/linux/linux.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">9/29/2022</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/other/linux/QA.html" class="prev">
+          1.Cannot connect to the Docker daemon ...
+        </a></span> <span class="next"><a href="/other/linux/pre-linux.html">
+          环境的搭建
+        </a></span></p></div> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:0;" data-v-b57cc07c data-v-7dd95ae2></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><!----><canvas id="vuepress-canvas-ribbon"></canvas><div></div><div class="kanbanniang" data-v-5775ee02><div class="banniang-container" style="display:;" data-v-5775ee02><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-5775ee02>
+      欢迎来到 前端Jeek
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-5775ee02><i class="kbnfont kbn-ban-home ban-home" data-v-5775ee02></i> <i class="kbnfont kbn-ban-message message" data-v-5775ee02></i> <i class="kbnfont kbn-ban-close close" data-v-5775ee02></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-5775ee02><i class="kbnfont kbn-ban-info info" data-v-5775ee02></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-5775ee02></i></div> <canvas id="banniang" width="150" height="220" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-5775ee02></canvas></div> <div class="showBanNiang" style="display:none;" data-v-5775ee02>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.6215ff8a.js" defer></script><script src="/assets/js/7.11327cc2.js" defer></script><script src="/assets/js/2.00aee375.js" defer></script><script src="/assets/js/1.3a9b40e4.js" defer></script><script src="/assets/js/349.142124fb.js" defer></script><script src="/assets/js/55.4f1e67a3.js" defer></script>
+  </body>
+</html>
