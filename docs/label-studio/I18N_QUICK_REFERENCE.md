@@ -453,11 +453,11 @@ t('time_ago', { time: formatTime(date) })
 
 ## Resources
 
-- **Full Documentation:** [I18N_IMPLEMENTATION_GUIDE.md](./I18N_IMPLEMENTATION_GUIDE.md)
+- **Full Documentation:** [I18N_IMPLEMENTATION_GUIDE.md](I18N_IMPLEMENTATION_GUIDE.md)
 - **i18next Docs:** https://www.i18next.com/
 - **react-i18next Docs:** https://react.i18next.com/
 - **Source Code:** `web/libs/editor/src/i18n/`
 
 ---
 
-**For detailed information, examples, and best practices, see the [complete i18n guide](./I18N_IMPLEMENTATION_GUIDE.md).**
+**For detailed information, examples, and best practices, see the [complete i18n guide](I18N_IMPLEMENTATION_GUIDE.md).**

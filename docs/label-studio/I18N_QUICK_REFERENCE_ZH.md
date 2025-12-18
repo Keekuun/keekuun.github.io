@@ -454,11 +454,11 @@ t('time_ago', { time: formatTime(date) })
 
 ## 资源
 
-- **完整文档:** [I18N_IMPLEMENTATION_GUIDE.md](./I18N_IMPLEMENTATION_GUIDE.md)
+- **完整文档:** [I18N_IMPLEMENTATION_GUIDE.md](I18N_IMPLEMENTATION_GUIDE.md)
 - **i18next 文档:** https://www.i18next.com/
 - **react-i18next 文档:** https://react.i18next.com/
 - **源代码:** `web/libs/editor/src/i18n/`
 
 ---
 
-**有关详细信息、示例和最佳实践，请参阅[完整的i18n指南](./I18N_IMPLEMENTATION_GUIDE.md)。**
+**有关详细信息、示例和最佳实践，请参阅[完整的i18n指南](I18N_IMPLEMENTATION_GUIDE.md)。**

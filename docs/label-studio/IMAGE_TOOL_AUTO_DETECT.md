@@ -694,10 +694,10 @@ async requestCustomSuggestions(context) {
 
 ### 相关文档
 
-- [Image Component 文档](./IMAGE_COMPONENT.md)
-- [Tool Shortcut 实现](./TOOL_SHORTCUT_IMPLEMENTATION.md)
-- [XML to React 渲染](./XML_TO_REACT_RENDERING.md)
-- [Predictions 配置说明](./PREDICTIONS.md)
+- [Image Component 文档](IMAGE_COMPONENT.md)
+- [Tool Shortcut 实现](TOOL_SHORTCUT_IMPLEMENTATION.md)
+- [XML to React 渲染](XML_TO_REACT_RENDERING.md)
+- [Predictions 配置说明](PREDICTIONS.md)
 
 ### 参考代码
 
