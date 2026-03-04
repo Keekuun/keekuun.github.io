@@ -34,7 +34,7 @@ npx prisma init
 
 编辑 `prisma/schema.prisma` 文件，配置你的数据库连接字符串。例如，对于 PostgreSQL 数据库：
 
-```prisma
+```typescript
 generator client {
 provider = "prisma-client-js"
 }
@@ -48,7 +48,7 @@ url      = env("DATABASE_URL")
 
 确保在 `.env` 文件中提供正确的数据库 URL：
 
-```env
+```bash
 DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
 ```
 
@@ -57,7 +57,7 @@ DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
 
 在 `schema.prisma` 文件中定义你的数据模型。例如，定义一个 `User` 模型：
 
-```prisma
+```typescript
 model User {
 id        Int      @id @default(autoincrement())
 name      String
@@ -219,7 +219,7 @@ Prisma 是一个现代化的 ORM 工具，提供了简洁的 API 和强大的功
 
 修改后的 `schema.prisma` 文件如下：
 
-```prisma
+```typescript
 generator client {
   provider = "prisma-client-js"
 }
@@ -341,7 +341,7 @@ npx prisma studio
 
 #### 1. 修改 `schema.prisma` 文件
 
-```prisma
+```typescript
 generator client {
   provider = "prisma-client-js"
 }
@@ -463,7 +463,7 @@ Prisma 的架构可以分为以下几个主要部分：
 - **Datasource**：配置数据库连接字符串。
 - **Model**：定义数据模型，包括字段、关系和约束。
 
-```prisma
+```typescript
 generator client {
   provider = "prisma-client-js"
 }

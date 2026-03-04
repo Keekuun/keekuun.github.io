@@ -175,7 +175,7 @@ export const taskCenterStore = defineStore('demo', {
  
 ```
 然后在页面中使用：
-```angular2html
+```vue
 <template>
 <!--  模板展示-->
 </template>
@@ -454,7 +454,7 @@ npx nuxi dev --dotenv .env.local
 }
 ```
 `.env`文件中我们可以定义一些环境变量，比如：
-```dotenv
+```bash
 # 可以区分环境
 NUXT_APP_ENV='dev' 
 # api host区分不同环境

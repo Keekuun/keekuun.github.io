@@ -44,7 +44,7 @@ export default supabase;
 
 在 `.env.local` 文件中设置 Supabase 的 URL 和匿名密钥：
 
-```env
+```bash
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-url.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```

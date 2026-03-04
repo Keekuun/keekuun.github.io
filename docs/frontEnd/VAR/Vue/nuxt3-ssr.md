@@ -14,7 +14,7 @@ tags:
 
 ## 1.环境变量
 可以创建`env.dev`, `env.prod`等多个环境变量
-```env
+```bash
 NUXT_APP_NAME='nuxt'
 NUXT_APP_SECRET='secret'
 NUXT_APP_ENV='prod'

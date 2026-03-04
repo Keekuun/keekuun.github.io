@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       caniuse-lite:
-        specifier: ^1.0.30001731
+        specifier: ^1.0.30001776
         version: 1.0.30001776
       vuepress-plugin-code-copy:
         specifier: ^1.0.6
@@ -22,19 +22,19 @@ importers:
         version: 2.3.1(chalk@4.1.2)(commander@2.20.3)(esm@3.2.25)
     devDependencies:
       '@vuepress-reco/vuepress-plugin-bulletin-popover':
-        specifier: ^1.6.16
+        specifier: 1.6.16
         version: 1.6.16
       '@vuepress-reco/vuepress-plugin-kan-ban-niang':
-        specifier: ^1.0.5
+        specifier: 1.0.5
         version: 1.0.5
       '@vuepress/plugin-google-analytics':
-        specifier: ^1.9.10
+        specifier: 1.9.10
         version: 1.9.10
       '@vuepress/plugin-medium-zoom':
-        specifier: ^1.9.10
+        specifier: 1.9.10
         version: 1.9.10
       '@vuepress/plugin-pwa':
-        specifier: ^1.9.10
+        specifier: 1.9.10
         version: 1.9.10
       imagemin-webp-webpack-plugin:
         specifier: ^3.3.6
@@ -45,8 +45,14 @@ importers:
       standard-version:
         specifier: ^9.5.0
         version: 9.5.0
+      vue:
+        specifier: 2.7.16
+        version: 2.7.16
+      vue-template-compiler:
+        specifier: 2.7.16
+        version: 2.7.16
       vuepress:
-        specifier: ^1.9.10
+        specifier: 1.9.10
         version: 1.9.10(@vue/compiler-sfc@3.5.29)(handlebars@4.7.8)(hogan.js@3.0.2)(lodash@4.17.23)(underscore@1.13.8)
       vuepress-plugin-auto-sidebar:
         specifier: ^2.3.2
@@ -76,7 +82,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       vuepress-theme-reco:
-        specifier: ^1.6.17
+        specifier: 1.6.17
         version: 1.6.17(chalk@4.1.2)(commander@2.20.3)(esm@3.2.25)(vue-class-component@7.2.6(vue@2.7.16))(vuepress@1.9.10(@vue/compiler-sfc@3.5.29)(handlebars@4.7.8)(hogan.js@3.0.2)(lodash@4.17.23)(underscore@1.13.8))
 
 packages:
@@ -4461,8 +4467,8 @@ packages:
   node-libs-browser@2.2.1:
     resolution: {integrity: sha512-h/zcD8H9kaDZ9ALUWwlBUDo6TKF8a7qBSCSEGfjTVIYeqsioSKaAX+BN7NgiMGp6iSIXZ3PxgCu8KS3b71YK5Q==}
 
-  node-releases@2.0.27:
-    resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
+  node-releases@2.0.36:
+    resolution: {integrity: sha512-TdC8FSgHz8Mwtw9g5L4gR/Sh9XhSP/0DEkQxfEFXOpiul5IiHgHan2VhYYb6agDSfp4KuvltmGApc8HMgUrIkA==}
 
   nopt@1.0.10:
     resolution: {integrity: sha512-NWmpvLSqUrgrAC9HCuxEvb+PSloHpqVu+FqcO4eeF2h5qYRhA7ev6KvelyQAKtegUbC6RypJnlEOhd8vloNKYg==}
@@ -8797,7 +8803,7 @@ snapshots:
       baseline-browser-mapping: 2.10.0
       caniuse-lite: 1.0.30001776
       electron-to-chromium: 1.5.307
-      node-releases: 2.0.27
+      node-releases: 2.0.36
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
 
   buffer-alloc-unsafe@1.1.0: {}
@@ -11966,7 +11972,7 @@ snapshots:
       util: 0.11.1
       vm-browserify: 1.1.2
 
-  node-releases@2.0.27: {}
+  node-releases@2.0.36: {}
 
   nopt@1.0.10:
     dependencies:

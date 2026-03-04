@@ -1,6 +1,4 @@
-module.exports = [
-  // { text: '主页', link: '/', icon: 'reco-home' },
-
+export default [
   {
     text: '前端',
     icon: 'reco-api',
@@ -77,11 +75,8 @@ module.exports = [
     text: '专题',
     icon: 'reco-blog',
     items: [
-      // { text: 'K8s / Traefik', link: '/books/k8s/K8s.html' },
       { text: '人月神话', link: '/books/The-Mythical-Man-Month-zh/' },
       { text: 'Label Studio', link: '/label-studio/README.html' },
-      // { text: '3D / WebGL', link: '/3d/webgl/02.html' },
-      // { text: 'Web3 / WASM', link: '/web3/1.html' },
     ],
   },
 
@@ -102,4 +97,4 @@ module.exports = [
   },
 
   { text: '流月', link: '/timeLine/', icon: 'reco-date' },
-];
+]

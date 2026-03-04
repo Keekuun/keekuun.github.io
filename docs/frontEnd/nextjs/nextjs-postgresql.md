@@ -64,7 +64,7 @@ npm install @prisma/client pg
 
 2.  **配置 `.env`**:
     打开 `.env` 文件，填入你的 PostgreSQL 连接字符串。
-    ```env
+    ```bash
     # .env
     # 永远不要将此文件提交到 Git 仓库！
     DATABASE_URL="postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE?schema=public"
@@ -74,7 +74,7 @@ npm install @prisma/client pg
 3.  **定义数据模型 (`schema.prisma`)**:
     这是“Schema 即真理”的体现。在这里定义你的数据表结构。
 
-    ```prisma
+    ```typescript
     // prisma/schema.prisma
 
     generator client {
