@@ -5,8 +5,7 @@ module.exports = {
     nextLinks: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
     prevLinks: true,
-    // 华为文案
-    huawei: true,
+    huawei: false,
     authorAvatar: '/images/avatar.png',
     type: 'blog',
     author: '前端Jeek',
@@ -30,10 +29,10 @@ module.exports = {
     // 博客设置
     blogConfig: {
         // 添加分类和标签
-        category: {
-            location: 5,     // 在导航栏菜单中所占的位置，默认2
-            text: '分类' // 默认文案 “分类”
-        },
+        // category: {
+        //     location: 5,     // 在导航栏菜单中所占的位置，默认2
+        //     text: '分类' // 默认文案 “分类”
+        // },
         tag: {
             location: 6,     // 在导航栏菜单中所占的位置，默认3
             text: '标签'      // 默认文案 “标签”

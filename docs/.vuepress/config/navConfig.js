@@ -1,131 +1,105 @@
 module.exports = [
-    // 添加时间轴导航
-    {text: '主页', link: '/', icon: 'reco-home'},
-    {
-        text: '前端',
-        icon: 'reco-api',
-        link: '/categories/前端/',
-        items: [
-            {
-                text: '前端基础', items: [
-                    // {text: 'HTML', link: '/tag/HTML/'},
-                    {text: 'CSS', link: '/tag/CSS/'},
-                    {text: 'JS', link: '/tag/JS/'},
-                    {text: 'TS', link: '/tag/TS/'},
-                ],
-            },
+  // { text: '主页', link: '/', icon: 'reco-home' },
 
-            {
-                text: 'VAR', items: [
-                    {text: 'vue', link: '/categories/Vue/'},
-                    // {text: 'angular', link: '/tag/Angular/'},
-                    {text: 'react', link: '/categories/React/'},
-                    {text: 'nextjs', link: '/categories/Next.js/'},
-                ]
-            },
-            {
-                text: '移动端', items: [
-                    {text: 'miniProgram', link: '/categories/移动端/'},
-                    {text: 'flutter', link: '/categories/flutter/'},
-                ],
-            },
-        ]
-    },
-    {
-        text: '后端',
-        icon: 'reco-coding',
-        link: '/categories/后端/',
+  {
+    text: '前端',
+    icon: 'reco-api',
+    link: '/categories/前端/',
+    items: [
+      {
+        text: '基础',
         items: [
-            {
-                text: '', items: [
-                    {text: 'node', link: '/backEnd/node/'},
-                    {text: 'nestjs', link: '/backEnd/nestjs/'},
-                ]
-            },
-            {
-                text: '', items: [
-                    {text: 'golang', link: '/backEnd/go/'},
-                ]
-            },
-            {
-                text: '', items: [
-                    {text: 'python', link: '/backEnd/python/'},
-                ]
-            },
-            {
-                text: 'Database', items: [
-                    {text: 'Mysql', link: '/dataBase/mysql/'},
-                    {text: 'Postgres', link: '/dataBase/postgres/'},
-                    {text: 'Mongodb', link: '/dataBase/mongodb/'},
-                    {text: 'Redis', link: '/dataBase/redis/'},
-                ]
-            },
-        ]
-    },
-    {
-        text: '其他',
-        icon: 'reco-other',
-        link: '/categories/其他/',
+          { text: 'CSS', link: '/tag/CSS/' },
+          { text: 'JS', link: '/tag/JS/' },
+          { text: 'TS', link: '/tag/TS/' },
+        ],
+      },
+      {
+        text: '框架',
         items: [
-            {text: '算法', link: '/tag/算法/'},
-            {text: '工程化', link: '/tag/工程化/'},
-            {text: '测试', link: '/tag/测试/'},
-            {text: '优化', link: '/tag/优化/'},
-            {text: '配置', link: '/tag/配置/'},
-            {text: 'webpack', link: '/tag/webpack/'},
-            {text: 'Git', link: '/tag/Git/'},
-        ]
-    },
-    {
-        text: '资源',
-        icon: 'reco-blog',
+          { text: 'Vue', link: '/categories/Vue/' },
+          { text: 'React', link: '/categories/React/' },
+          { text: 'Next.js', link: '/categories/Next.js/' },
+        ],
+      },
+      {
+        text: '移动端',
         items: [
-            {
-                text: '', items: [
-                    {text: 'Leetcode', link: 'https://leetcode-cn.com/u/zkkysqs/'},
-                    {text: 'Nowcoder', link: 'https://www.nowcoder.com/profile/9027587'},
-                ],
-            },
-            {
-                text: '', items: [
-                    {text: '网络编程', link: 'https://www.bookstack.cn/read/tcp-udp-ip/1.md'},
-                ],
-            },
-            {
-                text: '', items: [
-                    {text: 'Google Developer', link: 'https://developers.google.com/web/fundamentals/performance/get-started'},
-                    {text: 'Chrome DevTools', link: 'https://developers.google.cn/web/tools/chrome-devtools/'},
-                ],
-            },
-            {
-                text: '', items: [
-                    {text: 'Vue', link: 'https://vue3js.cn/'},
-                    {text: 'Angular', link: 'https://angular.io/docs'},
-                    {text: 'React', link: 'https://react.dev/'},
-                    {text: 'NextJS', link: 'https://nextjs.org/docs'},
-                    {text: 'NodeJS', link: 'https://nodejs.org/en/docs'},
-                ],
-            },
-            // {
-            //     text: '', items: [
-            //         {text: 'Geekbang', link: 'https://time.geekbang.org/dashboard/course'},
-            //         {text: 'Kaikeba', link: 'https://learn.kaikeba.com/home'},
-            //     ],
-            // },
-            {
-                text: '', items: [
-                    // {text: 'Reading', link: 'http://lxqnsys.com/pdf/'},
-                    {text: 'Awesome Books', link: 'https://github.com/guanpengchn/awesome-books'},
-                    {text: 'Programming Books', link: 'https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md'},
-                ],
-            },
-            {
-                text: '', items: [
-                    {text: 'Docschina', link: 'https://docschina.org/'},
-                    {text: 'Tool', link: 'https://tool.lu/'},
-                ],
-            },
-        ]
-    },
-    {text: '流月', link: '/timeLine/', icon: 'reco-date'},
+          { text: '小程序', link: '/categories/移动端/' },
+          { text: 'Flutter', link: '/categories/flutter/' },
+        ],
+      },
+    ],
+  },
+
+  {
+    text: '后端',
+    icon: 'reco-coding',
+    link: '/categories/后端/',
+    items: [
+      {
+        text: 'Node & NestJS',
+        items: [
+          { text: 'Node.js', link: '/backEnd/node/' },
+          { text: 'NestJS', link: '/backEnd/nestjs/' },
+        ],
+      },
+      {
+        text: 'Go & Python',
+        items: [
+          { text: 'Golang', link: '/backEnd/go/' },
+          { text: 'Python', link: '/backEnd/python/' },
+        ],
+      },
+      {
+        text: 'Database',
+        items: [
+          { text: 'MySQL', link: '/dataBase/mysql/' },
+          { text: 'Postgres', link: '/dataBase/postgres/' },
+          { text: 'MongoDB', link: '/dataBase/mongodb/' },
+          { text: 'Redis', link: '/dataBase/redis/' },
+        ],
+      },
+    ],
+  },
+
+  {
+    text: 'AI',
+    icon: 'reco-message',
+    link: '/categories/AI/',
+    items: [
+      { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
+      { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
+    ],
+  },
+
+  {
+    text: '专题',
+    icon: 'reco-blog',
+    items: [
+      // { text: 'K8s / Traefik', link: '/books/k8s/K8s.html' },
+      { text: '人月神话', link: '/books/The-Mythical-Man-Month-zh/' },
+      { text: 'Label Studio', link: '/label-studio/README.html' },
+      // { text: '3D / WebGL', link: '/3d/webgl/02.html' },
+      // { text: 'Web3 / WASM', link: '/web3/1.html' },
+    ],
+  },
+
+  {
+    text: '其他',
+    icon: 'reco-other',
+    link: '/tag/工程化/',
+    items: [
+      { text: '工程化 / 构建', link: '/tag/工程化/' },
+      { text: 'Webpack', link: '/tag/webpack/' },
+      { text: 'Git & CI/CD', link: '/tag/Git/' },
+      { text: '算法', link: '/tag/算法/' },
+      { text: '测试', link: '/tag/测试/' },
+      { text: '优化', link: '/tag/优化/' },
+      { text: '配置', link: '/tag/配置/' },
+      { text: '常用工具', link: '/tools/code-tool.html' },
+    ],
+  },
+
+  { text: '流月', link: '/timeLine/', icon: 'reco-date' },
 ];
