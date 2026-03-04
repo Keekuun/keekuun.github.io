@@ -3,7 +3,8 @@
 [![Build and Deploy](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/Keekuun/keekuun.github.io/actions/workflows/deploy.yml)
 [![Open in GitHub](https://img.shields.io/github/last-commit/Keekuun/keekuun.github.io)](https://github.com/Keekuun/keekuun.github.io)
 
-> 博客首页：https://blog.zkkysqs.top/
+> 博客首页：https://blog.zkkysqs.top/  
+> 本地开发：`pnpm install` → `pnpm docs:dev`；构建：`pnpm docs:build`。
 
 ![keekuun's GitHub stats](https://github-readme-stats.vercel.app/api?username=Keekuun&show_icons=true&theme=tokyonight&count_private=true&hide=contribs,prs)
 

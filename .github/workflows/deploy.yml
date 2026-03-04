@@ -5,54 +5,49 @@ on:
     branches:
       - master
 
+# 同一分支多次 push 时只保留最新一次部署，避免乱序
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
 jobs:
   docs:
-    runs-on: ubuntu-latest # 指定运行所需要的虚拟机环境（必填）
+    runs-on: ubuntu-latest
+
+    # 部署到 gh-pages 需要写仓库内容
+    permissions:
+      contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
-          fetch-depth: 0
+          fetch-depth: 0  # 拉取完整历史，供「最近更新时间」等使用
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          # 选择要使用的 node 版本
           node-version: "22"
+          cache: "pnpm"
 
-      # 缓存 node_modules
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      # 如果缓存没有命中，安装依赖
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      # 运行构建脚本
       - name: Build VuePress site
-        run: export NODE_OPTIONS=--max_old_space_size=10240 && yarn docs:build
+        run: export NODE_OPTIONS=--max_old_space_size=10240 && pnpm docs:build
 
-      - name: Set VuePress CNAME
-        run: cd docs/.vuepress/dist && echo 'blog.zkkysqs.top' > CNAME && cd -
+      - name: Set CNAME for custom domain
+        run: echo 'blog.zkkysqs.top' > docs/.vuepress/dist/CNAME
 
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
-        # 环境变量
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
-          # 部署到 gh-pages 分支
           target_branch: gh-pages
-          # 部署目录为 VuePress 的默认输出目录
           build_dir: docs/.vuepress/dist
