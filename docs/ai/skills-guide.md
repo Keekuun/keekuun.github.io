@@ -21,6 +21,7 @@ tags:
 - [快速开始](#快速开始)
 - [常用命令](#常用命令)
 - [推荐 Skills](#推荐-skills)
+- [批量安装脚本](#批量安装脚本)
 - [管理 Skills](#管理-skills)
 - [最佳实践](#最佳实践)
 - [常见问题](#常见问题)
@@ -251,14 +252,14 @@ npx skills add sickn33/antigravity-awesome-skills@nextjs-supabase-auth -g -y
 #### React
 
 ```bash
-# Vercel React 最佳实践（185.8K 安装）⭐ 必装
+# Vercel React 最佳实践(348K+ 安装)⭐ 必装
 npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
 
 # React 性能优化（444 安装）
 npx skills add nickcrew/claude-ctx-plugin@react-performance-optimization -g -y
 
-# React 组件开发（11.1K 安装）
-npx skills add google-labs-code/stitch-skills@react:components -g -y
+# React 组件开发(11.1K 安装)
+npx skills add google-labs-code/stitch-skills@react-components -g -y
 ```
 
 #### Tailwind CSS
@@ -335,27 +336,218 @@ npx skills add prisma/skills@prisma-database-setup -g -y
 ### 🧪 测试
 
 ```bash
-# 后端测试（4.1K 安装）⭐
+# Web 应用测试(126K+ Stars)⭐ 必装
+npx skills add anthropics/skills@webapp-testing -g -y
+
+# 后端测试(4.1K 安装)⭐
 npx skills add supercent-io/skills-template@backend-testing -g -y
 
-# 测试策略（4.1K 安装）
+# 测试策略(4.1K 安装)
 npx skills add supercent-io/skills-template@testing-strategies -g -y
 
-# E2E 测试（4.8K 安装）
+# E2E 测试(4.8K 安装)
 npx skills add wshobson/agents@e2e-testing-patterns -g -y
-
-# Web 应用测试（17.4K 安装）
-npx skills add anthropics/skills@webapp-testing -g -y
 ```
 
 ### 🐳 部署与容器化
 
 ```bash
-# Docker 专家（75 安装）
-npx skills add personamanagmentlayer/pcl@docker-expert -g -y
-
-# Docker 部署（108 安装）
+# Docker 部署(Node.js)(108 安装)
 npx skills add pluginagentmarketplace/custom-plugin-nodejs@docker-deployment -g -y
+
+# Vercel 部署
+npx skills add openai/skills@vercel-deploy -g -y
+
+# Cloudflare 部署
+npx skills add openai/skills@cloudflare-deploy -g -y
+```
+
+### 🛠️ 工程化与工作流
+
+```bash
+# Addy Osmani Agent Skills(37K+ Stars)⭐ 强烈推荐
+# 包含完整的软件工程流程:定义→规划→构建→验证→审查→交付
+git clone https://github.com/addyosmani/agent-skills.git
+# 然后手动复制到 ~/.agents/skills/ 或 ~/.claude/skills/
+
+# TDD 测试驱动开发
+npx skills add obra/superpowers@test-driven-development -g -y
+
+# 代码审查
+npx skills add mattpocock/skills@code-review -g -y
+
+# GitHub Actions 助手(24.4K 安装)
+npx skills add github/awesome-copilot@github-actions -g -y
+```
+
+### 🎨 UI/UX 设计
+
+```bash
+# Web 设计指南
+npx skills add vercel-labs/agent-skills@web-design-guidelines -g -y
+
+# UI 组件模式
+npx skills add supercent-io/skills-template@ui-component-patterns -g -y
+
+# 设计系统模式
+npx skills add supercent-io/skills-template@design-system-patterns -g -y
+
+# 响应式设计
+npx skills add supercent-io/skills-template@responsive-design -g -y
+```
+
+### 🤖 AI Agent 开发
+
+```bash
+# MCP Builder(Model Context Protocol)
+npx skills add anthropics/skills@mcp-builder -g -y
+
+# Skill Creator(创建自定义 Skills)
+npx skills add anthropics/skills@skill-creator -g -y
+
+# Browser Automation(Browserbase)
+npx skills add browserbase/skills@browser -g -y
+```
+
+---
+
+## 批量安装脚本
+
+为了快速安装所有推荐的 Skills,你可以使用以下自动化脚本:
+
+### 方法一:使用提供的安装脚本
+
+1. **下载脚本**:
+```bash
+curl -o install-skills.sh https://raw.githubusercontent.com/keekuun/keekuun.github.io/main/scripts/install-skills.sh
+chmod +x install-skills.sh
+```
+
+2. **运行脚本**:
+```bash
+./install-skills.sh
+```
+
+### 方法二:手动复制并执行
+
+将以下内容保存为 `install-skills.sh`:
+
+```bash
+#!/bin/bash
+
+# Skills 批量安装脚本
+set -e
+
+echo "========================================="
+echo "开始批量安装 Skills"
+echo "========================================="
+
+# 前端开发 - React/Next.js
+echo "📦 安装前端开发 Skills..."
+npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
+npx skills add wshobson/agents@nextjs-app-router-patterns -g -y
+npx skills add wshobson/agents@typescript-advanced-types -g -y
+
+# Tailwind CSS
+echo "📦 安装 Tailwind CSS Skills..."
+npx skills add josiahsiegel/claude-plugin-marketplace@tailwindcss-advanced-layouts -g -y
+npx skills add josiahsiegel/claude-plugin-marketplace@tailwindcss-animations -g -y
+npx skills add josiahsiegel/claude-plugin-marketplace@tailwindcss-mobile-first -g -y
+
+# 后端开发 - Go
+echo "📦 安装后端开发 Skills..."
+npx skills add manutej/luxor-claude-marketplace@golang-backend-development -g -y
+
+# API 设计
+echo "📦 安装 API 设计 Skills..."
+npx skills add supercent-io/skills-template@api-design -g -y
+npx skills add manutej/luxor-claude-marketplace@rest-api-design-patterns -g -y
+
+# 数据库
+echo "📦 安装数据库 Skills..."
+npx skills add supercent-io/skills-template@database-schema-design -g -y
+npx skills add neondatabase/agent-skills@neon-postgres -g -y
+npx skills add wshobson/agents@database-migration -g -y
+
+# 测试
+echo "📦 安装测试 Skills..."
+npx skills add anthropics/skills@webapp-testing -g -y
+npx skills add supercent-io/skills-template@backend-testing -g -y
+npx skills add supercent-io/skills-template@testing-strategies -g -y
+npx skills add wshobson/agents@e2e-testing-patterns -g -y
+
+# 部署与容器化
+echo "📦 安装部署 Skills..."
+npx skills add pluginagentmarketplace/custom-plugin-nodejs@docker-deployment -g -y
+
+# UI/UX 设计
+echo "📦 安装 UI/UX Skills..."
+npx skills add vercel-labs/agent-skills@web-design-guidelines -g -y
+npx skills add supercent-io/skills-template@ui-component-patterns -g -y
+npx skills add supercent-io/skills-template@design-system-patterns -g -y
+npx skills add supercent-io/skills-template@responsive-design -g -y
+
+# AI Agent 开发
+echo "📦 安装 AI Agent Skills..."
+npx skills add anthropics/skills@mcp-builder -g -y
+npx skills add anthropics/skills@skill-creator -g -y
+
+# 工程化与工作流
+echo "📦 安装工程化 Skills..."
+npx skills add obra/superpowers@test-driven-development -g -y
+
+echo ""
+echo "========================================="
+echo "✅ 所有 Skills 安装完成！"
+echo "========================================="
+echo ""
+echo "查看已安装的 Skills:"
+npx skills ls -g
+```
+
+然后执行:
+```bash
+chmod +x install-skills.sh
+./install-skills.sh
+```
+
+### 方法三:按需分类安装
+
+如果你只想安装特定类别的 Skills:
+
+```bash
+# 只安装前端核心 Skills
+npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
+npx skills add wshobson/agents@nextjs-app-router-patterns -g -y
+npx skills add wshobson/agents@typescript-advanced-types -g -y
+
+# 只安装测试 Skills
+npx skills add anthropics/skills@webapp-testing -g -y
+npx skills add supercent-io/skills-template@backend-testing -g -y
+
+# 只安装数据库 Skills
+npx skills add supercent-io/skills-template@database-schema-design -g -y
+npx skills add neondatabase/agent-skills@neon-postgres -g -y
+```
+
+### 手动安装 Addy Osmani Agent Skills
+
+由于这是一个大型综合技能包,需要手动安装:
+
+```bash
+# 克隆仓库
+git clone https://github.com/addyosmani/agent-skills.git
+
+# 复制到全局 skills 目录
+cp -r agent-skills/skills/* ~/.agents/skills/
+
+# 或者只复制需要的技能
+cp agent-skills/skills/spec-driven-development ~/.agents/skills/
+cp agent-skills/skills/test-driven-development ~/.agents/skills/
+cp agent-skills/skills/incremental-implementation ~/.agents/skills/
+
+# 清理
+rm -rf agent-skills
 ```
 
 ---
@@ -404,15 +596,17 @@ npx skills update
 
 ### Skills 存储位置
 
-- **全局 Skills**: `~/.claude/skills/`
-- **项目 Skills**: `./claude/skills/`
+- **全局 Skills**: `~/.agents/skills/` 或 `~/.claude/skills/`
+- **项目 Skills**: `./.agents/skills/` 或 `./.claude/skills/` 或 `.github/skills/`
 
-**手动清理：**
+**手动清理:**
 ```bash
 # 删除所有全局 skills
+rm -rf ~/.agents/skills/*
 rm -rf ~/.claude/skills/*
 
 # 删除特定 skill
+rm -rf ~/.agents/skills/<skill-name>
 rm -rf ~/.claude/skills/<skill-name>
 ```
 
@@ -470,14 +664,15 @@ npx skills remove -g
 
 ### 6. 技术栈组合推荐
 
-**前端开发者核心包：**
+**前端开发者核心包:**
 ```bash
 npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
 npx skills add wshobson/agents@nextjs-app-router-patterns -g -y
 npx skills add wshobson/agents@typescript-advanced-types -g -y
+npx skills add anthropics/skills@webapp-testing -g -y
 ```
 
-**全栈开发者核心包：**
+**全栈开发者核心包:**
 ```bash
 # 前端
 npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
@@ -491,7 +686,21 @@ npx skills add supercent-io/skills-template@api-design -g -y
 npx skills add supercent-io/skills-template@database-schema-design -g -y
 
 # 测试
+npx skills add anthropics/skills@webapp-testing -g -y
 npx skills add supercent-io/skills-template@backend-testing -g -y
+```
+
+**工程化最佳实践包:**
+```bash
+# Addy Osmani 的完整工程技能包(需手动安装)
+git clone https://github.com/addyosmani/agent-skills.git
+cp -r agent-skills/skills/* ~/.agents/skills/
+
+# TDD 工作流
+npx skills add obra/superpowers@test-driven-development -g -y
+
+# 代码审查
+npx skills add mattpocock/skills@code-review -g -y
 ```
 
 ---
@@ -595,10 +804,13 @@ cat ~/.claude/skills/<skill-name>/SKILL.md
 ### 推荐资源
 
 - **Skills 官网**: https://skills.sh/
-- **Skills map**: https://skillsmp.com/
-- **GitHub 组织**: https://github.com/vercel-labs/agent-skills
-- **社区 Skills**: https://github.com/topics/agent-skills
-- **文档**: https://github.com/anthropics/claude-code
+- **Skills Map**: https://skillsmp.com/
+- **Vercel Agent Skills**: https://github.com/vercel-labs/agent-skills
+- **Anthropic Skills**: https://github.com/anthropics/skills
+- **Addy Osmani Agent Skills**: https://github.com/addyosmani/agent-skills
+- **Awesome Claude Skills**: https://github.com/ComposioHQ/awesome-claude-skills
+- **Matt Pocock Skills**: https://github.com/mattpocock/skills
+- **wshobson Agents**: https://github.com/wshobson/agents
 
 ---
 
@@ -606,8 +818,8 @@ cat ~/.claude/skills/<skill-name>/SKILL.md
 
 ### 初学者
 
-1. 安装 3-5 个核心 skills
-2. 尝试使用 Claude Code 完成任务
+1. 使用批量安装脚本安装核心 skills
+2. 尝试使用 AI Agent 完成任务
 3. 观察 skills 如何改进代码质量
 
 ### 进阶使用
@@ -624,14 +836,14 @@ cat ~/.claude/skills/<skill-name>/SKILL.md
 
 ---
 
-**开始你的 Skills 之旅！**
+**开始你的 Skills 之旅!**
 
 ```bash
 # 从这里开始
 npx skills find
 
-# 安装你的第一个 skill
-npx skills add vercel-labs/agent-skills@vercel-react-best-practices -g -y
+# 或使用批量安装脚本
+./install-skills.sh
 
 # 查看已安装的
 npx skills ls -g
