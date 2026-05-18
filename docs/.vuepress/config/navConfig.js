@@ -61,22 +61,22 @@ export default [
     ],
   },
 
-  {
-    text: 'AI',
-    icon: 'reco-message',
-    link: '/categories/AI/',
-    items: [
-      { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
-      { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
-    ],
-  },
+  // {
+  //   text: 'AI',
+  //   icon: 'reco-message',
+  //   link: '/categories/AI/',
+  //   items: [
+  //     { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
+  //     { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
+  //   ],
+  // },
 
   {
     text: '专题',
     icon: 'reco-blog',
     items: [
       { text: '人月神话', link: '/books/The-Mythical-Man-Month-zh/' },
-      { text: 'Label Studio', link: '/label-studio/README.html' },
+      { text: 'Label Studio', link: '/label-studio' },
     ],
   },
 
