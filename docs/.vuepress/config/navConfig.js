@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     text: '前端',
     icon: 'reco-api',
