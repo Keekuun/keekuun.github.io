@@ -1,6 +1,6 @@
 ---
 title: Tools 系统设计与实现 - 让 Agent 拥有超能力
-date: 2026-05-26
+date: 2026-04-26
 isComment: true
 categories: 
 - AI

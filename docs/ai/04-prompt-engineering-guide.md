@@ -1,6 +1,6 @@
 ---
 title: Prompt Engineering 完全指南
-date: 2026-05-21
+date: 2026-04-21
 isComment: true
 categories: 
 - AI

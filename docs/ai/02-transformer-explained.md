@@ -1,6 +1,6 @@
 ---
 title: LLM 工作原理：用前端思维理解 Transformer
-date: 2026-05-19
+date: 2026-04-19
 isComment: true
 categories: 
 - AI

@@ -1,6 +1,6 @@
 ---
 title: 高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning
-date: 2026-05-22
+date: 2026-04-22
 isComment: true
 categories: 
 - AI

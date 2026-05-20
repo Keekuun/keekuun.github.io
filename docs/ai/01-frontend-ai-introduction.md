@@ -1,6 +1,6 @@
 ---
 title: 前端开发者的 AI 入门指南：你需要知道的所有概念
-date: 2026-05-18
+date: 2026-04-18
 isComment: true
 categories: 
 - AI

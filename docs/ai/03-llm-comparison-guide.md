@@ -1,6 +1,6 @@
 ---
 title: 主流大模型对比与选型指南
-date: 2026-05-20
+date: 2026-04-20
 isComment: true
 categories: 
 - AI

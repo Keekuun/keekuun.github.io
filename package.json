@@ -9,7 +9,10 @@
     "deploy": "bash deploy.sh",
     "deploy-win": "auto-deploy.bat",
     "pdf": "vuepress export docs",
-    "release": "git checkout master && git pull origin master && standard-version && git push --follow-tags origin"
+    "release": "git checkout master && git pull origin master && standard-version && git push --follow-tags origin",
+    "rag:index": "pnpm --dir tools/rag index",
+    "rag:index:dry": "pnpm --dir tools/rag index:dry",
+    "kb:dev": "pnpm --dir apps/kb-search dev"
   },
   "keywords": [
     "blog",

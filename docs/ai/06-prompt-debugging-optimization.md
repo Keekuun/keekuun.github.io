@@ -1,6 +1,6 @@
 ---
 title: Prompt 调试与优化实战
-date: 2026-05-23
+date: 2026-04-23
 isComment: true
 categories: 
 - AI
