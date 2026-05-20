@@ -96,5 +96,11 @@ module.exports = [
     ],
   },
 
+  {
+    text: 'AI 检索',
+    icon: 'reco-search',
+    link: 'https://keekuun-blog-search.vercel.app/',
+  },
+
   { text: '流月', link: '/timeLine/', icon: 'reco-date' },
 ]
