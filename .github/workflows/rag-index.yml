@@ -1,0 +1,48 @@
+name: rag-index
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/**/*.md"
+      - "tools/rag/**"
+  workflow_dispatch:
+
+concurrency:
+  group: rag-index
+  cancel-in-progress: true
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install index dependencies
+        working-directory: tools/rag
+        run: pnpm install --frozen-lockfile
+
+      - name: Build vector index
+        working-directory: tools/rag
+        env:
+          UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
+          UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          EMBEDDING_API_KEY: ${{ secrets.EMBEDDING_API_KEY }}
+          EMBEDDING_BASE_URL: ${{ vars.EMBEDDING_BASE_URL }}
+          EMBEDDING_MODEL: ${{ vars.EMBEDDING_MODEL }}
+          BLOG_BASE_URL: https://blog.zkkysqs.top
+          RAG_RESET_INDEX: "1"
+        run: pnpm index
