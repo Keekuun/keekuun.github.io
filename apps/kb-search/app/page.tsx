@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { MarkdownContent } from "./components/MarkdownContent";
 
 type Hit = {
   id: string;
@@ -210,7 +211,7 @@ export default function HomePage() {
             <h2 className="section-title">AI 回答</h2>
             <span className="section-badge">DeepSeek</span>
           </div>
-          <div className="answer-body">{answer}</div>
+          <MarkdownContent content={answer} />
         </section>
       )}
 
@@ -253,7 +254,9 @@ export default function HomePage() {
                           匹配 {pct.toFixed(0)}%
                         </span>
                       </div>
-                      <p className="hit-preview">{hit.preview}</p>
+                      <div className="hit-preview">
+                        <MarkdownContent content={hit.preview} variant="compact" />
+                      </div>
                       <div className="hit-path">{hit.path}</div>
                     </div>
                   </div>

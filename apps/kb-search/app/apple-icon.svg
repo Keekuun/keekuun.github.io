@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 24 24" fill="none">
+  <circle cx="0" cy="0" r="2.05" fill="#8b5cf6"/>
+  <g stroke="#8b5cf6" stroke-width="1.15" fill="none">
+    <ellipse rx="10" ry="4.75"/>
+    <ellipse rx="10" ry="4.75" transform="rotate(60)"/>
+    <ellipse rx="10" ry="4.75" transform="rotate(120)"/>
+  </g>
+  <text
+    x="0"
+    y="0.9"
+    font-size="5.2"
+    font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+    font-family="system-ui, Segoe UI, sans-serif"
+    letter-spacing="0.06em"
+  >RAG</text>
+</svg>
