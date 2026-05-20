@@ -1,0 +1,17 @@
+{
+  "name": "blog-rag-index",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "index": "node index.mjs",
+    "index:dry": "node index.mjs --dry-run",
+    "check-env": "node check-env.mjs"
+  },
+  "dependencies": {
+    "@upstash/vector": "^1.2.1",
+    "dotenv": "^16.5.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "openai": "^4.104.0"
+  }
+}
