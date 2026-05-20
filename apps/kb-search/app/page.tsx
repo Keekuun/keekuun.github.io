@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 type Hit = {
   id: string;
@@ -13,14 +13,25 @@ type Hit = {
   preview: string;
 };
 
+const EXAMPLES = [
+  "React Fiber 更新流程",
+  "NestJS 装饰器",
+  "JavaScript 事件循环",
+  "Prompt Engineering 技巧",
+  "Vue3 响应式原理",
+];
+
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [password, setPassword] = useState("");
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [mode, setMode] = useState<"search" | "chat">("search");
   const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
   const [error, setError] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
   const [answer, setAnswer] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const blogUrl =
     process.env.NEXT_PUBLIC_BLOG_BASE_URL || "https://blog.zkkysqs.top";
@@ -31,13 +42,16 @@ export default function HomePage() {
     return h;
   }, [password]);
 
-  async function runSearch() {
-    const q = query.trim();
+  async function runSearch(searchQuery?: string) {
+    const q = (searchQuery ?? query).trim();
     if (!q) return;
+    if (searchQuery) setQuery(searchQuery);
+
     setLoading(true);
     setError("");
     setHits([]);
     setAnswer("");
+    setSearched(true);
 
     try {
       if (mode === "search") {
@@ -63,92 +77,207 @@ export default function HomePage() {
       setError(e instanceof Error ? e.message : "请求失败");
     } finally {
       setLoading(false);
+      inputRef.current?.focus();
     }
   }
 
+  const hasResults = hits.length > 0 || !!answer;
+  const showEmpty = searched && !loading && !error && !hasResults;
+
   return (
-    <main>
-      <h1>博客知识库检索</h1>
-      <p className="subtitle">
-        语义搜索你写在 VuePress 里的文章 · 向量库 Upstash Vector
-      </p>
+    <div className="page">
+      <header className="header">
+        <div>
+          <h1 className="brand-title">博客知识库</h1>
+          <p className="brand-desc">用自然语言搜索你写过的技术文章</p>
+        </div>
+        <a className="blog-link" href={blogUrl} target="_blank" rel="noreferrer">
+          前往博客 →
+        </a>
+      </header>
 
-      <div className="search-row">
-        <input
-          type="text"
-          placeholder="例如：React Fiber 更新流程、Nest 装饰器用法…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && runSearch()}
-        />
-        <button type="button" onClick={runSearch} disabled={loading || !query.trim()}>
-          {loading ? "检索中…" : "查询"}
+      <section className="search-card" aria-label="搜索">
+        <div className="search-input-wrap">
+          <input
+            ref={inputRef}
+            className="search-input"
+            type="search"
+            placeholder="输入问题或关键词，按 Enter 搜索"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && runSearch()}
+            autoComplete="off"
+          />
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => runSearch()}
+            disabled={loading || !query.trim()}
+          >
+            {loading ? "搜索中" : "搜索"}
+          </button>
+        </div>
+
+        <div className="mode-tabs" role="tablist">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "search"}
+            className={`mode-tab ${mode === "search" ? "active" : ""}`}
+            onClick={() => setMode("search")}
+          >
+            相关片段
+            <span className="mode-tab-desc">快速、不消耗 AI</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "chat"}
+            className={`mode-tab ${mode === "chat" ? "active" : ""}`}
+            onClick={() => setMode("chat")}
+          >
+            AI 总结
+            <span className="mode-tab-desc">DeepSeek 归纳回答</span>
+          </button>
+        </div>
+
+        <div className="examples">
+          <p className="examples-label">试试这些：</p>
+          <div className="example-chips">
+            {EXAMPLES.map((ex) => (
+              <button
+                key={ex}
+                type="button"
+                className="chip"
+                disabled={loading}
+                onClick={() => runSearch(ex)}
+              >
+                {ex}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="advanced-toggle"
+          onClick={() => setShowAdvanced((v) => !v)}
+          aria-expanded={showAdvanced}
+        >
+          {showAdvanced ? "收起" : "高级"}：访问密码
         </button>
-      </div>
+        {showAdvanced && (
+          <div className="advanced-panel">
+            <input
+              type="password"
+              placeholder="若部署时设置了 KB_SEARCH_PASSWORD，在此填写"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+            <p className="advanced-hint">密码仅用于访问受保护的 API，不会上传到其他服务。</p>
+          </div>
+        )}
+      </section>
 
-      <div className="search-row">
-        <input
-          type="password"
-          placeholder="访问密码（若在 Vercel 设置了 KB_SEARCH_PASSWORD）"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
+      {error && (
+        <div className="alert-error" role="alert">
+          <span aria-hidden>⚠</span>
+          <span>{error}</span>
+        </div>
+      )}
 
-      <div className="mode-row">
-        <label>
-          <input
-            type="radio"
-            name="mode"
-            checked={mode === "search"}
-            onChange={() => setMode("search")}
-          />{" "}
-          仅检索片段
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="mode"
-            checked={mode === "chat"}
-            onChange={() => setMode("chat")}
-          />{" "}
-          AI 总结（DeepSeek）
-        </label>
-      </div>
+      {loading && (
+        <div className="loading-bar" aria-live="polite">
+          <span className="spinner" aria-hidden />
+          {mode === "chat" ? "正在检索并生成回答…" : "正在检索相关文章…"}
+        </div>
+      )}
 
-      {error && <p className="error">{error}</p>}
+      {showEmpty && (
+        <div className="empty-state">
+          <div className="empty-state-icon" aria-hidden>
+            🔍
+          </div>
+          <strong>没有找到相关内容</strong>
+          <p>换个说法试试，或确认博客已建立向量索引</p>
+        </div>
+      )}
 
-      {answer && (
-        <section className="panel">
-          <h2>回答</h2>
-          <div className="answer">{answer}</div>
+      {answer && !loading && (
+        <section className="answer-card" aria-label="AI 回答">
+          <div className="section-head">
+            <h2 className="section-title">AI 回答</h2>
+            <span className="section-badge">DeepSeek</span>
+          </div>
+          <div className="answer-body">{answer}</div>
         </section>
       )}
 
-      {hits.length > 0 && (
-        <section className="panel">
-          <h2>相关文章 ({hits.length})</h2>
-          {hits.map((hit, i) => (
-            <article className="hit" key={hit.id}>
-              <a href={hit.url} target="_blank" rel="noreferrer">
-                {hit.title}
-                {hit.heading ? ` — ${hit.heading}` : ""}
-              </a>
-              <div className="hit-meta">
-                [{i + 1}] {hit.category} · 相关度 {(hit.score * 100).toFixed(1)}% ·{" "}
-                {hit.path}
-              </div>
-              <p>{hit.preview}</p>
-            </article>
-          ))}
+      {hits.length > 0 && !loading && (
+        <section aria-label="检索结果">
+          <div className="section-head" style={{ marginBottom: "0.75rem" }}>
+            <h2 className="section-title">相关文章</h2>
+            <span className="section-badge">{hits.length} 条</span>
+          </div>
+          <div className="results-list">
+            {hits.map((hit, i) => {
+              const pct = Math.min(100, Math.max(0, hit.score * 100));
+              return (
+                <article className="hit-card" key={hit.id}>
+                  <div className="hit-top">
+                    <span className="hit-index" aria-hidden>
+                      {i + 1}
+                    </span>
+                    <div className="hit-main">
+                      <a
+                        className="hit-title"
+                        href={hit.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {hit.title}
+                        {hit.heading && (
+                          <span className="hit-heading"> · {hit.heading}</span>
+                        )}
+                      </a>
+                      <div className="hit-meta">
+                        <span className="tag">{hit.category}</span>
+                        <span className="score-wrap">
+                          <span className="score-bar" aria-hidden>
+                            <span
+                              className="score-fill"
+                              style={{ width: `${pct}%` }}
+                            />
+                          </span>
+                          匹配 {pct.toFixed(0)}%
+                        </span>
+                      </div>
+                      <p className="hit-preview">{hit.preview}</p>
+                      <div className="hit-path">{hit.path}</div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </section>
       )}
 
-      <footer>
-        正文站点：<a href={blogUrl}>{blogUrl}</a>
-        <br />
-        新文章发布后由 GitHub Actions 更新向量索引。
+      {!searched && !loading && (
+        <div className="empty-state">
+          <div className="empty-state-icon" aria-hidden>
+            📚
+          </div>
+          <strong>搜索你的博客知识库</strong>
+          <p>支持语义检索，输入概念即可找到曾写过的文章段落</p>
+        </div>
+      )}
+
+      <footer className="page-footer">
+        索引覆盖 <code>docs/</code> 下的 Markdown ·{" "}
+        <a href={blogUrl}>{blogUrl.replace(/^https?:\/\//, "")}</a>
       </footer>
-    </main>
+    </div>
   );
 }

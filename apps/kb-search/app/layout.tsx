@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "博客知识库检索",
-  description: "基于 Upstash Vector 的博客 RAG 检索",
+  title: "博客知识库 | 前端 Jeek",
+  description: "语义搜索 VuePress 博客文章，支持 AI 总结",
 };
 
 export default function RootLayout({
