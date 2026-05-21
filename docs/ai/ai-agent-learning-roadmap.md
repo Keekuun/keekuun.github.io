@@ -1,7 +1,7 @@
 ---
 title: AI Agent 前端开发者学习路线图 - 从入门到实战
 date: 2026-04-18
-sticky: 1
+# sticky: 1
 isComment: true
 categories: 
 - AI
@@ -20,10 +20,10 @@ tags:
 
 - [为什么前端开发者需要学习 AI Agent](#为什么前端开发者需要学习-ai-agent)
 - [学习路线图总览](#学习路线图总览)
-- [第一阶段：AI 基础认知（1-2周）](#第一阶段ai-基础认知1-2周)
-- [第二阶段：LLM API 与 Prompt Engineering（2-3周）](#第二阶段llm-api-与-prompt-engineering2-3周)
-- [第三阶段：Agent 核心概念（3-4周）](#第三阶段agent-核心概念3-4周)
-- [第四阶段：前端 AI Agent 实战（4-6周）](#第四阶段前端-ai-agent-实战4-6周)
+- [第一阶段：AI 基础认知](#第一阶段ai-基础认知1-2周)
+- [第二阶段：LLM API 与 Prompt Engineering](#第二阶段llm-api-与-prompt-engineering2-3周)
+- [第三阶段：Agent 核心概念](#第三阶段agent-核心概念3-4周)
+- [第四阶段：前端 AI Agent 实战](#第四阶段前端-ai-agent-实战4-6周)
 - [第五阶段：高级主题与优化（持续学习）](#第五阶段高级主题与优化持续学习)
 - [推荐学习资源](#推荐学习资源)
 - [实践项目清单](#实践项目清单)
@@ -106,7 +106,7 @@ graph TB
 
 ---
 
-## 第一阶段：AI 基础认知（1-2周）
+## 第一阶段：AI 基础认知
 
 ### 学习目标
 
@@ -182,7 +182,7 @@ graph TB
 
 ---
 
-## 第二阶段：LLM API 与 Prompt Engineering（2-3周）
+## 第二阶段：LLM API 与 Prompt Engineering
 
 ### 学习目标
 
@@ -370,7 +370,7 @@ if (response.choices[0].message.tool_calls) {
 
 ---
 
-## 第三阶段：Agent 核心概念（3-4周）
+## 第三阶段：Agent 核心概念
 
 ### 学习目标
 
@@ -735,7 +735,7 @@ class TaskPlanner {
 
 ---
 
-## 第四阶段：前端 AI Agent 实战（4-6周）
+## 第四阶段：前端 AI Agent 实战
 
 ### 学习目标
 
@@ -1315,7 +1315,7 @@ describe('AI Assistant', () => {
 
 ## 实践项目清单
 
-### 初级项目（1-2个月）
+### 初级项目
 
 - [ ] CLI 聊天机器人
 - [ ] 简单的问答系统
@@ -1323,7 +1323,7 @@ describe('AI Assistant', () => {
 - [ ] 情感分析工具
 - [ ] 代码片段生成器
 
-### 中级项目（2-4个月）
+### 中级项目
 
 - [ ] 基于文档的 RAG 问答系统
 - [ ] AI 驱动的待办事项助手
@@ -1331,7 +1331,7 @@ describe('AI Assistant', () => {
 - [ ] 个人学习助手（Anki 卡片生成）
 - [ ] GitHub Issue 自动分类机器人
 
-### 高级项目（4-6个月）
+### 高级项目
 
 - [ ] 多 Agent 协作系统
 - [ ] 实时代码审查工具

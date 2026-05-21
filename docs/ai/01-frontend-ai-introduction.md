@@ -16,8 +16,6 @@ tags:
 
 > 用前端开发者熟悉的思维方式，快速理解 AI、ML、LLM 等核心概念
 
-![AI Concept Map](/images/ai/ai-concept-map.png)
-
 ## 📚 目录
 
 - [为什么前端开发者需要关注 AI](#为什么前端开发者需要关注-ai)

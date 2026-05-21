@@ -1,5 +1,10 @@
 module.exports = [
   {
+    text: 'AI 检索',
+    icon: 'reco-search',
+    link: 'https://keekuun-blog-search.vercel.app/',
+  },
+  {
     text: '前端',
     icon: 'reco-api',
     link: '/categories/前端/',
@@ -95,12 +100,5 @@ module.exports = [
       { text: '常用工具', link: '/tools/code-tool.html' },
     ],
   },
-
-  {
-    text: 'AI 检索',
-    icon: 'reco-search',
-    link: 'https://keekuun-blog-search.vercel.app/',
-  },
-
   { text: '流月', link: '/timeLine/', icon: 'reco-date' },
 ]

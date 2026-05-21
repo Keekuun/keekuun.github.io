@@ -16,8 +16,6 @@ tags:
 
 > 不需要数学博士学历！用前端开发者熟悉的类比，深入理解改变世界的 Transformer 架构
 
-![Transformer Architecture](/images/ai/transformer-architecture.png)
-
 ## 📚 目录
 
 - [为什么需要理解 Transformer](#为什么需要理解-transformer)

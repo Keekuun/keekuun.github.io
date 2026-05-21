@@ -1,7 +1,6 @@
 ---
 title: Skills 入门指南
 date: 2026-03-04
-sticky: 1
 isComment: true
 categories: 
 - AI
