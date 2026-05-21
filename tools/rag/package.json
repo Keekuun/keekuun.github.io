@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "index": "node index.mjs",
+    "index:full": "node index.mjs --full",
+    "index:incremental": "node index.mjs --incremental",
     "index:dry": "node index.mjs --dry-run",
     "check-env": "node check-env.mjs"
   },

@@ -25,8 +25,26 @@ cp .env.example .env
 pnpm install
 pnpm check-env   # 先测 SILICONFLOW_API_KEY 是否可用
 pnpm index:dry
-pnpm index
+pnpm index          # 默认：RAG_RESET_INDEX=0 且未传 git 时仍全量；见下
+pnpm index:full     # 强制全量（可配合 RAG_RESET_INDEX=1）
+pnpm index:incremental   # 仅处理 git 变更的 docs（本地需有 git 历史）
 ```
+
+### 增量 vs 全量
+
+| 场景 | 行为 |
+|------|------|
+| CI push 只改了少量 `docs/**/*.md` | **增量**：只删/重建变更文章对应的向量 |
+| CI 首次 / `before` 为空 | **全量** + `RAG_RESET_INDEX=1` |
+| 本地 `pnpm index:full` | 全量 upsert（默认**不** reset，约 5200 次写入） |
+| Actions 手动运行并勾选 full_reindex | 全量且 `RAG_FORCE_RESET=1` 清空索引 |
+
+### Upstash 免费版写入上限（约 1 万次/天）
+
+- **不要**每次全量都 `reset` + 全量 upsert（约 1 万次+，易超限）。
+- 日常改文章走 **增量**（每篇约几百次删除 + 数十次 upsert）。
+- 全量中断后：下载 Actions 产物 `rag-upsert-cache`，放到 `tools/rag/`，次日设 `RAG_RESUME_UPSERT_FROM`（见 `.upsert-progress.json` 里的 offset）再跑；或仓库 Variable `RAG_RESUME_UPSERT_FROM=4800`。
+- 你当前已写入约 **4800/5182**，剩余 **382** 条明日续传即可（无需重跑 Embedding，需保留 payload 缓存）。
 
 ## 3. GitHub Actions（与 `.env` 对齐）
 

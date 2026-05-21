@@ -1,8 +1,6 @@
-import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fg from "fast-glob";
-import matter from "gray-matter";
 import { Index } from "@upstash/vector";
 import {
   createEmbeddingClient,
@@ -10,10 +8,16 @@ import {
   getEmbeddingModel,
   getEmbeddingProviderHint,
 } from "./lib/ai.mjs";
+import { deleteVectorsForPath } from "./lib/delete-chunks.mjs";
 import { embedTexts } from "./lib/embed.mjs";
+import { getGitDocChanges, parseChangedFilesEnv } from "./lib/git-changes.mjs";
 import { loadRagEnv } from "./lib/load-env.mjs";
-import { chunkMarkdown, extractTitle } from "./lib/chunk.mjs";
-import { markdownPathToBlogUrl, stableChunkId, toRepoRelative } from "./lib/paths.mjs";
+import { buildRecordsForFiles } from "./lib/records.mjs";
+import {
+  loadPayloadCache,
+  savePayloadCache,
+  writeUpsertBatches,
+} from "./lib/upsert-batch.mjs";
 
 loadRagEnv();
 
@@ -21,6 +25,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../..");
 
 const dryRun = process.argv.includes("--dry-run");
+const forceFull = process.argv.includes("--full");
+const forceIncremental = process.argv.includes("--incremental");
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -33,73 +39,26 @@ function requireEnv(name) {
 }
 
 async function collectMarkdownFiles() {
-  const patterns = ["docs/**/*.md", "!docs/.vuepress/**"];
-  return fg(patterns, {
+  return fg(["docs/**/*.md", "!docs/.vuepress/**"], {
     cwd: REPO_ROOT,
     absolute: true,
     onlyFiles: true,
   });
 }
 
-async function main() {
-  const blogBaseUrl = process.env.BLOG_BASE_URL || "https://blog.zkkysqs.top";
-  const embeddingModel = getEmbeddingModel();
+function resolveAbsolutePaths(relativePaths) {
+  return relativePaths.map((rel) => path.join(REPO_ROOT, rel));
+}
 
-  const files = await collectMarkdownFiles();
-  const records = [];
-
-  for (const absolutePath of files) {
-    const raw = await fs.readFile(absolutePath, "utf8");
-    const { data: frontmatter, content } = matter(raw);
-    const relativePath = toRepoRelative(absolutePath, REPO_ROOT);
-    const fileName = path.basename(absolutePath);
-    const title = extractTitle(content, frontmatter.title, fileName);
-    const url = markdownPathToBlogUrl(relativePath, blogBaseUrl);
-    const category = relativePath.replace(/^docs\//, "").split("/")[0] || "docs";
-    const chunks = chunkMarkdown(content);
-
-    chunks.forEach((chunkText, chunkIndex) => {
-      const headingMatch = chunkText.match(/^#{1,3}\s+(.+)$/m);
-      records.push({
-        id: stableChunkId(relativePath, chunkIndex),
-        text: chunkText,
-        metadata: {
-          path: relativePath,
-          title,
-          heading: headingMatch ? headingMatch[1].trim() : "",
-          url,
-          category,
-          chunkIndex,
-          preview: chunkText.slice(0, 400),
-        },
-      });
-    });
-  }
-
-  console.log(`扫描到 ${files.length} 篇 Markdown，生成 ${records.length} 个文本块`);
-
-  if (dryRun) {
-    console.log("dry-run 模式，跳过 embedding 与写入 Upstash");
-    console.log("示例:", records[0]?.id, records[0]?.metadata?.title);
-    return;
-  }
-
-  requireEnv("UPSTASH_VECTOR_REST_URL");
-  requireEnv("UPSTASH_VECTOR_REST_TOKEN");
-
-  const embeddingClient = createEmbeddingClient();
-  console.log(
-    `Embedding: ${embeddingModel} @ ${embeddingClient.baseURL} (${getEmbeddingProviderHint()})`
-  );
-
-  const index = new Index({
-    url: process.env.UPSTASH_VECTOR_REST_URL,
-    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
-  });
-
-  if (process.env.RAG_RESET_INDEX === "1") {
-    console.log("RAG_RESET_INDEX=1，清空 Upstash 索引…");
-    await index.reset();
+async function buildUpsertPayload(records, embeddingClient, embeddingModel) {
+  const resumeFrom = Number(process.env.RAG_RESUME_UPSERT_FROM) || 0;
+  if (resumeFrom > 0) {
+    const cached = await loadPayloadCache();
+    if (cached?.length) {
+      console.log(`复用缓存向量 ${cached.length} 条，跳过 Embedding（续传 upsert）`);
+      return cached;
+    }
+    console.warn("未找到 .upsert-payload.json，将重新 Embedding");
   }
 
   console.log(
@@ -135,40 +94,141 @@ async function main() {
   }
   console.log(`有效向量 ${upsertPayload.length} / ${records.length}`);
 
-  const vectorDim = upsertPayload[0]?.vector?.length;
-  const expectedDim = getEmbeddingDimensions();
-  console.log(
-    `向量维度: ${vectorDim}（模型 ${embeddingModel}，配置 EMBEDDING_DIMENSIONS=${expectedDim}）`
+  await savePayloadCache(upsertPayload);
+  return upsertPayload;
+}
+
+async function upsertRecords(index, records, embeddingClient, embeddingModel) {
+  if (records.length === 0) {
+    console.log("没有需要写入的文本块");
+    return;
+  }
+
+  const upsertPayload = await buildUpsertPayload(
+    records,
+    embeddingClient,
+    embeddingModel
   );
-  if (vectorDim && vectorDim !== expectedDim) {
-    console.warn(
-      `警告: 实际维度 ${vectorDim} 与 EMBEDDING_DIMENSIONS ${expectedDim} 不一致，请检查模型配置`
+  await writeUpsertBatches(index, upsertPayload);
+}
+
+async function runIncremental(index, embeddingClient, embeddingModel, blogBaseUrl) {
+  const gitChanges = getGitDocChanges(REPO_ROOT);
+  let toUpdate = [];
+  let toDelete = [];
+
+  if (gitChanges) {
+    toUpdate = gitChanges.toUpdate;
+    toDelete = gitChanges.toDelete;
+    console.log(
+      `增量模式（git ${process.env.RAG_GIT_BEFORE?.slice(0, 7)}..${process.env.RAG_GIT_AFTER?.slice(0, 7) || "HEAD"}）`
+    );
+  } else {
+    toUpdate = parseChangedFilesEnv();
+    console.log("增量模式（RAG_CHANGED_FILES）");
+  }
+
+  if (toUpdate.length === 0 && toDelete.length === 0) {
+    console.log("docs/ 无 Markdown 变更，跳过索引");
+    return;
+  }
+
+  console.log(`更新 ${toUpdate.length} 篇，删除 ${toDelete.length} 篇`);
+
+  for (const rel of [...new Set([...toUpdate, ...toDelete])]) {
+    console.log(`  清除旧向量: ${rel}`);
+    if (!dryRun) await deleteVectorsForPath(index, rel);
+  }
+
+  if (toDelete.length > 0 && toUpdate.length === 0) {
+    console.log("仅删除已完成，无需 Embedding");
+    return;
+  }
+
+  const absolutePaths = resolveAbsolutePaths(toUpdate);
+  const records = await buildRecordsForFiles(
+    absolutePaths,
+    REPO_ROOT,
+    blogBaseUrl
+  );
+  console.log(`本次生成 ${records.length} 个文本块`);
+
+  if (dryRun) {
+    console.log("dry-run 模式，跳过 embedding 与写入");
+    return;
+  }
+
+  await upsertRecords(index, records, embeddingClient, embeddingModel);
+}
+
+async function runFull(index, embeddingClient, embeddingModel, blogBaseUrl) {
+  const files = await collectMarkdownFiles();
+  const records = await buildRecordsForFiles(files, REPO_ROOT, blogBaseUrl);
+  console.log(`全量模式：${files.length} 篇 Markdown，${records.length} 个文本块`);
+
+  if (dryRun) {
+    console.log("dry-run 模式，跳过 embedding 与写入 Upstash");
+    console.log("示例:", records[0]?.id, records[0]?.metadata?.title);
+    return;
+  }
+
+  if (process.env.RAG_FORCE_RESET === "1") {
+    console.log(
+      "RAG_FORCE_RESET=1，清空 Upstash 索引（约消耗 1 次写入配额，但后续 upsert 仍占条数）…"
+    );
+    await index.reset();
+  } else {
+    console.log(
+      "全量 upsert（不 reset）：覆盖已有 id，约每向量 1 次写入；删文产生的孤儿向量可定期 full_reindex+reset 清理"
     );
   }
+
+  await upsertRecords(index, records, embeddingClient, embeddingModel);
+}
+
+async function main() {
+  const blogBaseUrl = process.env.BLOG_BASE_URL || "https://blog.zkkysqs.top";
+  const embeddingModel = getEmbeddingModel();
+
+  const useIncremental =
+    forceIncremental ||
+    (!forceFull &&
+      process.env.RAG_FORCE_RESET !== "1" &&
+      (process.env.RAG_GIT_BEFORE || process.env.RAG_CHANGED_FILES));
+
+  if (dryRun && !useIncremental) {
+    const files = await collectMarkdownFiles();
+    const records = await buildRecordsForFiles(files, REPO_ROOT, blogBaseUrl);
+    console.log(`扫描到 ${files.length} 篇 Markdown，生成 ${records.length} 个文本块`);
+    console.log("dry-run 模式，跳过 embedding 与写入 Upstash");
+    return;
+  }
+
+  if (dryRun && useIncremental) {
+    await runIncremental(null, null, null, blogBaseUrl);
+    return;
+  }
+
+  requireEnv("UPSTASH_VECTOR_REST_URL");
+  requireEnv("UPSTASH_VECTOR_REST_TOKEN");
+
+  const embeddingClient = createEmbeddingClient();
   console.log(
-    `请确认 Upstash Vector Index 的 Dimensions 也为 ${vectorDim}（bge-m3 为 1024，勿用 1536）`
+    `Embedding: ${embeddingModel} @ ${embeddingClient.baseURL} (${getEmbeddingProviderHint()})`
   );
 
-  const UPSERT_BATCH = 100;
-  for (let i = 0; i < upsertPayload.length; i += UPSERT_BATCH) {
-    const slice = upsertPayload.slice(i, i + UPSERT_BATCH);
-    try {
-      await index.upsert(slice);
-    } catch (err) {
-      const msg = err?.message || String(err);
-      if (msg.includes("Invalid vector dimension")) {
-        const m = msg.match(/(\d+),\s*expected:\s*(\d+)/);
-        const got = m?.[1] ?? vectorDim;
-        const want = m?.[2] ?? "?";
-        throw new Error(
-          `Upstash 向量维度不匹配：Embedding 输出 ${got} 维，但当前 Index 要求 ${want} 维。\n` +
-            `解决：在 Upstash 控制台新建 Dimensions=${got} 的 Index，更新 .env 的 UPSTASH_VECTOR_REST_URL / TOKEN，再执行 pnpm index。\n` +
-            `（若坚持用 ${want} 维 Index，需改用输出 ${want} 维的 Embedding 模型并修改 EMBEDDING_MODEL）`
-        );
-      }
-      throw err;
-    }
-    console.log(`已写入 Upstash ${Math.min(i + UPSERT_BATCH, upsertPayload.length)} / ${upsertPayload.length}`);
+  const index = new Index({
+    url: process.env.UPSTASH_VECTOR_REST_URL,
+    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
+  });
+
+  const vectorDim = getEmbeddingDimensions();
+  console.log(`目标向量维度: ${vectorDim}`);
+
+  if (useIncremental) {
+    await runIncremental(index, embeddingClient, embeddingModel, blogBaseUrl);
+  } else {
+    await runFull(index, embeddingClient, embeddingModel, blogBaseUrl);
   }
 
   console.log("索引完成");

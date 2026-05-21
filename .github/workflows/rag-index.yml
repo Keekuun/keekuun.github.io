@@ -8,6 +8,12 @@ on:
       - "docs/**/*.md"
       - "tools/rag/**"
   workflow_dispatch:
+    inputs:
+      full_reindex:
+        description: "全量重建（清空后重跑全部 docs）"
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: rag-index
@@ -19,23 +25,62 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed docs
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_reindex }}" = "true" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if ! git diff --name-only "$BEFORE" "$AFTER" -- docs/ | grep -q '\.md$'; then
+            echo "mode=skip" >> "$GITHUB_OUTPUT"
+            echo "无 docs Markdown 变更（可能仅改了 tools/rag）"
+            exit 0
+          fi
+
+          echo "mode=incremental" >> "$GITHUB_OUTPUT"
+          echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
+          echo "after=$AFTER" >> "$GITHUB_OUTPUT"
 
       - name: Setup pnpm
+        if: steps.changes.outputs.mode != 'skip'
         uses: pnpm/action-setup@v4
         with:
           version: 9
 
       - name: Setup Node.js
+        if: steps.changes.outputs.mode != 'skip'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
       - name: Install index dependencies
+        if: steps.changes.outputs.mode != 'skip'
         working-directory: tools/rag
         run: pnpm install --frozen-lockfile
 
-      # 环境变量与 tools/rag/.env 保持一致（密钥走 Secrets，见 tools/rag/README.md）
+      - name: Restore upsert cache (resume)
+        if: steps.changes.outputs.mode != 'skip' && vars.RAG_RESUME_UPSERT_FROM != '' && vars.RAG_RESUME_UPSERT_FROM != '0'
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: rag-upsert-cache
+          path: tools/rag
+
       - name: Build vector index
+        if: steps.changes.outputs.mode != 'skip'
         working-directory: tools/rag
         env:
           UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
@@ -48,5 +93,18 @@ jobs:
           EMBEDDING_MAX_CHARS: "6000"
           RAG_CHUNK_MAX_CHARS: "1200"
           BLOG_BASE_URL: https://blog.zkkysqs.top
-          RAG_RESET_INDEX: "1"
+          RAG_FORCE_RESET: ${{ github.event_name == 'workflow_dispatch' && inputs.full_reindex == 'true' && '1' || '0' }}
+          RAG_RESUME_UPSERT_FROM: ${{ vars.RAG_RESUME_UPSERT_FROM || '0' }}
+          RAG_GIT_BEFORE: ${{ steps.changes.outputs.before }}
+          RAG_GIT_AFTER: ${{ steps.changes.outputs.after }}
         run: pnpm index
+
+      - name: Upload upsert cache on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rag-upsert-cache
+          path: |
+            tools/rag/.upsert-payload.json
+            tools/rag/.upsert-progress.json
+          retention-days: 5

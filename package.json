@@ -11,6 +11,8 @@
     "pdf": "vuepress export docs",
     "release": "git checkout master && git pull origin master && standard-version && git push --follow-tags origin",
     "rag:index": "pnpm --dir tools/rag index",
+    "rag:index:full": "pnpm --dir tools/rag index:full",
+    "rag:index:incremental": "pnpm --dir tools/rag index:incremental",
     "rag:index:dry": "pnpm --dir tools/rag index:dry",
     "kb:dev": "pnpm --dir apps/kb-search dev"
   },
