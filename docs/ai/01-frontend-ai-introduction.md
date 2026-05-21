@@ -1042,6 +1042,6 @@ program.parse();
 
 ---
 
-**下一篇预告：** 《LLM 工作原理：用前端思维理解 Transformer》
+**下一篇预告：** [《LLM 工作原理：用前端思维理解 Transformer》](/ai/02-transformer-explained.html)
 
 我们将深入探讨 Transformer 架构，用前端开发者熟悉的类比来理解这个改变世界的技术。敬请期待！

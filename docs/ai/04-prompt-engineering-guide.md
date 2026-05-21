@@ -1482,7 +1482,7 @@ Prompt Engineering 是一门需要持续练习的技能。记住：
 
 随着 practice，你会发展出自己的风格和技巧。最重要的是：**开始行动，现在就写出你的第一个精心设计的 prompt！**
 
-**下一篇预告：** 《高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning》
+**下一篇预告：** [《高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning》](/ai/05-advanced-prompt-techniques.html)
 
 我们将深入探讨这些强大的技术，并通过更多实战案例展示它们的应用。敬请期待！
 

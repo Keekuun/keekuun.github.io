@@ -1624,7 +1624,7 @@ Chain of Thought 和 Few-shot Learning 是 prompt engineering 中最强大的两
 
 继续练习，你会逐渐发展出直觉，知道何时使用哪种技术，以及如何组合它们以获得最佳效果。
 
-**下一篇预告：** 《Prompt 调试与优化实战》
+**下一篇预告：** [《Prompt 调试与优化实战》](/ai/06-prompt-debugging-optimization.html)
 
 我们将深入探讨如何系统地调试和优化 prompt，包括自动化工具、评估框架和最佳实践。敬请期待！
 

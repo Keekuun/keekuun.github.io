@@ -1619,7 +1619,7 @@ console.log('Observation:', step.observation);
 ### 下一步
 
 1. **继续学习**
-   - 阅读系列下一篇文章
+   - 阅读系列下一篇：[《Tools 系统设计与实现》](/ai/09-tools-system-design.html)
    - 探索 LangChain、AutoGPT 等框架
    - 研究多 Agent 系统
 
@@ -1645,6 +1645,6 @@ console.log('Observation:', step.observation);
 - [Express.js Guide](https://expressjs.com/)
 - [React Documentation](https://react.dev/)
 
-**下一篇预告**: 《Tools 系统设计与实现》
+**下一篇预告：** [《Tools 系统设计与实现》](/ai/09-tools-system-design.html)
 
 我们将深入探讨如何设计和实现强大的工具系统，让 Agent 能够与外部世界交互。敬请期待！
