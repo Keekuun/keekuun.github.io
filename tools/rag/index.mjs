@@ -8,7 +8,15 @@ import {
   getEmbeddingModel,
   getEmbeddingProviderHint,
 } from "./lib/ai.mjs";
-import { deleteVectorsForPath } from "./lib/delete-chunks.mjs";
+import {
+  chunkCountsFromRecords,
+  loadChunkCountCache,
+  saveChunkCountCache,
+} from "./lib/chunk-count-cache.mjs";
+import {
+  deleteOrphanChunks,
+  deleteVectorsForPath,
+} from "./lib/delete-chunks.mjs";
 import { embedTexts } from "./lib/embed.mjs";
 import { getGitDocChanges, parseChangedFilesEnv } from "./lib/git-changes.mjs";
 import { loadRagEnv } from "./lib/load-env.mjs";
@@ -135,12 +143,20 @@ async function runIncremental(index, embeddingClient, embeddingModel, blogBaseUr
 
   console.log(`更新 ${toUpdate.length} 篇，删除 ${toDelete.length} 篇`);
 
-  for (const rel of [...new Set([...toUpdate, ...toDelete])]) {
-    console.log(`  清除旧向量: ${rel}`);
-    if (!dryRun) await deleteVectorsForPath(index, rel);
+  const chunkCache = dryRun ? {} : await loadChunkCountCache();
+
+  for (const rel of toDelete) {
+    const cached = chunkCache[rel];
+    console.log(
+      `  删除文章向量: ${rel}` +
+        (cached ? `（缓存 ${cached} 块）` : "（按上限扫删）")
+    );
+    if (!dryRun) await deleteVectorsForPath(index, rel, cached);
+    delete chunkCache[rel];
   }
 
   if (toDelete.length > 0 && toUpdate.length === 0) {
+    if (!dryRun) await saveChunkCountCache(chunkCache);
     console.log("仅删除已完成，无需 Embedding");
     return;
   }
@@ -151,14 +167,38 @@ async function runIncremental(index, embeddingClient, embeddingModel, blogBaseUr
     REPO_ROOT,
     blogBaseUrl
   );
+  const newCounts = chunkCountsFromRecords(records);
   console.log(`本次生成 ${records.length} 个文本块`);
 
   if (dryRun) {
+    for (const rel of toUpdate) {
+      const n = newCounts[rel] ?? 0;
+      const old = chunkCache[rel];
+      if (old != null && old > n) {
+        console.log(`  [dry-run] 将清除尾部孤儿: ${rel} #${n}..${old - 1}`);
+      }
+    }
     console.log("dry-run 模式，跳过 embedding 与写入");
     return;
   }
 
+  for (const rel of toUpdate) {
+    const newCount = newCounts[rel] ?? 0;
+    const oldCount = chunkCache[rel];
+    if (oldCount != null && oldCount > newCount) {
+      console.log(
+        `  清除变短文章的尾部块: ${rel}（${oldCount} → ${newCount}，删 ${oldCount - newCount} 条）`
+      );
+      await deleteOrphanChunks(index, rel, newCount);
+    }
+  }
+
   await upsertRecords(index, records, embeddingClient, embeddingModel);
+
+  for (const rel of toUpdate) {
+    if (newCounts[rel] != null) chunkCache[rel] = newCounts[rel];
+  }
+  await saveChunkCountCache(chunkCache);
 }
 
 async function runFull(index, embeddingClient, embeddingModel, blogBaseUrl) {
@@ -184,6 +224,12 @@ async function runFull(index, embeddingClient, embeddingModel, blogBaseUrl) {
   }
 
   await upsertRecords(index, records, embeddingClient, embeddingModel);
+
+  if (!dryRun) {
+    const counts = chunkCountsFromRecords(records);
+    await saveChunkCountCache(counts);
+    console.log(`已更新 chunk 计数缓存（${Object.keys(counts).length} 篇）`);
+  }
 }
 
 async function main() {

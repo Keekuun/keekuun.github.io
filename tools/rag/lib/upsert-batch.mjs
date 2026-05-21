@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isWriteLimitError, writeLimitMessage } from "./write-limit.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PAYLOAD_CACHE = path.join(__dirname, "../.upsert-payload.json");
@@ -45,11 +46,6 @@ export async function clearUpsertProgress() {
   }
 }
 
-function isWriteLimitError(err) {
-  const msg = err?.message || String(err);
-  return msg.includes("Exceeded daily write limit");
-}
-
 /**
  * 分批 upsert，支持断点续传（避免 Upstash 免费版每日 1 万次写入超限）
  */
@@ -85,11 +81,9 @@ export async function writeUpsertBatches(index, upsertPayload) {
       if (isWriteLimitError(err)) {
         await saveUpsertProgress(i, total);
         throw new Error(
-          `Upstash 今日写入已达上限（免费版约 10000 次/天）。` +
-            `已完成 ${i}/${total}。请明日再运行，并设置:\n` +
-            `  RAG_RESUME_UPSERT_FROM=${i}\n` +
-            `且保留 tools/rag/.upsert-payload.json（勿删）。` +
-            `Embedding 不会重跑，仅续传剩余 upsert。`
+          writeLimitMessage(i, total, "（upsert）") +
+            `\n  RAG_RESUME_UPSERT_FROM=${i}\n` +
+            `且保留 tools/rag/.upsert-payload.json（勿删）。Embedding 不会重跑。`
         );
       }
       throw err;

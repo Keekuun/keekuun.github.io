@@ -71,12 +71,12 @@ jobs:
         working-directory: tools/rag
         run: pnpm install --frozen-lockfile
 
-      - name: Restore upsert cache (resume)
-        if: steps.changes.outputs.mode != 'skip' && vars.RAG_RESUME_UPSERT_FROM != '' && vars.RAG_RESUME_UPSERT_FROM != '0'
+      - name: Restore RAG state cache
+        if: steps.changes.outputs.mode != 'skip'
         uses: actions/download-artifact@v4
         continue-on-error: true
         with:
-          name: rag-upsert-cache
+          name: rag-state-cache
           path: tools/rag
 
       - name: Build vector index
@@ -99,12 +99,13 @@ jobs:
           RAG_GIT_AFTER: ${{ steps.changes.outputs.after }}
         run: pnpm index
 
-      - name: Upload upsert cache on failure
-        if: failure()
+      - name: Upload RAG state cache
+        if: steps.changes.outputs.mode != 'skip' && (success() || failure())
         uses: actions/upload-artifact@v4
         with:
-          name: rag-upsert-cache
+          name: rag-state-cache
           path: |
+            tools/rag/.chunk-counts.json
             tools/rag/.upsert-payload.json
             tools/rag/.upsert-progress.json
-          retention-days: 5
+          retention-days: 30

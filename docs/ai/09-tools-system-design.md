@@ -1899,6 +1899,6 @@ class CustomerServiceToolKit {
 - [JSON Schema](https://json-schema.org/)
 - [Tool Use in AI Agents](https://arxiv.org/abs/2302.04761)
 
-**下一篇预告**: 《Memory 与 Planning：让 Agent 更智能》
+**下一篇**：[Memory 与 Planning：让 Agent 更智能](/ai/11-memory-planning-agent.html)
 
-我们将深入探讨如何让 Agent 拥有记忆能力和规划能力，使其更加智能和自主。敬请期待！
+在 Tools 之上补齐记忆分层、任务规划，以及与 ReAct 的协作方式。

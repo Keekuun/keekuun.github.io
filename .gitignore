@@ -64,6 +64,7 @@ apps/kb-search/.env.local
 tools/rag/.env
 tools/rag/.upsert-payload.json
 tools/rag/.upsert-progress.json
+tools/rag/.chunk-counts.json
 
 .idea
 
