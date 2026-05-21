@@ -34,15 +34,19 @@ jobs:
         working-directory: tools/rag
         run: pnpm install --frozen-lockfile
 
+      # 环境变量与 tools/rag/.env 保持一致（密钥走 Secrets，见 tools/rag/README.md）
       - name: Build vector index
         working-directory: tools/rag
         env:
           UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
           UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
-          EMBEDDING_API_KEY: ${{ secrets.EMBEDDING_API_KEY }}
-          EMBEDDING_BASE_URL: ${{ vars.EMBEDDING_BASE_URL }}
-          EMBEDDING_MODEL: ${{ vars.EMBEDDING_MODEL }}
+          EMBEDDING_BASE_URL: https://api.siliconflow.cn/v1
+          EMBEDDING_MODEL: BAAI/bge-m3
+          EMBEDDING_DIMENSIONS: "1024"
+          EMBEDDING_CONCURRENCY: "6"
+          EMBEDDING_MAX_CHARS: "6000"
+          RAG_CHUNK_MAX_CHARS: "1200"
           BLOG_BASE_URL: https://blog.zkkysqs.top
           RAG_RESET_INDEX: "1"
         run: pnpm index

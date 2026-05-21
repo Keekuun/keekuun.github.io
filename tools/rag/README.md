@@ -28,14 +28,20 @@ pnpm index:dry
 pnpm index
 ```
 
-## 3. GitHub Actions Secrets
+## 3. GitHub Actions（与 `.env` 对齐）
 
-| Secret | 说明 |
-|--------|------|
-| `UPSTASH_VECTOR_REST_URL` | Upstash REST URL |
-| `UPSTASH_VECTOR_REST_TOKEN` | Upstash Token |
-| `SILICONFLOW_API_KEY` | Embedding（或 `EMBEDDING_API_KEY`） |
-| `DEEPSEEK_API_KEY` | 可选，仅检索站对话需要 |
+索引 workflow 的非敏感项已写死在 `.github/workflows/rag-index.yml`，与 `.env.example` 相同。  
+**Secrets 必须与本地 `tools/rag/.env` 里三项一致**（值从 `.env` 复制，不要提交 `.env`）：
+
+| GitHub Secret | 对应 `.env` 变量 |
+|---------------|------------------|
+| `UPSTASH_VECTOR_REST_URL` | `UPSTASH_VECTOR_REST_URL` |
+| `UPSTASH_VECTOR_REST_TOKEN` | `UPSTASH_VECTOR_REST_TOKEN` |
+| `SILICONFLOW_API_KEY` | `SILICONFLOW_API_KEY` |
+
+`DEEPSEEK_API_KEY` 仅 `apps/kb-search` 需要，**不要**配进 `rag-index` workflow。
+
+更换 Upstash Index 后，记得同时改本地 `.env` 与上述三个 Secret，否则 CI 会写入错误的向量库。
 
 `master` 上 `docs/**` 变更时运行 `.github/workflows/rag-index.yml`。
 
