@@ -16,7 +16,6 @@ tags:
 
 > 从理论到实践，全面解析 AI Agent 的核心架构和工作原理
 
-![AI Agent Architecture](/images/ai/agent-architecture.png)
 
 ## 📚 目录
 

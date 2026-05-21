@@ -16,7 +16,6 @@ tags:
 
 > 掌握与 LLM 高效沟通的艺术，从入门到精通
 
-![Prompt Engineering](/images/ai/prompt-engineering.png)
 
 ## 📚 目录
 
@@ -162,9 +161,8 @@ const data = fetchData();
 ```
 
 ✅ **提供上下文：**
-```
-我正在开发一个 React 组件，用于显示用户列表。
-以下是我的代码：
+
+我正在开发一个 React 组件，用于显示用户列表。以下是我的代码：
 
 ```typescript
 const UserList = () => {
@@ -179,9 +177,7 @@ const UserList = () => {
 };
 ```
 
-问题：页面初次加载时不显示任何用户，需要刷新才能看到数据。
-请分析原因并提供修复方案。
-```
+问题：页面初次加载时不显示任何用户，需要刷新才能看到数据。请分析原因并提供修复方案。
 
 **技巧：**
 - 说明项目类型和技术栈
@@ -684,7 +680,7 @@ window.addEventListener('resize', handleResize);
 
 **Prompt 模板：**
 
-```
+````text
 你是一个资深 React 开发者。请审查以下组件代码，重点关注：
 
 1. 性能问题
@@ -705,7 +701,7 @@ window.addEventListener('resize', handleResize);
 ```
 
 请以结构化格式返回审查结果。
-```
+````
 
 **示例输出：**
 ```markdown
@@ -810,7 +806,7 @@ window.addEventListener('resize', handleResize);
 
 **Prompt：**
 
-```
+````text
 你是一个 JavaScript 调试专家。我遇到了一个异步代码的问题。
 
 问题描述：
@@ -841,7 +837,7 @@ async function processData() {
 2. 提供至少两种解决方案
 3. 解释每种方案的优缺点
 4. 推荐最佳实践
-```
+````
 
 ---
 
@@ -1056,10 +1052,11 @@ data.map(x => x.value)
 ```
 
 ✅ **修正：**
-```
+
 TypeScript 报错：Property 'value' does not exist on type 'unknown'.
 
 代码：
+
 ```typescript
 interface ApiResponse {
     data: any[];
@@ -1070,9 +1067,7 @@ function processResponse(response: ApiResponse) {
 }
 ```
 
-我已经尝试将 `data` 的类型改为 `unknown[]`，但还是有错。
-请提供类型安全的解决方案。
-```
+我已经尝试将 `data` 的类型改为 `unknown[]`，但还是有错。请提供类型安全的解决方案。
 
 ### 错误 4：忽略输出格式
 
@@ -1286,6 +1281,7 @@ npm install promptfoo
 - 给出使用示例
 
 代码：
+{code}
 ```
 
 ### 模板 2：代码审查
@@ -1305,7 +1301,7 @@ npm install promptfoo
 4. 改进后的代码
 
 代码：
-```{code}```
+{code}
 
 以 Markdown 格式返回审查报告。
 ```
@@ -1367,9 +1363,7 @@ npm install promptfoo
 {error_message}
 
 相关代码：
-```{language}
 {code}
-```
 
 已尝试的解决方案：
 {attempted_solutions}
@@ -1429,17 +1423,17 @@ npm install promptfoo
 
 ### 进阶学习路径
 
-**Level 1: 基础（1-2 周）**
+**Level 1: 基础**
 - 掌握基本原则
 - 练习常见模式
 - 建立 prompt 库
 
-**Level 2: 中级（1 个月）**
+**Level 2: 中级**
 - 熟练使用高级模式
 - 优化 token 使用
 - 系统化测试
 
-**Level 3: 高级（持续）**
+**Level 3: 高级**
 - 自定义 prompt 框架
 - 自动化评估系统
 - 贡献开源项目

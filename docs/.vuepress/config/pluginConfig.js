@@ -25,7 +25,7 @@ module.exports = {
             margin: 16
         },
     },
-    // 流程图
+    // 流程图（flow 语法）
     'flowchart': true,
     'ribbon': {
         size: 11,     // 彩带的宽度，默认为 90

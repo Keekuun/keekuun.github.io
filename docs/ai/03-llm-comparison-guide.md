@@ -17,7 +17,6 @@ tags:
 
 > 从功能、性能、成本多维度对比，帮你选择最适合的 LLM
 
-![LLM Comparison](/images/ai/llm-comparison.png)
 
 ## 📚 目录
 

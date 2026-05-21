@@ -16,7 +16,6 @@ tags:
 
 > 手把手教你构建一个实用的 AI Agent，从设计到部署的完整流程
 
-![Build First Agent](/images/ai/build-first-agent.png)
 
 ## 📚 目录
 

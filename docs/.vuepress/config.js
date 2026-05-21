@@ -24,6 +24,17 @@ module.exports = {
         anchor: {
             permalink: true, permalinkBefore: true, permalinkSymbol: '🌙'
         },
+        extendMarkdown: (md) => {
+            const defaultFence = md.renderer.rules.fence;
+            md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+                const token = tokens[idx];
+                const lang = token.info ? token.info.trim().split(/\s+/)[0] : '';
+                if (lang === 'mermaid') {
+                    return `<div class="mermaid">\n${token.content}\n</div>\n`;
+                }
+                return defaultFence(tokens, idx, options, env, self);
+            };
+        },
     },
     // 插件
     plugins: pluginConfig,

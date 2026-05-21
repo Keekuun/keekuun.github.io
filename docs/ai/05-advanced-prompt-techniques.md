@@ -16,7 +16,6 @@ tags:
 
 > 掌握让 LLM 深度推理和快速学习的两大核心技术
 
-![Advanced Prompting](/images/ai/advanced-prompting.png)
 
 ## 📚 目录
 
@@ -312,7 +311,6 @@ Let's think step by step.
 
 **示例：找出 Bug**
 
-```
 问题：以下代码为什么会出现无限循环？
 
 ```javascript
@@ -328,11 +326,10 @@ function processArray(arr) {
 }
 ```
 
-Let's trace through the execution step by step.
-```
+Prompt 补充：`Let's trace through the execution step by step.`
 
 **期望输出：**
-```
+
 让我逐步追踪执行过程：
 
 1. 初始状态：
@@ -363,6 +360,7 @@ Let's trace through the execution step by step.
    - 循环条件 i < arr.length 永远为真
 
 修复方案：
+
 ```javascript
 function processArray(arr) {
     const originalLength = arr.length; // 保存原始长度
@@ -376,7 +374,6 @@ function processArray(arr) {
 ```
 
 答案：出现无限循环是因为在遍历时不断向数组添加元素，导致数组长度持续增长，循环条件永远满足。
-```
 
 #### 3. 业务决策分析
 

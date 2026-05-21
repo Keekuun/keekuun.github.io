@@ -16,7 +16,6 @@ tags:
 
 > 深入解析如何设计和实现强大的工具系统，扩展 Agent 的能力边界
 
-![Tools System](/images/ai/tools-system.png)
 
 ## 📚 目录
 

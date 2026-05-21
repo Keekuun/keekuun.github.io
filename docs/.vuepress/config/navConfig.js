@@ -66,15 +66,16 @@ module.exports = [
     ],
   },
 
-  // {
-  //   text: 'AI',
-  //   icon: 'reco-message',
-  //   link: '/categories/AI/',
-  //   items: [
-  //     { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
-  //     { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
-  //   ],
-  // },
+  {
+    text: 'AI',
+    icon: 'reco-message',
+    link: '/categories/AI/',
+    items: [
+      { text: 'Hello Agents', link: 'https://hello-agents.datawhale.cc/' },
+      { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
+      { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
+    ],
+  },
 
   {
     text: '专题',

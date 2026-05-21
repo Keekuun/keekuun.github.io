@@ -16,7 +16,6 @@ tags:
 
 > 系统化地诊断、调试和优化你的 prompt，提升 AI 应用质量
 
-![Prompt Debugging](/images/ai/prompt-debugging.png)
 
 ## 📚 目录
 

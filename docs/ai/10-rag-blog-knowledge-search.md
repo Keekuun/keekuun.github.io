@@ -23,7 +23,7 @@ tags:
 **博客正文站点**：[https://blog.zkkysqs.top/](https://blog.zkkysqs.top/)（顶栏已增加「AI 检索」导航）
 
 
-[![](\images\ai\blog-search.png)]([https://keekuun-blog-search.vercel.app/)
+![](../../images/ai/blog-search.png)
 
 ---
 
