@@ -35,6 +35,7 @@ const REPO_ROOT = path.resolve(__dirname, "../..");
 const dryRun = process.argv.includes("--dry-run");
 const forceFull = process.argv.includes("--full");
 const forceIncremental = process.argv.includes("--incremental");
+const resumeUpsertOnly = process.argv.includes("--resume-upsert");
 
 function requireEnv(name) {
   const value = process.env[name];
@@ -232,7 +233,38 @@ async function runFull(index, embeddingClient, embeddingModel, blogBaseUrl) {
   }
 }
 
+/** 仅续传 Upstash upsert（需已有 .upsert-payload.json，不扫文档、不 Embedding） */
+async function runResumeUpsertOnly() {
+  requireEnv("UPSTASH_VECTOR_REST_URL");
+  requireEnv("UPSTASH_VECTOR_REST_TOKEN");
+
+  const cached = await loadPayloadCache();
+  if (!cached?.length) {
+    throw new Error(
+      "缺少 tools/rag/.upsert-payload.json。请从失败 CI 的 Artifacts「rag-state-cache」解压到 tools/rag/，或运行 pnpm index:full 并设置 RAG_RESUME_UPSERT_FROM（会重新 Embedding）。"
+    );
+  }
+
+  const start = Number(process.env.RAG_RESUME_UPSERT_FROM) || 0;
+  console.log(
+    `续传 upsert：缓存 ${cached.length} 条，从 ${start || "进度文件/.upsert-progress.json"} 起写入 Upstash`
+  );
+
+  const index = new Index({
+    url: process.env.UPSTASH_VECTOR_REST_URL,
+    token: process.env.UPSTASH_VECTOR_REST_TOKEN,
+  });
+
+  await writeUpsertBatches(index, cached);
+}
+
 async function main() {
+  if (resumeUpsertOnly) {
+    await runResumeUpsertOnly();
+    console.log("续传 upsert 完成");
+    return;
+  }
+
   const blogBaseUrl = process.env.BLOG_BASE_URL || "https://blog.zkkysqs.top";
   const embeddingModel = getEmbeddingModel();
 

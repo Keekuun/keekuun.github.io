@@ -6,6 +6,7 @@
     "index": "node index.mjs",
     "index:full": "node index.mjs --full",
     "index:incremental": "node index.mjs --incremental",
+    "index:resume": "node index.mjs --resume-upsert",
     "index:dry": "node index.mjs --dry-run",
     "check-env": "node check-env.mjs"
   },

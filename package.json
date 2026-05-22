@@ -13,6 +13,7 @@
     "rag:index": "pnpm --dir tools/rag index",
     "rag:index:full": "pnpm --dir tools/rag index:full",
     "rag:index:incremental": "pnpm --dir tools/rag index:incremental",
+    "rag:index:resume": "pnpm --dir tools/rag index:resume",
     "rag:index:dry": "pnpm --dir tools/rag index:dry",
     "kb:dev": "pnpm --dir apps/kb-search dev"
   },

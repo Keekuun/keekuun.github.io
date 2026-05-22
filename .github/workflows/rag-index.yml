@@ -71,15 +71,31 @@ jobs:
         working-directory: tools/rag
         run: pnpm install --frozen-lockfile
 
+      # 仅断点续传时需要；首次索引或未上传过产物时不会执行，避免 Artifact not found
       - name: Restore RAG state cache
-        if: steps.changes.outputs.mode != 'skip'
+        id: restore-cache
+        if: >-
+          steps.changes.outputs.mode != 'skip' &&
+          vars.RAG_RESUME_UPSERT_FROM != '' &&
+          vars.RAG_RESUME_UPSERT_FROM != '0'
         uses: actions/download-artifact@v4
         continue-on-error: true
         with:
           name: rag-state-cache
           path: tools/rag
 
+      - name: Cache restore hint
+        if: >-
+          steps.changes.outputs.mode != 'skip' &&
+          vars.RAG_RESUME_UPSERT_FROM != '' &&
+          vars.RAG_RESUME_UPSERT_FROM != '0' &&
+          steps.restore-cache.outcome != 'success'
+        run: |
+          echo "未找到 rag-state-cache（首次运行或产物已过期）。"
+          echo "将重新 Embedding；若仅需续传 upsert，请先下载上次失败 run 的产物到 tools/rag/"
+
       - name: Build vector index
+        id: index
         if: steps.changes.outputs.mode != 'skip'
         working-directory: tools/rag
         env:
@@ -100,7 +116,8 @@ jobs:
         run: pnpm index
 
       - name: Upload RAG state cache
-        if: steps.changes.outputs.mode != 'skip' && (success() || failure())
+        if: always() && steps.changes.outputs.mode != 'skip'
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: rag-state-cache
@@ -108,4 +125,5 @@ jobs:
             tools/rag/.chunk-counts.json
             tools/rag/.upsert-payload.json
             tools/rag/.upsert-progress.json
+          if-no-files-found: ignore
           retention-days: 30
