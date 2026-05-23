@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Prompt Engineering 完全指南 | 前端Jeek</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/data/manifest.json">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/MouseClickEffect.js"></script>
+    <meta name="description" content="每一个不曾起舞的日子，都是对生命的辜负！">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="keywords" content="vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang, flutter">
+    <meta name="copyright" content="前端Jeek">
+    <meta name="robots" content="all">
+    
+    <link rel="preload" href="/assets/css/0.styles.7c6fafd0.css" as="style"><link rel="preload" href="/assets/js/app.638f2ec8.js" as="script"><link rel="preload" href="/assets/js/4.14d443e6.js" as="script"><link rel="preload" href="/assets/js/3.28f787db.js" as="script"><link rel="preload" href="/assets/js/2.929b31f8.js" as="script"><link rel="preload" href="/assets/js/1.0193e05a.js" as="script"><link rel="preload" href="/assets/js/100.e7eb7297.js" as="script"><link rel="preload" href="/assets/js/55.149bf80a.js" as="script"><link rel="prefetch" href="/assets/js/10.08c4dbf9.js"><link rel="prefetch" href="/assets/js/101.732cae19.js"><link rel="prefetch" href="/assets/js/102.ee817138.js"><link rel="prefetch" href="/assets/js/103.57d26d71.js"><link rel="prefetch" href="/assets/js/104.19007bc0.js"><link rel="prefetch" href="/assets/js/105.92839faf.js"><link rel="prefetch" href="/assets/js/106.88f7cee4.js"><link rel="prefetch" href="/assets/js/107.f16996b4.js"><link rel="prefetch" href="/assets/js/108.7130aebf.js"><link rel="prefetch" href="/assets/js/109.dc67703c.js"><link rel="prefetch" href="/assets/js/11.e78dcfd3.js"><link rel="prefetch" href="/assets/js/110.26020568.js"><link rel="prefetch" href="/assets/js/111.47fc5127.js"><link rel="prefetch" href="/assets/js/112.abf7bddc.js"><link rel="prefetch" href="/assets/js/113.fb8ddb99.js"><link rel="prefetch" href="/assets/js/114.37e6b05e.js"><link rel="prefetch" href="/assets/js/115.f5469e65.js"><link rel="prefetch" href="/assets/js/116.f4c15ac1.js"><link rel="prefetch" href="/assets/js/117.7666cb27.js"><link rel="prefetch" href="/assets/js/118.4f8f0525.js"><link rel="prefetch" href="/assets/js/119.166ee0a2.js"><link rel="prefetch" href="/assets/js/120.3b4d4555.js"><link rel="prefetch" href="/assets/js/121.6c836968.js"><link rel="prefetch" href="/assets/js/122.c1be2580.js"><link rel="prefetch" href="/assets/js/123.e46b8175.js"><link rel="prefetch" href="/assets/js/124.eb07abc7.js"><link rel="prefetch" href="/assets/js/125.5425f768.js"><link rel="prefetch" href="/assets/js/126.ef8466ab.js"><link rel="prefetch" href="/assets/js/127.00dbab89.js"><link rel="prefetch" href="/assets/js/128.779f69f3.js"><link rel="prefetch" href="/assets/js/129.7edf064f.js"><link rel="prefetch" href="/assets/js/130.339f383b.js"><link rel="prefetch" href="/assets/js/131.61f43cbf.js"><link rel="prefetch" href="/assets/js/132.b390952d.js"><link rel="prefetch" href="/assets/js/133.f948c08b.js"><link rel="prefetch" href="/assets/js/134.8d0de047.js"><link rel="prefetch" href="/assets/js/135.43051f2e.js"><link rel="prefetch" href="/assets/js/136.436ef650.js"><link rel="prefetch" href="/assets/js/137.0588333f.js"><link rel="prefetch" href="/assets/js/138.8fb94509.js"><link rel="prefetch" href="/assets/js/139.3ef7625e.js"><link rel="prefetch" href="/assets/js/140.991c7762.js"><link rel="prefetch" href="/assets/js/141.c9be601d.js"><link rel="prefetch" href="/assets/js/142.b187b547.js"><link rel="prefetch" href="/assets/js/143.896ce11f.js"><link rel="prefetch" href="/assets/js/144.8017b38f.js"><link rel="prefetch" href="/assets/js/145.864350ac.js"><link rel="prefetch" href="/assets/js/146.8e8ce1ac.js"><link rel="prefetch" href="/assets/js/147.c8d5339d.js"><link rel="prefetch" href="/assets/js/148.cab173df.js"><link rel="prefetch" href="/assets/js/149.d871d03e.js"><link rel="prefetch" href="/assets/js/15.5c256c5d.js"><link rel="prefetch" href="/assets/js/150.070a905a.js"><link rel="prefetch" href="/assets/js/151.5d3cce4d.js"><link rel="prefetch" href="/assets/js/152.885a6eab.js"><link rel="prefetch" href="/assets/js/153.d4274d0b.js"><link rel="prefetch" href="/assets/js/154.b08094c3.js"><link rel="prefetch" href="/assets/js/155.aaa0c360.js"><link rel="prefetch" href="/assets/js/156.75e29611.js"><link rel="prefetch" href="/assets/js/157.3db5b198.js"><link rel="prefetch" href="/assets/js/158.c495cc0b.js"><link rel="prefetch" href="/assets/js/159.56f6bb56.js"><link rel="prefetch" href="/assets/js/16.d311dbc8.js"><link rel="prefetch" href="/assets/js/160.f526fdeb.js"><link rel="prefetch" href="/assets/js/161.dda7d2ed.js"><link rel="prefetch" href="/assets/js/162.0c3de6ea.js"><link rel="prefetch" href="/assets/js/163.780c3519.js"><link rel="prefetch" href="/assets/js/164.67a5c7b9.js"><link rel="prefetch" href="/assets/js/165.b0403520.js"><link rel="prefetch" href="/assets/js/166.63debe2a.js"><link rel="prefetch" href="/assets/js/167.d499e238.js"><link rel="prefetch" href="/assets/js/168.eacbd04c.js"><link rel="prefetch" href="/assets/js/169.ef414d5f.js"><link rel="prefetch" href="/assets/js/17.1773638e.js"><link rel="prefetch" href="/assets/js/170.aeda6b53.js"><link rel="prefetch" href="/assets/js/171.82785d85.js"><link rel="prefetch" href="/assets/js/172.14d3ba37.js"><link rel="prefetch" href="/assets/js/173.c10abbea.js"><link rel="prefetch" href="/assets/js/174.7d26b098.js"><link rel="prefetch" href="/assets/js/175.449c464f.js"><link rel="prefetch" href="/assets/js/176.2ec568b8.js"><link rel="prefetch" href="/assets/js/177.09eae550.js"><link rel="prefetch" href="/assets/js/178.07a858b6.js"><link rel="prefetch" href="/assets/js/179.644aee33.js"><link rel="prefetch" href="/assets/js/18.9598dbd5.js"><link rel="prefetch" href="/assets/js/180.b7a74755.js"><link rel="prefetch" href="/assets/js/181.528936a5.js"><link rel="prefetch" href="/assets/js/182.c39fc3bd.js"><link rel="prefetch" href="/assets/js/183.62da4a1d.js"><link rel="prefetch" href="/assets/js/184.614853b7.js"><link rel="prefetch" href="/assets/js/185.985074aa.js"><link rel="prefetch" href="/assets/js/186.ff3f7ad3.js"><link rel="prefetch" href="/assets/js/187.1dcdde0b.js"><link rel="prefetch" href="/assets/js/188.e1891107.js"><link rel="prefetch" href="/assets/js/189.95810ce9.js"><link rel="prefetch" href="/assets/js/19.61194f1d.js"><link rel="prefetch" href="/assets/js/190.1469c671.js"><link rel="prefetch" href="/assets/js/191.62ae1238.js"><link rel="prefetch" href="/assets/js/192.8f08ea06.js"><link rel="prefetch" href="/assets/js/193.7416339e.js"><link rel="prefetch" href="/assets/js/194.858c665e.js"><link rel="prefetch" href="/assets/js/195.fcb4ec95.js"><link rel="prefetch" href="/assets/js/196.4fb83dae.js"><link rel="prefetch" href="/assets/js/197.3ebc352a.js"><link rel="prefetch" href="/assets/js/198.e03f20a5.js"><link rel="prefetch" href="/assets/js/199.391e3dad.js"><link rel="prefetch" href="/assets/js/20.f5c3f97a.js"><link rel="prefetch" href="/assets/js/200.31246457.js"><link rel="prefetch" href="/assets/js/201.d0e352f1.js"><link rel="prefetch" href="/assets/js/202.78caff39.js"><link rel="prefetch" href="/assets/js/203.ba39ad67.js"><link rel="prefetch" href="/assets/js/204.6e4daec9.js"><link rel="prefetch" href="/assets/js/205.ebce75db.js"><link rel="prefetch" href="/assets/js/206.023dd80c.js"><link rel="prefetch" href="/assets/js/207.bfeb3739.js"><link rel="prefetch" href="/assets/js/208.347c75dd.js"><link rel="prefetch" href="/assets/js/209.7eee0d5f.js"><link rel="prefetch" href="/assets/js/21.c51039b8.js"><link rel="prefetch" href="/assets/js/210.44989fc8.js"><link rel="prefetch" href="/assets/js/211.a8806340.js"><link rel="prefetch" href="/assets/js/212.7232ed3c.js"><link rel="prefetch" href="/assets/js/213.5949fc7a.js"><link rel="prefetch" href="/assets/js/214.a980dd61.js"><link rel="prefetch" href="/assets/js/215.549f5c1a.js"><link rel="prefetch" href="/assets/js/216.2d2823ae.js"><link rel="prefetch" href="/assets/js/217.c6922dd3.js"><link rel="prefetch" href="/assets/js/218.f3366826.js"><link rel="prefetch" href="/assets/js/219.f3981b5c.js"><link rel="prefetch" href="/assets/js/22.9db74793.js"><link rel="prefetch" href="/assets/js/220.911e4d42.js"><link rel="prefetch" href="/assets/js/221.cf9b7c2e.js"><link rel="prefetch" href="/assets/js/222.6411a10a.js"><link rel="prefetch" href="/assets/js/223.f6bab2d3.js"><link rel="prefetch" href="/assets/js/224.02da6c08.js"><link rel="prefetch" href="/assets/js/225.6a941043.js"><link rel="prefetch" href="/assets/js/226.c6c2c562.js"><link rel="prefetch" href="/assets/js/227.72fda170.js"><link rel="prefetch" href="/assets/js/228.dc428c68.js"><link rel="prefetch" href="/assets/js/229.984376b2.js"><link rel="prefetch" href="/assets/js/23.cb31e06e.js"><link rel="prefetch" href="/assets/js/230.8e40c1e0.js"><link rel="prefetch" href="/assets/js/231.47450f4a.js"><link rel="prefetch" href="/assets/js/232.70999838.js"><link rel="prefetch" href="/assets/js/233.273fd09d.js"><link rel="prefetch" href="/assets/js/234.0c4e093d.js"><link rel="prefetch" href="/assets/js/235.d944ffbe.js"><link rel="prefetch" href="/assets/js/236.5348934c.js"><link rel="prefetch" href="/assets/js/237.1b2bbcbf.js"><link rel="prefetch" href="/assets/js/238.fc59a84e.js"><link rel="prefetch" href="/assets/js/239.73a2b679.js"><link rel="prefetch" href="/assets/js/24.02c5f969.js"><link rel="prefetch" href="/assets/js/240.3930d498.js"><link rel="prefetch" href="/assets/js/241.9c812cf8.js"><link rel="prefetch" href="/assets/js/242.7cc5786b.js"><link rel="prefetch" href="/assets/js/243.cb4de1c2.js"><link rel="prefetch" href="/assets/js/244.aafd241c.js"><link rel="prefetch" href="/assets/js/245.ee2d53c8.js"><link rel="prefetch" href="/assets/js/246.ad91bca1.js"><link rel="prefetch" href="/assets/js/247.63d000bf.js"><link rel="prefetch" href="/assets/js/248.33941570.js"><link rel="prefetch" href="/assets/js/249.5c7cdf57.js"><link rel="prefetch" href="/assets/js/25.adfa3cb9.js"><link rel="prefetch" href="/assets/js/250.785daeda.js"><link rel="prefetch" href="/assets/js/251.acb638b0.js"><link rel="prefetch" href="/assets/js/252.ff0e4b27.js"><link rel="prefetch" href="/assets/js/253.10fa2291.js"><link rel="prefetch" href="/assets/js/254.43b3954f.js"><link rel="prefetch" href="/assets/js/255.10f75bb8.js"><link rel="prefetch" href="/assets/js/256.4cead635.js"><link rel="prefetch" href="/assets/js/257.358c06b8.js"><link rel="prefetch" href="/assets/js/258.91422536.js"><link rel="prefetch" href="/assets/js/259.a87b0560.js"><link rel="prefetch" href="/assets/js/26.a21751e1.js"><link rel="prefetch" href="/assets/js/260.050a52db.js"><link rel="prefetch" href="/assets/js/261.c3887331.js"><link rel="prefetch" href="/assets/js/262.05b9aaf2.js"><link rel="prefetch" href="/assets/js/263.97c06e5c.js"><link rel="prefetch" href="/assets/js/264.da254a5c.js"><link rel="prefetch" href="/assets/js/265.a87abf1c.js"><link rel="prefetch" href="/assets/js/266.0aacb6d8.js"><link rel="prefetch" href="/assets/js/267.f0445481.js"><link rel="prefetch" href="/assets/js/268.d848e4af.js"><link rel="prefetch" href="/assets/js/269.264a3f4a.js"><link rel="prefetch" href="/assets/js/27.628f1a4e.js"><link rel="prefetch" href="/assets/js/270.b34e0a93.js"><link rel="prefetch" href="/assets/js/271.ca3b845c.js"><link rel="prefetch" href="/assets/js/272.7d9b1ec6.js"><link rel="prefetch" href="/assets/js/273.a7496d07.js"><link rel="prefetch" href="/assets/js/274.e044bf4c.js"><link rel="prefetch" href="/assets/js/275.77ad139c.js"><link rel="prefetch" href="/assets/js/276.0226d8a4.js"><link rel="prefetch" href="/assets/js/277.75ec4ee6.js"><link rel="prefetch" href="/assets/js/278.5695cfdd.js"><link rel="prefetch" href="/assets/js/279.64db9469.js"><link rel="prefetch" href="/assets/js/28.759af323.js"><link rel="prefetch" href="/assets/js/280.98070487.js"><link rel="prefetch" href="/assets/js/281.797c6f51.js"><link rel="prefetch" href="/assets/js/282.d06a0847.js"><link rel="prefetch" href="/assets/js/283.bfcc4a12.js"><link rel="prefetch" href="/assets/js/284.bab952f1.js"><link rel="prefetch" href="/assets/js/285.26e93b91.js"><link rel="prefetch" href="/assets/js/286.a450ebd8.js"><link rel="prefetch" href="/assets/js/287.60f1e48e.js"><link rel="prefetch" href="/assets/js/288.96bc8356.js"><link rel="prefetch" href="/assets/js/289.9d50b5e7.js"><link rel="prefetch" href="/assets/js/29.96409f42.js"><link rel="prefetch" href="/assets/js/290.4343f223.js"><link rel="prefetch" href="/assets/js/291.bcd70a31.js"><link rel="prefetch" href="/assets/js/292.247ffff6.js"><link rel="prefetch" href="/assets/js/293.9786d8c9.js"><link rel="prefetch" href="/assets/js/294.f280385c.js"><link rel="prefetch" href="/assets/js/295.4d602e2a.js"><link rel="prefetch" href="/assets/js/296.c7c5f7b3.js"><link rel="prefetch" href="/assets/js/297.736c960a.js"><link rel="prefetch" href="/assets/js/298.e33406ee.js"><link rel="prefetch" href="/assets/js/299.830b1f91.js"><link rel="prefetch" href="/assets/js/30.62148c8f.js"><link rel="prefetch" href="/assets/js/300.7341fd17.js"><link rel="prefetch" href="/assets/js/301.2424c9f5.js"><link rel="prefetch" href="/assets/js/302.ea15b5c9.js"><link rel="prefetch" href="/assets/js/303.8ba60824.js"><link rel="prefetch" href="/assets/js/304.1251b3a9.js"><link rel="prefetch" href="/assets/js/305.a7fbf2b0.js"><link rel="prefetch" href="/assets/js/306.e97d48e8.js"><link rel="prefetch" href="/assets/js/307.21806975.js"><link rel="prefetch" href="/assets/js/308.3d44d2fb.js"><link rel="prefetch" href="/assets/js/309.8e756d90.js"><link rel="prefetch" href="/assets/js/31.4d760ff1.js"><link rel="prefetch" href="/assets/js/310.adde4356.js"><link rel="prefetch" href="/assets/js/311.312ac6bb.js"><link rel="prefetch" href="/assets/js/312.8b8faf0a.js"><link rel="prefetch" href="/assets/js/313.cfc9fdf9.js"><link rel="prefetch" href="/assets/js/314.b6d6d34d.js"><link rel="prefetch" href="/assets/js/315.53dd7377.js"><link rel="prefetch" href="/assets/js/316.90805026.js"><link rel="prefetch" href="/assets/js/317.1155c12b.js"><link rel="prefetch" href="/assets/js/318.e5d99e4a.js"><link rel="prefetch" href="/assets/js/319.9bcc7940.js"><link rel="prefetch" href="/assets/js/32.7435c5a6.js"><link rel="prefetch" href="/assets/js/320.fb027c7b.js"><link rel="prefetch" href="/assets/js/321.cc97a006.js"><link rel="prefetch" href="/assets/js/322.c109c78d.js"><link rel="prefetch" href="/assets/js/323.118060ea.js"><link rel="prefetch" href="/assets/js/324.27e06544.js"><link rel="prefetch" href="/assets/js/325.ab6bfc7d.js"><link rel="prefetch" href="/assets/js/326.8946aa04.js"><link rel="prefetch" href="/assets/js/327.7176b359.js"><link rel="prefetch" href="/assets/js/328.0f101700.js"><link rel="prefetch" href="/assets/js/329.586d4ccc.js"><link rel="prefetch" href="/assets/js/33.a66f268d.js"><link rel="prefetch" href="/assets/js/330.607ddefe.js"><link rel="prefetch" href="/assets/js/331.5a369df2.js"><link rel="prefetch" href="/assets/js/332.2197f189.js"><link rel="prefetch" href="/assets/js/333.fd9ee902.js"><link rel="prefetch" href="/assets/js/334.01839d98.js"><link rel="prefetch" href="/assets/js/335.346aee34.js"><link rel="prefetch" href="/assets/js/336.64cddcc1.js"><link rel="prefetch" href="/assets/js/337.68b3e628.js"><link rel="prefetch" href="/assets/js/338.c66377c3.js"><link rel="prefetch" href="/assets/js/339.121a6802.js"><link rel="prefetch" href="/assets/js/34.9cbf36a2.js"><link rel="prefetch" href="/assets/js/340.c83a2fa8.js"><link rel="prefetch" href="/assets/js/341.1be49d38.js"><link rel="prefetch" href="/assets/js/342.0d9d6820.js"><link rel="prefetch" href="/assets/js/343.6335ee42.js"><link rel="prefetch" href="/assets/js/344.868282b4.js"><link rel="prefetch" href="/assets/js/345.06695a4a.js"><link rel="prefetch" href="/assets/js/346.fe8af61b.js"><link rel="prefetch" href="/assets/js/347.58569333.js"><link rel="prefetch" href="/assets/js/348.0830cc27.js"><link rel="prefetch" href="/assets/js/349.b3cd9cc9.js"><link rel="prefetch" href="/assets/js/35.81049534.js"><link rel="prefetch" href="/assets/js/350.f1e95c9d.js"><link rel="prefetch" href="/assets/js/351.88f89e69.js"><link rel="prefetch" href="/assets/js/352.7a7a6232.js"><link rel="prefetch" href="/assets/js/353.15681001.js"><link rel="prefetch" href="/assets/js/354.bcaa56e3.js"><link rel="prefetch" href="/assets/js/355.7021b500.js"><link rel="prefetch" href="/assets/js/356.8f1a3829.js"><link rel="prefetch" href="/assets/js/357.623dfb44.js"><link rel="prefetch" href="/assets/js/358.85f7fbc5.js"><link rel="prefetch" href="/assets/js/359.b8c96a21.js"><link rel="prefetch" href="/assets/js/36.073f9ab9.js"><link rel="prefetch" href="/assets/js/360.f61c2894.js"><link rel="prefetch" href="/assets/js/361.46a4047f.js"><link rel="prefetch" href="/assets/js/362.b330c09d.js"><link rel="prefetch" href="/assets/js/363.d137b86f.js"><link rel="prefetch" href="/assets/js/364.402435ed.js"><link rel="prefetch" href="/assets/js/365.e344443b.js"><link rel="prefetch" href="/assets/js/366.d9fded9e.js"><link rel="prefetch" href="/assets/js/367.e53759c7.js"><link rel="prefetch" href="/assets/js/368.1b24fb84.js"><link rel="prefetch" href="/assets/js/369.b2c8eaa5.js"><link rel="prefetch" href="/assets/js/37.fb882849.js"><link rel="prefetch" href="/assets/js/370.5a7c22ee.js"><link rel="prefetch" href="/assets/js/371.7ac96b1c.js"><link rel="prefetch" href="/assets/js/372.3f298e2e.js"><link rel="prefetch" href="/assets/js/373.8544e000.js"><link rel="prefetch" href="/assets/js/374.f5ad0781.js"><link rel="prefetch" href="/assets/js/375.26b72aab.js"><link rel="prefetch" href="/assets/js/376.20b47eb0.js"><link rel="prefetch" href="/assets/js/377.1cf38540.js"><link rel="prefetch" href="/assets/js/378.98c3e351.js"><link rel="prefetch" href="/assets/js/379.1a207e14.js"><link rel="prefetch" href="/assets/js/38.13017540.js"><link rel="prefetch" href="/assets/js/380.837dbcf9.js"><link rel="prefetch" href="/assets/js/381.04a1fbb2.js"><link rel="prefetch" href="/assets/js/382.d4709985.js"><link rel="prefetch" href="/assets/js/383.656bf094.js"><link rel="prefetch" href="/assets/js/384.c6fce3db.js"><link rel="prefetch" href="/assets/js/385.0ee9d3be.js"><link rel="prefetch" href="/assets/js/386.5dcfe8a7.js"><link rel="prefetch" href="/assets/js/387.c8ef3dba.js"><link rel="prefetch" href="/assets/js/388.cf2ff1bb.js"><link rel="prefetch" href="/assets/js/39.5a01641c.js"><link rel="prefetch" href="/assets/js/40.4966f608.js"><link rel="prefetch" href="/assets/js/41.9d823ec0.js"><link rel="prefetch" href="/assets/js/42.5a381f1e.js"><link rel="prefetch" href="/assets/js/43.175d6c68.js"><link rel="prefetch" href="/assets/js/44.f4f1cc7e.js"><link rel="prefetch" href="/assets/js/45.ac12fa25.js"><link rel="prefetch" href="/assets/js/46.7f75a105.js"><link rel="prefetch" href="/assets/js/47.9ce3d8e1.js"><link rel="prefetch" href="/assets/js/48.a579dc8d.js"><link rel="prefetch" href="/assets/js/49.388ae027.js"><link rel="prefetch" href="/assets/js/5.9497fec4.js"><link rel="prefetch" href="/assets/js/50.9bd1e73b.js"><link rel="prefetch" href="/assets/js/51.c36edf0f.js"><link rel="prefetch" href="/assets/js/52.ff8988d9.js"><link rel="prefetch" href="/assets/js/53.695ac4fc.js"><link rel="prefetch" href="/assets/js/54.81946127.js"><link rel="prefetch" href="/assets/js/56.22ea0d5a.js"><link rel="prefetch" href="/assets/js/57.b9e2e15b.js"><link rel="prefetch" href="/assets/js/58.cc88ef46.js"><link rel="prefetch" href="/assets/js/59.a6de9203.js"><link rel="prefetch" href="/assets/js/6.8386189b.js"><link rel="prefetch" href="/assets/js/60.77346694.js"><link rel="prefetch" href="/assets/js/61.595607d0.js"><link rel="prefetch" href="/assets/js/62.1fe7977e.js"><link rel="prefetch" href="/assets/js/63.479c4c60.js"><link rel="prefetch" href="/assets/js/64.901b1211.js"><link rel="prefetch" href="/assets/js/65.eb2a9322.js"><link rel="prefetch" href="/assets/js/66.a1c1b762.js"><link rel="prefetch" href="/assets/js/67.0e424aee.js"><link rel="prefetch" href="/assets/js/68.3e9a4c14.js"><link rel="prefetch" href="/assets/js/69.e8e6369a.js"><link rel="prefetch" href="/assets/js/7.3990d32a.js"><link rel="prefetch" href="/assets/js/70.afe1900d.js"><link rel="prefetch" href="/assets/js/71.3ef6b84a.js"><link rel="prefetch" href="/assets/js/72.89c26ea8.js"><link rel="prefetch" href="/assets/js/73.7266db17.js"><link rel="prefetch" href="/assets/js/74.3de2ac13.js"><link rel="prefetch" href="/assets/js/75.82472c3e.js"><link rel="prefetch" href="/assets/js/76.4979aa5a.js"><link rel="prefetch" href="/assets/js/77.6af356eb.js"><link rel="prefetch" href="/assets/js/78.e17f915d.js"><link rel="prefetch" href="/assets/js/79.0a7900c9.js"><link rel="prefetch" href="/assets/js/8.ba89a523.js"><link rel="prefetch" href="/assets/js/80.fdf011e3.js"><link rel="prefetch" href="/assets/js/81.ec825146.js"><link rel="prefetch" href="/assets/js/82.c584c578.js"><link rel="prefetch" href="/assets/js/83.e6078be8.js"><link rel="prefetch" href="/assets/js/84.a23478ff.js"><link rel="prefetch" href="/assets/js/85.2c553d72.js"><link rel="prefetch" href="/assets/js/86.6b825d35.js"><link rel="prefetch" href="/assets/js/87.6355efd6.js"><link rel="prefetch" href="/assets/js/88.7950bed8.js"><link rel="prefetch" href="/assets/js/89.efaa7593.js"><link rel="prefetch" href="/assets/js/9.27a398bf.js"><link rel="prefetch" href="/assets/js/90.de61f5b1.js"><link rel="prefetch" href="/assets/js/91.ef8fc055.js"><link rel="prefetch" href="/assets/js/92.2f12dec3.js"><link rel="prefetch" href="/assets/js/93.185172d2.js"><link rel="prefetch" href="/assets/js/94.48624406.js"><link rel="prefetch" href="/assets/js/95.cb24d842.js"><link rel="prefetch" href="/assets/js/96.927c66b8.js"><link rel="prefetch" href="/assets/js/97.ed0e4c9c.js"><link rel="prefetch" href="/assets/js/98.5400dcbf.js"><link rel="prefetch" href="/assets/js/99.e7bb67b9.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.87a1c24f.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.bde3e2d0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7c6fafd0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-5719ee36><div data-v-5719ee36><div class="password-shadow password-wrapper-out" style="display:none;" data-v-d55d3696 data-v-5719ee36 data-v-5719ee36><h3 class="title" data-v-d55d3696>前端Jeek</h3> <p class="description" data-v-d55d3696>每一个不曾起舞的日子，都是对生命的辜负！</p> <label id="box" class="inputBox" data-v-d55d3696><input type="password" value="" data-v-d55d3696> <span data-v-d55d3696>Konck! Knock!</span> <button data-v-d55d3696>OK</button></label> <div class="footer" data-v-d55d3696><span data-v-d55d3696><i class="iconfont reco-theme" data-v-d55d3696></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-d55d3696>vuePress-theme-reco</a></span> <span data-v-d55d3696><i class="iconfont reco-copyright" data-v-d55d3696></i> <a data-v-d55d3696><span data-v-d55d3696>前端Jeek</span>
+          
+        <span data-v-d55d3696>2018 - </span>
+        2026
+      </a></span></div></div> <div class="hide" data-v-5719ee36><header class="navbar" data-v-5719ee36><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/avatar.png" alt="前端Jeek" class="logo"> <span class="site-name">前端Jeek</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://keekuun-blog-search.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-search"></i>
+  AI 检索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>框架</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  Flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Node &amp; NestJS</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  Node.js
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  NestJS
+</a></li></ul></li><li class="dropdown-item"><h4>Go &amp; Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  Golang
+</a></li><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  Python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  MongoDB
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      AI
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://hello-agents.datawhale.cc/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Hello Agents
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="/ai/github-ai.html" class="nav-link"><i class="undefined"></i>
+  GitHub AI 库
+</a></li><li class="dropdown-item"><!----> <a href="/ai/skills-guide.html" class="nav-link"><i class="undefined"></i>
+  Skills 入门指南
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      专题
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/books/The-Mythical-Man-Month-zh/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/label-studio.html" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化 / 构建
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git &amp; CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tools/code-tool.html" class="nav-link"><i class="undefined"></i>
+  常用工具
+</a></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-5719ee36></div> <aside class="sidebar" data-v-5719ee36><div class="personal-info-wrapper" data-v-6557b968 data-v-5719ee36><img src="/images/avatar.png" alt="author-avatar" class="personal-img" data-v-6557b968> <h3 class="name" data-v-6557b968>
+    前端Jeek
+  </h3> <div class="num" data-v-6557b968><div data-v-6557b968><h3 data-v-6557b968>328</h3> <h6 data-v-6557b968>文章</h6></div> <div data-v-6557b968><h3 data-v-6557b968>139</h3> <h6 data-v-6557b968>标签</h6></div></div> <ul class="social-links" data-v-6557b968></ul> <hr data-v-6557b968></div> <nav class="nav-links"><div class="nav-item"><a href="https://keekuun-blog-search.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-search"></i>
+  AI 检索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>框架</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  Flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Node &amp; NestJS</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  Node.js
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  NestJS
+</a></li></ul></li><li class="dropdown-item"><h4>Go &amp; Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  Golang
+</a></li><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  Python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  MongoDB
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      AI
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://hello-agents.datawhale.cc/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Hello Agents
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="/ai/github-ai.html" class="nav-link"><i class="undefined"></i>
+  GitHub AI 库
+</a></li><li class="dropdown-item"><!----> <a href="/ai/skills-guide.html" class="nav-link"><i class="undefined"></i>
+  Skills 入门指南
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      专题
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/books/The-Mythical-Man-Month-zh/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/label-studio.html" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化 / 构建
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git &amp; CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tools/code-tool.html" class="nav-link"><i class="undefined"></i>
+  常用工具
+</a></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ai</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ai/01-frontend-ai-introduction.html" class="sidebar-link">前端开发者的 AI 入门指南：你需要知道的所有概念</a></li><li><a href="/ai/02-transformer-explained.html" class="sidebar-link">LLM 工作原理：用前端思维理解 Transformer</a></li><li><a href="/ai/03-llm-comparison-guide.html" class="sidebar-link">主流大模型对比与选型指南</a></li><li><a href="/ai/04-prompt-engineering-guide.html" aria-current="page" class="active sidebar-link">Prompt Engineering 完全指南</a></li><li><a href="/ai/05-advanced-prompt-techniques.html" class="sidebar-link">高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning</a></li><li><a href="/ai/06-prompt-debugging-optimization.html" class="sidebar-link">Prompt 调试与优化实战</a></li><li><a href="/ai/07-ai-agent-architecture.html" class="sidebar-link">深入理解 AI Agent 架构</a></li><li><a href="/ai/08-build-first-agent.html" class="sidebar-link">构建你的第一个 AI Agent - 从零到一的实战教程</a></li><li><a href="/ai/09-tools-system-design.html" class="sidebar-link">Tools 系统设计与实现 - 让 Agent 拥有超能力</a></li><li><a href="/ai/10-memory-planning-agent.html" class="sidebar-link">Memory 与 Planning：让 Agent 更智能</a></li><li><a href="/ai/ai-agent-learning-roadmap.html" class="sidebar-link">AI Agent 前端开发者学习路线图 - 从入门到实战</a></li><li><a href="/ai/github-ai.html" class="sidebar-link">GitHub AI 流行库</a></li><li><a href="/ai/rag-blog-knowledge-search.html" class="sidebar-link">给个人博客加上 RAG 知识库检索</a></li><li><a href="/ai/skills-guide.html" class="sidebar-link">Skills 入门指南</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-d55d3696 data-v-5719ee36><h3 class="title" data-v-d55d3696>Prompt Engineering 完全指南</h3> <!----> <label id="box" class="inputBox" data-v-d55d3696><input type="password" value="" data-v-d55d3696> <span data-v-d55d3696>Konck! Knock!</span> <button data-v-d55d3696>OK</button></label> <div class="footer" data-v-d55d3696><span data-v-d55d3696><i class="iconfont reco-theme" data-v-d55d3696></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-d55d3696>vuePress-theme-reco</a></span> <span data-v-d55d3696><i class="iconfont reco-copyright" data-v-d55d3696></i> <a data-v-d55d3696><span data-v-d55d3696>前端Jeek</span>
+          
+        <span data-v-d55d3696>2018 - </span>
+        2026
+      </a></span></div></div> <div data-v-5719ee36><div data-v-5719ee36><main class="page" style="padding-right:0;"><section style="display:;"><div class="page-title"><h1 class="title">Prompt Engineering 完全指南</h1> <div data-v-9a39fc4a><i class="iconfont reco-account" data-v-9a39fc4a><span data-v-9a39fc4a>前端Jeek</span></i> <i class="iconfont reco-date" data-v-9a39fc4a><span data-v-9a39fc4a>2026/4/21</span></i> <i class="iconfont reco-eye" data-v-9a39fc4a><span id="/ai/04-prompt-engineering-guide.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-9a39fc4a><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-9a39fc4a><span class="tag-item" data-v-9a39fc4a>Prompt Engineering</span><span class="tag-item" data-v-9a39fc4a>LLM</span><span class="tag-item" data-v-9a39fc4a>Best Practices</span><span class="tag-item" data-v-9a39fc4a>Tutorial</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="prompt-engineering-完全指南-让-ai-听懂你的话"><a href="#prompt-engineering-完全指南-让-ai-听懂你的话" class="header-anchor">🌙</a> Prompt Engineering 完全指南：让 AI 听懂你的话</h1> <blockquote><p>掌握与 LLM 高效沟通的艺术，从入门到精通</p></blockquote> <h2 id="📚-目录"><a href="#📚-目录" class="header-anchor">🌙</a> 📚 目录</h2> <ul><li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-prompt-engineering">什么是 Prompt Engineering</a></li> <li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AD%A6%E4%B9%A0-prompt-engineering">为什么需要学习 Prompt Engineering</a></li> <li><a href="#%E5%9F%BA%E7%A1%80%E5%8E%9F%E5%88%99%E5%92%8C%E6%8A%80%E5%B7%A7">基础原则和技巧</a></li> <li><a href="#%E9%AB%98%E7%BA%A7-prompt-%E6%A8%A1%E5%BC%8F">高级 Prompt 模式</a></li> <li><a href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E8%AF%A6%E8%A7%A3">实战案例详解</a></li> <li><a href="#%E8%B0%83%E8%AF%95%E5%92%8C%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7">调试和优化技巧</a></li> <li><a href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E5%92%8C%E9%81%BF%E5%85%8D%E6%96%B9%E6%B3%95">常见错误和避免方法</a></li> <li><a href="#%E5%B7%A5%E5%85%B7%E5%92%8C%E8%B5%84%E6%BA%90">工具和资源</a></li> <li><a href="#%E7%BB%83%E4%B9%A0%E5%92%8C%E6%8C%91%E6%88%98">练习和挑战</a></li></ul> <hr> <h2 id="什么是-prompt-engineering"><a href="#什么是-prompt-engineering" class="header-anchor">🌙</a> 什么是 Prompt Engineering</h2> <h3 id="定义"><a href="#定义" class="header-anchor">🌙</a> 定义</h3> <p><strong>Prompt Engineering（提示工程）</strong> 是设计和优化输入文本（prompt）的艺术和科学，目的是引导 LLM 生成高质量、准确、相关的输出。</p> <p><strong>简单类比：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>传统编程：你编写代码告诉计算机怎么做
+Prompt Engineering：你用自然语言告诉 AI 做什么
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="核心思想"><a href="#核心思想" class="header-anchor">🌙</a> 核心思想</h3> <p>LLM 就像一个超级聪明但需要明确指导的助手：</p> <ul><li>✅ 你说得越清楚，它做得越好</li> <li>✅ 提供上下文和示例，它能更好地理解</li> <li>✅ 指定格式和要求，输出更符合预期</li></ul> <h3 id="prompt-的组成要素"><a href="#prompt-的组成要素" class="header-anchor">🌙</a> Prompt 的组成要素</h3> <p>一个完整的 prompt 通常包含：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1. 角色设定 (Role)     - &quot;你是一个资深前端工程师&quot;
+2. 任务描述 (Task)     - &quot;请审查以下代码&quot;
+3. 上下文 (Context)    - &quot;这是一个电商网站的购物车功能&quot;
+4. 约束条件 (Constraints) - &quot;关注性能和安全性&quot;
+5. 输出格式 (Format)   - &quot;以 JSON 格式返回结果&quot;
+6. 示例 (Examples)     - &quot;例如：...&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><hr> <h2 id="为什么需要学习-prompt-engineering"><a href="#为什么需要学习-prompt-engineering" class="header-anchor">🌙</a> 为什么需要学习 Prompt Engineering</h2> <h3 id="实际影响"><a href="#实际影响" class="header-anchor">🌙</a> 实际影响</h3> <p><strong>好的 prompt vs 差的 prompt：</strong></p> <p>❌ <strong>差的 Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>写点关于 React 的东西
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>可能的输出：</strong> 泛泛而谈，缺乏重点，可能不是你想要的</p> <p>✅ <strong>好的 Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个资深前端技术作家。请用 300 字向初学者介绍 React Hooks 的核心概念，
+重点说明 useState 和 useEffect 的使用场景。使用通俗易懂的语言，
+并提供一个简单的代码示例。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>输出质量：</strong> 结构化、针对性强、实用价值高</p> <h3 id="数据说话"><a href="#数据说话" class="header-anchor">🌙</a> 数据说话</h3> <p>根据研究和实践经验：</p> <p>📊 <strong>Prompt 质量可以提升 50-200% 的输出质量</strong></p> <p>📊 <strong>良好的 prompt 可以减少 70% 的迭代次数</strong></p> <p>📊 <strong>专业的 prompt engineering 可以节省 40-60% 的 token 成本</strong></p> <h3 id="对前端开发者的价值"><a href="#对前端开发者的价值" class="header-anchor">🌙</a> 对前端开发者的价值</h3> <p>✅ <strong>提高开发效率</strong></p> <ul><li>快速生成代码片段</li> <li>自动完成重复性任务</li> <li>加速原型开发</li></ul> <p>✅ <strong>改善代码质量</strong></p> <ul><li>获得更好的代码审查建议</li> <li>发现潜在的 bug 和优化点</li> <li>学习最佳实践</li></ul> <p>✅ <strong>增强产品能力</strong></p> <ul><li>构建更智能的用户界面</li> <li>提供更个性化的体验</li> <li>实现自然语言交互</li></ul> <hr> <h2 id="基础原则和技巧"><a href="#基础原则和技巧" class="header-anchor">🌙</a> 基础原则和技巧</h2> <h3 id="原则-1-清晰明确-be-clear-and-specific"><a href="#原则-1-清晰明确-be-clear-and-specific" class="header-anchor">🌙</a> 原则 1：清晰明确（Be Clear and Specific）</h3> <p><strong>核心理念：</strong> LLM 无法读心，必须明确表达你的需求。</p> <p><strong>对比示例：</strong></p> <p>❌ <strong>模糊：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>帮我写个函数
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>✅ <strong>明确：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>用 TypeScript 编写一个函数，实现以下功能：
+- 接收一个字符串数组
+- 过滤出长度大于 5 的字符串
+- 按字母顺序排序
+- 返回新数组
+
+函数签名：function filterAndSort(arr: string[]): string[]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><strong>技巧：</strong></p> <ul><li>使用具体的动词（生成、分析、转换、总结）</li> <li>指定输入和输出的格式</li> <li>说明边界条件和特殊情况</li></ul> <h3 id="原则-2-提供上下文-provide-context"><a href="#原则-2-提供上下文-provide-context" class="header-anchor">🌙</a> 原则 2：提供上下文（Provide Context）</h3> <p><strong>核心理念：</strong> 背景信息帮助 LLM 做出更合适的决策。</p> <p><strong>对比示例：</strong></p> <p>❌ <strong>缺少上下文：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>这个代码有什么问题？
+
+const data = fetchData();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>✅ <strong>提供上下文：</strong></p> <p>我正在开发一个 React 组件，用于显示用户列表。以下是我的代码：</p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">const</span> <span class="token function-variable function">UserList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">[</span>users<span class="token punctuation">,</span> setUsers<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token function">fetchData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setUsers</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token punctuation">{</span>users<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>u <span class="token operator">=&gt;</span> <span class="token operator">&lt;</span>UserCard key<span class="token operator">=</span><span class="token punctuation">{</span>u<span class="token punctuation">.</span>id<span class="token punctuation">}</span> user<span class="token operator">=</span><span class="token punctuation">{</span>u<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>问题：页面初次加载时不显示任何用户，需要刷新才能看到数据。请分析原因并提供修复方案。</p> <p><strong>技巧：</strong></p> <ul><li>说明项目类型和技术栈</li> <li>描述当前的问题或目标</li> <li>提供相关的代码或数据</li></ul> <h3 id="原则-3-使用分隔符-use-delimiters"><a href="#原则-3-使用分隔符-use-delimiters" class="header-anchor">🌙</a> 原则 3：使用分隔符（Use Delimiters）</h3> <p><strong>核心理念：</strong> 清晰区分指令和内容，避免混淆。</p> <p><strong>常用分隔符：</strong></p> <ul><li>三重引号：<code>&quot;&quot;&quot;</code> 或 <code>'''</code></li> <li>三重反引号：<code>```</code></li> <li>XML 标签：<code>&lt;text&gt;&lt;/text&gt;</code></li> <li>破折号：<code>---</code></li></ul> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请分析以下文本的情感倾向：
+
+&quot;&quot;&quot;
+这个产品真的很棒！我非常喜欢它的设计和功能。
+客服态度也很好，响应速度快。强烈推荐！
+&quot;&quot;&quot;
+
+请以 JSON 格式返回：
+{
+    &quot;sentiment&quot;: &quot;positive/negative/neutral&quot;,
+    &quot;confidence&quot;: 0-1,
+    &quot;key_phrases&quot;: [&quot;phrase1&quot;, &quot;phrase2&quot;]
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>好处：</strong></p> <ul><li>防止 prompt 注入攻击</li> <li>清晰区分不同部分</li> <li>提高解析准确性</li></ul> <h3 id="原则-4-指定输出格式-specify-output-format"><a href="#原则-4-指定输出格式-specify-output-format" class="header-anchor">🌙</a> 原则 4：指定输出格式（Specify Output Format）</h3> <p><strong>核心理念：</strong> 明确的格式要求让输出更易用。</p> <p><strong>常见格式：</strong></p> <p><strong>JSON 格式：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请提取以下文章的关键信息，以 JSON 格式返回：
+
+文章：...
+
+{
+    &quot;title&quot;: &quot;文章标题&quot;,
+    &quot;author&quot;: &quot;作者&quot;,
+    &quot;date&quot;: &quot;YYYY-MM-DD&quot;,
+    &quot;summary&quot;: &quot;100字以内的摘要&quot;,
+    &quot;keywords&quot;: [&quot;关键词1&quot;, &quot;关键词2&quot;],
+    &quot;category&quot;: &quot;分类&quot;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p><strong>Markdown 格式：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请用 Markdown 格式总结以下内容：
+
+- 使用二级标题作为章节
+- 每个要点使用无序列表
+- 重要概念使用加粗
+- 代码示例使用代码块
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>表格格式：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请比较 React、Vue 和 Angular，以表格形式呈现：
+
+| 特性 | React | Vue | Angular |
+|------|-------|-----|---------|
+| ...  | ...   | ... | ...     |
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>技巧：</strong></p> <ul><li>提供模板或示例</li> <li>说明必填和选填字段</li> <li>指定数据类型和范围</li></ul> <h3 id="原则-5-分解复杂任务-break-down-complex-tasks"><a href="#原则-5-分解复杂任务-break-down-complex-tasks" class="header-anchor">🌙</a> 原则 5：分解复杂任务（Break Down Complex Tasks）</h3> <p><strong>核心理念：</strong> 将大任务拆分为小步骤，提高成功率。</p> <p><strong>对比示例：</strong></p> <p>❌ <strong>一次性完成复杂任务：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>创建一个完整的电商网站
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>✅ <strong>分步骤执行：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>步骤 1：设计数据库 schema，包含用户、商品、订单表
+
+步骤 2：创建商品列表页面的 React 组件结构
+
+步骤 3：实现购物车的状态管理逻辑
+
+步骤 4：编写结账流程的 API 接口
+
+让我们先从步骤 1 开始...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>技巧：</strong></p> <ul><li>使用编号列表明确步骤</li> <li>每步聚焦一个子任务</li> <li>逐步验证和调整</li></ul> <hr> <h2 id="高级-prompt-模式"><a href="#高级-prompt-模式" class="header-anchor">🌙</a> 高级 Prompt 模式</h2> <h3 id="模式-1-few-shot-learning-少样本学习"><a href="#模式-1-few-shot-learning-少样本学习" class="header-anchor">🌙</a> 模式 1：Few-Shot Learning（少样本学习）</h3> <p><strong>原理：</strong> 通过提供示例，让 LLM 学习模式和格式。</p> <p><strong>基本结构：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>任务描述
+
+示例 1：
+输入：...
+输出：...
+
+示例 2：
+输入：...
+输出：...
+
+现在处理新的输入：
+输入：{your_input}
+输出：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>实际应用：</strong></p> <p><strong>情感分类：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>将以下评论分类为正面、负面或中性：
+
+评论：&quot;这个手机太棒了！&quot;
+情感：正面
+
+评论：&quot;服务很差，不会再来了。&quot;
+情感：负面
+
+评论：&quot;今天天气不错。&quot;
+情感：中性
+
+评论：&quot;快递速度一般，包装还可以。&quot;
+情感：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>代码转换：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>将以下 JavaScript 函数转换为 TypeScript：
+
+示例 1：
+JS: function add(a, b) { return a + b; }
+TS: function add(a: number, b: number): number { return a + b; }
+
+示例 2：
+JS: function greet(name) { return &quot;Hello, &quot; + name; }
+TS: function greet(name: string): string { return `Hello, ${name}`; }
+
+现在转换：
+JS: function multiply(x, y) { return x * y; }
+TS:
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>优势：</strong></p> <ul><li>无需微调模型</li> <li>快速适应新任务</li> <li>提高输出一致性</li></ul> <p><strong>最佳实践：</strong></p> <ul><li>提供 3-5 个多样化的示例</li> <li>示例要覆盖常见情况</li> <li>确保示例的准确性</li></ul> <h3 id="模式-2-chain-of-thought-思维链"><a href="#模式-2-chain-of-thought-思维链" class="header-anchor">🌙</a> 模式 2：Chain of Thought（思维链）</h3> <p><strong>原理：</strong> 引导 LLM 逐步推理，提高复杂问题的准确性。</p> <p><strong>基本技巧：</strong> 添加 &quot;Let's think step by step&quot; 或 &quot;请逐步分析&quot;</p> <p><strong>对比示例：</strong></p> <p>❌ <strong>直接回答：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>如果小明有 5 个苹果，给了小红 2 个，又买了 3 个，现在有几个？
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>可能出错或不解释过程</p> <p>✅ <strong>思维链：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>如果小明有 5 个苹果，给了小红 2 个，又买了 3 个，现在有几个？
+
+请逐步分析：
+1. 初始数量
+2. 给出后的数量
+3. 购买后的数量
+4. 最终答案
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><strong>输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1. 初始数量：5 个苹果
+2. 给了小红 2 个：5 - 2 = 3 个
+3. 又买了 3 个：3 + 3 = 6 个
+4. 最终答案：小明现在有 6 个苹果
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>复杂推理示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>一个房间里有 3 个人，每个人养了 2 只猫，每只猫有 4 条腿。
+房间里总共有多少条腿？
+
+请逐步推理：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>让我逐步分析：
+
+1. 人的腿数：
+   - 3 个人 × 2 条腿 = 6 条腿
+
+2. 猫的数量：
+   - 3 个人 × 2 只猫 = 6 只猫
+
+3. 猫的腿数：
+   - 6 只猫 × 4 条腿 = 24 条腿
+
+4. 总腿数：
+   - 人的腿 + 猫的腿 = 6 + 24 = 30 条腿
+
+答案：房间里总共有 30 条腿。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>适用场景：</strong></p> <ul><li>数学问题</li> <li>逻辑推理</li> <li>复杂分析</li> <li>决策制定</li></ul> <h3 id="模式-3-role-playing-角色扮演"><a href="#模式-3-role-playing-角色扮演" class="header-anchor">🌙</a> 模式 3：Role Playing（角色扮演）</h3> <p><strong>原理：</strong> 赋予 LLM 特定角色，调整其回答风格和专业知识。</p> <p><strong>常见角色：</strong></p> <p><strong>技术专家：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个有 10 年经验的全栈工程师，精通 React、Node.js 和数据库设计。
+请审查以下代码架构并提出优化建议...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>教师/导师：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一位耐心的编程教师，擅长用简单的语言解释复杂概念。
+请向初学者解释什么是闭包...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>产品经理：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个经验丰富的产品经理，专注于用户体验和产品策略。
+请分析以下功能的优缺点...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>创意作家：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个富有创意的文案撰写人，擅长吸引人的标题和描述。
+请为以下产品写 5 个营销文案...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>效果对比：</strong></p> <p><strong>无角色：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>解释 React Hooks
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>有角色：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一位资深 React 开发者和技术讲师。
+请用通俗易懂的语言，配合实际例子，向中级开发者解释 React Hooks 的核心概念和最佳实践。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>技巧：</strong></p> <ul><li>明确角色的专业领域</li> <li>说明角色的经验和风格</li> <li>指定目标受众</li></ul> <h3 id="模式-4-tree-of-thoughts-思维树"><a href="#模式-4-tree-of-thoughts-思维树" class="header-anchor">🌙</a> 模式 4：Tree of Thoughts（思维树）</h3> <p><strong>原理：</strong> 探索多个推理路径，选择最优解。</p> <p><strong>实现方式：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：如何优化这个 React 应用的性能？
+
+请考虑以下三个不同的优化方向，并分别分析：
+
+方向 1：组件层面的优化
+- 可能的方案
+- 优点
+- 缺点
+
+方向 2：数据获取优化
+- 可能的方案
+- 优点
+- 缺点
+
+方向 3：打包和加载优化
+- 可能的方案
+- 优点
+- 缺点
+
+最后，综合评估哪个方向优先级最高，并给出具体实施建议。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><strong>适用场景：</strong></p> <ul><li>需要权衡多个方案</li> <li>复杂决策问题</li> <li>创意设计任务</li></ul> <h3 id="模式-5-self-consistency-自洽性"><a href="#模式-5-self-consistency-自洽性" class="header-anchor">🌙</a> 模式 5：Self-Consistency（自洽性）</h3> <p><strong>原理：</strong> 多次采样，选择最一致的答案。</p> <p><strong>手动实现：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请回答以下问题 3 次，每次独立思考：
+
+问题：JavaScript 中 == 和 === 的区别是什么？
+
+回答 1：
+[等待第一次回答]
+
+回答 2：
+[等待第二次回答]
+
+回答 3：
+[等待第三次回答]
+
+现在，综合三次回答，给出最准确和完整的答案。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>自动化实现（代码）：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">selfConsistentAnswer</span><span class="token punctuation">(</span>
+    question<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+    times <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> answers <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+        <span class="token function">Array</span><span class="token punctuation">(</span>times<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> 
+            <span class="token function">askLLM</span><span class="token punctuation">(</span>question<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// 找到最相似的答案（简化版）</span>
+    <span class="token keyword">const</span> bestAnswer <span class="token operator">=</span> <span class="token function">findMostCommonAnswer</span><span class="token punctuation">(</span>answers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> bestAnswer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>优势：</strong></p> <ul><li>减少随机性错误</li> <li>提高答案可靠性</li> <li>适用于关键任务</li></ul> <h3 id="模式-6-retrieval-augmented-generation-rag-prompt"><a href="#模式-6-retrieval-augmented-generation-rag-prompt" class="header-anchor">🌙</a> 模式 6：Retrieval Augmented Generation (RAG) Prompt</h3> <p><strong>原理：</strong> 结合外部知识，提高准确性和时效性。</p> <p><strong>模板：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>基于以下上下文信息回答问题。如果上下文中没有相关信息，请说明你不知道。
+
+上下文：
+&quot;&quot;&quot;
+{retrieved_documents}
+&quot;&quot;&quot;
+
+问题：{question}
+
+答案：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>实际应用：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>基于以下产品文档回答问题：
+
+文档内容：
+&quot;&quot;&quot;
+Product X 是一款智能家居设备。
+- 价格：$99
+- 电池续航：30 天
+- 支持 WiFi 和 Bluetooth
+- 兼容 iOS 和 Android
+- 保修期：2 年
+&quot;&quot;&quot;
+
+问题：Product X 的电池能用多久？
+
+答案：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>优势：</strong></p> <ul><li>减少幻觉（编造信息）</li> <li>提供可追溯的答案</li> <li>支持私有知识库</li></ul> <hr> <h2 id="实战案例详解"><a href="#实战案例详解" class="header-anchor">🌙</a> 实战案例详解</h2> <h3 id="案例-1-代码生成"><a href="#案例-1-代码生成" class="header-anchor">🌙</a> 案例 1：代码生成</h3> <p><strong>场景：</strong> 生成一个防抖函数</p> <p><strong>差的 Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>写个防抖函数
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>好的 Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请用 TypeScript 实现一个通用的防抖（debounce）函数。
+
+要求：
+1. 函数签名：function debounce&lt;T extends (...args: any[]) =&gt; any&gt;(
+       func: T, 
+       wait: number
+   ): (...args: Parameters&lt;T&gt;) =&gt; void
+
+2. 功能说明：
+   - 在 wait 毫秒内只执行最后一次调用
+   - 支持传递参数给原函数
+   - 保持 this 上下文
+
+3. 添加详细的 JSDoc 注释
+
+4. 提供使用示例
+
+5. 考虑边缘情况（如立即执行的需求）
+
+请先解释实现思路，然后提供代码。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><strong>期望输出结构：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token comment">/**
+ * 防抖函数：在指定时间内只执行最后一次调用
+ * @param func - 要防抖的函数
+ * @param wait - 等待时间（毫秒）
+ * @returns 防抖后的函数
+ */</span>
+<span class="token keyword">function</span> debounce<span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>
+    func<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">,</span>
+    wait<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> Parameters<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> timeoutId<span class="token operator">:</span> ReturnType<span class="token operator">&lt;</span><span class="token keyword">typeof</span> setTimeout<span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> Parameters<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timeoutId <span class="token operator">!==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timeoutId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        timeoutId <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 使用示例</span>
+<span class="token keyword">const</span> handleResize <span class="token operator">=</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Window resized'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'resize'</span><span class="token punctuation">,</span> handleResize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><h3 id="案例-2-代码审查"><a href="#案例-2-代码审查" class="header-anchor">🌙</a> 案例 2：代码审查</h3> <p><strong>场景：</strong> 审查 React 组件</p> <p><strong>Prompt 模板：</strong></p> <div class="language-text line-numbers-mode"><pre class="language-text"><code>你是一个资深 React 开发者。请审查以下组件代码，重点关注：
+
+1. 性能问题
+2. 潜在 bug
+3. 最佳实践遵循情况
+4. 可维护性
+5. 类型安全
+
+对于每个发现的问题：
+- 说明问题所在
+- 解释为什么这是问题
+- 提供修复建议
+- 给出改进后的代码
+
+组件代码：
+```typescript
+{code_here}
+```
+
+请以结构化格式返回审查结果。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p><strong>示例输出：</strong></p> <div class="language-markdown line-numbers-mode"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">##</span> 代码审查报告</span>
+
+<span class="token title important"><span class="token punctuation">###</span> 🔴 严重问题</span>
+
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">问题 1：缺少依赖项数组</span><span class="token punctuation">**</span></span>
+<span class="token list punctuation">-</span> 位置：useEffect hook
+<span class="token list punctuation">-</span> 说明：useEffect 缺少依赖项数组，导致每次渲染都执行
+<span class="token list punctuation">-</span> 修复：添加 [userId] 作为依赖
+
+<span class="token title important"><span class="token punctuation">###</span> 🟡 警告</span>
+
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">问题 2：未处理的加载状态</span><span class="token punctuation">**</span></span>
+<span class="token list punctuation">-</span> 位置：数据获取逻辑
+<span class="token list punctuation">-</span> 说明：没有处理 loading 状态，可能导致用户体验差
+<span class="token list punctuation">-</span> 建议：添加 isLoading 状态和 UI 反馈
+
+<span class="token title important"><span class="token punctuation">###</span> 💡 优化建议</span>
+
+<span class="token bold"><span class="token punctuation">**</span><span class="token content">建议 1：使用 useMemo 优化计算</span><span class="token punctuation">**</span></span>
+<span class="token list punctuation">-</span> 位置：filteredUsers 计算
+<span class="token list punctuation">-</span> 说明：每次渲染都重新计算，可以缓存结果
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="案例-3-文本摘要"><a href="#案例-3-文本摘要" class="header-anchor">🌙</a> 案例 3：文本摘要</h3> <p><strong>场景：</strong> 生成长文章摘要</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个专业的内容编辑。请为以下文章生成三种不同长度的摘要：
+
+1. 一句话摘要（20 字以内）
+2. 短摘要（100 字以内）
+3. 详细摘要（300 字以内，包含主要观点）
+
+要求：
+- 保持客观中立
+- 突出核心信息
+- 使用简洁清晰的语言
+- 不要添加原文中没有的信息
+
+文章内容：
+&quot;&quot;&quot;
+{article_content}
+&quot;&quot;&quot;
+
+请以 JSON 格式返回：
+{
+    &quot;one_liner&quot;: &quot;...&quot;,
+    &quot;short_summary&quot;: &quot;...&quot;,
+    &quot;detailed_summary&quot;: &quot;...&quot;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h3 id="案例-4-api-设计"><a href="#案例-4-api-设计" class="header-anchor">🌙</a> 案例 4：API 设计</h3> <p><strong>场景：</strong> 设计 RESTful API</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个经验丰富的后端架构师。请为一个博客平台设计 RESTful API。
+
+功能需求：
+- 用户注册和登录
+- 创建、读取、更新、删除文章
+- 评论功能
+- 点赞和收藏
+
+设计要求：
+1. 遵循 RESTful 原则
+2. 使用合理的 HTTP 方法和状态码
+3. 考虑分页、过滤、排序
+4. 包含认证和授权
+5. 提供请求/响应示例
+
+请以以下格式输出：
+
+## API 端点列表
+
+### 1. 用户相关
+- `POST /api/v1/users` - 注册用户
+  - Request: {...}
+  - Response: {...}
+
+...
+
+## 认证机制
+...
+
+## 错误处理
+...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><h3 id="案例-5-bug-诊断"><a href="#案例-5-bug-诊断" class="header-anchor">🌙</a> 案例 5：Bug 诊断</h3> <p><strong>场景：</strong> 调试异步代码问题</p> <p><strong>Prompt：</strong></p> <div class="language-text line-numbers-mode"><pre class="language-text"><code>你是一个 JavaScript 调试专家。我遇到了一个异步代码的问题。
+
+问题描述：
+我的代码应该按顺序执行三个异步操作，但实际执行顺序混乱。
+
+代码：
+```javascript
+async function processData() {
+    fetchUserData().then(user =&gt; {
+        console.log('User:', user);
+    });
+    
+    fetchPosts().then(posts =&gt; {
+        console.log('Posts:', posts);
+    });
+    
+    fetchComments().then(comments =&gt; {
+        console.log('Comments:', comments);
+    });
+}
+```
+
+期望输出顺序：User → Posts → Comments
+实际输出：顺序不确定
+
+请：
+1. 分析问题原因
+2. 提供至少两种解决方案
+3. 解释每种方案的优缺点
+4. 推荐最佳实践
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><hr> <h2 id="调试和优化技巧"><a href="#调试和优化技巧" class="header-anchor">🌙</a> 调试和优化技巧</h2> <h3 id="技巧-1-迭代优化"><a href="#技巧-1-迭代优化" class="header-anchor">🌙</a> 技巧 1：迭代优化</h3> <p><strong>流程：</strong></p> <div class="mermaid">
+graph LR
+    A[初始 Prompt] --&gt; B[测试输出]
+    B --&gt; C{满意?}
+    C --&gt;|否| D[分析问题]
+    D --&gt; E[调整 Prompt]
+    E --&gt; B
+    C --&gt;|是| F[完成]
+
+</div> <p><strong>实例：</strong></p> <p><strong>第 1 版：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>写一个排序函数
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>输出：</strong> 基本的冒泡排序</p> <p><strong>第 2 版：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>用 JavaScript 实现快速排序算法，包含注释
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>输出：</strong> 快速排序，但有 bug</p> <p><strong>第 3 版：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>用 TypeScript 实现快速排序算法。
+要求：
+- 泛型支持
+- 处理边界情况（空数组、单元素）
+- 添加单元测试
+- 详细的 JSDoc 注释
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>输出：</strong> 完整、健壮的的实现 ✅</p> <h3 id="技巧-2-a-b-测试"><a href="#技巧-2-a-b-测试" class="header-anchor">🌙</a> 技巧 2：A/B 测试</h3> <p><strong>方法：</strong> 同时尝试多个 prompt 变体，选择最佳结果</p> <p><strong>示例：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">const</span> prompts <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;用简洁的语言解释 React&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;用比喻的方式解释 React&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;用代码示例解释 React&quot;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> results <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+    prompts<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>p <span class="token operator">=&gt;</span> <span class="token function">askLLM</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 人工或使用另一个 LLM 评估哪个最好</span>
+<span class="token keyword">const</span> best <span class="token operator">=</span> <span class="token function">selectBestResult</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h3 id="技巧-3-温度调优"><a href="#技巧-3-温度调优" class="header-anchor">🌙</a> 技巧 3：温度调优</h3> <p><strong>Temperature 参数：</strong></p> <ul><li>0.0-0.3：确定性高，适合事实性问题</li> <li>0.4-0.7：平衡创造性和准确性</li> <li>0.8-1.0：创造性高，适合创意任务</li></ul> <p><strong>调优策略：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token comment">// 代码生成 - 低温度</span>
+<span class="token keyword">const</span> code <span class="token operator">=</span> <span class="token keyword">await</span> llm<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>prompt<span class="token punctuation">,</span> <span class="token punctuation">{</span> temperature<span class="token operator">:</span> <span class="token number">0.2</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 文案创作 - 高温度</span>
+<span class="token keyword">const</span> copy <span class="token operator">=</span> <span class="token keyword">await</span> llm<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>prompt<span class="token punctuation">,</span> <span class="token punctuation">{</span> temperature<span class="token operator">:</span> <span class="token number">0.8</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 通用对话 - 中等温度</span>
+<span class="token keyword">const</span> chat <span class="token operator">=</span> <span class="token keyword">await</span> llm<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>prompt<span class="token punctuation">,</span> <span class="token punctuation">{</span> temperature<span class="token operator">:</span> <span class="token number">0.7</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="技巧-4-系统化测试"><a href="#技巧-4-系统化测试" class="header-anchor">🌙</a> 技巧 4：系统化测试</h3> <p><strong>建立测试集：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">PromptTest</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    prompt<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    expectedBehavior<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> tests<span class="token operator">:</span> PromptTest<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        name<span class="token operator">:</span> <span class="token string">&quot;基本功能&quot;</span><span class="token punctuation">,</span>
+        prompt<span class="token operator">:</span> <span class="token string">&quot;生成一个加法函数&quot;</span><span class="token punctuation">,</span>
+        expectedBehavior<span class="token operator">:</span> <span class="token string">&quot;返回正确的 TypeScript 函数&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        name<span class="token operator">:</span> <span class="token string">&quot;边界情况&quot;</span><span class="token punctuation">,</span>
+        prompt<span class="token operator">:</span> <span class="token string">&quot;处理空输入的排序函数&quot;</span><span class="token punctuation">,</span>
+        expectedBehavior<span class="token operator">:</span> <span class="token string">&quot;返回空数组而不报错&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 运行测试</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> test <span class="token keyword">of</span> tests<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">askLLM</span><span class="token punctuation">(</span>test<span class="token punctuation">.</span>prompt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> passed <span class="token operator">=</span> <span class="token function">evaluateResult</span><span class="token punctuation">(</span>result<span class="token punctuation">,</span> test<span class="token punctuation">.</span>expectedBehavior<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>test<span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>passed <span class="token operator">?</span> <span class="token string">'✅'</span> <span class="token operator">:</span> <span class="token string">'❌'</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h3 id="技巧-5-token-优化"><a href="#技巧-5-token-优化" class="header-anchor">🌙</a> 技巧 5：Token 优化</h3> <p><strong>目标：</strong> 用最少的 token 获得最好的结果</p> <p><strong>优化策略：</strong></p> <ol><li><p><strong>去除冗余词汇</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ &quot;我希望你能够帮助我写一个函数...&quot;
+✅ &quot;写一个函数...&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li> <li><p><strong>使用缩写和术语</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ &quot;超文本标记语言&quot;
+✅ &quot;HTML&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li> <li><p><strong>结构化而非冗长</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 长篇大论的描述
+✅ 清晰的要点列表
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li> <li><p><strong>复用上下文</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token comment">// 在对话中引用之前的内容</span>
+<span class="token string">&quot;基于上面的代码，添加错误处理&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li></ol> <p><strong>监控 Token 使用：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> encode <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'gpt-tokenizer'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> prompt <span class="token operator">=</span> <span class="token string">&quot;Your prompt here&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> tokens <span class="token operator">=</span> <span class="token function">encode</span><span class="token punctuation">(</span>prompt<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Prompt uses </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>tokens<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> tokens</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 估算成本</span>
+<span class="token keyword">const</span> cost <span class="token operator">=</span> <span class="token punctuation">(</span>tokens <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.002</span><span class="token punctuation">;</span> <span class="token comment">// GPT-3.5 价格</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Estimated cost: $</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>cost<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr> <h2 id="常见错误和避免方法"><a href="#常见错误和避免方法" class="header-anchor">🌙</a> 常见错误和避免方法</h2> <h3 id="错误-1-过于模糊"><a href="#错误-1-过于模糊" class="header-anchor">🌙</a> 错误 1：过于模糊</h3> <p>❌ <strong>错误示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>帮我优化代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>✅ <strong>修正：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请优化以下 React 组件的性能，重点关注：
+1. 减少不必要的重渲染
+2. 优化事件处理
+3. 改进数据获取逻辑
+
+代码：...
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="错误-2-一次性要求太多"><a href="#错误-2-一次性要求太多" class="header-anchor">🌙</a> 错误 2：一次性要求太多</h3> <p>❌ <strong>错误示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>创建一个完整的社交媒体应用，包括用户系统、动态发布、评论、点赞、私信、通知等功能
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>✅ <strong>修正：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>让我们分步骤构建社交媒体应用。
+
+第一步：设计用户认证系统的数据库 schema
+- 用户表字段
+- 密码加密策略
+- session 管理
+
+请先完成这一步，我们再继续下一步。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="错误-3-缺少必要的上下文"><a href="#错误-3-缺少必要的上下文" class="header-anchor">🌙</a> 错误 3：缺少必要的上下文</h3> <p>❌ <strong>错误示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>这个为什么报错？
+
+data.map(x =&gt; x.value)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>✅ <strong>修正：</strong></p> <p>TypeScript 报错：Property 'value' does not exist on type 'unknown'.</p> <p>代码：</p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">ApiResponse</span> <span class="token punctuation">{</span>
+    data<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">processResponse</span><span class="token punctuation">(</span>response<span class="token operator">:</span> ApiResponse<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> response<span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=&gt;</span> x<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>我已经尝试将 <code>data</code> 的类型改为 <code>unknown[]</code>，但还是有错。请提供类型安全的解决方案。</p> <h3 id="错误-4-忽略输出格式"><a href="#错误-4-忽略输出格式" class="header-anchor">🌙</a> 错误 4：忽略输出格式</h3> <p>❌ <strong>错误示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>列出 5 个 JavaScript 数组方法
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>输出可能是段落、列表或其他格式，需要额外解析</p> <p>✅ <strong>修正：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>列出 5 个常用的 JavaScript 数组方法，以 JSON 数组格式返回：
+
+[&quot;method1&quot;, &quot;method2&quot;, &quot;method3&quot;, &quot;method4&quot;, &quot;method5&quot;]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="错误-5-没有验证输出"><a href="#错误-5-没有验证输出" class="header-anchor">🌙</a> 错误 5：没有验证输出</h3> <p>❌ <strong>错误做法：</strong>
+直接使用 LLM 的输出，不进行验证</p> <p>✅ <strong>正确做法：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">askLLM</span><span class="token punctuation">(</span>prompt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 验证 JSON 格式</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> parsed <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 验证必需字段</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>parsed<span class="token punctuation">.</span>title <span class="token operator">||</span> <span class="token operator">!</span>parsed<span class="token punctuation">.</span>content<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'Missing required fields'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> parsed<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 重试或降级处理</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'Invalid output, retrying...'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">await</span> <span class="token function">retryWithStricterPrompt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="错误-6-忽视安全性"><a href="#错误-6-忽视安全性" class="header-anchor">🌙</a> 错误 6：忽视安全性</h3> <p>❌ <strong>危险做法：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>执行用户输入的代码：${userInput}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>✅ <strong>安全做法：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token comment">// 1. 输入验证和清理</span>
+<span class="token keyword">const</span> sanitizedInput <span class="token operator">=</span> <span class="token function">sanitizeInput</span><span class="token punctuation">(</span>userInput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2. 使用沙箱环境</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">executeInSandbox</span><span class="token punctuation">(</span>sanitizedInput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 3. 限制权限和资源</span>
+<span class="token comment">// 4. 设置超时</span>
+<span class="token comment">// 5. 审计日志</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr> <h2 id="工具和资源"><a href="#工具和资源" class="header-anchor">🌙</a> 工具和资源</h2> <h3 id="prompt-开发工具"><a href="#prompt-开发工具" class="header-anchor">🌙</a> Prompt 开发工具</h3> <p><strong>1. OpenAI Playground</strong></p> <ul><li>网址：https://platform.openai.com/playground</li> <li>功能：实时测试和调试 prompt</li> <li>特色：可视化界面，参数调节</li></ul> <p><strong>2. Prompt Perfect</strong></p> <ul><li>网址：https://promptperfect.jina.ai/</li> <li>功能：自动优化 prompt</li> <li>特色：AI 辅助改进</li></ul> <p><strong>3. LangSmith</strong></p> <ul><li>网址：https://smith.langchain.com/</li> <li>功能：追踪、调试和评估 LLM 应用</li> <li>特色：完整的观测性平台</li></ul> <p><strong>4. Promptfoo</strong></p> <ul><li>网址：https://www.promptfoo.dev/</li> <li>功能：批量测试和评估 prompt</li> <li>特色：开源，支持多种模型</li></ul> <h3 id="学习资源"><a href="#学习资源" class="header-anchor">🌙</a> 学习资源</h3> <p><strong>官方文档：</strong></p> <ul><li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">OpenAI Prompt Engineering Guide<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://docs.anthropic.com/claude/prompt-library" target="_blank" rel="noopener noreferrer">Anthropic Prompt Library<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://ai.google.dev/docs/prompt_best_practices" target="_blank" rel="noopener noreferrer">Google Prompting Guide<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p><strong>课程：</strong></p> <ul><li><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank" rel="noopener noreferrer">DeepLearning.AI - ChatGPT Prompt Engineering<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://learnprompting.org/" target="_blank" rel="noopener noreferrer">Learn Prompting<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p><strong>社区和资源：</strong></p> <ul><li><a href="https://prompthero.com/" target="_blank" rel="noopener noreferrer">PromptHero<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - 优秀 prompt 示例</li> <li><a href="https://github.com/promptslab/Awesome-Prompt-Engineering" target="_blank" rel="noopener noreferrer">Awesome Prompt Engineering<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.reddit.com/r/PromptEngineering/" target="_blank" rel="noopener noreferrer">r/PromptEngineering<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h3 id="实用库"><a href="#实用库" class="header-anchor">🌙</a> 实用库</h3> <p><strong>Token 计算：</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> gpt-tokenizer
+<span class="token function">npm</span> <span class="token function">install</span> tiktoken
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>Prompt 管理：</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> langchain
+<span class="token function">npm</span> <span class="token function">install</span> @langchain/core
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>测试框架：</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> promptfoo
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><hr> <h2 id="练习和挑战"><a href="#练习和挑战" class="header-anchor">🌙</a> 练习和挑战</h2> <h3 id="练习-1-基础-prompt-改进"><a href="#练习-1-基础-prompt-改进" class="header-anchor">🌙</a> 练习 1：基础 Prompt 改进</h3> <p><strong>原始 Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>写个排序算法
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><strong>任务：</strong> 改进这个 prompt，使其能生成高质量的 TypeScript 排序函数实现。</p> <p><strong>要求：</strong></p> <ul><li>指定排序算法类型</li> <li>要求泛型支持</li> <li>包含测试用例</li> <li>添加性能分析</li></ul> <h3 id="练习-2-few-shot-示例设计"><a href="#练习-2-few-shot-示例设计" class="header-anchor">🌙</a> 练习 2：Few-Shot 示例设计</h3> <p><strong>任务：</strong> 设计一个 few-shot prompt，用于将自然语言转换为 SQL 查询。</p> <p><strong>示例输入：</strong></p> <ul><li>&quot;找出上个月销售额最高的产品&quot;</li> <li>&quot;显示每个用户的订单数量&quot;</li></ul> <p><strong>期望输出：</strong></p> <ul><li>对应的 SQL 查询语句</li></ul> <h3 id="练习-3-chain-of-thought-应用"><a href="#练习-3-chain-of-thought-应用" class="header-anchor">🌙</a> 练习 3：Chain of Thought 应用</h3> <p><strong>问题：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>一个农场有鸡和兔子，总共有 35 个头和 94 条腿。
+问：鸡和兔子各有多少只？
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>任务：</strong> 编写一个 prompt，引导 LLM 使用 Chain of Thought 解决这个问题。</p> <h3 id="练习-4-角色扮演设计"><a href="#练习-4-角色扮演设计" class="header-anchor">🌙</a> 练习 4：角色扮演设计</h3> <p><strong>场景：</strong> 构建一个面试助手</p> <p><strong>任务：</strong> 设计一个 system prompt，让 LLM 扮演技术面试官。</p> <p><strong>要求：</strong></p> <ul><li>针对前端开发岗位</li> <li>能够提出合适的问题</li> <li>评估候选人的回答</li> <li>提供建设性反馈</li></ul> <h3 id="练习-5-prompt-模板化"><a href="#练习-5-prompt-模板化" class="header-anchor">🌙</a> 练习 5：Prompt 模板化</h3> <p><strong>任务：</strong> 创建一个可复用的代码审查 prompt 模板。</p> <p><strong>模板变量：</strong></p> <ul><li><code>{language}</code>: 编程语言</li> <li><code>{framework}</code>: 框架（可选）</li> <li><code>{focus_areas}</code>: 关注的方面</li> <li><code>{code}</code>: 待审查的代码</li></ul> <p><strong>要求：</strong> 模板应该灵活且产生一致的输出格式。</p> <hr> <h2 id="prompt-库-常用模板"><a href="#prompt-库-常用模板" class="header-anchor">🌙</a> Prompt 库：常用模板</h2> <h3 id="模板-1-代码生成"><a href="#模板-1-代码生成" class="header-anchor">🌙</a> 模板 1：代码生成</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个经验丰富的 {language} 开发者。
+
+任务：{task_description}
+
+要求：
+1. {requirement_1}
+2. {requirement_2}
+3. {requirement_3}
+
+约束：
+- {constraint_1}
+- {constraint_2}
+
+输出格式：
+- 先解释思路
+- 提供完整代码
+- 添加注释
+- 给出使用示例
+
+代码：
+{code}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="模板-2-代码审查"><a href="#模板-2-代码审查" class="header-anchor">🌙</a> 模板 2：代码审查</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>角色：资深 {language} 代码审查员
+
+请审查以下代码，关注：
+- {focus_area_1}
+- {focus_area_2}
+- {focus_area_3}
+
+对于每个问题：
+1. 问题描述
+2. 严重程度（高/中/低）
+3. 修复建议
+4. 改进后的代码
+
+代码：
+{code}
+
+以 Markdown 格式返回审查报告。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="模板-3-文档生成"><a href="#模板-3-文档生成" class="header-anchor">🌙</a> 模板 3：文档生成</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个技术文档作家。
+
+任务：为以下 {item_type} 编写文档
+
+内容：
+{content}
+
+要求：
+- 目标读者：{audience}
+- 语气：{tone}
+- 长度：{length}
+
+包含章节：
+1. 概述
+2. 使用方法
+3. 参数说明
+4. 示例
+5. 常见问题
+
+使用 Markdown 格式。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h3 id="模板-4-数据分析"><a href="#模板-4-数据分析" class="header-anchor">🌙</a> 模板 4：数据分析</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个数据分析师。
+
+数据集描述：
+{dataset_description}
+
+问题：{question}
+
+请：
+1. 解释分析方法
+2. 提供分析步骤
+3. 给出结论
+4. 如有必要，提供可视化建议
+
+数据：
+{data}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="模板-5-bug-修复"><a href="#模板-5-bug-修复" class="header-anchor">🌙</a> 模板 5：Bug 修复</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个调试专家。
+
+问题描述：
+{problem_description}
+
+错误信息：
+{error_message}
+
+相关代码：
+{code}
+
+已尝试的解决方案：
+{attempted_solutions}
+
+请：
+1. 分析根本原因
+2. 提供解决方案
+3. 解释为什么这样修复
+4. 预防措施
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><hr> <h2 id="总结与最佳实践"><a href="#总结与最佳实践" class="header-anchor">🌙</a> 总结与最佳实践</h2> <h3 id="核心原则回顾"><a href="#核心原则回顾" class="header-anchor">🌙</a> 核心原则回顾</h3> <p>✅ <strong>CLARITY（清晰）</strong></p> <ul><li>明确表达需求</li> <li>避免歧义</li> <li>具体而非抽象</li></ul> <p>✅ <strong>CONTEXT（上下文）</strong></p> <ul><li>提供背景信息</li> <li>说明目标和约束</li> <li>给出相关示例</li></ul> <p>✅ <strong>CONSTRAINTS（约束）</strong></p> <ul><li>指定输出格式</li> <li>设定边界条件</li> <li>明确质量标准</li></ul> <p>✅ <strong>COMPOSITION（结构化）</strong></p> <ul><li>分解复杂任务</li> <li>使用分隔符</li> <li>逻辑清晰的组织</li></ul> <p>✅ <strong>CONSISTENCY（一致性）</strong></p> <ul><li>保持风格统一</li> <li>使用模板</li> <li>建立规范</li></ul> <h3 id="prompt-engineering-checklist"><a href="#prompt-engineering-checklist" class="header-anchor">🌙</a> Prompt Engineering Checklist</h3> <p>在发送 prompt 前，检查：</p> <ul><li>[ ] 目标是否明确？</li> <li>[ ] 上下文是否充分？</li> <li>[ ] 输出格式是否指定？</li> <li>[ ] 是否有示例（如需要）？</li> <li>[ ] 是否考虑了边界情况？</li> <li>[ ] 是否使用了分隔符？</li> <li>[ ] 语言是否简洁清晰？</li> <li>[ ] 是否避免了歧义？</li> <li>[ ] 是否适合任务的复杂度？</li> <li>[ ] 是否考虑了安全性？</li></ul> <h3 id="进阶学习路径"><a href="#进阶学习路径" class="header-anchor">🌙</a> 进阶学习路径</h3> <p><strong>Level 1: 基础</strong></p> <ul><li>掌握基本原则</li> <li>练习常见模式</li> <li>建立 prompt 库</li></ul> <p><strong>Level 2: 中级</strong></p> <ul><li>熟练使用高级模式</li> <li>优化 token 使用</li> <li>系统化测试</li></ul> <p><strong>Level 3: 高级</strong></p> <ul><li>自定义 prompt 框架</li> <li>自动化评估系统</li> <li>贡献开源项目</li></ul> <h3 id="持续改进"><a href="#持续改进" class="header-anchor">🌙</a> 持续改进</h3> <p><strong>每周实践：</strong></p> <ul><li>📝 记录成功的 prompt</li> <li>🧪 实验新的技巧</li> <li>📊 分析失败案例</li> <li>🤝 分享和交流</li></ul> <p><strong>建立个人 Prompt 库：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>prompts/
+├── code-generation/
+│   ├── typescript-function.md
+│   ├── react-component.md
+│   └── api-endpoint.md
+├── code-review/
+│   ├── security-focus.md
+│   └── performance-focus.md
+├── documentation/
+│   ├── api-docs.md
+│   └── readme.md
+└── debugging/
+    ├── runtime-error.md
+    └── type-error.md
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><hr> <h2 id="结语"><a href="#结语" class="header-anchor">🌙</a> 结语</h2> <p>Prompt Engineering 是一门需要持续练习的技能。记住：</p> <p>🎯 <strong>没有完美的 prompt，只有不断优化的过程</strong></p> <p>🧪 <strong>实验是关键 - 多尝试不同的方法</strong></p> <p>📚 <strong>学习他人的经验 - 研究优秀的 prompt</strong></p> <p>🔄 <strong>迭代改进 - 每次都比上次更好</strong></p> <p>💡 <strong>理解原理 - 不只是复制粘贴</strong></p> <p>随着 practice，你会发展出自己的风格和技巧。最重要的是：<strong>开始行动，现在就写出你的第一个精心设计的 prompt！</strong></p> <p><strong>下一篇预告：</strong> <a href="/ai/05-advanced-prompt-techniques.html">《高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning》</a></p> <p>我们将深入探讨这些强大的技术，并通过更多实战案例展示它们的应用。敬请期待！</p> <hr> <h2 id="参考资料"><a href="#参考资料" class="header-anchor">🌙</a> 参考资料</h2> <ul><li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">OpenAI Prompt Engineering Guide<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://docs.anthropic.com/claude/prompt-library" target="_blank" rel="noopener noreferrer">Anthropic Prompt Library<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://learnprompting.org/" target="_blank" rel="noopener noreferrer">Learn Prompting<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.promptingguide.ai/" target="_blank" rel="noopener noreferrer">Prompt Engineering Guide<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank" rel="noopener noreferrer">DeepLearning.AI Prompt Engineering Course<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Keekuun/keekuun.github.io/edit/master/docs/ai/04-prompt-engineering-guide.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">5/21/2026</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/ai/03-llm-comparison-guide.html" class="prev">
+          主流大模型对比与选型指南
+        </a></span> <span class="next"><a href="/ai/05-advanced-prompt-techniques.html">
+          高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning
+        </a></span></p></div> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:0;" data-v-c27bb48a data-v-5719ee36></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-2a01419c data-v-2a01419c><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-2a01419c><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-2a01419c></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-2a01419c></path></svg></div><!----><canvas id="vuepress-canvas-ribbon"></canvas><div></div><div class="kanbanniang" data-v-0c89d2e6><div class="banniang-container" style="display:;" data-v-0c89d2e6><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-0c89d2e6>
+      欢迎来到 前端Jeek
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-0c89d2e6><i class="kbnfont kbn-ban-home ban-home" data-v-0c89d2e6></i> <i class="kbnfont kbn-ban-message message" data-v-0c89d2e6></i> <i class="kbnfont kbn-ban-close close" data-v-0c89d2e6></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-0c89d2e6><i class="kbnfont kbn-ban-info info" data-v-0c89d2e6></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-0c89d2e6></i></div> <canvas id="banniang" width="150" height="220" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-0c89d2e6></canvas></div> <div class="showBanNiang" style="display:none;" data-v-0c89d2e6>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.638f2ec8.js" defer></script><script src="/assets/js/4.14d443e6.js" defer></script><script src="/assets/js/3.28f787db.js" defer></script><script src="/assets/js/2.929b31f8.js" defer></script><script src="/assets/js/1.0193e05a.js" defer></script><script src="/assets/js/100.e7eb7297.js" defer></script><script src="/assets/js/55.149bf80a.js" defer></script>
+  </body>
+</html>

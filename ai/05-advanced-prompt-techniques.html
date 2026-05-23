@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning | 前端Jeek</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/data/manifest.json">
+    <script language="javascript" type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="/js/MouseClickEffect.js"></script>
+    <meta name="description" content="每一个不曾起舞的日子，都是对生命的辜负！">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="keywords" content="vuepress, blog, 前端, HTML5, CSS3，javascript, typescript, go, golang, flutter">
+    <meta name="copyright" content="前端Jeek">
+    <meta name="robots" content="all">
+    
+    <link rel="preload" href="/assets/css/0.styles.7c6fafd0.css" as="style"><link rel="preload" href="/assets/js/app.638f2ec8.js" as="script"><link rel="preload" href="/assets/js/4.14d443e6.js" as="script"><link rel="preload" href="/assets/js/3.28f787db.js" as="script"><link rel="preload" href="/assets/js/2.929b31f8.js" as="script"><link rel="preload" href="/assets/js/1.0193e05a.js" as="script"><link rel="preload" href="/assets/js/101.732cae19.js" as="script"><link rel="preload" href="/assets/js/55.149bf80a.js" as="script"><link rel="prefetch" href="/assets/js/10.08c4dbf9.js"><link rel="prefetch" href="/assets/js/100.e7eb7297.js"><link rel="prefetch" href="/assets/js/102.ee817138.js"><link rel="prefetch" href="/assets/js/103.57d26d71.js"><link rel="prefetch" href="/assets/js/104.19007bc0.js"><link rel="prefetch" href="/assets/js/105.92839faf.js"><link rel="prefetch" href="/assets/js/106.88f7cee4.js"><link rel="prefetch" href="/assets/js/107.f16996b4.js"><link rel="prefetch" href="/assets/js/108.7130aebf.js"><link rel="prefetch" href="/assets/js/109.dc67703c.js"><link rel="prefetch" href="/assets/js/11.e78dcfd3.js"><link rel="prefetch" href="/assets/js/110.26020568.js"><link rel="prefetch" href="/assets/js/111.47fc5127.js"><link rel="prefetch" href="/assets/js/112.abf7bddc.js"><link rel="prefetch" href="/assets/js/113.fb8ddb99.js"><link rel="prefetch" href="/assets/js/114.37e6b05e.js"><link rel="prefetch" href="/assets/js/115.f5469e65.js"><link rel="prefetch" href="/assets/js/116.f4c15ac1.js"><link rel="prefetch" href="/assets/js/117.7666cb27.js"><link rel="prefetch" href="/assets/js/118.4f8f0525.js"><link rel="prefetch" href="/assets/js/119.166ee0a2.js"><link rel="prefetch" href="/assets/js/120.3b4d4555.js"><link rel="prefetch" href="/assets/js/121.6c836968.js"><link rel="prefetch" href="/assets/js/122.c1be2580.js"><link rel="prefetch" href="/assets/js/123.e46b8175.js"><link rel="prefetch" href="/assets/js/124.eb07abc7.js"><link rel="prefetch" href="/assets/js/125.5425f768.js"><link rel="prefetch" href="/assets/js/126.ef8466ab.js"><link rel="prefetch" href="/assets/js/127.00dbab89.js"><link rel="prefetch" href="/assets/js/128.779f69f3.js"><link rel="prefetch" href="/assets/js/129.7edf064f.js"><link rel="prefetch" href="/assets/js/130.339f383b.js"><link rel="prefetch" href="/assets/js/131.61f43cbf.js"><link rel="prefetch" href="/assets/js/132.b390952d.js"><link rel="prefetch" href="/assets/js/133.f948c08b.js"><link rel="prefetch" href="/assets/js/134.8d0de047.js"><link rel="prefetch" href="/assets/js/135.43051f2e.js"><link rel="prefetch" href="/assets/js/136.436ef650.js"><link rel="prefetch" href="/assets/js/137.0588333f.js"><link rel="prefetch" href="/assets/js/138.8fb94509.js"><link rel="prefetch" href="/assets/js/139.3ef7625e.js"><link rel="prefetch" href="/assets/js/140.991c7762.js"><link rel="prefetch" href="/assets/js/141.c9be601d.js"><link rel="prefetch" href="/assets/js/142.b187b547.js"><link rel="prefetch" href="/assets/js/143.896ce11f.js"><link rel="prefetch" href="/assets/js/144.8017b38f.js"><link rel="prefetch" href="/assets/js/145.864350ac.js"><link rel="prefetch" href="/assets/js/146.8e8ce1ac.js"><link rel="prefetch" href="/assets/js/147.c8d5339d.js"><link rel="prefetch" href="/assets/js/148.cab173df.js"><link rel="prefetch" href="/assets/js/149.d871d03e.js"><link rel="prefetch" href="/assets/js/15.5c256c5d.js"><link rel="prefetch" href="/assets/js/150.070a905a.js"><link rel="prefetch" href="/assets/js/151.5d3cce4d.js"><link rel="prefetch" href="/assets/js/152.885a6eab.js"><link rel="prefetch" href="/assets/js/153.d4274d0b.js"><link rel="prefetch" href="/assets/js/154.b08094c3.js"><link rel="prefetch" href="/assets/js/155.aaa0c360.js"><link rel="prefetch" href="/assets/js/156.75e29611.js"><link rel="prefetch" href="/assets/js/157.3db5b198.js"><link rel="prefetch" href="/assets/js/158.c495cc0b.js"><link rel="prefetch" href="/assets/js/159.56f6bb56.js"><link rel="prefetch" href="/assets/js/16.d311dbc8.js"><link rel="prefetch" href="/assets/js/160.f526fdeb.js"><link rel="prefetch" href="/assets/js/161.dda7d2ed.js"><link rel="prefetch" href="/assets/js/162.0c3de6ea.js"><link rel="prefetch" href="/assets/js/163.780c3519.js"><link rel="prefetch" href="/assets/js/164.67a5c7b9.js"><link rel="prefetch" href="/assets/js/165.b0403520.js"><link rel="prefetch" href="/assets/js/166.63debe2a.js"><link rel="prefetch" href="/assets/js/167.d499e238.js"><link rel="prefetch" href="/assets/js/168.eacbd04c.js"><link rel="prefetch" href="/assets/js/169.ef414d5f.js"><link rel="prefetch" href="/assets/js/17.1773638e.js"><link rel="prefetch" href="/assets/js/170.aeda6b53.js"><link rel="prefetch" href="/assets/js/171.82785d85.js"><link rel="prefetch" href="/assets/js/172.14d3ba37.js"><link rel="prefetch" href="/assets/js/173.c10abbea.js"><link rel="prefetch" href="/assets/js/174.7d26b098.js"><link rel="prefetch" href="/assets/js/175.449c464f.js"><link rel="prefetch" href="/assets/js/176.2ec568b8.js"><link rel="prefetch" href="/assets/js/177.09eae550.js"><link rel="prefetch" href="/assets/js/178.07a858b6.js"><link rel="prefetch" href="/assets/js/179.644aee33.js"><link rel="prefetch" href="/assets/js/18.9598dbd5.js"><link rel="prefetch" href="/assets/js/180.b7a74755.js"><link rel="prefetch" href="/assets/js/181.528936a5.js"><link rel="prefetch" href="/assets/js/182.c39fc3bd.js"><link rel="prefetch" href="/assets/js/183.62da4a1d.js"><link rel="prefetch" href="/assets/js/184.614853b7.js"><link rel="prefetch" href="/assets/js/185.985074aa.js"><link rel="prefetch" href="/assets/js/186.ff3f7ad3.js"><link rel="prefetch" href="/assets/js/187.1dcdde0b.js"><link rel="prefetch" href="/assets/js/188.e1891107.js"><link rel="prefetch" href="/assets/js/189.95810ce9.js"><link rel="prefetch" href="/assets/js/19.61194f1d.js"><link rel="prefetch" href="/assets/js/190.1469c671.js"><link rel="prefetch" href="/assets/js/191.62ae1238.js"><link rel="prefetch" href="/assets/js/192.8f08ea06.js"><link rel="prefetch" href="/assets/js/193.7416339e.js"><link rel="prefetch" href="/assets/js/194.858c665e.js"><link rel="prefetch" href="/assets/js/195.fcb4ec95.js"><link rel="prefetch" href="/assets/js/196.4fb83dae.js"><link rel="prefetch" href="/assets/js/197.3ebc352a.js"><link rel="prefetch" href="/assets/js/198.e03f20a5.js"><link rel="prefetch" href="/assets/js/199.391e3dad.js"><link rel="prefetch" href="/assets/js/20.f5c3f97a.js"><link rel="prefetch" href="/assets/js/200.31246457.js"><link rel="prefetch" href="/assets/js/201.d0e352f1.js"><link rel="prefetch" href="/assets/js/202.78caff39.js"><link rel="prefetch" href="/assets/js/203.ba39ad67.js"><link rel="prefetch" href="/assets/js/204.6e4daec9.js"><link rel="prefetch" href="/assets/js/205.ebce75db.js"><link rel="prefetch" href="/assets/js/206.023dd80c.js"><link rel="prefetch" href="/assets/js/207.bfeb3739.js"><link rel="prefetch" href="/assets/js/208.347c75dd.js"><link rel="prefetch" href="/assets/js/209.7eee0d5f.js"><link rel="prefetch" href="/assets/js/21.c51039b8.js"><link rel="prefetch" href="/assets/js/210.44989fc8.js"><link rel="prefetch" href="/assets/js/211.a8806340.js"><link rel="prefetch" href="/assets/js/212.7232ed3c.js"><link rel="prefetch" href="/assets/js/213.5949fc7a.js"><link rel="prefetch" href="/assets/js/214.a980dd61.js"><link rel="prefetch" href="/assets/js/215.549f5c1a.js"><link rel="prefetch" href="/assets/js/216.2d2823ae.js"><link rel="prefetch" href="/assets/js/217.c6922dd3.js"><link rel="prefetch" href="/assets/js/218.f3366826.js"><link rel="prefetch" href="/assets/js/219.f3981b5c.js"><link rel="prefetch" href="/assets/js/22.9db74793.js"><link rel="prefetch" href="/assets/js/220.911e4d42.js"><link rel="prefetch" href="/assets/js/221.cf9b7c2e.js"><link rel="prefetch" href="/assets/js/222.6411a10a.js"><link rel="prefetch" href="/assets/js/223.f6bab2d3.js"><link rel="prefetch" href="/assets/js/224.02da6c08.js"><link rel="prefetch" href="/assets/js/225.6a941043.js"><link rel="prefetch" href="/assets/js/226.c6c2c562.js"><link rel="prefetch" href="/assets/js/227.72fda170.js"><link rel="prefetch" href="/assets/js/228.dc428c68.js"><link rel="prefetch" href="/assets/js/229.984376b2.js"><link rel="prefetch" href="/assets/js/23.cb31e06e.js"><link rel="prefetch" href="/assets/js/230.8e40c1e0.js"><link rel="prefetch" href="/assets/js/231.47450f4a.js"><link rel="prefetch" href="/assets/js/232.70999838.js"><link rel="prefetch" href="/assets/js/233.273fd09d.js"><link rel="prefetch" href="/assets/js/234.0c4e093d.js"><link rel="prefetch" href="/assets/js/235.d944ffbe.js"><link rel="prefetch" href="/assets/js/236.5348934c.js"><link rel="prefetch" href="/assets/js/237.1b2bbcbf.js"><link rel="prefetch" href="/assets/js/238.fc59a84e.js"><link rel="prefetch" href="/assets/js/239.73a2b679.js"><link rel="prefetch" href="/assets/js/24.02c5f969.js"><link rel="prefetch" href="/assets/js/240.3930d498.js"><link rel="prefetch" href="/assets/js/241.9c812cf8.js"><link rel="prefetch" href="/assets/js/242.7cc5786b.js"><link rel="prefetch" href="/assets/js/243.cb4de1c2.js"><link rel="prefetch" href="/assets/js/244.aafd241c.js"><link rel="prefetch" href="/assets/js/245.ee2d53c8.js"><link rel="prefetch" href="/assets/js/246.ad91bca1.js"><link rel="prefetch" href="/assets/js/247.63d000bf.js"><link rel="prefetch" href="/assets/js/248.33941570.js"><link rel="prefetch" href="/assets/js/249.5c7cdf57.js"><link rel="prefetch" href="/assets/js/25.adfa3cb9.js"><link rel="prefetch" href="/assets/js/250.785daeda.js"><link rel="prefetch" href="/assets/js/251.acb638b0.js"><link rel="prefetch" href="/assets/js/252.ff0e4b27.js"><link rel="prefetch" href="/assets/js/253.10fa2291.js"><link rel="prefetch" href="/assets/js/254.43b3954f.js"><link rel="prefetch" href="/assets/js/255.10f75bb8.js"><link rel="prefetch" href="/assets/js/256.4cead635.js"><link rel="prefetch" href="/assets/js/257.358c06b8.js"><link rel="prefetch" href="/assets/js/258.91422536.js"><link rel="prefetch" href="/assets/js/259.a87b0560.js"><link rel="prefetch" href="/assets/js/26.a21751e1.js"><link rel="prefetch" href="/assets/js/260.050a52db.js"><link rel="prefetch" href="/assets/js/261.c3887331.js"><link rel="prefetch" href="/assets/js/262.05b9aaf2.js"><link rel="prefetch" href="/assets/js/263.97c06e5c.js"><link rel="prefetch" href="/assets/js/264.da254a5c.js"><link rel="prefetch" href="/assets/js/265.a87abf1c.js"><link rel="prefetch" href="/assets/js/266.0aacb6d8.js"><link rel="prefetch" href="/assets/js/267.f0445481.js"><link rel="prefetch" href="/assets/js/268.d848e4af.js"><link rel="prefetch" href="/assets/js/269.264a3f4a.js"><link rel="prefetch" href="/assets/js/27.628f1a4e.js"><link rel="prefetch" href="/assets/js/270.b34e0a93.js"><link rel="prefetch" href="/assets/js/271.ca3b845c.js"><link rel="prefetch" href="/assets/js/272.7d9b1ec6.js"><link rel="prefetch" href="/assets/js/273.a7496d07.js"><link rel="prefetch" href="/assets/js/274.e044bf4c.js"><link rel="prefetch" href="/assets/js/275.77ad139c.js"><link rel="prefetch" href="/assets/js/276.0226d8a4.js"><link rel="prefetch" href="/assets/js/277.75ec4ee6.js"><link rel="prefetch" href="/assets/js/278.5695cfdd.js"><link rel="prefetch" href="/assets/js/279.64db9469.js"><link rel="prefetch" href="/assets/js/28.759af323.js"><link rel="prefetch" href="/assets/js/280.98070487.js"><link rel="prefetch" href="/assets/js/281.797c6f51.js"><link rel="prefetch" href="/assets/js/282.d06a0847.js"><link rel="prefetch" href="/assets/js/283.bfcc4a12.js"><link rel="prefetch" href="/assets/js/284.bab952f1.js"><link rel="prefetch" href="/assets/js/285.26e93b91.js"><link rel="prefetch" href="/assets/js/286.a450ebd8.js"><link rel="prefetch" href="/assets/js/287.60f1e48e.js"><link rel="prefetch" href="/assets/js/288.96bc8356.js"><link rel="prefetch" href="/assets/js/289.9d50b5e7.js"><link rel="prefetch" href="/assets/js/29.96409f42.js"><link rel="prefetch" href="/assets/js/290.4343f223.js"><link rel="prefetch" href="/assets/js/291.bcd70a31.js"><link rel="prefetch" href="/assets/js/292.247ffff6.js"><link rel="prefetch" href="/assets/js/293.9786d8c9.js"><link rel="prefetch" href="/assets/js/294.f280385c.js"><link rel="prefetch" href="/assets/js/295.4d602e2a.js"><link rel="prefetch" href="/assets/js/296.c7c5f7b3.js"><link rel="prefetch" href="/assets/js/297.736c960a.js"><link rel="prefetch" href="/assets/js/298.e33406ee.js"><link rel="prefetch" href="/assets/js/299.830b1f91.js"><link rel="prefetch" href="/assets/js/30.62148c8f.js"><link rel="prefetch" href="/assets/js/300.7341fd17.js"><link rel="prefetch" href="/assets/js/301.2424c9f5.js"><link rel="prefetch" href="/assets/js/302.ea15b5c9.js"><link rel="prefetch" href="/assets/js/303.8ba60824.js"><link rel="prefetch" href="/assets/js/304.1251b3a9.js"><link rel="prefetch" href="/assets/js/305.a7fbf2b0.js"><link rel="prefetch" href="/assets/js/306.e97d48e8.js"><link rel="prefetch" href="/assets/js/307.21806975.js"><link rel="prefetch" href="/assets/js/308.3d44d2fb.js"><link rel="prefetch" href="/assets/js/309.8e756d90.js"><link rel="prefetch" href="/assets/js/31.4d760ff1.js"><link rel="prefetch" href="/assets/js/310.adde4356.js"><link rel="prefetch" href="/assets/js/311.312ac6bb.js"><link rel="prefetch" href="/assets/js/312.8b8faf0a.js"><link rel="prefetch" href="/assets/js/313.cfc9fdf9.js"><link rel="prefetch" href="/assets/js/314.b6d6d34d.js"><link rel="prefetch" href="/assets/js/315.53dd7377.js"><link rel="prefetch" href="/assets/js/316.90805026.js"><link rel="prefetch" href="/assets/js/317.1155c12b.js"><link rel="prefetch" href="/assets/js/318.e5d99e4a.js"><link rel="prefetch" href="/assets/js/319.9bcc7940.js"><link rel="prefetch" href="/assets/js/32.7435c5a6.js"><link rel="prefetch" href="/assets/js/320.fb027c7b.js"><link rel="prefetch" href="/assets/js/321.cc97a006.js"><link rel="prefetch" href="/assets/js/322.c109c78d.js"><link rel="prefetch" href="/assets/js/323.118060ea.js"><link rel="prefetch" href="/assets/js/324.27e06544.js"><link rel="prefetch" href="/assets/js/325.ab6bfc7d.js"><link rel="prefetch" href="/assets/js/326.8946aa04.js"><link rel="prefetch" href="/assets/js/327.7176b359.js"><link rel="prefetch" href="/assets/js/328.0f101700.js"><link rel="prefetch" href="/assets/js/329.586d4ccc.js"><link rel="prefetch" href="/assets/js/33.a66f268d.js"><link rel="prefetch" href="/assets/js/330.607ddefe.js"><link rel="prefetch" href="/assets/js/331.5a369df2.js"><link rel="prefetch" href="/assets/js/332.2197f189.js"><link rel="prefetch" href="/assets/js/333.fd9ee902.js"><link rel="prefetch" href="/assets/js/334.01839d98.js"><link rel="prefetch" href="/assets/js/335.346aee34.js"><link rel="prefetch" href="/assets/js/336.64cddcc1.js"><link rel="prefetch" href="/assets/js/337.68b3e628.js"><link rel="prefetch" href="/assets/js/338.c66377c3.js"><link rel="prefetch" href="/assets/js/339.121a6802.js"><link rel="prefetch" href="/assets/js/34.9cbf36a2.js"><link rel="prefetch" href="/assets/js/340.c83a2fa8.js"><link rel="prefetch" href="/assets/js/341.1be49d38.js"><link rel="prefetch" href="/assets/js/342.0d9d6820.js"><link rel="prefetch" href="/assets/js/343.6335ee42.js"><link rel="prefetch" href="/assets/js/344.868282b4.js"><link rel="prefetch" href="/assets/js/345.06695a4a.js"><link rel="prefetch" href="/assets/js/346.fe8af61b.js"><link rel="prefetch" href="/assets/js/347.58569333.js"><link rel="prefetch" href="/assets/js/348.0830cc27.js"><link rel="prefetch" href="/assets/js/349.b3cd9cc9.js"><link rel="prefetch" href="/assets/js/35.81049534.js"><link rel="prefetch" href="/assets/js/350.f1e95c9d.js"><link rel="prefetch" href="/assets/js/351.88f89e69.js"><link rel="prefetch" href="/assets/js/352.7a7a6232.js"><link rel="prefetch" href="/assets/js/353.15681001.js"><link rel="prefetch" href="/assets/js/354.bcaa56e3.js"><link rel="prefetch" href="/assets/js/355.7021b500.js"><link rel="prefetch" href="/assets/js/356.8f1a3829.js"><link rel="prefetch" href="/assets/js/357.623dfb44.js"><link rel="prefetch" href="/assets/js/358.85f7fbc5.js"><link rel="prefetch" href="/assets/js/359.b8c96a21.js"><link rel="prefetch" href="/assets/js/36.073f9ab9.js"><link rel="prefetch" href="/assets/js/360.f61c2894.js"><link rel="prefetch" href="/assets/js/361.46a4047f.js"><link rel="prefetch" href="/assets/js/362.b330c09d.js"><link rel="prefetch" href="/assets/js/363.d137b86f.js"><link rel="prefetch" href="/assets/js/364.402435ed.js"><link rel="prefetch" href="/assets/js/365.e344443b.js"><link rel="prefetch" href="/assets/js/366.d9fded9e.js"><link rel="prefetch" href="/assets/js/367.e53759c7.js"><link rel="prefetch" href="/assets/js/368.1b24fb84.js"><link rel="prefetch" href="/assets/js/369.b2c8eaa5.js"><link rel="prefetch" href="/assets/js/37.fb882849.js"><link rel="prefetch" href="/assets/js/370.5a7c22ee.js"><link rel="prefetch" href="/assets/js/371.7ac96b1c.js"><link rel="prefetch" href="/assets/js/372.3f298e2e.js"><link rel="prefetch" href="/assets/js/373.8544e000.js"><link rel="prefetch" href="/assets/js/374.f5ad0781.js"><link rel="prefetch" href="/assets/js/375.26b72aab.js"><link rel="prefetch" href="/assets/js/376.20b47eb0.js"><link rel="prefetch" href="/assets/js/377.1cf38540.js"><link rel="prefetch" href="/assets/js/378.98c3e351.js"><link rel="prefetch" href="/assets/js/379.1a207e14.js"><link rel="prefetch" href="/assets/js/38.13017540.js"><link rel="prefetch" href="/assets/js/380.837dbcf9.js"><link rel="prefetch" href="/assets/js/381.04a1fbb2.js"><link rel="prefetch" href="/assets/js/382.d4709985.js"><link rel="prefetch" href="/assets/js/383.656bf094.js"><link rel="prefetch" href="/assets/js/384.c6fce3db.js"><link rel="prefetch" href="/assets/js/385.0ee9d3be.js"><link rel="prefetch" href="/assets/js/386.5dcfe8a7.js"><link rel="prefetch" href="/assets/js/387.c8ef3dba.js"><link rel="prefetch" href="/assets/js/388.cf2ff1bb.js"><link rel="prefetch" href="/assets/js/39.5a01641c.js"><link rel="prefetch" href="/assets/js/40.4966f608.js"><link rel="prefetch" href="/assets/js/41.9d823ec0.js"><link rel="prefetch" href="/assets/js/42.5a381f1e.js"><link rel="prefetch" href="/assets/js/43.175d6c68.js"><link rel="prefetch" href="/assets/js/44.f4f1cc7e.js"><link rel="prefetch" href="/assets/js/45.ac12fa25.js"><link rel="prefetch" href="/assets/js/46.7f75a105.js"><link rel="prefetch" href="/assets/js/47.9ce3d8e1.js"><link rel="prefetch" href="/assets/js/48.a579dc8d.js"><link rel="prefetch" href="/assets/js/49.388ae027.js"><link rel="prefetch" href="/assets/js/5.9497fec4.js"><link rel="prefetch" href="/assets/js/50.9bd1e73b.js"><link rel="prefetch" href="/assets/js/51.c36edf0f.js"><link rel="prefetch" href="/assets/js/52.ff8988d9.js"><link rel="prefetch" href="/assets/js/53.695ac4fc.js"><link rel="prefetch" href="/assets/js/54.81946127.js"><link rel="prefetch" href="/assets/js/56.22ea0d5a.js"><link rel="prefetch" href="/assets/js/57.b9e2e15b.js"><link rel="prefetch" href="/assets/js/58.cc88ef46.js"><link rel="prefetch" href="/assets/js/59.a6de9203.js"><link rel="prefetch" href="/assets/js/6.8386189b.js"><link rel="prefetch" href="/assets/js/60.77346694.js"><link rel="prefetch" href="/assets/js/61.595607d0.js"><link rel="prefetch" href="/assets/js/62.1fe7977e.js"><link rel="prefetch" href="/assets/js/63.479c4c60.js"><link rel="prefetch" href="/assets/js/64.901b1211.js"><link rel="prefetch" href="/assets/js/65.eb2a9322.js"><link rel="prefetch" href="/assets/js/66.a1c1b762.js"><link rel="prefetch" href="/assets/js/67.0e424aee.js"><link rel="prefetch" href="/assets/js/68.3e9a4c14.js"><link rel="prefetch" href="/assets/js/69.e8e6369a.js"><link rel="prefetch" href="/assets/js/7.3990d32a.js"><link rel="prefetch" href="/assets/js/70.afe1900d.js"><link rel="prefetch" href="/assets/js/71.3ef6b84a.js"><link rel="prefetch" href="/assets/js/72.89c26ea8.js"><link rel="prefetch" href="/assets/js/73.7266db17.js"><link rel="prefetch" href="/assets/js/74.3de2ac13.js"><link rel="prefetch" href="/assets/js/75.82472c3e.js"><link rel="prefetch" href="/assets/js/76.4979aa5a.js"><link rel="prefetch" href="/assets/js/77.6af356eb.js"><link rel="prefetch" href="/assets/js/78.e17f915d.js"><link rel="prefetch" href="/assets/js/79.0a7900c9.js"><link rel="prefetch" href="/assets/js/8.ba89a523.js"><link rel="prefetch" href="/assets/js/80.fdf011e3.js"><link rel="prefetch" href="/assets/js/81.ec825146.js"><link rel="prefetch" href="/assets/js/82.c584c578.js"><link rel="prefetch" href="/assets/js/83.e6078be8.js"><link rel="prefetch" href="/assets/js/84.a23478ff.js"><link rel="prefetch" href="/assets/js/85.2c553d72.js"><link rel="prefetch" href="/assets/js/86.6b825d35.js"><link rel="prefetch" href="/assets/js/87.6355efd6.js"><link rel="prefetch" href="/assets/js/88.7950bed8.js"><link rel="prefetch" href="/assets/js/89.efaa7593.js"><link rel="prefetch" href="/assets/js/9.27a398bf.js"><link rel="prefetch" href="/assets/js/90.de61f5b1.js"><link rel="prefetch" href="/assets/js/91.ef8fc055.js"><link rel="prefetch" href="/assets/js/92.2f12dec3.js"><link rel="prefetch" href="/assets/js/93.185172d2.js"><link rel="prefetch" href="/assets/js/94.48624406.js"><link rel="prefetch" href="/assets/js/95.cb24d842.js"><link rel="prefetch" href="/assets/js/96.927c66b8.js"><link rel="prefetch" href="/assets/js/97.ed0e4c9c.js"><link rel="prefetch" href="/assets/js/98.5400dcbf.js"><link rel="prefetch" href="/assets/js/99.e7bb67b9.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.87a1c24f.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.bde3e2d0.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7c6fafd0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-5719ee36><div data-v-5719ee36><div class="password-shadow password-wrapper-out" style="display:none;" data-v-d55d3696 data-v-5719ee36 data-v-5719ee36><h3 class="title" data-v-d55d3696>前端Jeek</h3> <p class="description" data-v-d55d3696>每一个不曾起舞的日子，都是对生命的辜负！</p> <label id="box" class="inputBox" data-v-d55d3696><input type="password" value="" data-v-d55d3696> <span data-v-d55d3696>Konck! Knock!</span> <button data-v-d55d3696>OK</button></label> <div class="footer" data-v-d55d3696><span data-v-d55d3696><i class="iconfont reco-theme" data-v-d55d3696></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-d55d3696>vuePress-theme-reco</a></span> <span data-v-d55d3696><i class="iconfont reco-copyright" data-v-d55d3696></i> <a data-v-d55d3696><span data-v-d55d3696>前端Jeek</span>
+          
+        <span data-v-d55d3696>2018 - </span>
+        2026
+      </a></span></div></div> <div class="hide" data-v-5719ee36><header class="navbar" data-v-5719ee36><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/images/avatar.png" alt="前端Jeek" class="logo"> <span class="site-name">前端Jeek</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="https://keekuun-blog-search.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-search"></i>
+  AI 检索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>框架</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  Flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Node &amp; NestJS</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  Node.js
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  NestJS
+</a></li></ul></li><li class="dropdown-item"><h4>Go &amp; Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  Golang
+</a></li><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  Python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  MongoDB
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      AI
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://hello-agents.datawhale.cc/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Hello Agents
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="/ai/github-ai.html" class="nav-link"><i class="undefined"></i>
+  GitHub AI 库
+</a></li><li class="dropdown-item"><!----> <a href="/ai/skills-guide.html" class="nav-link"><i class="undefined"></i>
+  Skills 入门指南
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      专题
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/books/The-Mythical-Man-Month-zh/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/label-studio.html" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化 / 构建
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git &amp; CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tools/code-tool.html" class="nav-link"><i class="undefined"></i>
+  常用工具
+</a></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask" data-v-5719ee36></div> <aside class="sidebar" data-v-5719ee36><div class="personal-info-wrapper" data-v-6557b968 data-v-5719ee36><img src="/images/avatar.png" alt="author-avatar" class="personal-img" data-v-6557b968> <h3 class="name" data-v-6557b968>
+    前端Jeek
+  </h3> <div class="num" data-v-6557b968><div data-v-6557b968><h3 data-v-6557b968>328</h3> <h6 data-v-6557b968>文章</h6></div> <div data-v-6557b968><h3 data-v-6557b968>139</h3> <h6 data-v-6557b968>标签</h6></div></div> <ul class="social-links" data-v-6557b968></ul> <hr data-v-6557b968></div> <nav class="nav-links"><div class="nav-item"><a href="https://keekuun-blog-search.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-search"></i>
+  AI 检索
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-api"></i>
+      前端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>基础</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/tag/CSS/" class="nav-link"><i class="undefined"></i>
+  CSS
+</a></li><li class="dropdown-subitem"><a href="/tag/JS/" class="nav-link"><i class="undefined"></i>
+  JS
+</a></li><li class="dropdown-subitem"><a href="/tag/TS/" class="nav-link"><i class="undefined"></i>
+  TS
+</a></li></ul></li><li class="dropdown-item"><h4>框架</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/Vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></li><li class="dropdown-subitem"><a href="/categories/React/" class="nav-link"><i class="undefined"></i>
+  React
+</a></li><li class="dropdown-subitem"><a href="/categories/Next.js/" class="nav-link"><i class="undefined"></i>
+  Next.js
+</a></li></ul></li><li class="dropdown-item"><h4>移动端</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/categories/移动端/" class="nav-link"><i class="undefined"></i>
+  小程序
+</a></li><li class="dropdown-subitem"><a href="/categories/flutter/" class="nav-link"><i class="undefined"></i>
+  Flutter
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-coding"></i>
+      后端
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Node &amp; NestJS</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/node/" class="nav-link"><i class="undefined"></i>
+  Node.js
+</a></li><li class="dropdown-subitem"><a href="/backEnd/nestjs/" class="nav-link"><i class="undefined"></i>
+  NestJS
+</a></li></ul></li><li class="dropdown-item"><h4>Go &amp; Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/backEnd/go/" class="nav-link"><i class="undefined"></i>
+  Golang
+</a></li><li class="dropdown-subitem"><a href="/backEnd/python/" class="nav-link"><i class="undefined"></i>
+  Python
+</a></li></ul></li><li class="dropdown-item"><h4>Database</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/dataBase/mysql/" class="nav-link"><i class="undefined"></i>
+  MySQL
+</a></li><li class="dropdown-subitem"><a href="/dataBase/postgres/" class="nav-link"><i class="undefined"></i>
+  Postgres
+</a></li><li class="dropdown-subitem"><a href="/dataBase/mongodb/" class="nav-link"><i class="undefined"></i>
+  MongoDB
+</a></li><li class="dropdown-subitem"><a href="/dataBase/redis/" class="nav-link"><i class="undefined"></i>
+  Redis
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      AI
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://hello-agents.datawhale.cc/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="undefined"></i>
+  Hello Agents
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="/ai/github-ai.html" class="nav-link"><i class="undefined"></i>
+  GitHub AI 库
+</a></li><li class="dropdown-item"><!----> <a href="/ai/skills-guide.html" class="nav-link"><i class="undefined"></i>
+  Skills 入门指南
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-blog"></i>
+      专题
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/books/The-Mythical-Man-Month-zh/" class="nav-link"><i class="undefined"></i>
+  人月神话
+</a></li><li class="dropdown-item"><!----> <a href="/label-studio.html" class="nav-link"><i class="undefined"></i>
+  Label Studio
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-other"></i>
+      其他
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tag/工程化/" class="nav-link"><i class="undefined"></i>
+  工程化 / 构建
+</a></li><li class="dropdown-item"><!----> <a href="/tag/webpack/" class="nav-link"><i class="undefined"></i>
+  Webpack
+</a></li><li class="dropdown-item"><!----> <a href="/tag/Git/" class="nav-link"><i class="undefined"></i>
+  Git &amp; CI/CD
+</a></li><li class="dropdown-item"><!----> <a href="/tag/算法/" class="nav-link"><i class="undefined"></i>
+  算法
+</a></li><li class="dropdown-item"><!----> <a href="/tag/测试/" class="nav-link"><i class="undefined"></i>
+  测试
+</a></li><li class="dropdown-item"><!----> <a href="/tag/优化/" class="nav-link"><i class="undefined"></i>
+  优化
+</a></li><li class="dropdown-item"><!----> <a href="/tag/配置/" class="nav-link"><i class="undefined"></i>
+  配置
+</a></li><li class="dropdown-item"><!----> <a href="/tools/code-tool.html" class="nav-link"><i class="undefined"></i>
+  常用工具
+</a></li></ul></div></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  流月
+</a></div> <a href="https://github.com/Keekuun/keekuun.github.io" target="_blank" rel="noopener noreferrer" class="repo-link"><i class="iconfont reco-github"></i>
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ai</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ai/01-frontend-ai-introduction.html" class="sidebar-link">前端开发者的 AI 入门指南：你需要知道的所有概念</a></li><li><a href="/ai/02-transformer-explained.html" class="sidebar-link">LLM 工作原理：用前端思维理解 Transformer</a></li><li><a href="/ai/03-llm-comparison-guide.html" class="sidebar-link">主流大模型对比与选型指南</a></li><li><a href="/ai/04-prompt-engineering-guide.html" class="sidebar-link">Prompt Engineering 完全指南</a></li><li><a href="/ai/05-advanced-prompt-techniques.html" aria-current="page" class="active sidebar-link">高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning</a></li><li><a href="/ai/06-prompt-debugging-optimization.html" class="sidebar-link">Prompt 调试与优化实战</a></li><li><a href="/ai/07-ai-agent-architecture.html" class="sidebar-link">深入理解 AI Agent 架构</a></li><li><a href="/ai/08-build-first-agent.html" class="sidebar-link">构建你的第一个 AI Agent - 从零到一的实战教程</a></li><li><a href="/ai/09-tools-system-design.html" class="sidebar-link">Tools 系统设计与实现 - 让 Agent 拥有超能力</a></li><li><a href="/ai/10-memory-planning-agent.html" class="sidebar-link">Memory 与 Planning：让 Agent 更智能</a></li><li><a href="/ai/ai-agent-learning-roadmap.html" class="sidebar-link">AI Agent 前端开发者学习路线图 - 从入门到实战</a></li><li><a href="/ai/github-ai.html" class="sidebar-link">GitHub AI 流行库</a></li><li><a href="/ai/rag-blog-knowledge-search.html" class="sidebar-link">给个人博客加上 RAG 知识库检索</a></li><li><a href="/ai/skills-guide.html" class="sidebar-link">Skills 入门指南</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-d55d3696 data-v-5719ee36><h3 class="title" data-v-d55d3696>高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning</h3> <!----> <label id="box" class="inputBox" data-v-d55d3696><input type="password" value="" data-v-d55d3696> <span data-v-d55d3696>Konck! Knock!</span> <button data-v-d55d3696>OK</button></label> <div class="footer" data-v-d55d3696><span data-v-d55d3696><i class="iconfont reco-theme" data-v-d55d3696></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-d55d3696>vuePress-theme-reco</a></span> <span data-v-d55d3696><i class="iconfont reco-copyright" data-v-d55d3696></i> <a data-v-d55d3696><span data-v-d55d3696>前端Jeek</span>
+          
+        <span data-v-d55d3696>2018 - </span>
+        2026
+      </a></span></div></div> <div data-v-5719ee36><div data-v-5719ee36><main class="page" style="padding-right:0;"><section style="display:;"><div class="page-title"><h1 class="title">高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning</h1> <div data-v-9a39fc4a><i class="iconfont reco-account" data-v-9a39fc4a><span data-v-9a39fc4a>前端Jeek</span></i> <i class="iconfont reco-date" data-v-9a39fc4a><span data-v-9a39fc4a>2026/4/22</span></i> <i class="iconfont reco-eye" data-v-9a39fc4a><span id="/ai/05-advanced-prompt-techniques.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-9a39fc4a><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-9a39fc4a><span class="tag-item" data-v-9a39fc4a>Advanced Prompting</span><span class="tag-item" data-v-9a39fc4a>Chain of Thought</span><span class="tag-item" data-v-9a39fc4a>Few-shot Learning</span><span class="tag-item" data-v-9a39fc4a>Reasoning</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="高级-prompt-技巧-chain-of-thought-与-few-shot-learning"><a href="#高级-prompt-技巧-chain-of-thought-与-few-shot-learning" class="header-anchor">🌙</a> 高级 Prompt 技巧：Chain of Thought 与 Few-shot Learning</h1> <blockquote><p>掌握让 LLM 深度推理和快速学习的两大核心技术</p></blockquote> <h2 id="📚-目录"><a href="#📚-目录" class="header-anchor">🌙</a> 📚 目录</h2> <ul><li><a href="#%E5%BC%95%E8%A8%80%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7">引言：为什么需要高级技巧</a></li> <li><a href="#chain-of-thought-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90">Chain of Thought 深度解析</a></li> <li><a href="#few-shot-learning-%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97">Few-shot Learning 完全指南</a></li> <li><a href="#%E4%B8%A4%E7%A7%8D%E6%8A%80%E6%9C%AF%E7%9A%84%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8">两种技术的结合使用</a></li> <li><a href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3">实战案例：复杂问题解决</a></li> <li><a href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%92%8C%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">性能优化和最佳实践</a></li> <li><a href="#%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">常见陷阱和解决方案</a></li> <li><a href="#%E5%B7%A5%E5%85%B7%E5%92%8C%E6%A1%86%E6%9E%B6%E6%94%AF%E6%8C%81">工具和框架支持</a></li> <li><a href="#%E7%BB%83%E4%B9%A0%E5%92%8C%E6%8C%91%E6%88%98">练习和挑战</a></li></ul> <hr> <h2 id="引言-为什么需要高级技巧"><a href="#引言-为什么需要高级技巧" class="header-anchor">🌙</a> 引言：为什么需要高级技巧</h2> <h3 id="基础-prompt-的局限性"><a href="#基础-prompt-的局限性" class="header-anchor">🌙</a> 基础 Prompt 的局限性</h3> <p>在前一篇文章中，我们学习了基础的 prompt engineering 技巧。但对于复杂任务，基础方法往往不够：</p> <p><strong>场景 1：复杂数学问题</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 基础 prompt: &quot;计算 234 × 567 ÷ 89 + 123&quot;
+结果：可能直接给出错误答案
+
+✅ 需要：逐步推理过程
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>场景 2：新任务类型</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 基础 prompt: &quot;将这个 JSON 转换为 GraphQL schema&quot;
+结果：格式不正确或遗漏细节
+
+✅ 需要：提供示例展示期望格式
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>场景 3：多步骤决策</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 基础 prompt: &quot;如何优化这个应用的性能？&quot;
+结果：泛泛而谈的建议
+
+✅ 需要：系统性的分析和权衡
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="高级技巧的价值"><a href="#高级技巧的价值" class="header-anchor">🌙</a> 高级技巧的价值</h3> <p><strong>Chain of Thought (CoT)</strong> 和 <strong>Few-shot Learning</strong> 是解决这些问题的两大核心技术：</p> <table><thead><tr><th>技术</th> <th>解决的问题</th> <th>提升效果</th></tr></thead> <tbody><tr><td>Chain of Thought</td> <td>复杂推理、多步计算</td> <td>准确性提升 20-40%</td></tr> <tr><td>Few-shot Learning</td> <td>新任务适应、格式控制</td> <td>一致性提升 50-70%</td></tr> <tr><td>两者结合</td> <td>复杂新任务</td> <td>综合效果最佳</td></tr></tbody></table> <p><strong>研究数据：</strong></p> <ul><li>GPT-3 在数学推理任务上，CoT 将准确率从 18% 提升到 57%</li> <li>Few-shot learning 可以将新任务的适应时间从小时级降到分钟级</li> <li>结合使用时，复杂任务的成功率提升可达 3 倍</li></ul> <hr> <h2 id="chain-of-thought-深度解析"><a href="#chain-of-thought-深度解析" class="header-anchor">🌙</a> Chain of Thought 深度解析</h2> <h3 id="什么是-chain-of-thought"><a href="#什么是-chain-of-thought" class="header-anchor">🌙</a> 什么是 Chain of Thought？</h3> <p><strong>定义：</strong> Chain of Thought（思维链）是一种 prompt 技术，通过引导 LLM 展示中间推理步骤，提高复杂问题的解决能力。</p> <p><strong>核心思想：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>人类解题：理解问题 → 分解步骤 → 逐步推理 → 得出答案
+传统 LLM：理解问题 → 直接输出答案 ❌
+CoT LLM：理解问题 → 展示推理过程 → 得出答案 ✅
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="为什么-cot-有效"><a href="#为什么-cot-有效" class="header-anchor">🌙</a> 为什么 CoT 有效？</h3> <p><strong>1. 模拟人类思维过程</strong></p> <p>研究表明，LLM 的内部表示更接近&quot;直觉&quot;而非&quot;推理&quot;。CoT 强制模型显式地展示推理链条。</p> <p><strong>2. 错误检测和纠正</strong></p> <p>当模型逐步推理时，可以在中间步骤发现并纠正错误。</p> <p><strong>3. 更好的注意力分配</strong></p> <p>逐步推理让模型能够更专注地处理每个子问题。</p> <p><strong>4. 可解释性</strong></p> <p>用户可以查看推理过程，理解模型是如何得出结论的。</p> <h3 id="cot-的实现方式"><a href="#cot-的实现方式" class="header-anchor">🌙</a> CoT 的实现方式</h3> <h4 id="方式-1-zero-shot-cot-最简单"><a href="#方式-1-zero-shot-cot-最简单" class="header-anchor">🌙</a> 方式 1：Zero-shot CoT（最简单）</h4> <p><strong>方法：</strong> 添加魔法短语 &quot;Let's think step by step&quot;</p> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：小明有 10 个苹果，吃了 3 个，又买了 5 个，最后给了小红一半。
+小明还剩几个苹果？
+
+Let's think step by step.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p><strong>输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>让我逐步思考：
+
+1. 初始数量：10 个苹果
+2. 吃了 3 个：10 - 3 = 7 个
+3. 又买了 5 个：7 + 5 = 12 个
+4. 给了小红一半：12 ÷ 2 = 6 个
+
+答案：小明还剩 6 个苹果。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>优点：</strong></p> <ul><li>✅ 极其简单，只需添加一句话</li> <li>✅ 适用于各种问题类型</li> <li>✅ 无需准备示例</li></ul> <p><strong>缺点：</strong></p> <ul><li>❌ 效果不如 few-shot CoT</li> <li>❌ 推理步骤可能不够详细</li></ul> <p><strong>适用场景：</strong></p> <ul><li>快速测试</li> <li>中等复杂度问题</li> <li>不想准备示例时</li></ul> <h4 id="方式-2-few-shot-cot-推荐"><a href="#方式-2-few-shot-cot-推荐" class="header-anchor">🌙</a> 方式 2：Few-shot CoT（推荐）</h4> <p><strong>方法：</strong> 提供带推理过程的示例</p> <p><strong>完整示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>请解答以下数学问题，展示完整的推理过程。
+
+问题 1：一个农场有鸡和兔子，总共有 35 个头和 94 条腿。问鸡和兔子各有多少只？
+
+解答：
+让我逐步分析：
+
+1. 设变量：
+   - 设鸡的数量为 x
+   - 设兔子的数量为 y
+
+2. 建立方程：
+   - 头的总数：x + y = 35
+   - 腿的总数：2x + 4y = 94（鸡有 2 条腿，兔子有 4 条腿）
+
+3. 解方程：
+   - 从第一个方程：x = 35 - y
+   - 代入第二个方程：2(35 - y) + 4y = 94
+   - 展开：70 - 2y + 4y = 94
+   - 简化：70 + 2y = 94
+   - 解得：2y = 24，所以 y = 12
+
+4. 求 x：
+   - x = 35 - 12 = 23
+
+5. 验证：
+   - 头数：23 + 12 = 35 ✓
+   - 腿数：23×2 + 12×4 = 46 + 48 = 94 ✓
+
+答案：鸡有 23 只，兔子有 12 只。
+
+---
+
+问题 2：{your_question}
+
+解答：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><p><strong>优点：</strong></p> <ul><li>✅ 效果更好，推理更准确</li> <li>✅ 可以控制推理风格</li> <li>✅ 适合特定领域的问题</li></ul> <p><strong>缺点：</strong></p> <ul><li>❌ 需要准备高质量示例</li> <li>❌ 消耗更多 token</li></ul> <p><strong>适用场景：</strong></p> <ul><li>复杂的专业问题</li> <li>需要特定推理模式</li> <li>生产环境应用</li></ul> <h4 id="方式-3-self-ask-cot-进阶"><a href="#方式-3-self-ask-cot-进阶" class="header-anchor">🌙</a> 方式 3：Self-ask CoT（进阶）</h4> <p><strong>方法：</strong> 引导模型自己提出问题并回答</p> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：React 和 Vue 哪个更适合大型项目？
+
+在回答之前，先问自己几个关键问题：
+
+1. 我需要了解什么信息才能做出判断？
+2. 大型项目的关键需求是什么？
+3. React 和 Vue 在这些方面的表现如何？
+
+现在，逐一回答这些问题，然后给出结论。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>让我先思考需要回答的关键问题：
+
+**问题 1：大型项目的关键需求是什么？**
+- 可扩展性
+- 团队协作
+- 生态系统
+- 长期维护
+- 性能表现
+
+**问题 2：React 的表现如何？**
+- 可扩展性：优秀，组件化架构清晰
+- 团队协作：好，但需要严格的规范
+- 生态系统：非常强大，社区活跃
+- 长期维护：Facebook 支持，稳定性好
+- 性能：优秀，虚拟 DOM 高效
+
+**问题 3：Vue 的表现如何？**
+- 可扩展性：良好，但超大型项目可能需要更多规划
+- 团队协作：优秀，文档清晰，学习曲线平缓
+- 生态系统：良好，但不如 React 丰富
+- 长期维护：社区驱动，核心团队稳定
+- 性能：优秀，响应式系统高效
+
+**综合分析：**
+
+对于大型项目，我推荐 React，原因如下：
+1. 更成熟的生态系统
+2. 更大的社区和人才池
+3. 更多的企业级应用案例
+
+但如果团队已经熟悉 Vue，Vue 也是很好的选择。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p><strong>优点：</strong></p> <ul><li>✅ 更深入的思考</li> <li>✅ 更全面的答案</li> <li>✅ 减少偏见</li></ul> <p><strong>缺点：</strong></p> <ul><li>❌ 更长的响应时间</li> <li>❌ 更多的 token 消耗</li></ul> <h3 id="cot-在不同领域的应用"><a href="#cot-在不同领域的应用" class="header-anchor">🌙</a> CoT 在不同领域的应用</h3> <h4 id="_1-数学和逻辑推理"><a href="#_1-数学和逻辑推理" class="header-anchor">🌙</a> 1. 数学和逻辑推理</h4> <p><strong>示例：概率问题</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：掷两个骰子，点数之和为 7 的概率是多少？
+
+Let's think step by step.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>期望输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>让我逐步分析：
+
+1. 确定样本空间：
+   - 每个骰子有 6 个面
+   - 两个骰子的组合总数：6 × 6 = 36 种
+
+2. 找出和为 7 的组合：
+   - (1, 6)
+   - (2, 5)
+   - (3, 4)
+   - (4, 3)
+   - (5, 2)
+   - (6, 1)
+   - 共 6 种组合
+
+3. 计算概率：
+   - 概率 = 有利结果数 / 总结果数
+   - 概率 = 6 / 36 = 1/6
+
+答案：点数之和为 7 的概率是 1/6 或约 16.67%。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h4 id="_2-代码调试"><a href="#_2-代码调试" class="header-anchor">🌙</a> 2. 代码调试</h4> <p><strong>示例：找出 Bug</strong></p> <p>问题：以下代码为什么会出现无限循环？</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">processArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>Prompt 补充：<code>Let's trace through the execution step by step.</code></p> <p><strong>期望输出：</strong></p> <p>让我逐步追踪执行过程：</p> <ol><li><p>初始状态：</p> <ul><li>假设 arr = [1, 2, 3]</li> <li>i = 0</li> <li>arr.length = 3</li></ul></li> <li><p>第一次迭代（i = 0）：</p> <ul><li>arr[0] = 1 &gt; 0 ✓</li> <li>执行：arr.push(1 * 2) → arr = [1, 2, 3, 2]</li> <li>arr.length 现在是 4</li> <li>i++ → i = 1</li></ul></li> <li><p>第二次迭代（i = 1）：</p> <ul><li>arr[1] = 2 &gt; 0 ✓</li> <li>执行：arr.push(2 * 2) → arr = [1, 2, 3, 2, 4]</li> <li>arr.length 现在是 5</li> <li>i++ → i = 2</li></ul></li> <li><p>问题所在：</p> <ul><li>每次遇到正数，就向数组添加新元素</li> <li>arr.length 不断增加</li> <li>i 也在增加，但永远追不上 arr.length</li> <li>导致无限循环</li></ul></li> <li><p>根本原因：</p> <ul><li>在遍历数组的同时修改数组长度</li> <li>循环条件 i &lt; arr.length 永远为真</li></ul></li></ol> <p>修复方案：</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">function</span> <span class="token function">processArray</span><span class="token punctuation">(</span><span class="token parameter">arr</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> originalLength <span class="token operator">=</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token comment">// 保存原始长度</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> originalLength<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>答案：出现无限循环是因为在遍历时不断向数组添加元素，导致数组长度持续增长，循环条件永远满足。</p> <h4 id="_3-业务决策分析"><a href="#_3-业务决策分析" class="header-anchor">🌙</a> 3. 业务决策分析</h4> <p><strong>示例：技术选型</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：我们应该使用 MongoDB 还是 PostgreSQL？
+
+背景：我们正在构建一个电商平台，需要存储用户信息、订单、商品数据。
+
+Let's analyze this decision systematically.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>期望输出包含：</strong></p> <ul><li>需求分析</li> <li>两种数据库的对比</li> <li>优缺点权衡</li> <li>最终建议和理由</li></ul> <h3 id="cot-的最佳实践"><a href="#cot-的最佳实践" class="header-anchor">🌙</a> CoT 的最佳实践</h3> <p><strong>✅ Do:</strong></p> <ol><li>明确指示要逐步思考</li> <li>提供清晰的示例（few-shot）</li> <li>鼓励验证中间结果</li> <li>要求解释每个步骤的原因</li></ol> <p><strong>❌ Don't:</strong></p> <ol><li>不要跳过关键步骤</li> <li>避免过于复杂的单步推理</li> <li>不要忘记验证最终答案</li> <li>不要忽略边界情况</li></ol> <p><strong>提示词模板：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>{task_description}
+
+请按照以下步骤思考和解答：
+
+1. 理解问题：重新表述问题，确保理解正确
+2. 分解任务：将问题拆解为小步骤
+3. 逐步推理：对每个步骤进行详细推理
+4. 验证结果：检查每一步的正确性
+5. 总结答案：给出最终结论
+
+开始解答：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><hr> <h2 id="few-shot-learning-完全指南"><a href="#few-shot-learning-完全指南" class="header-anchor">🌙</a> Few-shot Learning 完全指南</h2> <h3 id="什么是-few-shot-learning"><a href="#什么是-few-shot-learning" class="header-anchor">🌙</a> 什么是 Few-shot Learning？</h3> <p><strong>定义：</strong> Few-shot Learning（少样本学习）是通过提供少量示例，让 LLM 快速学习新模式或任务的 prompting 技术。</p> <p><strong>与传统机器学习的对比：</strong></p> <table><thead><tr><th>类型</th> <th>所需数据量</th> <th>训练时间</th> <th>灵活性</th></tr></thead> <tbody><tr><td>Zero-shot</td> <td>0 示例</td> <td>无</td> <td>高，但效果有限</td></tr> <tr><td>Few-shot</td> <td>1-10 示例</td> <td>无</td> <td>高，效果好</td></tr> <tr><td>Fine-tuning</td> <td>1000+ 样本</td> <td>长</td> <td>低，需重新训练</td></tr></tbody></table> <p><strong>核心优势：</strong></p> <ul><li>✅ 无需训练模型</li> <li>✅ 快速适应新任务</li> <li>✅ 灵活调整行为</li> <li>✅ 成本低</li></ul> <h3 id="few-shot-的工作原理"><a href="#few-shot-的工作原理" class="header-anchor">🌙</a> Few-shot 的工作原理</h3> <p><strong>类比理解：</strong></p> <p>想象你在教一个聪明的实习生：</p> <p><strong>Zero-shot（零样本）：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你：&quot;帮我格式化这些数据&quot;
+实习生：（猜测你的意思，可能做错）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>Few-shot（少样本）：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你：&quot;看这几个例子：
+输入: {name: &quot;John&quot;, age: 30} → 输出: &quot;John, 30 years old&quot;
+输入: {name: &quot;Jane&quot;, age: 25} → 输出: &quot;Jane, 25 years old&quot;
+
+现在格式化这个：{name: &quot;Bob&quot;, age: 35}&quot;
+实习生：（理解模式）&quot;Bob, 35 years old&quot; ✓
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="few-shot-的设计原则"><a href="#few-shot-的设计原则" class="header-anchor">🌙</a> Few-shot 的设计原则</h3> <h4 id="原则-1-示例质量至关重要"><a href="#原则-1-示例质量至关重要" class="header-anchor">🌙</a> 原则 1：示例质量至关重要</h4> <p><strong>好的示例特征：</strong></p> <ul><li>✅ 准确无误</li> <li>✅ 覆盖典型情况</li> <li>✅ 格式一致</li> <li>✅ 清晰易懂</li></ul> <p><strong>坏的示例：</strong></p> <ul><li>❌ 有错误或模糊</li> <li>❌ 格式不统一</li> <li>❌ 过于复杂或简单</li> <li>❌ 不具代表性</li></ul> <h4 id="原则-2-示例数量和多样性"><a href="#原则-2-示例数量和多样性" class="header-anchor">🌙</a> 原则 2：示例数量和多样性</h4> <p><strong>一般规则：</strong></p> <ul><li><strong>简单任务</strong>：1-3 个示例</li> <li><strong>中等任务</strong>：3-5 个示例</li> <li><strong>复杂任务</strong>：5-10 个示例</li></ul> <p><strong>多样性考虑：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>情感分类示例：
+✅ 正面：&quot;这个产品太棒了！&quot;
+✅ 负面：&quot;服务很差，失望。&quot;
+✅ 中性：&quot;今天天气还可以。&quot;
+✅ 混合：&quot;价格贵但质量好。&quot;
+
+而不是：
+❌ 正面：&quot;太好了！&quot;
+❌ 正面：&quot;非常棒！&quot;
+❌ 正面：&quot;超级好！&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h4 id="原则-3-示例的顺序和布局"><a href="#原则-3-示例的顺序和布局" class="header-anchor">🌙</a> 原则 3：示例的顺序和布局</h4> <p><strong>推荐格式：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>任务描述
+
+示例 1：
+输入：{example_input_1}
+输出：{example_output_1}
+
+示例 2：
+输入：{example_input_2}
+输出：{example_output_2}
+
+...
+
+现在处理新的输入：
+输入：{new_input}
+输出：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>关键点：</strong></p> <ul><li>使用清晰的分隔符</li> <li>保持一致的格式</li> <li>最后留出输出位置</li></ul> <h3 id="few-shot-实战案例"><a href="#few-shot-实战案例" class="header-anchor">🌙</a> Few-shot 实战案例</h3> <h4 id="案例-1-文本分类"><a href="#案例-1-文本分类" class="header-anchor">🌙</a> 案例 1：文本分类</h4> <p><strong>任务：</strong> 将客户反馈分类到不同类别</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>将客户反馈分类为以下类别之一：
+- PRODUCT_QUALITY（产品质量）
+- SHIPPING（物流）
+- CUSTOMER_SERVICE（客服）
+- PRICING（价格）
+- OTHER（其他）
+
+示例 1：
+反馈：&quot;收到的商品有破损，包装也不够结实。&quot;
+类别：PRODUCT_QUALITY
+
+示例 2：
+反馈：&quot;快递太慢了，等了两周才收到。&quot;
+类别：SHIPPING
+
+示例 3：
+反馈：&quot;客服态度很好，问题很快就解决了。&quot;
+类别：CUSTOMER_SERVICE
+
+示例 4：
+反馈：&quot;价格比竞争对手高很多，性价比不高。&quot;
+类别：PRICING
+
+现在分类以下反馈：
+反馈：&quot;网站界面不太友好，找商品很困难。&quot;
+类别：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p><strong>输出：</strong> <code>OTHER</code> 或 <code>WEBSITE_USABILITY</code>（取决于是否允许新类别）</p> <h4 id="案例-2-代码转换"><a href="#案例-2-代码转换" class="header-anchor">🌙</a> 案例 2：代码转换</h4> <p><strong>任务：</strong> JavaScript → TypeScript</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>将以下 JavaScript 函数转换为 TypeScript，添加适当的类型注解。
+
+示例 1：
+JS: function add(a, b) { return a + b; }
+TS: function add(a: number, b: number): number { return a + b; }
+
+示例 2：
+JS: function greet(name) { return &quot;Hello, &quot; + name; }
+TS: function greet(name: string): string { return `Hello, ${name}`; }
+
+示例 3：
+JS: function filterUsers(users, minAge) {
+    return users.filter(u =&gt; u.age &gt;= minAge);
+}
+TS: interface User { name: string; age: number; }
+    function filterUsers(users: User[], minAge: number): User[] {
+        return users.filter(u =&gt; u.age &gt;= minAge);
+    }
+
+现在转换：
+JS: function findMax(numbers) {
+    return Math.max(...numbers);
+}
+TS:
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><p><strong>输出：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">findMax</span><span class="token punctuation">(</span>numbers<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">...</span>numbers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="案例-3-数据提取"><a href="#案例-3-数据提取" class="header-anchor">🌙</a> 案例 3：数据提取</h4> <p><strong>任务：</strong> 从非结构化文本提取结构化信息</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>从以下文本中提取事件信息，以 JSON 格式返回。
+
+需要提取的字段：
+- event_name: 事件名称
+- date: 日期（YYYY-MM-DD 格式）
+- location: 地点
+- participants: 参与者列表
+
+示例 1：
+文本：&quot;明天下午 3 点，张三和李四将在北京会议室讨论项目计划。&quot;
+JSON:
+{
+    &quot;event_name&quot;: &quot;项目计划讨论&quot;,
+    &quot;date&quot;: &quot;2024-05-23&quot;,
+    &quot;location&quot;: &quot;北京会议室&quot;,
+    &quot;participants&quot;: [&quot;张三&quot;, &quot;李四&quot;]
+}
+
+示例 2：
+文本：&quot;下周一上午 10 点，王五在上海办公室做技术分享，赵六和钱七参加。&quot;
+JSON:
+{
+    &quot;event_name&quot;: &quot;技术分享&quot;,
+    &quot;date&quot;: &quot;2024-05-27&quot;,
+    &quot;location&quot;: &quot;上海办公室&quot;,
+    &quot;participants&quot;: [&quot;王五&quot;, &quot;赵六&quot;, &quot;钱七&quot;]
+}
+
+现在提取：
+文本：&quot;本周五晚上 7 点，周八在深圳咖啡厅与吴九和郑十见面洽谈合作。&quot;
+JSON:
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p><strong>输出：</strong></p> <div class="language-json line-numbers-mode"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;event_name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;合作洽谈&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;date&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2024-05-24&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;location&quot;</span><span class="token operator">:</span> <span class="token string">&quot;深圳咖啡厅&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;participants&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;周八&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;吴九&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;郑十&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h4 id="案例-4-风格转换"><a href="#案例-4-风格转换" class="header-anchor">🌙</a> 案例 4：风格转换</h4> <p><strong>任务：</strong> 将技术文档转换为通俗易懂的解释</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>将以下技术概念用通俗易懂的语言解释，适合非技术人员理解。
+使用类比和简单的语言，避免专业术语。
+
+示例 1：
+技术概念：&quot;API（应用程序编程接口）&quot;
+通俗解释：&quot;API 就像餐厅的服务员。你（用户）告诉服务员你想吃什么（请求），
+服务员把你的需求告诉厨房（系统），然后把做好的菜（响应）端给你。
+你不需要知道厨房怎么做菜，只需要通过服务员点餐即可。&quot;
+
+示例 2：
+技术概念：&quot;数据库索引&quot;
+通俗解释：&quot;数据库索引就像书的目录。如果你想找某个章节，
+可以直接查目录找到页码，而不需要一页页翻完整本书。
+索引让查找数据变得更快。&quot;
+
+现在解释：
+技术概念：&quot;缓存（Cache）&quot;
+通俗解释：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><strong>输出：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&quot;缓存就像你的书桌。常用的书（数据）放在书桌上，可以随时快速拿到。
+不常用的书放在书架上，需要时再去取。
+书桌（缓存）空间有限，但访问速度快；书架（主存储）空间大，但访问慢。
+通过把常用物品放在手边，提高了工作效率。&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="few-shot-的高级技巧"><a href="#few-shot-的高级技巧" class="header-anchor">🌙</a> Few-shot 的高级技巧</h3> <h4 id="技巧-1-动态示例选择"><a href="#技巧-1-动态示例选择" class="header-anchor">🌙</a> 技巧 1：动态示例选择</h4> <p><strong>问题：</strong> 固定的示例可能不适用于所有输入</p> <p><strong>解决方案：</strong> 根据输入动态选择最相关的示例</p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">class</span> <span class="token class-name">DynamicFewShot</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> examples<span class="token operator">:</span> Example<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">async</span> <span class="token function">generatePrompt</span><span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 1. 计算输入与所有示例的相似度</span>
+        <span class="token keyword">const</span> similarities <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>examples<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>ex<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+                example<span class="token operator">:</span> ex<span class="token punctuation">,</span>
+                similarity<span class="token operator">:</span> <span class="token keyword">await</span> <span class="token function">calculateSimilarity</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> ex<span class="token punctuation">.</span>input<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 2. 选择最相似的 3 个示例</span>
+        <span class="token keyword">const</span> topExamples <span class="token operator">=</span> similarities
+            <span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> b<span class="token punctuation">.</span>similarity <span class="token operator">-</span> a<span class="token punctuation">.</span>similarity<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>s <span class="token operator">=&gt;</span> s<span class="token punctuation">.</span>example<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 3. 构建 prompt</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">buildPrompt</span><span class="token punctuation">(</span>topExamples<span class="token punctuation">,</span> input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h4 id="技巧-2-渐进式示例"><a href="#技巧-2-渐进式示例" class="header-anchor">🌙</a> 技巧 2：渐进式示例</h4> <p><strong>方法：</strong> 从简单到复杂排列示例</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例 1（简单）：基本用法
+示例 2（中等）：带参数
+示例 3（复杂）：边缘情况
+
+这样可以帮助模型理解模式的复杂性。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="技巧-3-负样本示例"><a href="#技巧-3-负样本示例" class="header-anchor">🌙</a> 技巧 3：负样本示例</h4> <p><strong>方法：</strong> 包含错误示例和正确示例的对比</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>错误的做法：
+输入：...
+错误输出：...
+问题：缺少类型检查
+
+正确的做法：
+输入：...
+正确输出：...
+说明：添加了类型验证
+
+现在处理新的输入：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>优势：</strong></p> <ul><li>帮助模型理解边界</li> <li>减少常见错误</li> <li>提高鲁棒性</li></ul> <hr> <h2 id="两种技术的结合使用"><a href="#两种技术的结合使用" class="header-anchor">🌙</a> 两种技术的结合使用</h2> <h3 id="cot-few-shot-的强大组合"><a href="#cot-few-shot-的强大组合" class="header-anchor">🌙</a> CoT + Few-shot 的强大组合</h3> <p><strong>原理：</strong> 结合两者的优势，获得最佳效果</p> <p><strong>结构：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>任务描述
+
+示例 1：
+输入：{input_1}
+
+解答过程（CoT）：
+1. 第一步推理...
+2. 第二步推理...
+3. ...
+
+最终答案：{answer_1}
+
+---
+
+示例 2：
+输入：{input_2}
+
+解答过程（CoT）：
+1. ...
+2. ...
+
+最终答案：{answer_2}
+
+---
+
+现在处理新的输入：
+输入：{new_input}
+
+解答过程：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><h3 id="实际案例-复杂数据分析"><a href="#实际案例-复杂数据分析" class="header-anchor">🌙</a> 实际案例：复杂数据分析</h3> <p><strong>任务：</strong> 分析销售数据并提供建议</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>你是一个数据分析专家。请分析销售数据，提供洞察和建议。
+
+示例 1：
+数据：
+- 月份：1月、2月、3月
+- 销售额：100万、120万、90万
+- 主要变化：2月有情人节促销，3月无活动
+
+分析过程：
+1. 观察趋势：
+   - 1月到2月增长 20%（100万 → 120万）
+   - 2月到3月下降 25%（120万 → 90万）
+
+2. 识别原因：
+   - 2月增长可能源于情人节促销
+   - 3月下降是因为没有促销活动
+
+3. 计算指标：
+   - 平均月销售额：(100 + 120 + 90) / 3 = 103.3万
+   - 波动幅度：最大值 120万 - 最小值 90万 = 30万
+
+4. 提出建议：
+   - 建议在 3 月也安排促销活动
+   - 分析情人节促销的具体效果
+   - 考虑其他节日营销机会
+
+建议：
+- 短期：策划 3 月下旬的春季促销
+- 中期：建立月度促销日历
+- 长期：开发客户忠诚度计划
+
+---
+
+示例 2：
+数据：
+- 产品线：A、B、C
+- 销售额：A产品 50万，B产品 30万，C产品 20万
+- 利润率：A产品 20%，B产品 35%，C产品 15%
+
+分析过程：
+1. 收入分析：
+   - A产品贡献最大收入（50%）
+   - C产品收入最低（20%）
+
+2. 利润分析：
+   - B产品利润率最高（35%）
+   - C产品利润率最低（15%）
+
+3. 综合评估：
+   - A产品：高收入，中等利润 → 现金牛
+   - B产品：中等收入，高利润 → 明星产品
+   - C产品：低收入，低利润 → 问题产品
+
+4. 战略建议：
+   - 加大对 B 产品的投入
+   - 优化 C 产品或考虑淘汰
+   - 维持 A 产品的市场份额
+
+建议：
+- 优先推广 B 产品
+- 重新评估 C 产品策略
+- 探索 A 产品的增值服务
+
+---
+
+现在分析以下数据：
+数据：
+- 渠道：线上、线下
+- Q1 销售额：线上 200万，线下 150万
+- Q2 销售额：线上 250万，线下 130万
+- 增长率：线上 +25%，线下 -13%
+
+分析过程：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br></div></div><p><strong>期望输出：</strong> 完整的分析过程和建议</p> <h3 id="结合使用的优势"><a href="#结合使用的优势" class="header-anchor">🌙</a> 结合使用的优势</h3> <p><strong>1. 更高的准确性</strong></p> <ul><li>Few-shot 提供模式</li> <li>CoT 确保推理正确</li></ul> <p><strong>2. 更好的泛化</strong></p> <ul><li>示例展示多样性</li> <li>推理过程可适应新情况</li></ul> <p><strong>3. 更强的可解释性</strong></p> <ul><li>可以看到学习模式</li> <li>可以理解推理逻辑</li></ul> <p><strong>4. 更易调试</strong></p> <ul><li>检查示例是否合适</li> <li>检查推理是否有误</li></ul> <hr> <h2 id="实战案例-复杂问题解决"><a href="#实战案例-复杂问题解决" class="header-anchor">🌙</a> 实战案例：复杂问题解决</h2> <h3 id="案例-1-算法设计"><a href="#案例-1-算法设计" class="header-anchor">🌙</a> 案例 1：算法设计</h3> <p><strong>问题：</strong> 设计一个智能推荐系统</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>设计一个电商平台的商品推荐系统。
+
+请参考以下示例的思路和方法：
+
+示例 1：新闻推荐系统
+
+问题分析：
+1. 目标：为用户推荐感兴趣的新闻
+2. 挑战：冷启动、多样性、实时性
+
+解决方案设计：
+1. 数据收集：
+   - 用户行为（点击、阅读时长、分享）
+   - 内容特征（类别、标签、关键词）
+   - 上下文信息（时间、设备、位置）
+
+2. 算法选择：
+   - 协同过滤：基于相似用户的行为
+   - 内容推荐：基于文章特征
+   - 混合方法：结合多种算法
+
+3. 实现步骤：
+   - Step 1: 构建用户画像
+   - Step 2: 计算相似度
+   - Step 3: 生成候选集
+   - Step 4: 排序和过滤
+   - Step 5: A/B 测试优化
+
+4. 评估指标：
+   - 点击率（CTR）
+   - 阅读完成率
+   - 用户满意度
+
+---
+
+现在设计电商商品推荐系统：
+
+请按照类似的思路，考虑：
+- 电商的特殊性（购买vs浏览）
+- 商品属性（价格、类别、品牌）
+- 业务目标（转化率、客单价）
+
+你的设计：
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><p><strong>期望输出：</strong> 完整的推荐系统设计方案</p> <h3 id="案例-2-架构决策"><a href="#案例-2-架构决策" class="header-anchor">🌙</a> 案例 2：架构决策</h3> <p><strong>问题：</strong> 微服务 vs 单体架构</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>为一个初创公司的电商平台选择架构方案。
+
+背景：
+- 团队规模：5 人
+- 预期用户：首年 10 万，三年 100 万
+- 功能：用户、商品、订单、支付
+- 预算：有限
+
+请使用决策框架分析：
+
+示例：社交媒体平台架构决策
+
+1. 需求分析：
+   - 高并发读取
+   - 实时互动
+   - 媒体存储
+
+2. 选项评估：
+
+   单体架构：
+   优点：开发快、部署简单、调试容易
+   缺点：扩展性差、耦合度高
+   
+   微服务：
+   优点：独立扩展、技术灵活、容错性好
+   缺点：复杂度高、运维成本、分布式问题
+
+3. 权衡分析：
+   - 初期流量不大 → 单体足够
+   - 团队小 → 微服务 overhead 太大
+   - 未来扩展 → 预留拆分接口
+
+4. 决策：采用模块化单体，为未来微服务拆分做准备
+
+---
+
+现在分析电商平台：
+
+1. 需求分析：
+   [你的分析]
+
+2. 选项评估：
+   [你的评估]
+
+3. 权衡分析：
+   [你的权衡]
+
+4. 最终决策：
+   [你的决策和理由]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br></div></div><h3 id="案例-3-性能优化"><a href="#案例-3-性能优化" class="header-anchor">🌙</a> 案例 3：性能优化</h3> <p><strong>问题：</strong> React 应用性能优化</p> <p><strong>Prompt：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>优化一个 React 电商应用的性能。
+
+当前问题：
+- 首页加载慢（5秒+）
+- 滚动卡顿
+- 搜索响应延迟
+
+请参考以下优化案例的思路：
+
+示例：Dashboard 应用优化
+
+问题诊断：
+1. 性能分析：
+   - 使用 Chrome DevTools Profiler
+   - 识别瓶颈组件
+   - 分析网络请求
+
+发现的问题：
+- 大量不必要的重渲染
+- 未优化的图片加载
+- 同步的 API 调用
+
+优化措施：
+1. 组件层面：
+   - 使用 React.memo 包裹纯组件
+   - 用 useMemo 缓存计算结果
+   - 用 useCallback 缓存函数
+
+2. 数据获取：
+   - 实现懒加载
+   - 添加请求缓存
+   - 使用 SWR 或 React Query
+
+3. 资源优化：
+   - 图片懒加载和压缩
+   - 代码分割（Code Splitting）
+   - Tree Shaking
+
+4. 结果：
+   - 加载时间：5s → 1.5s
+   - FPS：30 → 60
+   - Bundle size：2MB → 800KB
+
+---
+
+现在优化电商应用：
+
+1. 问题诊断：
+   [你的诊断方法]
+
+2. 可能的原因：
+   [你的分析]
+
+3. 优化方案：
+   [具体措施，按优先级排序]
+
+4. 预期效果：
+   [量化指标]
+
+5. 实施计划：
+   [分阶段执行]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br></div></div><hr> <h2 id="性能优化和最佳实践"><a href="#性能优化和最佳实践" class="header-anchor">🌙</a> 性能优化和最佳实践</h2> <h3 id="token-效率优化"><a href="#token-效率优化" class="header-anchor">🌙</a> Token 效率优化</h3> <p><strong>问题：</strong> Few-shot + CoT 消耗大量 token</p> <p><strong>优化策略：</strong></p> <p><strong>1. 精简示例</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 冗长示例：
+输入：&quot;这是一个很长的句子，包含了多个词汇和复杂的语法结构...&quot;
+输出：&quot;经过详细的分析和处理，我们得到了以下结果...&quot;
+
+✅ 精简示例：
+输入：&quot;长句子...&quot;
+输出：&quot;结果...&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><strong>2. 复用上下文</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token comment">// 在对话中引用之前的示例</span>
+<span class="token string">&quot;使用上面提供的格式，处理新的输入...&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>3. 分层提示</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>第一层：简单任务，zero-shot
+第二层：复杂任务，few-shot
+第三层：非常复杂，few-shot + CoT
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>4. 缓存示例</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">class</span> <span class="token class-name">PromptCache</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> cache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">getPrompt</span><span class="token punctuation">(</span>taskType<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>taskType<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>taskType<span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">const</span> prompt <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">buildPrompt</span><span class="token punctuation">(</span>taskType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cache<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>taskType<span class="token punctuation">,</span> prompt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> prompt<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="质量评估"><a href="#质量评估" class="header-anchor">🌙</a> 质量评估</h3> <p><strong>如何判断 CoT/Few-shot 的效果？</strong></p> <p><strong>1. 准确性指标</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">EvaluationMetrics</span> <span class="token punctuation">{</span>
+    accuracy<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>      <span class="token comment">// 正确率</span>
+    consistency<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>   <span class="token comment">// 一致性</span>
+    completeness<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>  <span class="token comment">// 完整性</span>
+    relevance<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>     <span class="token comment">// 相关性</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>2. A/B 测试</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">abTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> baseline <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">testPrompt</span><span class="token punctuation">(</span>baselinePrompt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> improved <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">testPrompt</span><span class="token punctuation">(</span>improvedPrompt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Baseline accuracy:'</span><span class="token punctuation">,</span> baseline<span class="token punctuation">.</span>accuracy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Improved accuracy:'</span><span class="token punctuation">,</span> improved<span class="token punctuation">.</span>accuracy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Improvement:'</span><span class="token punctuation">,</span> 
+        <span class="token punctuation">(</span><span class="token punctuation">(</span>improved<span class="token punctuation">.</span>accuracy <span class="token operator">-</span> baseline<span class="token punctuation">.</span>accuracy<span class="token punctuation">)</span> <span class="token operator">/</span> baseline<span class="token punctuation">.</span>accuracy <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'%'</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>3. 人工评估</strong></p> <ul><li>抽样检查输出质量</li> <li>收集用户反馈</li> <li>持续改进示例</li></ul> <h3 id="最佳实践清单"><a href="#最佳实践清单" class="header-anchor">🌙</a> 最佳实践清单</h3> <p><strong>Few-shot Best Practices:</strong></p> <ul><li>[ ] 示例准确无误</li> <li>[ ] 覆盖典型场景</li> <li>[ ] 格式保持一致</li> <li>[ ] 数量适中（3-5 个）</li> <li>[ ] 顺序合理（简单→复杂）</li> <li>[ ] 包含边界情况</li></ul> <p><strong>CoT Best Practices:</strong></p> <ul><li>[ ] 明确要求逐步推理</li> <li>[ ] 提供推理示例</li> <li>[ ] 鼓励验证结果</li> <li>[ ] 分解复杂步骤</li> <li>[ ] 保持逻辑连贯</li> <li>[ ] 总结最终答案</li></ul> <p><strong>结合使用 Best Practices:</strong></p> <ul><li>[ ] 示例包含推理过程</li> <li>[ ] 推理模式一致</li> <li>[ ] 控制 token 消耗</li> <li>[ ] 评估实际效果</li> <li>[ ] 持续优化示例</li> <li>[ ] 文档化最佳实践</li></ul> <hr> <h2 id="常见陷阱和解决方案"><a href="#常见陷阱和解决方案" class="header-anchor">🌙</a> 常见陷阱和解决方案</h2> <h3 id="陷阱-1-示例偏差"><a href="#陷阱-1-示例偏差" class="header-anchor">🌙</a> 陷阱 1：示例偏差</h3> <p><strong>问题：</strong> 示例不够多样化，导致模型过拟合</p> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ 所有示例都是正面情感
+→ 模型可能倾向于预测正面
+
+✅ 平衡的示例
+→ 正面、负面、中性都有
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>解决方案：</strong></p> <ul><li>确保示例的代表性</li> <li>覆盖各种情况</li> <li>定期更新示例</li></ul> <h3 id="陷阱-2-推理跳跃"><a href="#陷阱-2-推理跳跃" class="header-anchor">🌙</a> 陷阱 2：推理跳跃</h3> <p><strong>问题：</strong> CoT 中跳过关键步骤</p> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>❌ &quot;通过计算得到答案是 42&quot;
+（没有展示计算过程）
+
+✅ &quot;首先...然后...因此答案是 42&quot;
+（完整的推理链）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>解决方案：</strong></p> <ul><li>在示例中展示详细步骤</li> <li>明确要求不跳过步骤</li> <li>验证中间结果</li></ul> <h3 id="陷阱-3-示例冲突"><a href="#陷阱-3-示例冲突" class="header-anchor">🌙</a> 陷阱 3：示例冲突</h3> <p><strong>问题：</strong> 示例之间存在矛盾</p> <p><strong>示例：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>示例 1：日期格式 YYYY-MM-DD
+示例 2：日期格式 MM/DD/YYYY
+→ 模型困惑
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>解决方案：</strong></p> <ul><li>严格一致的格式</li> <li>清晰的规范说明</li> <li>审查所有示例</li></ul> <h3 id="陷阱-4-过度依赖"><a href="#陷阱-4-过度依赖" class="header-anchor">🌙</a> 陷阱 4：过度依赖</h3> <p><strong>问题：</strong> 即使简单任务也使用复杂 prompt</p> <p><strong>解决方案：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">selectPromptStrategy</span><span class="token punctuation">(</span>task<span class="token operator">:</span> Task<span class="token punctuation">)</span><span class="token operator">:</span> Strategy <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>task<span class="token punctuation">.</span>complexity <span class="token operator">===</span> <span class="token string">'simple'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'zero-shot'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>task<span class="token punctuation">.</span>complexity <span class="token operator">===</span> <span class="token string">'medium'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'few-shot'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'few-shot-cot'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="陷阱-5-忽视验证"><a href="#陷阱-5-忽视验证" class="header-anchor">🌙</a> 陷阱 5：忽视验证</h3> <p><strong>问题：</strong> 盲目信任模型输出</p> <p><strong>解决方案：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">validateOutput</span><span class="token punctuation">(</span>
+    output<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> 
+    constraints<span class="token operator">:</span> ValidationRules
+<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1. 格式验证</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">matchesFormat</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> constraints<span class="token punctuation">.</span>format<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 2. 逻辑验证</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isLogicallyConsistent</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 3. 业务规则验证</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">meetsBusinessRules</span><span class="token punctuation">(</span>output<span class="token punctuation">,</span> constraints<span class="token punctuation">.</span>rules<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><hr> <h2 id="工具和框架支持"><a href="#工具和框架支持" class="header-anchor">🌙</a> 工具和框架支持</h2> <h3 id="langchain-中的实现"><a href="#langchain-中的实现" class="header-anchor">🌙</a> LangChain 中的实现</h3> <p><strong>Few-shot Prompt Template:</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> FewShotPromptTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;langchain/prompts&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> examples <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        question<span class="token operator">:</span> <span class="token string">&quot;Who lived longer, Muhammad Ali or Alan Turing?&quot;</span><span class="token punctuation">,</span>
+        answer<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+Are follow up questions needed here: Yes.
+Follow up: How old was Muhammad Ali when he died?
+Intermediate answer: Muhammad Ali was 74 years old when he died.
+Follow up: How old was Alan Turing when he died?
+Intermediate answer: Alan Turing was 41 years old when he died.
+So the final answer is: Muhammad Ali
+</span><span class="token template-punctuation string">`</span></span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 更多示例...</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> prompt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FewShotPromptTemplate</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    examples<span class="token punctuation">,</span>
+    examplePrompt<span class="token operator">:</span> PromptTemplate<span class="token punctuation">.</span><span class="token function">fromTemplate</span><span class="token punctuation">(</span>
+        <span class="token string">&quot;Question: {question}\nAnswer: {answer}&quot;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    prefix<span class="token operator">:</span> <span class="token string">&quot;Answer the following questions by reasoning step-by-step.&quot;</span><span class="token punctuation">,</span>
+    suffix<span class="token operator">:</span> <span class="token string">&quot;Question: {question}\nAnswer:&quot;</span><span class="token punctuation">,</span>
+    inputVariables<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;question&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p><strong>Chain of Thought:</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> ChatOpenAI <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;langchain/chat_models/openai&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> PromptTemplate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;langchain/prompts&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> cotPrompt <span class="token operator">=</span> PromptTemplate<span class="token punctuation">.</span><span class="token function">fromTemplate</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+{question}
+
+Let's think step by step.
+</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> model <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ChatOpenAI</span><span class="token punctuation">(</span><span class="token punctuation">{</span> temperature<span class="token operator">:</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> chain <span class="token operator">=</span> cotPrompt<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> chain<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    question<span class="token operator">:</span> <span class="token string">&quot;What is the square root of 144?&quot;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="openai-function-calling-结合"><a href="#openai-function-calling-结合" class="header-anchor">🌙</a> OpenAI Function Calling 结合</h3> <p><strong>结构化 CoT 输出：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">const</span> functions <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        name<span class="token operator">:</span> <span class="token string">&quot;reasoning_step&quot;</span><span class="token punctuation">,</span>
+        description<span class="token operator">:</span> <span class="token string">&quot;Record a reasoning step&quot;</span><span class="token punctuation">,</span>
+        parameters<span class="token operator">:</span> <span class="token punctuation">{</span>
+            type<span class="token operator">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+            properties<span class="token operator">:</span> <span class="token punctuation">{</span>
+                step_number<span class="token operator">:</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;integer&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                description<span class="token operator">:</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;string&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                conclusion<span class="token operator">:</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;string&quot;</span> <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> openai<span class="token punctuation">.</span>chat<span class="token punctuation">.</span>completions<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    model<span class="token operator">:</span> <span class="token string">&quot;gpt-4&quot;</span><span class="token punctuation">,</span>
+    messages<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> role<span class="token operator">:</span> <span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span> content<span class="token operator">:</span> complexQuestion <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    functions<span class="token punctuation">,</span>
+    function_call<span class="token operator">:</span> <span class="token string">&quot;auto&quot;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="自定义框架"><a href="#自定义框架" class="header-anchor">🌙</a> 自定义框架</h3> <p><strong>PromptBuilder 类：</strong></p> <div class="language-typescript line-numbers-mode"><pre class="language-typescript"><code><span class="token keyword">class</span> <span class="token class-name">PromptBuilder</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> taskDescription<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> examples<span class="token operator">:</span> Example<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> useCoT<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    
+    <span class="token function">setTask</span><span class="token punctuation">(</span>description<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>taskDescription <span class="token operator">=</span> description<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">addExample</span><span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> output<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> reasoning<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>examples<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> input<span class="token punctuation">,</span> output<span class="token punctuation">,</span> reasoning <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">enableChainOfThought</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">this</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>useCoT <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token function">build</span><span class="token punctuation">(</span>newInput<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> prompt <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>taskDescription<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 添加示例</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>examples<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ex<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">示例 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">:\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+            prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">输入：</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ex<span class="token punctuation">.</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+            
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>useCoT <span class="token operator">&amp;&amp;</span> ex<span class="token punctuation">.</span>reasoning<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">推理过程：\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ex<span class="token punctuation">.</span>reasoning<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            
+            prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">输出：</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>ex<span class="token punctuation">.</span>output<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 添加新输入</span>
+        prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">现在处理：\n输入：</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>newInput<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>useCoT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">推理过程：\n</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            prompt <span class="token operator">+=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">输出：</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">return</span> prompt<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 使用</span>
+<span class="token keyword">const</span> prompt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PromptBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">setTask</span><span class="token punctuation">(</span><span class="token string">&quot;将自然语言转换为 SQL&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">addExample</span><span class="token punctuation">(</span>
+        <span class="token string">&quot;找出最贵的产品&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;SELECT * FROM products ORDER BY price DESC LIMIT 1&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;1. 需要从 products 表查询\n2. 按价格降序排序\n3. 取第一条记录&quot;</span>
+    <span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">enableChainOfThought</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token string">&quot;显示每个类别的平均价格&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br></div></div><hr> <h2 id="练习和挑战"><a href="#练习和挑战" class="header-anchor">🌙</a> 练习和挑战</h2> <h3 id="练习-1-cot-基础"><a href="#练习-1-cot-基础" class="header-anchor">🌙</a> 练习 1：CoT 基础</h3> <p><strong>任务：</strong> 使用 zero-shot CoT 解决以下问题</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>问题：如果一个正方形的周长是 48cm，它的面积是多少？
+
+提示：添加 &quot;Let's think step by step&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><strong>要求：</strong></p> <ul><li>展示完整的计算过程</li> <li>验证最终答案</li></ul> <h3 id="练习-2-few-shot-设计"><a href="#练习-2-few-shot-设计" class="header-anchor">🌙</a> 练习 2：Few-shot 设计</h3> <p><strong>任务：</strong> 设计一个 few-shot prompt，用于将 emoji 描述转换为文字</p> <p><strong>示例输入：</strong></p> <ul><li>&quot;😊 👍&quot; → &quot;开心且赞同&quot;</li> <li>&quot;😢 💔&quot; → &quot;伤心且心碎&quot;</li></ul> <p><strong>要求：</strong></p> <ul><li>创建 3-5 个示例</li> <li>测试新的 emoji 组合</li> <li>评估准确性</li></ul> <h3 id="练习-3-cot-few-shot-结合"><a href="#练习-3-cot-few-shot-结合" class="header-anchor">🌙</a> 练习 3：CoT + Few-shot 结合</h3> <p><strong>任务：</strong> 创建一个代码审查助手</p> <p><strong>要求：</strong></p> <ul><li>提供 2-3 个代码审查示例</li> <li>每个示例包含详细的推理过程</li> <li>涵盖不同类型的问题（bug、性能、安全）</li></ul> <p><strong>示例结构：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>代码：[有问题的代码]
+
+审查过程：
+1. 识别问题类型
+2. 分析问题原因
+3. 评估严重程度
+4. 提供修复建议
+
+审查结果：[结构化输出]
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="练习-4-性能优化实验"><a href="#练习-4-性能优化实验" class="header-anchor">🌙</a> 练习 4：性能优化实验</h3> <p><strong>任务：</strong> 比较不同 prompt 策略的效果</p> <p><strong>实验设计：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>测试集：10 个复杂问题
+
+策略 A：Zero-shot
+策略 B：Few-shot (3 examples)
+策略 C：Few-shot + CoT
+
+测量指标：
+- 准确率
+- Token 消耗
+- 响应时间
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>要求：</strong></p> <ul><li>记录实验结果</li> <li>分析 trade-offs</li> <li>给出使用建议</li></ul> <h3 id="练习-5-实际应用"><a href="#练习-5-实际应用" class="header-anchor">🌙</a> 练习 5：实际应用</h3> <p><strong>任务：</strong> 为你的项目创建一个实用的 prompt</p> <p><strong>场景选择（任选其一）：</strong></p> <ol><li>API 文档生成</li> <li>单元测试生成</li> <li>用户反馈分析</li> <li>日志异常检测</li></ol> <p><strong>要求：</strong></p> <ul><li>选择合适的策略（zero/few-shot, with/without CoT）</li> <li>设计高质量的示例</li> <li>测试和优化</li> <li>文档化使用方法</li></ul> <hr> <h2 id="总结与下一步"><a href="#总结与下一步" class="header-anchor">🌙</a> 总结与下一步</h2> <h3 id="核心要点回顾"><a href="#核心要点回顾" class="header-anchor">🌙</a> 核心要点回顾</h3> <p>✅ <strong>Chain of Thought:</strong></p> <ul><li>引导逐步推理</li> <li>提高复杂问题准确性</li> <li>Zero-shot 和 Few-shot 两种形式</li> <li>适用于数学、逻辑、调试等场景</li></ul> <p>✅ <strong>Few-shot Learning:</strong></p> <ul><li>通过示例快速适应新任务</li> <li>示例质量至关重要</li> <li>3-5 个多样化示例最佳</li> <li>适用于分类、转换、提取等任务</li></ul> <p>✅ <strong>结合使用:</strong></p> <ul><li>Few-shot 提供模式</li> <li>CoT 确保推理正确</li> <li>效果最佳但成本高</li> <li>适合复杂的新任务</li></ul> <h3 id="进阶学习路径"><a href="#进阶学习路径" class="header-anchor">🌙</a> 进阶学习路径</h3> <p><strong>Level 1: 掌握基础</strong></p> <ul><li>✅ 完成本文练习</li> <li>✅ 在实际项目中应用</li> <li>✅ 建立 prompt 库</li></ul> <p><strong>Level 2: 深入优化</strong></p> <ul><li>📖 学习 Tree of Thoughts</li> <li>📖 研究 Self-consistency</li> <li>📖 探索 ReAct 模式</li></ul> <p><strong>Level 3: 系统化</strong></p> <ul><li>🔧 构建 prompt 管理框架</li> <li>🔧 实现自动化评估</li> <li>🔧 贡献开源项目</li></ul> <h3 id="推荐资源"><a href="#推荐资源" class="header-anchor">🌙</a> 推荐资源</h3> <p><strong>论文：</strong></p> <ul><li><a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener noreferrer">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://arxiv.org/abs/2301.07838" target="_blank" rel="noopener noreferrer">Few-shot Learning with Large Language Models<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <p><strong>工具：</strong></p> <ul><li><a href="https://python.langchain.com/docs/modules/model_io/prompts/" target="_blank" rel="noopener noreferrer">LangChain Prompt Templates<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.promptfoo.dev/" target="_blank" rel="noopener noreferrer">Promptfoo<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - Prompt 测试框架</li></ul> <p><strong>实践：</strong></p> <ul><li><a href="https://github.com/openai/openai-cookbook" target="_blank" rel="noopener noreferrer">OpenAI Cookbook - Few-shot Examples<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://github.com/promptslab/Awesome-Prompt-Engineering" target="_blank" rel="noopener noreferrer">Awesome Prompt Engineering<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <hr> <h2 id="结语"><a href="#结语" class="header-anchor">🌙</a> 结语</h2> <p>Chain of Thought 和 Few-shot Learning 是 prompt engineering 中最强大的两项技术。掌握它们，你将能够：</p> <p>🎯 <strong>解决更复杂的问题</strong>
+🚀 <strong>更快地适应新任务</strong>
+💡 <strong>获得更可靠的输出</strong>
+📊 <strong>显著提升应用质量</strong></p> <p><strong>记住：</strong></p> <ul><li>实践是关键 - 多尝试不同的组合</li> <li>质量胜过数量 - 精心设计的示例更重要</li> <li>持续优化 - 根据反馈不断改进</li> <li>权衡成本 - 选择适合的策略</li></ul> <p>继续练习，你会逐渐发展出直觉，知道何时使用哪种技术，以及如何组合它们以获得最佳效果。</p> <p><strong>下一篇预告：</strong> <a href="/ai/06-prompt-debugging-optimization.html">《Prompt 调试与优化实战》</a></p> <p>我们将深入探讨如何系统地调试和优化 prompt，包括自动化工具、评估框架和最佳实践。敬请期待！</p> <hr> <h2 id="参考资料"><a href="#参考资料" class="header-anchor">🌙</a> 参考资料</h2> <ul><li>Wei, J., et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022.</li> <li>Brown, T., et al. (2020). Language Models are Few-Shot Learners. NeurIPS 2020.</li> <li><a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener noreferrer">OpenAI Prompt Engineering Guide<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://python.langchain.com/docs/" target="_blank" rel="noopener noreferrer">LangChain Documentation<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></section> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Keekuun/keekuun.github.io/edit/master/docs/ai/05-advanced-prompt-techniques.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">5/21/2026</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/ai/04-prompt-engineering-guide.html" class="prev">
+          Prompt Engineering 完全指南
+        </a></span> <span class="next"><a href="/ai/06-prompt-debugging-optimization.html">
+          Prompt 调试与优化实战
+        </a></span></p></div> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:0;" data-v-c27bb48a data-v-5719ee36></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-2a01419c data-v-2a01419c><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-2a01419c><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-2a01419c></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-2a01419c></path></svg></div><!----><canvas id="vuepress-canvas-ribbon"></canvas><div></div><div class="kanbanniang" data-v-0c89d2e6><div class="banniang-container" style="display:;" data-v-0c89d2e6><div class="messageBox" style="right:68px;bottom:190px;display:none;" data-v-0c89d2e6>
+      欢迎来到 前端Jeek
+    </div> <div class="operation" style="right:90px;bottom:40px;display:;" data-v-0c89d2e6><i class="kbnfont kbn-ban-home ban-home" data-v-0c89d2e6></i> <i class="kbnfont kbn-ban-message message" data-v-0c89d2e6></i> <i class="kbnfont kbn-ban-close close" data-v-0c89d2e6></i> <a target="_blank" href="https://vuepress-theme-reco.recoluan.com/views/plugins/kanbanniang.html" data-v-0c89d2e6><i class="kbnfont kbn-ban-info info" data-v-0c89d2e6></i></a> <i class="kbnfont kbn-ban-theme skin" style="display:;" data-v-0c89d2e6></i></div> <canvas id="banniang" width="150" height="220" class="live2d" style="right:90px;bottom:-20px;opacity:0.9;" data-v-0c89d2e6></canvas></div> <div class="showBanNiang" style="display:none;" data-v-0c89d2e6>
+    看板娘
+  </div></div></div></div>
+    <script src="/assets/js/app.638f2ec8.js" defer></script><script src="/assets/js/4.14d443e6.js" defer></script><script src="/assets/js/3.28f787db.js" defer></script><script src="/assets/js/2.929b31f8.js" defer></script><script src="/assets/js/1.0193e05a.js" defer></script><script src="/assets/js/101.732cae19.js" defer></script><script src="/assets/js/55.149bf80a.js" defer></script>
+  </body>
+</html>
