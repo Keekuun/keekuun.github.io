@@ -105,7 +105,7 @@ flowchart TB
 | 向量库 | [Upstash Vector](https://upstash.com/docs/vector) | Serverless，和 Vercel 搭配简单，无需自建 Milvus |
 | 向量化 | 硅基流动 `BAAI/bge-m3`（1024 维） | DeepSeek 暂无官方 Embedding API；中文技术文效果够用 |
 | 对话归纳 | [DeepSeek](https://platform.deepseek.com) API | OpenAI 兼容，检索站「AI 总结」模式使用 |
-| 检索前端 | Next.js 14（`apps/kb-search`） | App Router + API Route，部署到 Vercel 省事 |
+| 检索前端 | Next.js 16（`apps/kb-search`） | App Router + API Route，部署到 Vercel 省事 |
 | 索引脚本 | Node ESM（`tools/rag`） | 与博客共用仓库，本地和 CI 都能跑 |
 | 博客 | VuePress 1.x + GitHub Pages | 现有方案，未动 |
 

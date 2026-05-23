@@ -223,6 +223,17 @@ a {
   margin-top: 0.15rem;
 }
 
+.mode-tab-locked:not(.active) {
+  opacity: 0.72;
+}
+
+.quota-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* Examples */
 .examples {
   margin-top: 1rem;

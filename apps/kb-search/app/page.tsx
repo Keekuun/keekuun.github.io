@@ -1,7 +1,13 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MarkdownContent } from "./components/MarkdownContent";
+
+type SiteConfig = {
+  passwordGate: boolean;
+  anonymousDailySearchLimit: number;
+  chatRequiresPassword: boolean;
+};
 
 type Hit = {
   id: string;
@@ -32,7 +38,19 @@ export default function HomePage() {
   const [error, setError] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
   const [answer, setAnswer] = useState("");
+  const [siteConfig, setSiteConfig] = useState<SiteConfig | null>(null);
+  const [anonRemaining, setAnonRemaining] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    fetch("/api/config")
+      .then((r) => r.json())
+      .then((data: SiteConfig) => setSiteConfig(data))
+      .catch(() => {});
+  }, []);
+
+  const chatLocked =
+    Boolean(siteConfig?.chatRequiresPassword) && !password.trim();
 
   const blogUrl =
     process.env.NEXT_PUBLIC_BLOG_BASE_URL || "https://blog.zkkysqs.top";
@@ -55,11 +73,23 @@ export default function HomePage() {
     setSearched(true);
 
     try {
+      if (mode === "chat" && chatLocked) {
+        setError("AI 总结需要访问密码，请在下方「高级」中填写");
+        setShowAdvanced(true);
+        return;
+      }
+
       if (mode === "search") {
         const res = await fetch(
           `/api/search?q=${encodeURIComponent(q)}`,
           { headers: headers() }
         );
+        const remaining = res.headers.get("X-RateLimit-Remaining");
+        if (remaining !== null && remaining !== "") {
+          setAnonRemaining(Number(remaining));
+        } else if (password.trim()) {
+          setAnonRemaining(null);
+        }
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "检索失败");
         setHits(data.hits ?? []);
@@ -134,11 +164,22 @@ export default function HomePage() {
             type="button"
             role="tab"
             aria-selected={mode === "chat"}
-            className={`mode-tab ${mode === "chat" ? "active" : ""}`}
-            onClick={() => setMode("chat")}
+            className={`mode-tab ${mode === "chat" ? "active" : ""} ${chatLocked ? "mode-tab-locked" : ""}`}
+            onClick={() => {
+              if (chatLocked) {
+                setError("AI 总结需要访问密码");
+                setShowAdvanced(true);
+                return;
+              }
+              setMode("chat");
+              setError("");
+            }}
+            title={chatLocked ? "需要访问密码" : undefined}
           >
             AI 总结
-            <span className="mode-tab-desc">DeepSeek 归纳回答</span>
+            <span className="mode-tab-desc">
+              {chatLocked ? "需密码" : "DeepSeek 归纳回答"}
+            </span>
           </button>
         </div>
 
@@ -176,9 +217,23 @@ export default function HomePage() {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            <p className="advanced-hint">密码仅用于访问受保护的 API，不会上传到其他服务。</p>
+            <p className="advanced-hint">
+              密码仅发往本站 API。填写后可无限检索并使用 AI 总结。
+            </p>
           </div>
         )}
+
+        {siteConfig?.passwordGate &&
+          siteConfig.anonymousDailySearchLimit > 0 &&
+          !password.trim() && (
+            <p className="quota-hint" role="status">
+              访客每日可免费语义检索 {siteConfig.anonymousDailySearchLimit} 次
+              {anonRemaining !== null && anonRemaining >= 0
+                ? `，今日剩余 ${anonRemaining} 次`
+                : ""}
+              ；AI 总结需密码。
+            </p>
+          )}
       </section>
 
       {error && (
