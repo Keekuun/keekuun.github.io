@@ -69,6 +69,7 @@ export function unmountAiSummarize() {
 
 function mountInline(Vue, AiSummarizeBar, options, page) {
   if (!options.underTitle) return;
+  if (options.floating && options.floating.enabled) return;
 
   const anchor = findTitleAnchor(options.titleSelector);
   if (!anchor) return;
@@ -115,8 +116,6 @@ function mountFloating(Vue, AiSummarizeFloating, options, page) {
       siteName: options.siteName,
       label: options.label.replace(/：$/, '') || '用 AI 总结',
       storageKey: options.floating.storageKey,
-      defaultCollapsed: options.floating.defaultCollapsed,
-      defaultHidden: options.floating.defaultHidden,
     },
   });
   floatingVm.$mount(root);

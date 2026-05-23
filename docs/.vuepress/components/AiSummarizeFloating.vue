@@ -1,53 +1,39 @@
 <template>
-  <div>
+  <div
+    ref="anchor"
+    class="ai-summarize-float-anchor is-docked"
+    :class="{
+      'is-hover-open': hoverOpen,
+      [`dock-${dockSide}`]: true,
+      'is-ready': anchorLeft != null,
+    }"
+    :style="anchorStyle"
+    @mouseenter="onAnchorEnter"
+  >
     <button
-      v-if="hidden"
+      v-show="!hoverOpen"
       type="button"
       class="ai-summarize-float-restore"
-      title="显示 AI 总结"
-      aria-label="显示 AI 总结面板"
-      @click="showPanel"
+      :class="{ 'is-touch': !canHoverPreview }"
+      :aria-expanded="hoverOpen"
+      aria-label="AI 总结"
+      @click.stop="onChipActivate"
     >
       AI
     </button>
 
     <div
-      v-else
+      v-show="hoverOpen"
       ref="panel"
-      class="ai-summarize-float"
-      :class="{ 'is-collapsed': collapsed, 'is-dragging': dragging }"
-      :style="panelStyle"
+      class="ai-summarize-float is-overlay"
       role="complementary"
-      aria-label="AI 总结（可拖动）"
+      aria-label="AI 总结"
+      @click.stop
     >
-      <div
-        class="ai-summarize-float__head"
-        title="拖动移动"
-        @mousedown.prevent="onDragStart"
-      >
+      <div class="ai-summarize-float__head">
         <span class="ai-summarize-float__title">{{ label }}</span>
-        <div class="ai-summarize-float__actions">
-          <button
-            type="button"
-            class="ai-summarize-float__btn"
-            :title="collapsed ? '展开' : '收起'"
-            :aria-expanded="!collapsed"
-            @click.stop="toggleCollapsed"
-          >
-            {{ collapsed ? '展开' : '收起' }}
-          </button>
-          <button
-            type="button"
-            class="ai-summarize-float__btn"
-            title="隐藏"
-            aria-label="隐藏 AI 总结面板"
-            @click.stop="hidePanel"
-          >
-            隐藏
-          </button>
-        </div>
       </div>
-      <div v-show="!collapsed" class="ai-summarize-float__body">
+      <div class="ai-summarize-float__body">
         <AiSummarizeBar
           :page-url="pageUrl"
           :site-name="siteName"
@@ -63,7 +49,8 @@
 <script>
 import AiSummarizeBar from './AiSummarizeBar.vue';
 
-const DEFAULT_POS = { useDefault: true, left: null, top: null };
+const EDGE_MARGIN = 12;
+const DOCK_CHIP_SIZE = 40;
 
 export default {
   name: 'AiSummarizeFloating',
@@ -73,58 +60,126 @@ export default {
     siteName: { type: String, default: 'blog.zkkysqs.top' },
     label: { type: String, default: '用 AI 总结' },
     storageKey: { type: String, default: 'keekuun-blog-ai-summarize-float' },
-    defaultCollapsed: { type: Boolean, default: true },
-    defaultHidden: { type: Boolean, default: false },
   },
   data() {
     return {
-      collapsed: this.defaultCollapsed,
-      hidden: this.defaultHidden,
-      pos: { ...DEFAULT_POS },
-      dragging: false,
-      dragOffset: { x: 0, y: 0 },
+      hoverOpen: false,
+      anchorLeft: null,
+      anchorTop: null,
+      dockSide: 'right',
+      layoutScheduled: false,
     };
   },
   computed: {
-    panelStyle() {
-      if (this.pos.useDefault) {
-        return {
-          right: '12px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-        };
+    canHoverPreview() {
+      if (typeof window === 'undefined') return false;
+      return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    },
+    anchorStyle() {
+      if (this.anchorLeft == null || this.anchorTop == null) {
+        return { visibility: 'hidden' };
       }
       return {
-        left: `${this.pos.left}px`,
-        top: `${this.pos.top}px`,
+        left: `${this.anchorLeft}px`,
+        top: `${this.anchorTop}px`,
+        right: 'auto',
+        bottom: 'auto',
         transform: 'none',
+        visibility: 'visible',
       };
     },
   },
   mounted() {
     this.loadState();
-    this.bindDragEnd();
-    this.bindAutoCollapse();
+    this.bindDismissListeners();
+    this.bindViewportWatch();
+    this.$nextTick(() => {
+      this.initPosition();
+    });
   },
   beforeDestroy() {
-    this.unbindDragEnd();
-    this.unbindAutoCollapse();
+    this.unbindDismissListeners();
+    this.unbindViewportWatch();
   },
   methods: {
+    getViewportBounds() {
+      const vv = window.visualViewport;
+      if (vv) {
+        return {
+          left: vv.offsetLeft,
+          top: vv.offsetTop,
+          right: vv.offsetLeft + vv.width,
+          bottom: vv.offsetTop + vv.height,
+          width: vv.width,
+          height: vv.height,
+        };
+      }
+      return {
+        left: 0,
+        top: 0,
+        right: window.innerWidth,
+        bottom: window.innerHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    },
+    scheduleLayoutUpdate() {
+      if (this.layoutScheduled) return;
+      this.layoutScheduled = true;
+      this.$nextTick(() => {
+        this.layoutScheduled = false;
+        if (!this.hoverOpen) this.applyDockPosition();
+      });
+    },
+    initPosition() {
+      const vv = this.getViewportBounds();
+      const height = DOCK_CHIP_SIZE;
+
+      if (this.anchorLeft == null || this.anchorTop == null) {
+        this.dockSide = this.dockSide || 'right';
+        this.anchorTop = vv.top + Math.max(EDGE_MARGIN, (vv.height - height) / 2);
+        if (this.dockSide === 'left') {
+          this.anchorLeft = vv.left + EDGE_MARGIN;
+        } else {
+          this.anchorLeft = vv.right - DOCK_CHIP_SIZE - EDGE_MARGIN;
+        }
+      }
+
+      this.applyDockPosition();
+    },
+    applyDockPosition() {
+      const vv = this.getViewportBounds();
+      const height = DOCK_CHIP_SIZE;
+
+      if (this.dockSide === 'left') {
+        this.anchorLeft = vv.left + EDGE_MARGIN;
+      } else {
+        this.anchorLeft = vv.right - DOCK_CHIP_SIZE - EDGE_MARGIN;
+      }
+
+      const minTop = vv.top + EDGE_MARGIN;
+      const maxTop = vv.bottom - height - EDGE_MARGIN;
+      if (this.anchorTop == null) {
+        this.anchorTop = vv.top + (vv.height - height) / 2;
+      }
+      this.anchorTop = Math.min(Math.max(minTop, this.anchorTop), maxTop);
+    },
     loadState() {
       try {
         const raw = localStorage.getItem(this.storageKey);
         if (!raw) return;
         const s = JSON.parse(raw);
-        if (typeof s.collapsed === 'boolean') this.collapsed = s.collapsed;
-        if (typeof s.hidden === 'boolean') this.hidden = s.hidden;
+        if (s.dockSide === 'left' || s.dockSide === 'right') {
+          this.dockSide = s.dockSide;
+        }
         if (
           typeof s.left === 'number' &&
           typeof s.top === 'number' &&
           !Number.isNaN(s.left) &&
           !Number.isNaN(s.top)
         ) {
-          this.pos = { useDefault: false, left: s.left, top: s.top };
+          this.anchorLeft = s.left;
+          this.anchorTop = s.top;
         }
       } catch {
         /* ignore */
@@ -135,10 +190,9 @@ export default {
         localStorage.setItem(
           this.storageKey,
           JSON.stringify({
-            collapsed: this.collapsed,
-            hidden: this.hidden,
-            left: this.pos.useDefault ? null : this.pos.left,
-            top: this.pos.useDefault ? null : this.pos.top,
+            dockSide: this.dockSide,
+            left: this.anchorLeft,
+            top: this.anchorTop,
           })
         );
       } catch {
@@ -149,27 +203,33 @@ export default {
       if (!target || !this.$el) return false;
       return this.$el.contains(target);
     },
-    hideIfVisible() {
-      if (this.hidden || this.dragging) return;
-      this.hidden = true;
-      this.saveState();
+    onAnchorEnter() {
+      if (!this.canHoverPreview) return;
+      this.hoverOpen = true;
+    },
+    onChipActivate() {
+      if (this.canHoverPreview) return;
+      this.hoverOpen = !this.hoverOpen;
+    },
+    closeHoverPreview() {
+      this.hoverOpen = false;
     },
     onDocumentClick(e) {
+      if (!this.hoverOpen) return;
       if (this.isInteractionInsidePanel(e.target)) return;
-      this.hideIfVisible();
+      this.closeHoverPreview();
     },
-    onDocumentScroll(e) {
-      const panel = this.$refs.panel;
-      if (panel && e.target && panel.contains(e.target)) return;
-      this.hideIfVisible();
+    onDocumentScroll() {
+      if (!this.hoverOpen) return;
+      this.closeHoverPreview();
     },
-    bindAutoCollapse() {
+    bindDismissListeners() {
       this._onDocClick = (e) => this.onDocumentClick(e);
-      this._onDocScroll = (e) => this.onDocumentScroll(e);
+      this._onDocScroll = () => this.onDocumentScroll();
       document.addEventListener('click', this._onDocClick, true);
       document.addEventListener('scroll', this._onDocScroll, true);
     },
-    unbindAutoCollapse() {
+    unbindDismissListeners() {
       if (this._onDocClick) {
         document.removeEventListener('click', this._onDocClick, true);
       }
@@ -177,74 +237,24 @@ export default {
         document.removeEventListener('scroll', this._onDocScroll, true);
       }
     },
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
-      this.saveState();
-    },
-    hidePanel() {
-      this.hidden = true;
-      this.saveState();
-    },
-    showPanel() {
-      this.hidden = false;
-      this.collapsed = false;
-      this.saveState();
-    },
-    clampPosition(left, top) {
-      const panel = this.$refs.panel;
-      const w = panel ? panel.offsetWidth : 280;
-      const h = panel ? panel.offsetHeight : 120;
-      const maxL = Math.max(8, window.innerWidth - w - 8);
-      const maxT = Math.max(8, window.innerHeight - h - 8);
-      return {
-        left: Math.min(Math.max(8, left), maxL),
-        top: Math.min(Math.max(8, top), maxT),
+    bindViewportWatch() {
+      this._onViewportChange = () => {
+        if (!this.hoverOpen) this.applyDockPosition();
       };
-    },
-    onDragStart(e) {
-      if (e.button !== 0) return;
-      const panel = this.$refs.panel;
-      if (!panel) return;
-
-      const rect = panel.getBoundingClientRect();
-      if (this.pos.useDefault) {
-        this.pos = {
-          useDefault: false,
-          left: rect.left,
-          top: rect.top,
-        };
+      window.addEventListener('resize', this._onViewportChange);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', this._onViewportChange);
+        window.visualViewport.addEventListener('scroll', this._onViewportChange);
       }
-
-      this.dragging = true;
-      this.dragOffset = {
-        x: e.clientX - this.pos.left,
-        y: e.clientY - this.pos.top,
-      };
-      document.body.classList.add('ai-summarize-float-dragging');
     },
-    onDragMove(e) {
-      if (!this.dragging) return;
-      const next = this.clampPosition(
-        e.clientX - this.dragOffset.x,
-        e.clientY - this.dragOffset.y
-      );
-      this.pos = { useDefault: false, left: next.left, top: next.top };
-    },
-    onDragEnd() {
-      if (!this.dragging) return;
-      this.dragging = false;
-      document.body.classList.remove('ai-summarize-float-dragging');
-      this.saveState();
-    },
-    bindDragEnd() {
-      this._onMove = (e) => this.onDragMove(e);
-      this._onUp = () => this.onDragEnd();
-      document.addEventListener('mousemove', this._onMove);
-      document.addEventListener('mouseup', this._onUp);
-    },
-    unbindDragEnd() {
-      document.removeEventListener('mousemove', this._onMove);
-      document.removeEventListener('mouseup', this._onUp);
+    unbindViewportWatch() {
+      if (this._onViewportChange) {
+        window.removeEventListener('resize', this._onViewportChange);
+        if (window.visualViewport) {
+          window.visualViewport.removeEventListener('resize', this._onViewportChange);
+          window.visualViewport.removeEventListener('scroll', this._onViewportChange);
+        }
+      }
     },
   },
 };

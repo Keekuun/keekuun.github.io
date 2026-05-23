@@ -35,11 +35,6 @@ export function resolveAiSummarizeOptions(site, page) {
     titleSelector,
     floating: {
       enabled: pick(floatingFm.enabled, floatingTheme.enabled, true) !== false,
-      defaultCollapsed:
-        pick(floatingFm.defaultCollapsed, floatingTheme.defaultCollapsed, true) !==
-        false,
-      defaultHidden:
-        pick(floatingFm.defaultHidden, floatingTheme.defaultHidden, false) === true,
       storageKey:
         floatingTheme.storageKey || 'keekuun-blog-ai-summarize-float',
     },

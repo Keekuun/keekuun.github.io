@@ -68,12 +68,10 @@ module.exports = {
         enabled: true,
         label: '用 AI 总结：',
         siteName: 'blog.zkkysqs.top',
-        underTitle: true,
+        underTitle: false,
         titleSelector: 'main.page .page-title',
         floating: {
             enabled: true,
-            defaultCollapsed: true,
-            defaultHidden: false,
             storageKey: 'keekuun-blog-ai-summarize-float',
         },
     },

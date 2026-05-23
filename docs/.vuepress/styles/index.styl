@@ -266,9 +266,28 @@ body.mermaid-zoom-open {
   pointer-events: auto;
 }
 
-.ai-summarize-float {
+.ai-summarize-float-anchor {
   position: fixed;
   z-index: 521;
+  visibility: hidden;
+}
+
+.ai-summarize-float-anchor.is-ready {
+  visibility: visible;
+}
+
+.ai-summarize-float-anchor.is-docked:not(.is-hover-open) {
+  width: 40px;
+  height: 40px;
+  transition: left 0.22s ease, top 0.22s ease;
+}
+
+.ai-summarize-float-anchor.is-hover-open {
+  transition: none;
+}
+
+.ai-summarize-float {
+  position: relative;
   max-width: unquote('min(280px, calc(100vw - 24px))')
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.96);
@@ -279,9 +298,33 @@ body.mermaid-zoom-open {
   user-select: none;
 }
 
-.ai-summarize-float.is-dragging {
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
-  cursor: grabbing;
+.ai-summarize-float.is-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: unquote('min(280px, calc(100vw - 24px))')
+  max-height: unquote('min(70vh, calc(100dvh - 32px))')
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+}
+
+.ai-summarize-float-anchor.dock-right .ai-summarize-float.is-overlay {
+  right: 100%;
+  margin-right: 8px;
+  transform: translateY(-50%);
+}
+
+.ai-summarize-float-anchor.dock-left .ai-summarize-float.is-overlay {
+  left: 100%;
+  margin-left: 8px;
+  transform: translateY(-50%);
+}
+
+.ai-summarize-float.is-overlay .ai-summarize-float__body {
+  max-height: unquote('min(55vh, calc(100dvh - 120px))')
+  overflow-y: auto;
 }
 
 .ai-summarize-float__head {
@@ -290,14 +333,8 @@ body.mermaid-zoom-open {
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0.45rem 0.55rem 0.45rem 0.65rem;
-  cursor: grab;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px 12px 0 0;
-}
-
-.ai-summarize-float.is-collapsed .ai-summarize-float__head {
-  border-bottom: none;
-  border-radius: 12px;
 }
 
 .ai-summarize-float__title {
@@ -334,11 +371,9 @@ body.mermaid-zoom-open {
 }
 
 .ai-summarize-float-restore {
-  position: fixed;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 521;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -348,8 +383,19 @@ body.mermaid-zoom-open {
   font-size: 13px;
   font-weight: 700;
   color: #4d6bfe;
-  cursor: pointer;
+  cursor: default;
   padding: 0;
+  user-select: none;
+}
+
+.ai-summarize-float-restore.is-touch {
+  cursor: pointer;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .ai-summarize-float-restore {
+    cursor: pointer;
+  }
 }
 
 .ai-summarize-float-restore:hover {
@@ -384,7 +430,17 @@ body.ai-summarize-float-dragging * {
 }
 
 @media (max-width: 768px) {
+  .ai-summarize-float-root,
+  .ai-summarize-float-anchor {
+    z-index: 10002;
+  }
+
   .ai-summarize-float {
-    max-width: calc(100vw - 16px);
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+  }
+
+  .ai-summarize-float__body {
+    max-height: unquote('min(55vh, 360px)')
   }
 }
