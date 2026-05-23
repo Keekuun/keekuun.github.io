@@ -1,4 +1,7 @@
 import mermaid from 'mermaid';
+import AiSummarizeBar from './components/AiSummarizeBar.vue';
+import AiSummarizeFloating from './components/AiSummarizeFloating.vue';
+import { mountAiSummarize, unmountAiSummarize } from './plugins/ai-summarize/client';
 
 let zoomOverlay = null;
 let zoomKeyHandler = null;
@@ -103,8 +106,25 @@ function setupMermaidZoomListeners() {
     document.addEventListener('keydown', onMermaidKeydown);
 }
 
-export default ({ router }) => {
-    if (typeof window === 'undefined') return;
+function refreshAiSummarize(Vue, router) {
+    const app = router.app;
+    if (!app || !app.$page) return;
+
+    unmountAiSummarize();
+    mountAiSummarize(Vue, AiSummarizeBar, AiSummarizeFloating, app.$site, app.$page);
+}
+
+function scheduleAiSummarize(Vue, router) {
+    [0, 80, 250, 700, 1500].forEach((ms) => {
+        setTimeout(() => refreshAiSummarize(Vue, router), ms);
+    });
+}
+
+export default ({ Vue, router, isServer }) => {
+    if (typeof window === 'undefined' || isServer) return;
+
+    Vue.component('AiSummarizeBar', AiSummarizeBar);
+    Vue.component('AiSummarizeFloating', AiSummarizeFloating);
 
     mermaid.initialize({
         startOnLoad: false,
@@ -116,10 +136,12 @@ export default ({ router }) => {
 
     router.onReady(() => {
         setTimeout(renderMermaidDiagrams, 50);
+        scheduleAiSummarize(Vue, router);
     });
 
     router.afterEach(() => {
         closeMermaidZoom();
         setTimeout(renderMermaidDiagrams, 50);
+        scheduleAiSummarize(Vue, router);
     });
 };

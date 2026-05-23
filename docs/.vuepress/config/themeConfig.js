@@ -63,6 +63,20 @@ module.exports = {
     //         facetFilters: ''
     //     }
     // },
+    // AI 总结：标题下 + 右侧悬浮（均可配置/关闭）
+    aiSummarize: {
+        enabled: true,
+        label: '用 AI 总结：',
+        siteName: 'blog.zkkysqs.top',
+        underTitle: true,
+        titleSelector: 'main.page .page-title',
+        floating: {
+            enabled: true,
+            defaultCollapsed: true,
+            defaultHidden: false,
+            storageKey: 'keekuun-blog-ai-summarize-float',
+        },
+    },
     lastUpdated: '上次更新',
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
     repo: 'https://github.com/Keekuun/keekuun.github.io',

@@ -128,6 +128,10 @@ module.exports = {
         hostname: 'https://blog.zkkysqs.top'
     },
     // 广告通知 https://vuepress-theme-reco.recoluan.com/views/plugins/bulletinPopover.html#loader-wrapper
+    './plugins/ai-summarize': {
+        siteName: 'blog.zkkysqs.top',
+        label: '用 AI 总结：',
+    },
     // '@vuepress-reco/vuepress-plugin-bulletin-popover': {
     //     title: '迁移通知',
     //     body: [
