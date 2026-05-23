@@ -10,7 +10,12 @@ module.exports = {
         updatePopup: {
             message: "发现新内容可用!",
             buttonText: "刷新"
-        }
+        },
+        workboxOptions: {
+            skipWaiting: true,
+            clientsClaim: true,
+            cleanupOutdatedCaches: true,
+        },
     },
     // 谷歌分析
     '@vuepress/google-analytics': {
@@ -125,7 +130,12 @@ module.exports = {
         }
     },
     "sitemap": {
-        hostname: 'https://blog.zkkysqs.top'
+        hostname: 'https://blog.zkkysqs.top',
+        dateFormatter: (lastUpdated) => {
+            const time = new Date(lastUpdated).getTime();
+            if (Number.isNaN(time)) return undefined;
+            return new Date(time).toISOString();
+        },
     },
     // 广告通知 https://vuepress-theme-reco.recoluan.com/views/plugins/bulletinPopover.html#loader-wrapper
     './plugins/ai-summarize': {

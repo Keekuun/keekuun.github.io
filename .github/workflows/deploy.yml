@@ -41,6 +41,14 @@ jobs:
       - name: Build VuePress site
         run: export NODE_OPTIONS=--max_old_space_size=10240 && pnpm docs:build
 
+      - name: Verify build assets
+        run: |
+          test -f docs/.vuepress/dist/index.html
+          APP_JS=$(grep -oE 'app\.[a-f0-9]+\.js' docs/.vuepress/dist/index.html | head -1)
+          test -n "$APP_JS"
+          test -f "docs/.vuepress/dist/assets/js/$APP_JS"
+          echo "Verified: assets/js/$APP_JS"
+
       - name: Set CNAME for custom domain
         run: echo 'blog.zkkysqs.top' > docs/.vuepress/dist/CNAME
 

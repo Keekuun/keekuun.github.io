@@ -69,7 +69,6 @@ export function unmountAiSummarize() {
 
 function mountInline(Vue, AiSummarizeBar, options, page) {
   if (!options.underTitle) return;
-  if (options.floating && options.floating.enabled) return;
 
   const anchor = findTitleAnchor(options.titleSelector);
   if (!anchor) return;

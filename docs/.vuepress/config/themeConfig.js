@@ -68,7 +68,7 @@ module.exports = {
         enabled: true,
         label: '用 AI 总结：',
         siteName: 'blog.zkkysqs.top',
-        underTitle: false,
+        underTitle: true,
         titleSelector: 'main.page .page-title',
         floating: {
             enabled: true,
