@@ -77,3 +77,7 @@ package-lock.json
 temp/
 
 docs/.vitepress/
+docs/ai/hello-agent/**/node_modules/
+docs/ai/hello-agent/**/dist/
+docs/ai/hello-agent/**/.env
+docs/ai/hello-agent/**/data/

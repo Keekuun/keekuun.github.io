@@ -59,6 +59,12 @@ tags:
 - 优化搜索策略
 - 改进输出质量
 
+✅ **实时交互体验**（示例仓库已实现）
+- SSE 推送 ReAct 推理步骤
+- 流式 Markdown 渲染与打字机效果
+- 可折叠的 Thought / Action / Observation 展示
+- 智能滚动控制
+
 ### 功能演示
 
 ```
@@ -97,9 +103,9 @@ graph TB
     C2 --> D4[File Tool]
     
     C3 --> E[(SQLite DB)]
-    C4 --> F[OpenAI API]
+    C4 --> F[OpenAI 兼容 API]
     
-    D1 --> G[Web Search API]
+    D1 --> G[Serper 搜索 API]
     D2 --> H[Wikipedia API]
 ```
 
@@ -111,15 +117,17 @@ graph TB
 
 **后端：**
 - Node.js + TypeScript
-- Express.js（API 服务器）
-- OpenAI SDK（LLM 调用）
-- SQLite（数据存储）
+- Express.js（API 服务器 + SSE）
+- OpenAI SDK（兼容 DeepSeek 等 OpenAI 格式 API）
+- better-sqlite3（会话记忆）
+- node-fetch（维基百科、Serper 搜索）
 
 **前端：**
 - React + TypeScript
-- Vite（构建工具）
-- Tailwind CSS（样式）
-- Axios（HTTP 客户端）
+- Vite（构建工具，`/api` 代理到后端）
+- Tailwind CSS + `@tailwindcss/typography`
+- react-markdown + highlight.js（报告渲染）
+- Framer Motion（交互动画）
 
 **开发工具：**
 - pnpm（包管理器）
@@ -128,102 +136,129 @@ graph TB
 
 ### 项目初始化
 
-**Step 1: 创建项目结构**
+> 完整可运行示例：[hello-agent/01-agent-research-assistant](https://github.com/Keekuun/hello-agent/tree/main/01-agent-research-assistant)
+
+**方式一：克隆示例仓库（推荐）**
 
 ```bash
-# 创建项目目录
-mkdir research-agent && cd research-agent
+git clone https://github.com/Keekuun/hello-agent.git
+cd hello-agent/01-agent-research-assistant
+```
 
-# 初始化后端
-mkdir server && cd server
-pnpm init
-pnpm add express openai better-sqlite3 cors dotenv
-pnpm add -D typescript @types/node @types/express tsx vitest
+**方式二：从零手动搭建**
 
-# 初始化前端
-cd ..
-pnpm create vite@latest client --template react-ts
+若希望跟随下文逐步手写，可按方式一的目录结构自行创建 `server/` 与 `client/`。
+
+### 快速开始
+
+**1. 后端**
+
+```bash
+cd server
+pnpm install
+cp .env.example .env
+# 编辑 .env，填入 OPENAI_API_KEY（可选配置 SERPER_API_KEY）
+pnpm dev
+```
+
+API 默认：`http://localhost:3000`
+
+**2. 前端**
+
+```bash
 cd client
-pnpm add axios tailwindcss postcss autoprefixer
-pnpm exec tailwindcss init -p
+pnpm install
+pnpm dev
 ```
 
-**Step 2: 配置 TypeScript**
+浏览器打开 `http://localhost:5173`（Vite 已将 `/api` 代理到后端）。
 
-`server/tsconfig.json`:
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
-}
+**3. 测试**
+
+```bash
+cd server
+pnpm test
 ```
 
-**Step 3: 环境变量配置**
+**4. Docker 一键部署**
 
-`.env`:
+```bash
+# 在项目根目录配置 .env 后
+docker-compose up -d
+# 访问 http://localhost:8080
+```
+
+### 环境变量
+
+`server/.env.example`：
+
 ```env
-# OpenAI API
 OPENAI_API_KEY=your_api_key_here
-
-# Server
+OPENAI_MODEL=deepseek-chat
+OPENAI_BASE_URL=https://api.deepseek.com
+# https://serper.dev/
+SERPER_API_KEY=
 PORT=3000
 NODE_ENV=development
-
-# Database
 DATABASE_PATH=./data/agent.db
 ```
 
-**Step 4: 项目结构**
+| 变量 | 必填 | 说明 |
+|------|------|------|
+| `OPENAI_API_KEY` | 是 | OpenAI 兼容 API Key |
+| `OPENAI_MODEL` | 否 | 默认 `deepseek-chat` |
+| `OPENAI_BASE_URL` | 否 | 默认 `https://api.deepseek.com` |
+| `SERPER_API_KEY` | 否 | 未配置时搜索工具返回演示数据 |
+| `PORT` | 否 | 默认 `3000` |
+| `DATABASE_PATH` | 否 | 默认 `./data/agent.db` |
+
+### 项目结构
 
 ```
-research-agent/
-├── server/
+01-agent-research-assistant/
+├── server/                    # Express + Agent 核心
 │   ├── src/
-│   │   ├── agent/
-│   │   │   ├── index.ts          # Agent 主类
-│   │   │   ├── react-engine.ts   # ReAct 引擎
-│   │   │   ├── memory.ts         # 记忆系统
-│   │   │   └── planner.ts        # 规划器
-│   │   ├── tools/
-│   │   │   ├── index.ts          # 工具注册
-│   │   │   ├── search.ts         # 搜索工具
-│   │   │   ├── wikipedia.ts      # 维基百科工具
-│   │   │   ├── calculator.ts     # 计算器工具
-│   │   │   └── file.ts           # 文件工具
-│   │   ├── llm/
-│   │   │   └── openai-client.ts  # LLM 客户端
+│   │   ├── index.ts           # 服务入口
 │   │   ├── api/
-│   │   │   └── routes.ts         # API 路由
-│   │   ├── database/
-│   │   │   └── sqlite.ts         # 数据库连接
-│   │   └── index.ts              # 入口文件
-│   ├── package.json
-│   └── tsconfig.json
-├── client/
+│   │   │   └── routes.ts      # REST + SSE 路由
+│   │   ├── agent/
+│   │   │   ├── index.ts       # ResearchAgent 主类
+│   │   │   ├── react-engine.ts
+│   │   │   ├── memory.ts      # SQLite 会话记忆
+│   │   │   ├── in-memory-memory.ts
+│   │   │   ├── types.ts
+│   │   │   └── __tests__/react-engine.test.ts
+│   │   ├── llm/
+│   │   │   └── openai-client.ts
+│   │   └── tools/
+│   │       ├── index.ts       # ToolRegistry
+│   │       ├── search.ts      # Serper 搜索（可演示模式）
+│   │       ├── wikipedia.ts
+│   │       ├── calculator.ts
+│   │       └── file.ts
+│   ├── .env.example
+│   └── package.json
+├── client/                    # Vite + React UI
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── ChatInterface.tsx
 │   │   │   ├── AgentStatus.tsx
-│   │   │   └── ReportViewer.tsx
+│   │   │   ├── MarkdownRenderer.tsx
+│   │   │   ├── StreamingMarkdown.tsx
+│   │   │   └── TypewriterText.tsx
 │   │   ├── hooks/
 │   │   │   └── useAgent.ts
 │   │   ├── App.tsx
 │   │   └── main.tsx
+│   ├── vite.config.ts         # /api → localhost:3000
 │   └── package.json
+├── docs/                      # 架构与实现说明
+├── docker-compose.yml
+├── Dockerfile
 └── README.md
 ```
+
+示例仓库内另有详细文档：`docs/architecture.md`、`docs/backend.md`、`docs/frontend.md`、`docs/ai-technology.md`。
 
 ---
 
@@ -240,7 +275,7 @@ export interface Message {
     role: 'user' | 'assistant' | 'system';
     content: string;
     timestamp: Date;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }
 
 // ReAct 步骤
@@ -248,9 +283,9 @@ export interface ReActStep {
     thought: string;
     action?: {
         tool: string;
-        input: any;
+        input: unknown;
     };
-    observation?: any;
+    observation?: unknown;
     finalAnswer?: string;
 }
 
@@ -259,7 +294,7 @@ export interface Tool {
     name: string;
     description: string;
     parameters: ToolParameterSchema;
-    execute: (input: any) => Promise<any>;
+    execute: (input: unknown) => Promise<unknown>;
 }
 
 // 工具参数 schema
@@ -303,8 +338,8 @@ export interface ChatMessage {
 export interface MemorySystem {
     addMessage(message: Message): Promise<void>;
     getHistory(limit?: number): Promise<Message[]>;
-    saveKnowledge(key: string, value: any): Promise<void>;
-    getKnowledge(key: string): Promise<any>;
+    saveKnowledge(key: string, value: unknown): Promise<void>;
+    getKnowledge(key: string): Promise<unknown>;
     clear(): Promise<void>;
 }
 ```
@@ -376,7 +411,7 @@ export class ResearchAgent {
     }
     
     private generateId(): string {
-        return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        return `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
     }
 }
 ```
@@ -397,8 +432,8 @@ export class OpenAIClient implements LLMClient {
     private client: OpenAI;
     private defaultModel: string;
     
-    constructor(apiKey: string, model = 'gpt-4-turbo') {
-        this.client = new OpenAI({ apiKey });
+    constructor(apiKey: string, model = 'gpt-4o-mini', baseURL?: string) {
+        this.client = new OpenAI({ apiKey, baseURL });
         this.defaultModel = model;
     }
     
@@ -412,7 +447,7 @@ export class OpenAIClient implements LLMClient {
             max_tokens: options?.maxTokens ?? 2000
         });
         
-        return completion.choices[0].message.content || '';
+        return completion.choices[0]?.message?.content ?? '';
     }
     
     async chat(messages: ChatMessage[], options?: LLMOptions): Promise<string> {
@@ -426,9 +461,19 @@ export class OpenAIClient implements LLMClient {
             max_tokens: options?.maxTokens ?? 2000
         });
         
-        return completion.choices[0].message.content || '';
+        return completion.choices[0]?.message?.content ?? '';
     }
 }
+```
+
+路由层创建客户端时传入环境变量：
+
+```typescript
+const llm = new OpenAIClient(
+  apiKey,
+  process.env.OPENAI_MODEL,
+  process.env.OPENAI_BASE_URL
+);
 ```
 
 ### 记忆系统实现
@@ -556,12 +601,12 @@ import { FileTool } from './file';
 export class ToolRegistry {
     private tools: Map<string, Tool> = new Map();
     
-    constructor() {
-        // 注册默认工具
+    constructor(extraTools: Tool[] = []) {
         this.register(new SearchTool());
         this.register(new WikipediaTool());
         this.register(new CalculatorTool());
         this.register(new FileTool());
+        extraTools.forEach((tool) => this.register(tool));
     }
     
     register(tool: Tool): void {
@@ -582,15 +627,8 @@ export class ToolRegistry {
         ).join('\n');
     }
     
-    toOpenAIFormat() {
-        return this.getAll().map(tool => ({
-            type: 'function' as const,
-            function: {
-                name: tool.name,
-                description: tool.description,
-                parameters: tool.parameters
-            }
-        }));
+    getToolNames(): string[] {
+        return Array.from(this.tools.keys());
     }
 }
 ```
@@ -627,12 +665,28 @@ export class SearchTool implements Tool {
         
         console.log(`🔍 搜索: ${query}`);
         
+        const apiKey = process.env.SERPER_API_KEY;
+        
+        // 未配置 SERPER_API_KEY 时返回演示数据，便于本地调试
+        if (!apiKey) {
+            return {
+                success: true,
+                query,
+                mock: true,
+                message: '未配置 SERPER_API_KEY，返回演示数据',
+                results: [
+                    { title: `${query} - 示例结果 1`, snippet: '配置 SERPER_API_KEY 后可获取真实搜索结果。', link: 'https://example.com/1' },
+                    { title: `${query} - 示例结果 2`, snippet: '智能研究助手 Agent 演示模式。', link: 'https://example.com/2' }
+                ].slice(0, num_results),
+                count: Math.min(2, num_results)
+            };
+        }
+        
         try {
-            // 使用 Serper API（或其他搜索 API）
             const response = await fetch('https://google.serper.dev/search', {
                 method: 'POST',
                 headers: {
-                    'X-API-KEY': process.env.SERPER_API_KEY!,
+                    'X-API-KEY': apiKey,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -919,7 +973,7 @@ export class ReActEngine {
     
     constructor(config: AgentConfig) {
         this.config = config;
-        this.tools = new ToolRegistry();
+        this.tools = new ToolRegistry(config.tools);
         this.maxIterations = config.maxIterations || 10;
     }
     
@@ -1105,10 +1159,14 @@ Thought:
 const memory = new SQLiteMemory('./data/agent.db', sessionId);
 
 const agent = new ResearchAgent({
-    llm: new OpenAIClient(process.env.OPENAI_API_KEY!),
+    llm: new OpenAIClient(
+        process.env.OPENAI_API_KEY!,
+        process.env.OPENAI_MODEL,
+        process.env.OPENAI_BASE_URL
+    ),
     tools: [],
     memory: memory,
-    maxIterations: 10
+    maxIterations: Number(process.env.MAX_ITERATIONS ?? 10)
 }, sessionId);
 
 // Agent 会自动保存和加载对话历史
@@ -1129,80 +1187,113 @@ const lastQuery = await memory.getKnowledge('last_search_query');
 
 ## 第六步：构建用户界面
 
+示例仓库前端组件分工：
+
+| 组件 | 职责 |
+|------|------|
+| `ChatInterface.tsx` | 会话 UI、SSE 消费、步骤折叠 |
+| `AgentStatus.tsx` | Agent 运行状态指示 |
+| `StreamingMarkdown.tsx` | 流式 Markdown 渲染 |
+| `TypewriterText.tsx` | 打字机效果 |
+| `MarkdownRenderer.tsx` | 静态 Markdown + 代码高亮 |
+| `useAgent.ts` | 创建会话、管理 `sessionId` |
+
 ### API 服务器
 
-`server/src/api/routes.ts`:
+`server/src/api/routes.ts`（与示例仓库一致的核心逻辑）：
 
 ```typescript
 import express from 'express';
+import path from 'path';
+import fs from 'fs';
 import { ResearchAgent } from '../agent';
 import { OpenAIClient } from '../llm/openai-client';
 import { SQLiteMemory } from '../agent/memory';
 
 const router = express.Router();
-
-// 存储活跃的 Agent 实例
 const agents = new Map<string, ResearchAgent>();
 
-// 创建新会话
-router.post('/sessions', async (req, res) => {
-    const sessionId = Date.now().toString();
-    
-    const memory = new SQLiteMemory(process.env.DATABASE_PATH!, sessionId);
-    const llm = new OpenAIClient(process.env.OPENAI_API_KEY!);
-    
-    const agent = new ResearchAgent({
-        llm,
-        tools: [],
-        memory,
-        maxIterations: 10
-    }, sessionId);
-    
-    agents.set(sessionId, agent);
-    
+function getDatabasePath(): string {
+  const dbPath = process.env.DATABASE_PATH ?? './data/agent.db';
+  const dir = path.dirname(path.resolve(dbPath));
+  fs.mkdirSync(dir, { recursive: true });
+  return dbPath;
+}
+
+function createAgent(sessionId: string): ResearchAgent {
+  const memory = new SQLiteMemory(getDatabasePath(), sessionId);
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw new Error('OPENAI_API_KEY is not configured');
+
+  const llm = new OpenAIClient(apiKey, process.env.OPENAI_MODEL, process.env.OPENAI_BASE_URL);
+
+  return new ResearchAgent(
+    {
+      llm,
+      tools: [],
+      memory,
+      maxIterations: Number(process.env.MAX_ITERATIONS ?? 10),
+    },
+    sessionId
+  );
+}
+
+router.post('/sessions', (_req, res) => {
+  try {
+    const sessionId = `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+    agents.set(sessionId, createAgent(sessionId));
     res.json({ sessionId });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(500).json({ error: message });
+  }
 });
 
-// 执行任务
 router.post('/sessions/:sessionId/execute', async (req, res) => {
-    const { sessionId } = req.params;
-    const { task } = req.body;
-    
-    const agent = agents.get(sessionId);
-    
-    if (!agent) {
-        return res.status(404).json({ error: 'Session not found' });
-    }
-    
-    try {
-        // 设置 SSE 用于实时推送进度
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
-        
-        const result = await agent.execute(task, (step) => {
-            res.write(`data: ${JSON.stringify(step)}\n\n`);
-        });
-        
-        res.write(`data: ${JSON.stringify({ complete: true, result })}\n\n`);
-        res.end();
-        
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+  const { sessionId } = req.params;
+  const { task } = req.body as { task?: string };
+
+  if (!task?.trim()) {
+    res.status(400).json({ error: 'task is required' });
+    return;
+  }
+
+  const agent = agents.get(sessionId);
+  if (!agent) {
+    res.status(404).json({ error: 'Session not found' });
+    return;
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+
+  try {
+    const result = await agent.execute(task, (step) => {
+      res.write(`data: ${JSON.stringify(step)}\n\n`);
+    });
+    res.write(`data: ${JSON.stringify({ complete: true, result })}\n\n`);
+    res.end();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    res.write(`data: ${JSON.stringify({ error: message })}\n\n`);
+    res.end();
+  }
 });
 
-// 获取对话历史
 router.get('/sessions/:sessionId/history', async (req, res) => {
-    const { sessionId } = req.params;
-    const agent = agents.get(sessionId);
-    
-    if (!agent) {
-        return res.status(404).json({ error: 'Session not found' });
-    }
-    
-    const history = await agent.getHistory();
-    res.json(history);
+  const agent = agents.get(req.params.sessionId);
+  if (!agent) return res.status(404).json({ error: 'Session not found' });
+  res.json(await agent.getHistory());
+});
+
+router.delete('/sessions/:sessionId', async (req, res) => {
+  const { sessionId } = req.params;
+  const agent = agents.get(sessionId);
+  if (!agent) return res.status(404).json({ error: 'Session not found' });
+  await agent.clearSession();
+  agents.delete(sessionId);
+  res.json({ ok: true });
 });
 
 export default router;
@@ -1210,11 +1301,10 @@ export default router;
 
 ### React 前端组件
 
-`client/src/components/ChatInterface.tsx`:
+`client/src/components/ChatInterface.tsx`（简化示意，完整实现见示例仓库）：
 
 ```typescript
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useAgent } from '../hooks/useAgent';
 
 interface Message {
@@ -1252,7 +1342,7 @@ export const ChatInterface: React.FC = () => {
         
         try {
             const response = await fetch(
-                `http://localhost:3000/api/sessions/${sessionId}/execute`,
+                `/api/sessions/${sessionId}/execute`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1443,49 +1533,62 @@ if (stepsAreIndependent) {
 
 ### Docker 部署
 
-`Dockerfile`:
+示例仓库根目录 `Dockerfile`（后端）：
 
 ```dockerfile
-# 后端
-FROM node:20-alpine AS server-builder
+FROM node:20-alpine AS builder
 WORKDIR /app/server
-COPY server/package*.json ./
+COPY server/package.json ./
 RUN npm install
 COPY server/ .
 RUN npm run build
 
 FROM node:20-alpine
-WORKDIR /app
-COPY --from=server-builder /app/server/dist ./server
-COPY --from=server-builder /app/server/node_modules ./node_modules
-COPY server/package*.json ./
+WORKDIR /app/server
+COPY --from=builder /app/server/dist ./dist
+COPY --from=builder /app/server/package.json ./
+COPY --from=builder /app/server/node_modules ./node_modules
+RUN mkdir -p /app/server/data
+ENV NODE_ENV=production
+ENV DATABASE_PATH=/app/server/data/agent.db
 EXPOSE 3000
-CMD ["node", "server/index.js"]
+CMD ["node", "dist/index.js"]
 ```
 
-`docker-compose.yml`:
+`docker-compose.yml`：
 
 ```yaml
 version: '3.8'
 
 services:
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+      - SERPER_API_KEY=${SERPER_API_KEY:-}
       - DATABASE_PATH=/data/agent.db
     volumes:
-      - ./data:/data
+      - agent-data:/app/server/data
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - '8080:80'
     depends_on:
       - server
+
+volumes:
+  agent-data:
 ```
+
+启动后访问 **http://localhost:8080**（Nginx 反向代理前端，并转发 `/api` 到后端）。
 
 ### 部署到云平台
 
@@ -1521,10 +1624,10 @@ vercel deploy
    - 长期记忆向量数据库
 
 3. **UI 改进**
-   - 实时进度可视化
    - 研究报告导出（PDF/Markdown）
-   - 历史记录管理
+   - 多会话历史管理
    - 主题切换
+   - （示例仓库已实现：SSE 进度、流式 Markdown、打字机、步骤折叠）
 
 ### 性能优化
 
@@ -1633,7 +1736,14 @@ console.log('Observation:', step.observation);
    - 开源代码
    - 参与社区讨论
 
-**完整代码**: [GitHub Repository](https://github.com/yourusername/research-agent)
+**完整代码**：[Keekuun/hello-agent — 01-agent-research-assistant](https://github.com/Keekuun/hello-agent/tree/main/01-agent-research-assistant)
+
+克隆命令：
+
+```bash
+git clone https://github.com/Keekuun/hello-agent.git
+cd hello-agent/01-agent-research-assistant
+```
 
 ---
 
