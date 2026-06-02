@@ -82,7 +82,7 @@ module.exports = [
     icon: 'reco-blog',
     items: [
       { text: '人月神话', link: '/books/The-Mythical-Man-Month-zh/' },
-      { text: 'Label Studio', link: '/label-studio' },
+      { text: 'Label Studio', link: '/label-studio/' },
     ],
   },
 
