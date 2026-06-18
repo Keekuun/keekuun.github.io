@@ -14,7 +14,7 @@ tags:
 
 # 多智能体协作：从单兵作战到团队分工
 
-> [08 的第一个 Agent](/ai/08-build-first-agent.html) 里，一个 ReAct 循环 + 几个 Tool 就能完成调研任务。[09 Tools](/ai/09-tools-system-design.html) 把能力拆清楚了。什么时候还要再拆成 **多个 Agent**？这篇从前端能实现的编排方式讲起，由浅入深。
+> [08 的第一个 Agent](./08-build-first-agent.md) 里，一个 ReAct 循环 + 几个 Tool 就能完成调研任务。[09 Tools](./09-tools-system-design.md) 把能力拆清楚了。什么时候还要再拆成 **多个 Agent**？这篇从前端能实现的编排方式讲起，由浅入深。
 
 ## 📚 目录
 
@@ -37,7 +37,7 @@ tags:
 
 | 情况 | 更合适的做法 |
 |------|--------------|
-| 步骤固定，3～5 步 | 单 Agent + [Planner](/ai/10-memory-planning-agent.html) |
+| 步骤固定，3～5 步 | 单 Agent + [Planner](./10-memory-planning-agent.md) |
 | 只是工具多 | 单 Agent + Tool Registry |
 | 要写代码 **且** 要独立审查 | Coder Agent + Reviewer Agent |
 | 子任务可并行 | Map-Reduce（`Promise.all` + 限流） |
@@ -154,7 +154,7 @@ const graph = new StateGraph(State)
 const app = graph.compile();
 ```
 
-这和 [08 里 ReAct 的 while 循环](/ai/08-build-first-agent.html) 是一类问题，但 **分支多了以后**，图编排更好维护、更好画给同事看。
+这和 [08 里 ReAct 的 while 循环](./08-build-first-agent.md) 是一类问题，但 **分支多了以后**，图编排更好维护、更好画给同事看。
 
 ### Checkpoint：暂停等人审批
 
@@ -232,7 +232,7 @@ Zod 校验；解析失败就 **重跑该节点**，别把脏数据传下去。
 
 ## 和前端 UI 怎么接
 
-Multi-Agent 和 [08 的 SSE 流式 UI](/ai/08-build-first-agent.html) 可以同一套：
+Multi-Agent 和 [08 的 SSE 流式 UI](./08-build-first-agent.md) 可以同一套：
 
 ```typescript
 // 每个图节点开始时推一条事件
@@ -269,17 +269,20 @@ Coder 和 Reviewer 无限互怼，Token 烧光。审查循环 **最多 2～3 轮
 用 fixture mock Worker，只测 Router 有没有派对人；全链路测试留少量冒烟。
 
 **5. 和 Memory 搅在一起**  
-多 Agent 的 State 是 **任务黑板**；用户长期偏好走 [Memory 进阶](/ai/13-advanced-memory.html)，别混。
+多 Agent 的 State 是 **任务黑板**；用户长期偏好走 [Memory 进阶](./13-advanced-memory.md)，别混。
 
 ---
 
 ## 系列导航
 
-1. [构建第一个 Agent](/ai/08-build-first-agent.html)
-2. [Tools 系统](/ai/09-tools-system-design.html)
-3. [Memory 与 Planning](/ai/10-memory-planning-agent.html)
-4. [RAG 进阶](/ai/11-advanced-rag-patterns.html)
+1. [构建第一个 Agent](./08-build-first-agent.md)
+2. [Tools 系统](./09-tools-system-design.md)
+3. [Memory 与 Planning](./10-memory-planning-agent.md)
+4. [RAG 进阶](./11-advanced-rag-patterns.md)
 5. **本文**
-6. [Memory 进阶](/ai/13-advanced-memory.html)
+6. [Memory 进阶](./13-advanced-memory.md)
+7. [LangChain.js 生态](./15-langchain-js-guide.md) · [LC 专系列 01～16](./langchain/README.md)
+8. [LangGraph.js 实战](./16-langgraphjs-practice.md) · [LG 专系列 01～13](./langgraph/README.md)
+9. [17～26 产品化与扩展](./17-build-production-chatbot-ui.md)（UI · 上线 · 收官 · SDK · 多模态 · Eval · Skills · 传统 Web · Langfuse · CopilotKit）
 
-**参考：** [LangGraph.js 文档](https://langchain-ai.github.io/langgraphjs/) · [Anthropic: Building effective agents](https://www.anthropic.com/research/building-effective-agents)
+**总索引：** [README](./README.md) · **参考：** [LangGraph.js 文档](https://langchain-ai.github.io/langgraphjs/) · [Anthropic: Building effective agents](https://www.anthropic.com/research/building-effective-agents)

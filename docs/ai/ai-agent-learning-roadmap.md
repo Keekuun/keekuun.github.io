@@ -1372,6 +1372,33 @@ describe('AI Assistant', () => {
 16. 《AI 应用安全最佳实践》
 17. 《从 0 到 1：我的 AI Agent 项目复盘》
 
+### 已发布文章对照（与上文规划编号不同）
+
+路线图早期编号与博客实际发文已分叉，以 `docs/ai/` 文件为准：
+
+| 文件 | 主题 |
+|------|------|
+| 01～10 | 基础 · Prompt · Agent 核心 |
+| rag-blog-knowledge-search | RAG 博客实战 |
+| 11～14 | RAG 进阶 · Multi-Agent · Memory 进阶 · WebAI |
+| **15** | **LangChain.js 生态与选型** |
+| **16** | **LangGraph.js 实战** |
+| **17** | **生产级 Chatbot UI** |
+| **18** | **Agent 上线 Checklist** |
+| **19** | **博客 AI 助手收官** |
+| **20** | **Vercel AI SDK** |
+| **21** | **多模态交互** |
+| **22** | **Agent Eval 回归** |
+| **23** | **Skills 与程序记忆** |
+| **24** | **传统 Web 接入 AI** |
+| **25** | **Langfuse 可观测实战** |
+| **26** | **CopilotKit 嵌入指南** |
+| **27** | **Mastra：TS 一体化 Agent 框架速览**（与 15/20 三角对照） |
+| [README](./README.md) | **系列总索引与学习路径** |
+| langchain/ | LangChain.js API 深挖专系列（**01～16**） |
+| langgraph/ | LangGraph.js API 深挖专系列（**01～13**） |
+| mastra/ | Mastra.js API 深挖专系列（**01～08**） |
+
 ### 写作建议
 
 ✅ **每篇文章结构：**

@@ -74,6 +74,17 @@ module.exports = [
       { text: 'Hello Agents', link: 'https://hello-agents.datawhale.cc/' },
       { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
       { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
+      {
+        text: '框架深挖',
+        items: [
+          { text: 'AI 系列总索引', link: '/ai/README.html' },
+          { text: 'Mastra 生态速览 (27)', link: '/ai/27-mastra-typescript-agent-framework.html' },
+          { text: 'LangChain.js 专系列', link: '/ai/langchain/' },
+          { text: 'LangGraph.js 专系列', link: '/ai/langgraph/' },
+          { text: 'Mastra.js 专系列', link: '/ai/mastra/' },
+          { text: 'Agent 学习路线图', link: '/ai/ai-agent-learning-roadmap.html' },
+        ],
+      },
     ],
   },
 

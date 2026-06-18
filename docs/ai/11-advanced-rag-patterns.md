@@ -31,7 +31,7 @@ tags:
 
 ## 你很可能已经跑过 Naive RAG
 
-不管是公司 Wiki 问答，还是 [博客语义检索](/ai/rag-blog-knowledge-search.html)，最基础的流程都一样：
+不管是公司 Wiki 问答，还是 [博客语义检索](./rag-blog-knowledge-search.md)，最基础的流程都一样：
 
 ```mermaid
 flowchart LR
@@ -273,7 +273,7 @@ ${question}`;
 
 ### Agentic RAG
 
-问题需要 **搜好几次**（「哪些文档同时讲了 A 和 B」）时，把检索做成 [Tool](/ai/09-tools-system-design.html)：
+问题需要 **搜好几次**（「哪些文档同时讲了 A 和 B」）时，把检索做成 [Tool](./09-tools-system-design.md)：
 
 ```typescript
 const searchTool: Tool = {
@@ -288,7 +288,7 @@ const searchTool: Tool = {
 };
 ```
 
-Agent 用 [ReAct](/ai/08-build-first-agent.html) 自己决定何时搜、搜什么——和固定「每问必搜一次」的管道不同。
+Agent 用 [ReAct](./08-build-first-agent.md) 自己决定何时搜、搜什么——和固定「每问必搜一次」的管道不同。
 
 ### GraphRAG
 
@@ -339,10 +339,10 @@ type FailureMode =
 
 ## 系列导航
 
-1. [给个人博客加上 RAG](/ai/rag-blog-knowledge-search.html) — 基础流水线实战
+1. [给个人博客加上 RAG](./rag-blog-knowledge-search.md) — 基础流水线实战
 2. **本文**
-3. [多智能体协作](/ai/12-multi-agent-systems.html)
-4. [Memory 进阶](/ai/13-advanced-memory.html)
-5. [WebAI 与边缘推理](/ai/14-webai-and-edge-inference.html)
+3. [多智能体协作](./12-multi-agent-systems.md)
+4. [Memory 进阶](./13-advanced-memory.md)
+5. [WebAI 与边缘推理](./14-webai-and-edge-inference.md)
 
-**延伸阅读：** [RAGAS 文档](https://docs.ragas.io/) · [Corrective RAG 论文](https://arxiv.org/abs/2401.15884) · [Lost in the Middle](https://arxiv.org/abs/2307.03172)
+**总索引：** [README](./README.md) · **延伸阅读：** [RAGAS 文档](https://docs.ragas.io/) · [Corrective RAG 论文](https://arxiv.org/abs/2401.15884) · [Lost in the Middle](https://arxiv.org/abs/2307.03172)

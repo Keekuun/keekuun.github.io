@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adv 12 Bloom</title>
+  <link rel="stylesheet" href="/shared/demo.css" />
+</head>
+<body class="layout-full">
+  <header class="bar"><a href="/">← Demos</a><span>进阶 12 · UnrealBloomPass 辉光</span></header>
+  <div id="root" style="width:100%;height:calc(100% - 40px);"></div>
+  <div class="panel">
+    <label><input type="checkbox" id="bloomOn" checked /> Bloom</label>
+    <label>strength: <span id="strVal">0.8</span>
+      <input type="range" id="strength" min="0" max="2" step="0.1" value="0.8" />
+    </label>
+    <label>threshold: <span id="thrVal">0.85</span>
+      <input type="range" id="threshold" min="0" max="1" step="0.05" value="0.85" />
+    </label>
+    <p class="status">高 emissive 物体触发辉光 · 孪生告警常用</p>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

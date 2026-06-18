@@ -411,7 +411,7 @@ TypeScript toolkit for AI apps: streaming, tools, agents, and multi-provider.
 
 Vercel 出品的 TS AI 工具包，支持流式、工具调用与多模型。
 
-+ [Mastra](https://github.com/mastra-ai/mastra)
++ [Mastra](https://github.com/mastra-ai/mastra) · [本系列速览](./27-mastra-typescript-agent-framework.md) · [专系列](./mastra/README.md)
 
 Opinionated TypeScript framework: workflows, agents, RAG, evals.
 

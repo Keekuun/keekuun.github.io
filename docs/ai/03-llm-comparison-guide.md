@@ -1366,6 +1366,8 @@ class HybridLLMSystem {
 
 希望这份指南能帮助你做出明智的选择！如果在具体场景中需要更详细的建议，欢迎继续交流。
 
-**下一篇预告：** [《Prompt Engineering 完全指南》](/ai/04-prompt-engineering-guide.html)
+**下一篇：** [04 Prompt Engineering](./04-prompt-engineering-guide.md)
+
+**系列导航：** [总索引](./README.md) · [02 Transformer](./02-transformer-explained.md) · **03 本文** · [04 Prompt](./04-prompt-engineering-guide.md)
 
 我们将深入探讨如何编写高效的 prompt，让 LLM 发挥最大潜力。敬请期待！

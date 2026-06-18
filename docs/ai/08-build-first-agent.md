@@ -1722,7 +1722,7 @@ console.log('Observation:', step.observation);
 ### 下一步
 
 1. **继续学习**
-   - 阅读系列下一篇：[《Tools 系统设计与实现》](/ai/09-tools-system-design.html)
+   - 阅读系列下一篇：[《Tools 系统设计与实现》](./09-tools-system-design.md)
    - 探索 LangChain、AutoGPT 等框架
    - 研究多 Agent 系统
 
@@ -1755,6 +1755,16 @@ cd hello-agent/01-agent-research-assistant
 - [Express.js Guide](https://expressjs.com/)
 - [React Documentation](https://react.dev/)
 
-**下一篇预告：** [《Tools 系统设计与实现》](/ai/09-tools-system-design.html)
+## 系列导航
 
-我们将深入探讨如何设计和实现强大的工具系统，让 Agent 能够与外部世界交互。敬请期待！
+**总索引：** [AI Agent 系列首页](./README.md)
+
+| 阶段 | 链接 |
+|------|------|
+| 前置 | [07 架构](./07-ai-agent-architecture.md) |
+| **本文** | 第一个 Agent（自研 ReAct + SSE） |
+| 续篇 | [09 Tools](./09-tools-system-design.md) → [10 Memory](./10-memory-planning-agent.md) |
+| 框架版 | [16 LangGraph 实战](./16-langgraphjs-practice.md) · [LG 专系列](./langgraph/README.md) |
+| 产品化 | [17 Chatbot UI](./17-build-production-chatbot-ui.md) · [19 收官](./19-blog-ai-assistant-capstone.md) |
+
+**下一篇：** [09 Tools 系统设计与实现](./09-tools-system-design.md)

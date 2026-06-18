@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 ECharts vs Three</title>
+  <link rel="stylesheet" href="/shared/demo.css" />
+  <style>
+    body { overflow: hidden; }
+    .split { height: calc(100vh - 40px); }
+    .pane { display: flex; flex-direction: column; border-right: 1px solid #30363d; min-height: 0; }
+    .pane:last-child { border-right: none; }
+    .pane h3 { padding: 8px 12px; font: 13px system-ui; color: #8b949e; background: #161b22; flex-shrink: 0; }
+    #chart, #three-root { flex: 1; min-height: 0; position: relative; }
+    #three-root canvas { width: 100% !important; height: 100% !important; }
+  </style>
+</head>
+<body>
+  <header class="bar"><a href="/">← Demos</a><span>01 · ECharts 折线 + Three 网格</span></header>
+  <div class="split">
+    <div class="pane"><h3>ECharts 2D</h3><div id="chart"></div></div>
+    <div class="pane"><h3>Three.js 3D</h3><div id="three-root"></div></div>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

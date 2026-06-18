@@ -315,4 +315,10 @@ Next 开发态默认图标不会自动带到 Vercel。在 `app/icon.svg` 与 `pu
 
 ---
 
+## 系列导航
+
+**总索引：** [README](./README.md) · **进阶：** [11 RAG 进阶](./11-advanced-rag-patterns.md) · **专系列：** [LC 06～09 Documents/Embeddings/VectorStore](./langchain/README.md) · **收官：** [19 博客 AI 助手](./19-blog-ai-assistant-capstone.md)
+
+---
+
 *本文基于 2026 年 5 月仓库实际实现整理；厂商 API 限制与价格以官方文档为准。*

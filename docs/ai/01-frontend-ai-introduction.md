@@ -1042,6 +1042,20 @@ program.parse();
 
 ---
 
-**下一篇预告：** [《LLM 工作原理：用前端思维理解 Transformer》](/ai/02-transformer-explained.html)
+## 系列导航
 
-我们将深入探讨 Transformer 架构，用前端开发者熟悉的类比来理解这个改变世界的技术。敬请期待！
+**总索引：** [AI Agent 学习系列首页](./README.md) · [完整路线图](./ai-agent-learning-roadmap.md)
+
+**本系列起点（01～03）：**
+
+1. **本文**
+2. [02 Transformer](./02-transformer-explained.md)
+3. [03 大模型选型](./03-llm-comparison-guide.md)
+
+**后续主线：** [04 Prompt](./04-prompt-engineering-guide.md) → … → [08 第一个 Agent](./08-build-first-agent.md) → [19 收官](./19-blog-ai-assistant-capstone.md)
+
+**框架深挖：** [LangChain 专系列](./langchain/README.md) · [LangGraph 专系列](./langgraph/README.md)
+
+---
+
+**下一篇：** [《LLM 工作原理：用前端思维理解 Transformer》](./02-transformer-explained.md)

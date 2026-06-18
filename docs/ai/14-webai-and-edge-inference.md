@@ -155,7 +155,7 @@ for await (const chunk of chunks) {
 }
 ```
 
-同样放 Worker，主线程用 SSE 或 `ReadableStream` 推给 UI——和 [08 流式报告](/ai/08-build-first-agent.html) 同一套。
+同样放 Worker，主线程用 SSE 或 `ReadableStream` 推给 UI——和 [08 流式报告](./08-build-first-agent.md) 同一套。
 
 **量化（q4）**：模型体积缩小、速度上去，1.5B 聊天在笔记本 Chrome 上勉强可用；**7B+ 别在浏览器默认跑**。
 
@@ -185,7 +185,7 @@ async function search(text: string) {
 }
 ```
 
-服务端 `/api/search` 增加「直接收 vector」分支，跳过 Embedding API——降延迟、降费用。索引逻辑见 [RAG 进阶](/ai/11-advanced-rag-patterns.html)。
+服务端 `/api/search` 增加「直接收 vector」分支，跳过 Embedding API——降延迟、降费用。索引逻辑见 [RAG 进阶](./11-advanced-rag-patterns.md)。
 
 ---
 
@@ -222,17 +222,20 @@ if (caps?.available === 'readily') {
 
 **5. 端侧失败没 fallback** → OOM 时自动走云端 API。
 
-**不适合 WebAI 的：** 长上下文 [Multi-Agent](/ai/12-multi-agent-systems.html)、要最新知识的问答、7B+ 质量写作——继续 `fetch` 云端。
+**不适合 WebAI 的：** 长上下文 [Multi-Agent](./12-multi-agent-systems.md)、要最新知识的问答、7B+ 质量写作——继续 `fetch` 云端。
 
 ---
 
 ## 系列导航
 
-1. [RAG 进阶](/ai/11-advanced-rag-patterns.html)
-2. [多智能体](/ai/12-multi-agent-systems.html)
-3. [Memory 进阶](/ai/13-advanced-memory.html)
+1. [RAG 进阶](./11-advanced-rag-patterns.md)
+2. [多智能体](./12-multi-agent-systems.md)
+3. [Memory 进阶](./13-advanced-memory.md)
 4. **本文**
+5. [LangChain.js 生态](./15-langchain-js-guide.md) · [专系列](./langchain/README.md)
+6. [LangGraph.js 实战](./16-langgraphjs-practice.md) · [专系列](./langgraph/README.md)
+7. [17 Chatbot UI](./17-build-production-chatbot-ui.md) · … · [24 传统 Web](./24-traditional-web-ai-integration.md)
 
-基础链：[08 Agent](/ai/08-build-first-agent.html) → [09 Tools](/ai/09-tools-system-design.html) → [10 Memory](/ai/10-memory-planning-agent.html)
+基础链：[08 Agent](./08-build-first-agent.md) → [09 Tools](./09-tools-system-design.md) → [10 Memory](./10-memory-planning-agent.md)
 
-**参考：** [Transformers.js](https://huggingface.co/docs/transformers.js) · [WebLLM](https://webllm.mlc.ai/) · [Chrome AI](https://developer.chrome.com/docs/ai)
+**总索引：** [README](./README.md) · **参考：** [Transformers.js](https://huggingface.co/docs/transformers.js) · [WebLLM](https://webllm.mlc.ai/) · [Chrome AI](https://developer.chrome.com/docs/ai)

@@ -1589,9 +1589,9 @@ for await (const chunk of streamResponse) {
 - 📖 BabyAGI 架构
 - 📖 Microsoft Autogen
 
-**下一篇：** [《构建你的第一个 AI Agent》](/ai/08-build-first-agent.html)
+**系列导航：** [总索引](./README.md) · **下一篇：** [08 第一个 Agent](./08-build-first-agent.md)
 
-我们将手把手教你从零开始构建一个实用的 AI Agent。敬请期待！
+我们将手把手教你从零开始构建一个实用的 AI Agent。
 
 ---
 

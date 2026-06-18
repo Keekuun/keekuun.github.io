@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adv 16 Shader</title>
+  <link rel="stylesheet" href="/shared/demo.css" />
+  <style>
+    .mode-btns { display: flex; gap: 6px; margin-bottom: 8px; }
+    .mode-btns button.active { border-color: #58a6ff; color: #58a6ff; }
+  </style>
+</head>
+<body class="layout-full">
+  <header class="bar"><a href="/">← Demos</a><span>进阶 16 · 自定义 Shader</span></header>
+  <div id="root" style="width:100%;height:calc(100% - 40px);"></div>
+  <div class="panel">
+    <div class="mode-btns">
+      <button id="modeHeat" class="active">热力染色</button>
+      <button id="modeFlow">流动管线</button>
+    </div>
+    <label id="heatCtrl">强度 uIntensity: <span id="intVal">0.5</span>
+      <input type="range" id="intensity" min="0" max="1" step="0.01" value="0.5" />
+    </label>
+    <label id="flowCtrl" hidden>流速: <span id="spdVal">1.0</span>
+      <input type="range" id="speed" min="0.1" max="3" step="0.1" value="1" />
+    </label>
+    <p class="status">uniform 驱动 · 孪生可视化常用</p>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

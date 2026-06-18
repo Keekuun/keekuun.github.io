@@ -1,0 +1,17 @@
+packages:
+  - 'apps/*'
+  - 'tools/*'
+
+# 控制依赖安装时是否允许执行 postinstall / 构建脚本（pnpm 10.26+）
+# true = 允许，false = 禁止；未列出的包默认不允许
+allowBuilds:
+  '@parcel/watcher': true # 文件监听，docs:dev / next dev 需要
+  core-js: true # Babel / VuePress 编译 polyfill
+  cwebp-bin: false # WebP 插件已禁用，且二进制易安装失败
+  esbuild: true # Next.js、部分构建工具依赖
+  fsevents: true # macOS 原生文件事件（仅 macOS 生效）
+  gif2webp-bin: false # 同 cwebp-bin，项目未使用
+  highlight.js: true # VuePress 代码高亮
+  puppeteer: false # 非项目直接依赖，跳过 Chromium 下载
+  sharp: true # 图片处理 
+  vuepress: true # 博客 dev / build 必需

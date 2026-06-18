@@ -14,7 +14,7 @@ tags:
 
 # Memory 与 Planning：让 Agent 更智能
 
-> 在 [Tools 系统](/ai/09-tools-system-design.html) 之上，补齐记忆与规划，让 Agent 能「记住」并「分步执行」
+> 在 [Tools 系统](./09-tools-system-design.md) 之上，补齐记忆与规划，让 Agent 能「记住」并「分步执行」
 
 ## 📚 目录
 
@@ -31,7 +31,7 @@ tags:
 
 ## 为什么 Tools 还不够
 
-[上一篇](/ai/09-tools-system-design.html) 解决的是：**Agent 能调用外部能力**（搜索、计算、读写文件等）。
+[上一篇](./09-tools-system-design.md) 解决的是：**Agent 能调用外部能力**（搜索、计算、读写文件等）。
 
 但真实任务往往还需要两件事：
 
@@ -51,7 +51,7 @@ graph LR
     F -->|是| G[回复用户]
 ```
 
-架构层面的组件关系在 [《深入理解 AI Agent 架构》](/ai/07-ai-agent-architecture.html) 已有介绍；[《构建你的第一个 AI Agent》](/ai/08-build-first-agent.html) 里用 SQLite 做过对话历史。本文聚焦：**如何把记忆和规划接到你已有的 Tool Registry 上**。
+架构层面的组件关系在 [《深入理解 AI Agent 架构》](./07-ai-agent-architecture.md) 已有介绍；[《构建你的第一个 AI Agent》](./08-build-first-agent.md) 里用 SQLite 做过对话历史。本文聚焦：**如何把记忆和规划接到你已有的 Tool Registry 上**。
 
 ---
 
@@ -67,7 +67,7 @@ graph LR
 
 ### 短期记忆：对话与 Tool 轨迹
 
-在 [08-build-first-agent](/ai/08-build-first-agent.html) 的 `SQLiteMemory` 基础上，建议把 **Tool 调用也写入历史**，方便 LLM 理解「上一步搜到了什么」：
+在 [08-build-first-agent](./08-build-first-agent.md) 的 `SQLiteMemory` 基础上，建议把 **Tool 调用也写入历史**，方便 LLM 理解「上一步搜到了什么」：
 
 ```typescript
 interface MemoryMessage {
@@ -111,7 +111,7 @@ class ShortTermMemory {
 
 ### 长期记忆：语义检索
 
-需要「上个月用户说过喜欢 TypeScript」这类信息时，用 Embedding + 向量检索（与博客 [RAG 检索](/ai/rag-blog-knowledge-search.html) 同一套思路，但索引的是 **Agent 记忆条目** 而非全文博客）：
+需要「上个月用户说过喜欢 TypeScript」这类信息时，用 Embedding + 向量检索（与博客 [RAG 检索](./rag-blog-knowledge-search.md) 同一套思路，但索引的是 **Agent 记忆条目** 而非全文博客）：
 
 ```typescript
 interface MemoryRecord {
@@ -199,7 +199,7 @@ class WorkingMemory {
 | ReAct | 探索型、路径不确定 | 每步读写短期记忆 |
 | Plan-and-Execute | 步骤清晰、可并行 | 计划存工作记忆，按步执行 |
 
-复杂任务可 **先 Plan 再 ReAct**：Planner 输出步骤列表，Executor 对每一步跑 ReAct 循环（选用 [09](/ai/09-tools-system-design.html) 里的 Tool）。
+复杂任务可 **先 Plan 再 ReAct**：Planner 输出步骤列表，Executor 对每一步跑 ReAct 循环（选用 [09](./09-tools-system-design.md) 里的 Tool）。
 
 ```mermaid
 flowchart TB
@@ -251,7 +251,7 @@ interface Plan {
 2. `planner.createPlan(goal, tools)` → `working.setPlan(plan)`。
 3. 对每个 `pending` 且依赖已满足的 step：
    - `shortTerm.add({ role: 'system', content: '当前步骤: ...' })`
-   - 跑 ReAct（内部调用 [ToolRegistry](/ai/09-tools-system-design.html)）
+   - 跑 ReAct（内部调用 [ToolRegistry](./09-tools-system-design.md)）
    - `shortTerm.add({ role: 'tool', ... })`，`working.setStepResult(id, result)`
    - 若失败 → `planner.adjustPlan(plan, error)` 重规划
 4. 全部完成后，用短期记忆摘要生成最终回复；可选 `longTerm.remember(summary)`。
@@ -336,7 +336,7 @@ class AgentMemory {
 }
 ```
 
-与 [08](/ai/08-build-first-agent.html) 的 `ResearchAgent` 集成时，在构造函数里注入 `AgentMemory`，替换原先单一的 SQLite 对话表即可。
+与 [08](./08-build-first-agent.md) 的 `ResearchAgent` 集成时，在构造函数里注入 `AgentMemory`，替换原先单一的 SQLite 对话表即可。
 
 ---
 
@@ -396,22 +396,27 @@ class Planner {
 | 场景 | 短期 | 长期 |
 |------|------|------|
 | 本地原型 | 内存 / SQLite | Chroma 本地 |
-| 个人博客级 Agent | SQLite | Upstash Vector（见 [RAG 文](/ai/rag-blog-knowledge-search.html)） |
+| 个人博客级 Agent | SQLite | Upstash Vector（见 [RAG 文](./rag-blog-knowledge-search.md)） |
 | 生产多租户 | Redis + DB | 托管向量库 + 行级隔离 |
 
 ---
 
 ## 系列导航
 
+**总索引：** [AI Agent 系列首页](./README.md)
+
 **Agent 系列（建议阅读顺序）：**
 
-1. [深入理解 AI Agent 架构](/ai/07-ai-agent-architecture.html)
-2. [构建你的第一个 AI Agent](/ai/08-build-first-agent.html)
-3. [Tools 系统设计与实现](/ai/09-tools-system-design.html)
+1. [深入理解 AI Agent 架构](./07-ai-agent-architecture.md)
+2. [构建你的第一个 AI Agent](./08-build-first-agent.md)
+3. [Tools 系统设计与实现](./09-tools-system-design.md)
 4. **本文：Memory 与 Planning**
-5. [给个人博客加上 RAG 知识库检索](/ai/rag-blog-knowledge-search.html)（向量检索实战）
+5. [给个人博客加上 RAG 知识库检索](./rag-blog-knowledge-search.md)（向量检索实战）
+6. [RAG 进阶](./11-advanced-rag-patterns.md) · [多智能体](./12-multi-agent-systems.md) · [Memory 进阶](./13-advanced-memory.md) · [WebAI](./14-webai-and-edge-inference.md)
+7. [LangChain.js 生态](./15-langchain-js-guide.md) · [专系列](./langchain/README.md) · [LangGraph 专系列](./langgraph/README.md)
+8. [17～26 产品化与扩展](./17-build-production-chatbot-ui.md) · [**系列总索引**](./README.md)
 
-**下一篇预告（系列 4）**：《构建生产级 AI Chatbot UI》—— 把 Agent 能力接到可上线的聊天界面（规划中）。
+**主线 Phase 1 完结；Phase 2 见 20～24。**
 
 ---
 

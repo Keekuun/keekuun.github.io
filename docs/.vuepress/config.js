@@ -2,6 +2,8 @@ const pluginConfig = require('./config/pluginConfig.js');
 const headConfig = require('./config/headConfig.js');
 const themeConfig = require('./config/themeConfig');
 
+const pluginEntries = Object.entries(pluginConfig).map(([name, options]) => [name, options]);
+
 const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 module.exports = {
     title: '前端Jeek',
@@ -37,7 +39,24 @@ module.exports = {
         },
     },
     // 插件
-    plugins: pluginConfig,
+    plugins: [
+        // 热重载时 blog 插件的 clientDynamicModules 可能早于 ready()，兜底避免崩溃
+        (options, ctx) => ({
+            name: 'fix-blog-hot-reload',
+            ready() {
+                if (!ctx.frontmatterClassificationPages) {
+                    ctx.frontmatterClassificationPages = [];
+                }
+            },
+            async clientDynamicModules() {
+                if (!ctx.frontmatterClassificationPages) {
+                    ctx.frontmatterClassificationPages = [];
+                }
+                return [];
+            },
+        }),
+        ...pluginEntries,
+    ],
 
     chainWebpack: (config) => {
         // 图片处理规则

@@ -1,0 +1,5 @@
+node_modules
+dist
+# 大体积 3D 资源走 CDN，勿提交本地镜像
+public/models/**
+public/textures/**

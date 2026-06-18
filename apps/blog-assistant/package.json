@@ -1,0 +1,39 @@
+{
+  "name": "blog-assistant",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev --port 3010",
+    "build": "next build",
+    "start": "next start --port 3010",
+    "index:blog": "node scripts/index-blog.mjs",
+    "eval": "node scripts/run-eval.mjs"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.79",
+    "@langchain/langgraph": "^0.4.9",
+    "@langchain/langgraph-checkpoint": "^0.0.18",
+    "@langchain/langgraph-checkpoint-postgres": "^0.1.2",
+    "@langchain/openai": "^0.6.16",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
+    "@upstash/vector": "^1.2.3",
+    "next": "^16.2.6",
+    "openai": "^6.39.0",
+    "pg": "^8.16.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/pg": "^8.15.5",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}

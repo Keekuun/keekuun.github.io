@@ -13,7 +13,7 @@ tags:
 
 # Memory 进阶：构建 Agent 的长期认知系统
 
-> [第十篇](/ai/10-memory-planning-agent.html) 用 SQLite 存了对话历史，用向量库做了长期记忆。再往下做时，很容易踩坑：**把 RAG 知识库和用户对话记忆塞进同一个向量 index**。这篇在 10 的基础上，讲记忆和 RAG 怎么分、怎么写、怎么读。
+> [第十篇](./10-memory-planning-agent.md) 用 SQLite 存了对话历史，用向量库做了长期记忆。再往下做时，很容易踩坑：**把 RAG 知识库和用户对话记忆塞进同一个向量 index**。这篇在 10 的基础上，讲记忆和 RAG 怎么分、怎么写、怎么读。
 
 ## 📚 目录
 
@@ -49,13 +49,13 @@ tags:
 ...
 ```
 
-[RAG 检索](/ai/rag-blog-knowledge-search.html) 索引的是静态 `docs/`；记忆索引的是 **提取后的条目**，别混。
+[RAG 检索](./rag-blog-knowledge-search.md) 索引的是静态 `docs/`；记忆索引的是 **提取后的条目**，别混。
 
 ---
 
 ## 记忆分几层（复习 + 延伸）
 
-[10 篇](/ai/10-memory-planning-agent.html) 的三层，用前端状态来类比：
+[10 篇](./10-memory-planning-agent.md) 的三层，用前端状态来类比：
 
 | 记忆 | 像前端里的… | 实现 |
 |------|-------------|------|
@@ -175,7 +175,7 @@ ${recent.join('\n')}
 
 例如多次问 React 性能 → 洞察「当前关注 Frontend 性能，检索时可优先该分类」。
 
-洞察可以喂给 [Planner](/ai/10-memory-planning-agent.html)：
+洞察可以喂给 [Planner](./10-memory-planning-agent.md)：
 
 ```typescript
 const plan = await planner.createPlan(goal, {
@@ -204,7 +204,7 @@ const plan = await planner.createPlan(goal, {
 
 **前端：** 可做「Agent 对你的了解」面板，展示语义记忆，允许用户删改——和 Cookie 设置页类似。
 
-**多 Agent：** 见 [12 篇](/ai/12-multi-agent-systems.html)。Researcher 抓回来的原始 HTML **不要**进用户可见记忆，只存摘要；内部 Agent 轨迹标 `visibility: internal`。
+**多 Agent：** 见 [12 篇](./12-multi-agent-systems.md)。Researcher 抓回来的原始 HTML **不要**进用户可见记忆，只存摘要；内部 Agent 轨迹标 `visibility: internal`。
 
 ```typescript
 interface MemoryScope {
@@ -218,10 +218,10 @@ interface MemoryScope {
 
 ## 系列导航
 
-1. [Memory 与 Planning](/ai/10-memory-planning-agent.html) — 基础代码从这里接
-2. [RAG 进阶](/ai/11-advanced-rag-patterns.html)
-3. [多智能体](/ai/12-multi-agent-systems.html)
+1. [Memory 与 Planning](./10-memory-planning-agent.md) — 基础代码从这里接
+2. [RAG 进阶](./11-advanced-rag-patterns.md)
+3. [多智能体](./12-multi-agent-systems.md)
 4. **本文**
-5. [WebAI](/ai/14-webai-and-edge-inference.html)
+5. [WebAI](./14-webai-and-edge-inference.md)
 
-**参考：** [Generative Agents 论文](https://arxiv.org/abs/2304.03442) · [Mem0](https://mem0.ai/)
+**总索引：** [README](./README.md) · **参考：** [Generative Agents 论文](https://arxiv.org/abs/2304.03442) · [Mem0](https://mem0.ai/)

@@ -1450,7 +1450,9 @@ model = AutoModelForSequenceClassification.from_pretrained(
 
 现在你已经理解了 Transformer 的核心原理，下一步可以：
 
-📖 **阅读下一篇：** [《主流大模型对比与选型指南》](/ai/03-llm-comparison-guide.html)
+📖 **阅读下一篇：** [《主流大模型对比与选型指南》](./03-llm-comparison-guide.md)
+
+**系列导航：** [总索引](./README.md) · [01 入门](./01-frontend-ai-introduction.md) · **02 本文** · [03 选型](./03-llm-comparison-guide.md)
 
 🛠️ **动手实践：**
 - 使用 Hugging Face Transformers 库

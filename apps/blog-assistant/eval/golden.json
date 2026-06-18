@@ -1,0 +1,72 @@
+[
+  {
+    "id": "rag-11-series",
+    "mode": "rag",
+    "message": "11 篇 RAG 进阶讲什么？",
+    "must_include": ["RAG", "检索"],
+    "should_call_tool": null
+  },
+  {
+    "id": "lg-checkpoint-vs-memory",
+    "mode": "agent",
+    "message": "LangGraph checkpoint 和 Memory 有什么区别？",
+    "must_include": ["checkpoint", "State"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "runnable-vs-stategraph",
+    "mode": "agent",
+    "message": "LangChain Runnable 和 LangGraph State 什么关系？",
+    "must_include": ["Runnable", "State"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "agent-react",
+    "mode": "agent",
+    "message": "ReAct Agent 循环是怎么工作的？",
+    "must_include": ["Tool", "思考"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "blog-assistant-deploy",
+    "mode": "agent",
+    "message": "博客 AI 助手怎么部署到 Vercel？",
+    "must_include": ["Vercel", "部署"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "vercel-ai-sdk",
+    "mode": "agent",
+    "message": "Vercel AI SDK 的 useChat 解决什么问题？",
+    "must_include": ["useChat", "流式"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "langsmith-trace",
+    "mode": "agent",
+    "message": "LangSmith trace 里能看到什么？",
+    "must_include": ["trace", "Tool"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "multi-agent",
+    "mode": "agent",
+    "message": "多智能体系统有哪些协作模式？",
+    "must_include": ["Agent", "路由"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "webai-edge",
+    "mode": "agent",
+    "message": "WebAI 边缘推理适合什么场景？",
+    "must_include": ["浏览器", "本地"],
+    "should_call_tool": "search_blog"
+  },
+  {
+    "id": "eval-golden",
+    "mode": "agent",
+    "message": "Agent 评估 golden 数据集怎么建？",
+    "must_include": ["golden", "Eval"],
+    "should_call_tool": "search_blog"
+  }
+]

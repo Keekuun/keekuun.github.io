@@ -1471,9 +1471,9 @@ Prompt 调试和优化是一个持续的过程，需要：
 
 通过系统化的调试和优化，你将能够构建出高质量、稳定可靠的 AI 应用。
 
-**下一篇预告：** [《深入理解 AI Agent 架构》](/ai/07-ai-agent-architecture.html)
+**下一篇：** [07 AI Agent 架构](./07-ai-agent-architecture.md)
 
-我们将开始 Agent 系列的学习，深入探讨 AI Agent 的核心架构和工作原理。敬请期待！
+**系列导航：** [总索引](./README.md) · [05 高级 Prompt](./05-advanced-prompt-techniques.md) · **06 本文** · [07 Agent 架构](./07-ai-agent-architecture.md)
 
 ---
 

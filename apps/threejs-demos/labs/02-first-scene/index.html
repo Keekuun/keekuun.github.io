@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>02 First Scene</title>
+  <link rel="stylesheet" href="/shared/demo.css" />
+  <style>
+    body { background: linear-gradient(135deg, #1a1f2e, #0f1117); }
+  </style>
+</head>
+<body class="layout-full">
+  <header class="bar"><a href="/">← Demos</a><span>02 · 第一个场景</span></header>
+  <div id="root" style="width:100%;height:calc(100% - 40px);"></div>
+  <div class="panel">
+    <strong>实验选项</strong>
+    <label><input type="checkbox" id="alpha" /> 透明背景 (2.4)</label>
+    <label><input type="checkbox" id="onDemand" /> 按需渲染 (2.3)</label>
+    <label>DPR cap: <span id="dprVal">2</span>
+      <input type="range" id="dpr" min="1" max="2" step="0.5" value="2" />
+    </label>
+    <p class="status" id="status">连续渲染中</p>
+  </div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
