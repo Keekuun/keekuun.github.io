@@ -120,6 +120,19 @@ function scheduleAiSummarize(Vue, router) {
     });
 }
 
+function mountBlogAssistantWidget(site) {
+    const cfg = site.themeConfig && site.themeConfig.blogAssistant;
+    if (!cfg || !cfg.enabled || !cfg.baseUrl) return;
+    if (document.getElementById('blog-assistant-widget-root')) return;
+
+    const script = document.createElement('script');
+    script.src = `${cfg.baseUrl}/embed.js`;
+    script.setAttribute('data-base', cfg.baseUrl);
+    script.setAttribute('data-position', cfg.position || 'right');
+    script.defer = true;
+    document.body.appendChild(script);
+}
+
 export default ({ Vue, router, isServer }) => {
     if (typeof window === 'undefined' || isServer) return;
 
@@ -137,11 +150,13 @@ export default ({ Vue, router, isServer }) => {
     router.onReady(() => {
         setTimeout(renderMermaidDiagrams, 50);
         scheduleAiSummarize(Vue, router);
+        mountBlogAssistantWidget(router.app.$site);
     });
 
     router.afterEach(() => {
         closeMermaidZoom();
         setTimeout(renderMermaidDiagrams, 50);
         scheduleAiSummarize(Vue, router);
+        mountBlogAssistantWidget(router.app.$site);
     });
 };

@@ -4,6 +4,7 @@
     "mode": "rag",
     "message": "11 篇 RAG 进阶讲什么？",
     "must_include": ["RAG", "检索"],
+    "expect_source": "11-advanced-rag",
     "should_call_tool": null
   },
   {
@@ -11,6 +12,7 @@
     "mode": "agent",
     "message": "LangGraph checkpoint 和 Memory 有什么区别？",
     "must_include": ["checkpoint", "State"],
+    "expect_source": "langgraph",
     "should_call_tool": "search_blog"
   },
   {

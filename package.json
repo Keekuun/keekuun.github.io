@@ -20,6 +20,8 @@
     "blog-assistant:build": "pnpm --dir apps/blog-assistant build",
     "blog-assistant:index": "pnpm --dir apps/blog-assistant index:blog",
     "blog-assistant:eval": "pnpm --dir apps/blog-assistant eval",
+    "blog-assistant:setup-env": "pnpm --dir apps/blog-assistant setup-env",
+    "blog-assistant:check-env": "pnpm --dir apps/blog-assistant check-env",
     "webgl:dev": "pnpm --dir apps/webgl-demos dev",
     "webgl:build": "pnpm --dir apps/webgl-demos build",
     "threejs:dev": "pnpm --dir apps/threejs-demos dev",

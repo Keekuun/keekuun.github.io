@@ -7,6 +7,7 @@ import {
 } from "@/lib/ai";
 
 import { hitsToCitations, type Citation } from "@/lib/citations";
+import type { RagHistoryMessage } from "@/lib/rag/types";
 
 export type SearchHit = {
   id: string;
@@ -35,8 +36,12 @@ export async function embedQuery(text: string): Promise<number[]> {
   return res.data[0].embedding;
 }
 
-export async function searchBlog(query: string, topK = 8): Promise<SearchHit[]> {
-  const vector = await embedQuery(query);
+export async function searchBlog(
+  query: string,
+  topK = 8,
+  embeddingText?: string
+): Promise<SearchHit[]> {
+  const vector = await embedQuery(embeddingText ?? query);
   const index = getIndex();
   const result = await index.query({
     vector,
@@ -82,24 +87,46 @@ export function formatHitsForTool(hits: SearchHit[]): string {
 const RAG_SYSTEM =
   "你是博客 AI 助手。只根据提供的博客摘录回答；若摘录不足以回答，明确说博客中未找到相关内容。回答使用中文，并在句末用 [1][2] 标注引用编号，不要编造链接。";
 
+function buildRagChatMessages(
+  query: string,
+  hits: SearchHit[],
+  history: RagHistoryMessage[] = []
+) {
+  const context = formatHitsForContext(hits);
+  const system =
+    history.length > 0
+      ? `${RAG_SYSTEM}\n\n可结合对话历史理解指代，但回答必须基于检索摘录，不可编造。`
+      : RAG_SYSTEM;
+
+  const messages: Array<{
+    role: "system" | "user" | "assistant";
+    content: string;
+  }> = [{ role: "system", content: system }];
+
+  for (const turn of history) {
+    messages.push({ role: turn.role, content: turn.content });
+  }
+
+  messages.push({
+    role: "user",
+    content: `问题：${query}\n\n--- 检索摘录 ---\n${context}`,
+  });
+
+  return messages;
+}
+
 export async function answerWithContext(
   query: string,
-  hits: SearchHit[]
+  hits: SearchHit[],
+  history: RagHistoryMessage[] = []
 ): Promise<string> {
   const client = createChatClient();
   const model = getChatModel();
-  const context = formatHitsForContext(hits);
 
   const completion = await client.chat.completions.create({
     model,
     temperature: 0.2,
-    messages: [
-      { role: "system", content: RAG_SYSTEM },
-      {
-        role: "user",
-        content: `问题：${query}\n\n--- 检索摘录 ---\n${context}`,
-      },
-    ],
+    messages: buildRagChatMessages(query, hits, history),
   });
 
   return completion.choices[0]?.message?.content?.trim() || "未能生成回答。";
@@ -107,25 +134,26 @@ export async function answerWithContext(
 
 export async function streamAnswerWithContext(
   query: string,
-  hits: SearchHit[]
+  hits: SearchHit[],
+  options?: {
+    temperature?: number;
+    sendDone?: boolean;
+    history?: RagHistoryMessage[];
+  }
 ): Promise<ReadableStream<Uint8Array>> {
   const client = createChatClient();
   const model = getChatModel();
-  const context = formatHitsForContext(hits);
   const encoder = new TextEncoder();
   const citations: Citation[] = hitsToCitations(hits);
+  const temperature = options?.temperature ?? 0.2;
+  const sendDone = options?.sendDone !== false;
+  const history = options?.history ?? [];
 
   const completion = await client.chat.completions.create({
     model,
-    temperature: 0.2,
+    temperature,
     stream: true,
-    messages: [
-      { role: "system", content: RAG_SYSTEM },
-      {
-        role: "user",
-        content: `问题：${query}\n\n--- 检索摘录 ---\n${context}`,
-      },
-    ],
+    messages: buildRagChatMessages(query, hits, history),
   });
 
   return new ReadableStream({
@@ -141,7 +169,9 @@ export async function streamAnswerWithContext(
           const token = chunk.choices[0]?.delta?.content;
           if (token) send({ type: "token", content: token });
         }
-        send({ type: "done" });
+        if (sendDone) {
+          send({ type: "done" });
+        }
       } catch (err) {
         send({
           type: "error",

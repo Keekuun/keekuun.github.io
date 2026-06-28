@@ -1,0 +1,81 @@
+name: blog-assistant-eval
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "apps/blog-assistant/**"
+      - "tools/rag/**"
+
+concurrency:
+  group: blog-assistant-eval
+  cancel-in-progress: true
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    # 需配置 DEEPSEEK_API_KEY 等 secrets 后才跑；未配置时跳过
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      secrets.DEEPSEEK_API_KEY != ''
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build blog-assistant
+        working-directory: apps/blog-assistant
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
+          UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          EMBEDDING_BASE_URL: https://api.siliconflow.cn/v1
+          EMBEDDING_MODEL: BAAI/bge-m3
+          NEXT_PUBLIC_BLOG_BASE_URL: https://blog.zkkysqs.top
+        run: pnpm build
+
+      - name: Start blog-assistant
+        working-directory: apps/blog-assistant
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          UPSTASH_VECTOR_REST_URL: ${{ secrets.UPSTASH_VECTOR_REST_URL }}
+          UPSTASH_VECTOR_REST_TOKEN: ${{ secrets.UPSTASH_VECTOR_REST_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          EMBEDDING_BASE_URL: https://api.siliconflow.cn/v1
+          EMBEDDING_MODEL: BAAI/bge-m3
+          NEXT_PUBLIC_BLOG_BASE_URL: https://blog.zkkysqs.top
+          BLOG_ASSISTANT_PASSWORD: ${{ secrets.BLOG_ASSISTANT_PASSWORD }}
+        run: |
+          pnpm start &
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3010/api/config > /dev/null; then
+              echo "Server ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Server failed to start"
+          exit 1
+
+      - name: Run golden eval
+        env:
+          EVAL_BASE_URL: http://localhost:3010
+          EVAL_PASS_THRESHOLD: "0.8"
+          BLOG_ASSISTANT_PASSWORD: ${{ secrets.BLOG_ASSISTANT_PASSWORD }}
+        run: pnpm blog-assistant:eval

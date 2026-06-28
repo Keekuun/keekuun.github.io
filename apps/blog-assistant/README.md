@@ -7,7 +7,7 @@
 | 模式 | 说明 |
 |------|------|
 | **Agent** | `search_blog` + `search_wikipedia`，checkpoint 多轮 |
-| **RAG** | 固定检索链 + 流式回答 |
+| **RAG** | 固定检索链 + 多轮历史 + 重排序 |
 | **阶段 3** | Neon Postgres checkpoint、Cookie 会话、LangSmith、Eval |
 | **阶段 4** | 多会话侧栏、引用跳转、悬浮 widget |
 
@@ -50,9 +50,17 @@ pnpm blog-assistant:dev
 | `GET /api/agent/chat?threadId=` | 从 checkpoint 恢复消息 |
 | `GET /api/agent/threads` | 会话列表（需 `DATABASE_URL`） |
 | `DELETE /api/agent/threads` | 删除会话记录 |
-| `POST /api/rag/chat` | RAG SSE（`query`） |
+| `POST /api/rag/chat` | RAG SSE（`query` + 可选 `history`，支持 `regenerate`） |
 
-SSE 事件：`meta` · `token` · `tool_start` / `tool_end` · `citations` · `done` · `error`
+SSE 事件：`meta` · `route` · `retrieve` · `token` · `tool_start` / `tool_end` · `citations` · `suggestions` · `done` · `error`
+
+- Agent：`{ regenerate: true, threadId }` 回退 checkpoint 重答
+- RAG：`{ regenerate: true, query, history? }` 同问题换一版（提高 temperature）
+- RAG 多轮：`history: [{ role, content }]` 最多 6 轮；短问/指代时自动扩展检索 query
+- 路由：`AGENT_LLM_ROUTER=auto|rules|llm`
+- 重排序：`RAG_RERANK=1`（向量分 + 关键词混合，默认开）
+- HyDE：`RAG_HYDE=auto|off|on`（假设文档增强 Embedding，默认 auto）
+- RAG 会话：浏览器 `localStorage` 持久化（刷新可续聊）
 
 ## Eval（golden 10 条）
 
@@ -77,6 +85,8 @@ pnpm blog-assistant:eval  # 默认 http://localhost:3010，阈值 80%
 ```
 
 iframe 目标：`/widget`（精简 UI）。
+
+**本站 VuePress 自动接入：** 在 GitHub 仓库 Variables 设置 `BLOG_ASSISTANT_WIDGET_URL=https://你的助手域名`，重新部署博客后会自动加载悬浮 widget，并在导航栏显示「AI 助手」入口。
 
 ## Vercel 部署
 

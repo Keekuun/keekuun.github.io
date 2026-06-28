@@ -1,16 +1,25 @@
 import { HumanMessage } from "@langchain/core/messages";
 import { getAgentGraph } from "@/lib/agent/graph";
+import { AGENT_RECURSION_LIMIT } from "@/lib/agent/prompt";
 import { serializeMessages } from "@/lib/agent/messages";
 import { hitsToCitations } from "@/lib/citations";
 import { assertThreadAccess, touchThread, upsertThread } from "@/lib/db/threads";
 import { isChatAuthorized } from "@/lib/auth";
 import { getCheckpointerKind } from "@/lib/agent/checkpointer";
+import { isPersistenceRequested } from "@/lib/persistence";
+import { suggestFollowUps } from "@/lib/agent/follow-ups";
+import {
+  getLastHumanText,
+  trimMessagesForRegenerate,
+} from "@/lib/agent/regenerate";
+import { resolveIntent } from "@/lib/agent/llm-router";
+import { INTENT_LABELS } from "@/lib/agent/router";
 import {
   checkAnonymousChatLimit,
   rateLimitHeaders,
 } from "@/lib/rate-limit";
 import { getOrCreateUserId, withSessionCookie } from "@/lib/session";
-import { searchBlog } from "@/lib/vector";
+import { retrieveBlogChunks } from "@/lib/rag/retriever";
 import { isDemoMode } from "@/lib/demo-mode";
 import { createDemoAgentStream } from "@/lib/demo-stream";
 
@@ -69,7 +78,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: { message?: string; threadId?: string };
+  let body: { message?: string; threadId?: string; regenerate?: boolean };
   try {
     body = await request.json();
   } catch {
@@ -83,8 +92,22 @@ export async function POST(request: Request) {
     );
   }
 
-  const message = body.message?.trim();
-  if (!message) {
+  const regenerate = Boolean(body.regenerate);
+  const threadId = body.threadId?.trim() || crypto.randomUUID();
+  let message = body.message?.trim() ?? "";
+
+  if (regenerate) {
+    if (!body.threadId?.trim()) {
+      return withSessionCookie(
+        new Response(JSON.stringify({ error: "重新生成需要 threadId" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }),
+        userId,
+        isNew
+      );
+    }
+  } else if (!message) {
     return withSessionCookie(
       new Response(JSON.stringify({ error: "请提供 message" }), {
         status: 400,
@@ -94,8 +117,6 @@ export async function POST(request: Request) {
       isNew
     );
   }
-
-  const threadId = body.threadId?.trim() || crypto.randomUUID();
 
   const allowed = await assertThreadAccess(userId, threadId);
   if (!allowed) {
@@ -109,10 +130,12 @@ export async function POST(request: Request) {
     );
   }
 
-  await upsertThread(userId, threadId, message);
+  if (!regenerate && isPersistenceRequested(request)) {
+    await upsertThread(userId, threadId, message);
+  }
 
   if (isDemoMode()) {
-    const stream = createDemoAgentStream(threadId, message);
+    const stream = createDemoAgentStream(threadId, message || "重新生成");
     return withSessionCookie(
       new Response(stream, {
         headers: {
@@ -127,21 +150,49 @@ export async function POST(request: Request) {
     );
   }
 
-  const graph = await getAgentGraph();
+  const usePersistence = isPersistenceRequested(request);
+  const graph = await getAgentGraph({ persistence: usePersistence });
   const encoder = new TextEncoder();
   const runName = process.env.LANGCHAIN_PROJECT || "blog-assistant";
+  const checkpointerKind = getCheckpointerKind(usePersistence ? "postgres" : "memory");
+  const graphConfig = {
+    version: "v2" as const,
+    recursionLimit: AGENT_RECURSION_LIMIT,
+    configurable: { thread_id: threadId, userId },
+    runName,
+    metadata: { userId, threadId, regenerate, persistence: usePersistence },
+    tags: ["blog-assistant", checkpointerKind],
+  };
 
   try {
-    const stream = await graph.streamEvents(
-      { messages: [new HumanMessage(message)] },
-      {
-        version: "v2",
-        configurable: { thread_id: threadId, userId },
-        runName,
-        metadata: { userId, threadId },
-        tags: ["blog-assistant", getCheckpointerKind()],
+    if (regenerate) {
+      const snap = await graph.getState({
+        configurable: { thread_id: threadId },
+      });
+      const trimmed = trimMessagesForRegenerate(snap.values.messages ?? []);
+      if (trimmed.length === 0) {
+        return withSessionCookie(
+          new Response(JSON.stringify({ error: "没有可重新生成的消息" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          }),
+          userId,
+          isNew
+        );
       }
-    );
+      message = getLastHumanText(trimmed);
+      await graph.updateState(
+        { configurable: { thread_id: threadId } },
+        { messages: trimmed }
+      );
+    }
+
+    const intent = await resolveIntent(message);
+    const streamInput = regenerate
+      ? null
+      : { messages: [new HumanMessage(message)] };
+
+    const stream = await graph.streamEvents(streamInput, graphConfig);
 
     const bodyStream = new ReadableStream({
       async start(controller) {
@@ -150,7 +201,12 @@ export async function POST(request: Request) {
         };
 
         try {
-          send({ type: "meta", threadId, userId });
+          send({ type: "meta", threadId, userId, regenerate });
+          send({
+            type: "route",
+            intent,
+            label: INTENT_LABELS[intent],
+          });
           for await (const event of stream) {
             if (event.event === "on_chat_model_stream") {
               const chunk = event.data?.chunk?.content;
@@ -171,7 +227,7 @@ export async function POST(request: Request) {
                 const query = extractToolQuery(event.data);
                 if (query) {
                   try {
-                    const hits = await searchBlog(query, 5);
+                    const { hits } = await retrieveBlogChunks(query, { topK: 5 });
                     if (hits.length > 0) {
                       send({ type: "citations", items: hitsToCitations(hits) });
                     }
@@ -182,7 +238,13 @@ export async function POST(request: Request) {
               }
             }
           }
-          await touchThread(threadId);
+          if (usePersistence) {
+            await touchThread(threadId);
+          }
+          send({
+            type: "suggestions",
+            items: suggestFollowUps(intent, message),
+          });
           send({ type: "done" });
         } catch (err) {
           send({
@@ -259,7 +321,8 @@ export async function GET(request: Request) {
       );
     }
 
-    const graph = await getAgentGraph();
+    const usePersistence = isPersistenceRequested(request);
+    const graph = await getAgentGraph({ persistence: usePersistence });
     const snap = await graph.getState({
       configurable: { thread_id: threadId },
     });

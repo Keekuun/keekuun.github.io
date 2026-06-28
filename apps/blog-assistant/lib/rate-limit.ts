@@ -1,6 +1,6 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
-import { getAnonymousDailyLimit, isPasswordGateEnabled } from "./auth";
+import { getAnonymousDailyLimit, isChatAuthorized, isPasswordGateEnabled } from "./auth";
 
 export type RateLimitResult = {
   allowed: boolean;
@@ -64,6 +64,11 @@ function memoryRateLimit(ip: string, limit: number): RateLimitResult {
 export async function checkAnonymousChatLimit(
   request: Request
 ): Promise<RateLimitResult> {
+  // 已填写正确访问密码：不限流
+  if (isChatAuthorized(request)) {
+    return { allowed: true, remaining: -1, limit: -1 };
+  }
+
   const limit = getAnonymousDailyLimit();
   if (!isPasswordGateEnabled() || limit < 0) {
     return { allowed: true, remaining: -1, limit: -1 };

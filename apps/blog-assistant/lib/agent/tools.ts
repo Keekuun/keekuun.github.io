@@ -1,10 +1,11 @@
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
-import { formatHitsForTool, searchBlog } from "@/lib/vector";
+import { formatHitsForTool } from "@/lib/vector";
+import { retrieveBlogChunks } from "@/lib/rag/retriever";
 
 export const searchBlogTool = tool(
   async ({ query }) => {
-    const hits = await searchBlog(query, 5);
+    const { hits } = await retrieveBlogChunks(query, { topK: 5, rerank: true });
     if (hits.length === 0) {
       return "未在博客向量库中找到相关内容。请确认已运行索引脚本（pnpm rag:index）。";
     }

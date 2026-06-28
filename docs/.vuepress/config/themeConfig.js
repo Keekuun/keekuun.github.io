@@ -75,6 +75,12 @@ module.exports = {
             storageKey: 'keekuun-blog-ai-summarize-float',
         },
     },
+    // 博客 AI 助手悬浮 widget（部署 blog-assistant 后设 BLOG_ASSISTANT_WIDGET_URL）
+    blogAssistant: {
+        enabled: Boolean(process.env.BLOG_ASSISTANT_WIDGET_URL),
+        baseUrl: (process.env.BLOG_ASSISTANT_WIDGET_URL || '').replace(/\/$/, ''),
+        position: 'right',
+    },
     lastUpdated: '上次更新',
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
     repo: 'https://github.com/Keekuun/keekuun.github.io',

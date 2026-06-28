@@ -1,5 +1,7 @@
 import { MemorySaver } from "@langchain/langgraph";
-import { isDatabaseEnabled } from "@/lib/db/pool";
+import { isDatabaseConfigured } from "@/lib/db/pool";
+
+export type CheckpointerMode = "memory" | "postgres";
 
 let memorySaver: MemorySaver | undefined;
 let postgresSaver: unknown;
@@ -29,13 +31,24 @@ async function getPostgresCheckpointer() {
   return postgresInit;
 }
 
-export async function resolveCheckpointer() {
-  if (isDatabaseEnabled()) {
+export async function resolveCheckpointer(mode: CheckpointerMode = "memory") {
+  if (mode === "postgres" && isDatabaseConfigured()) {
     return getPostgresCheckpointer();
   }
   return getMemoryCheckpointer();
 }
 
-export function getCheckpointerKind(): "postgres" | "memory" {
-  return isDatabaseEnabled() ? "postgres" : "memory";
+export function getCheckpointerKind(mode: CheckpointerMode = "memory"): CheckpointerMode {
+  return mode === "postgres" && isDatabaseConfigured() ? "postgres" : "memory";
+}
+
+/** 删除 thread 的全部 checkpoint（配合会话删除，避免 Postgres 膨胀） */
+export async function deleteThreadCheckpoint(threadId: string): Promise<void> {
+  if (!isDatabaseConfigured()) return;
+  const saver = (await getPostgresCheckpointer()) as {
+    deleteThread?: (id: string) => Promise<void>;
+  };
+  if (typeof saver.deleteThread === "function") {
+    await saver.deleteThread(threadId);
+  }
 }

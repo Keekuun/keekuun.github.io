@@ -1,9 +1,20 @@
+const blogAssistantUrl = (process.env.BLOG_ASSISTANT_WIDGET_URL || '').replace(/\/$/, '');
+
 module.exports = [
   {
     text: 'AI 检索',
     icon: 'reco-search',
     link: 'https://keekuun-blog-search.vercel.app/',
   },
+  ...(blogAssistantUrl
+    ? [
+        {
+          text: 'AI 助手',
+          icon: 'reco-message',
+          link: blogAssistantUrl,
+        },
+      ]
+    : []),
   {
     text: '前端',
     icon: 'reco-api',

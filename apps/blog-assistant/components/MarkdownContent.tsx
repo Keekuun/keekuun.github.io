@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -8,7 +9,10 @@ type Props = {
   variant?: "default" | "compact";
 };
 
-export function MarkdownContent({ content, variant = "default" }: Props) {
+export const MarkdownContent = memo(function MarkdownContent({
+  content,
+  variant = "default",
+}: Props) {
   if (!content?.trim()) return null;
 
   return (
@@ -23,10 +27,15 @@ export function MarkdownContent({ content, variant = "default" }: Props) {
               {children}
             </a>
           ),
+          table: ({ children }) => (
+            <div className="md-table-wrap">
+              <table>{children}</table>
+            </div>
+          ),
         }}
       >
         {content}
       </ReactMarkdown>
     </div>
   );
-}
+});

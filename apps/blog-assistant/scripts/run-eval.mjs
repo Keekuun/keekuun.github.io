@@ -28,6 +28,7 @@ async function consumeSse(res) {
   let buf = "";
   let text = "";
   const tools = [];
+  const citationPaths = [];
 
   while (true) {
     const { done, value } = await reader.read();
@@ -40,9 +41,15 @@ async function consumeSse(res) {
       const evt = JSON.parse(line.slice(6));
       if (evt.type === "token") text += evt.content;
       if (evt.type === "tool_start") tools.push(evt.name);
+      if (evt.type === "citations" && Array.isArray(evt.items)) {
+        for (const item of evt.items) {
+          if (item?.path) citationPaths.push(String(item.path));
+          if (item?.url) citationPaths.push(String(item.url));
+        }
+      }
     }
   }
-  return { text, tools };
+  return { text, tools, citationPaths };
 }
 
 async function runCase(item) {
@@ -66,6 +73,7 @@ async function runCase(item) {
 
   let answer = "";
   let tools = [];
+  let citationPaths = [];
 
   if (res.headers.get("content-type")?.includes("json")) {
     const data = await res.json();
@@ -74,6 +82,7 @@ async function runCase(item) {
     const out = await consumeSse(res);
     answer = out.text;
     tools = out.tools;
+    citationPaths = out.citationPaths;
   }
 
   const lower = answer.toLowerCase();
@@ -88,6 +97,19 @@ async function runCase(item) {
       reason: `缺少关键词: ${missing.join(", ")}`,
       answer: answer.slice(0, 200),
     };
+  }
+
+  if (item.expect_source) {
+    const needle = String(item.expect_source).toLowerCase();
+    const haystack = [...citationPaths, answer].join("\n").toLowerCase();
+    if (!haystack.includes(needle)) {
+      return {
+        id: item.id,
+        pass: false,
+        reason: `未命中来源: ${item.expect_source}`,
+        answer: answer.slice(0, 200),
+      };
+    }
   }
 
   if (item.should_call_tool && !tools.includes(item.should_call_tool)) {

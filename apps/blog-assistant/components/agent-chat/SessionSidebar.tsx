@@ -15,6 +15,8 @@ type Props = {
   onDelete: (threadId: string) => void;
   collapsed?: boolean;
   onToggle?: () => void;
+  creating?: boolean;
+  loadingThreadId?: string | null;
 };
 
 function formatTime(iso: string): string {
@@ -40,6 +42,8 @@ export function SessionSidebar({
   onDelete,
   collapsed,
   onToggle,
+  creating = false,
+  loadingThreadId = null,
 }: Props) {
   if (collapsed) {
     return (
@@ -59,8 +63,14 @@ export function SessionSidebar({
       <div className="session-sidebar-head">
         <h2 className="session-sidebar-title">会话</h2>
         <div className="session-sidebar-actions">
-          <button type="button" className="btn-ghost btn-sm" onClick={onNew}>
-            新建
+          <button
+            type="button"
+            className={`btn-ghost btn-sm${creating ? " btn-ghost--busy" : ""}`}
+            onClick={onNew}
+            disabled={creating}
+            aria-busy={creating}
+          >
+            {creating ? "创建中…" : "新建"}
           </button>
           {onToggle && (
             <button type="button" className="btn-ghost btn-sm" onClick={onToggle}>
@@ -79,14 +89,18 @@ export function SessionSidebar({
         {sessions.map((session) => (
           <li
             key={session.threadId}
-            className={`session-item ${activeThreadId === session.threadId ? "active" : ""}`}
+            className={`session-item ${activeThreadId === session.threadId ? "active" : ""}${loadingThreadId === session.threadId ? " session-item--loading" : ""}`}
           >
             <button
               type="button"
               className="session-item-main"
               onClick={() => onSelect(session.threadId)}
+              disabled={loadingThreadId === session.threadId}
+              aria-busy={loadingThreadId === session.threadId}
             >
-              <span className="session-item-title">{session.title}</span>
+              <span className="session-item-title">
+                {loadingThreadId === session.threadId ? "加载中…" : session.title}
+              </span>
               <span className="session-item-time">
                 {formatTime(session.updatedAt)}
               </span>

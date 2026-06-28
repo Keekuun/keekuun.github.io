@@ -39,6 +39,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build VuePress site
+        env:
+          BLOG_ASSISTANT_WIDGET_URL: ${{ vars.BLOG_ASSISTANT_WIDGET_URL }}
         run: export NODE_OPTIONS=--max_old_space_size=10240 && pnpm docs:build
 
       - name: Verify build assets

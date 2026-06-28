@@ -17,6 +17,11 @@ export function getPool(): pg.Pool {
   return pool;
 }
 
-export function isDatabaseEnabled(): boolean {
+export function isDatabaseConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL?.trim());
+}
+
+/** @deprecated 使用 isDatabaseConfigured；是否写入 DB 还取决于请求头 */
+export function isDatabaseEnabled(): boolean {
+  return isDatabaseConfigured();
 }

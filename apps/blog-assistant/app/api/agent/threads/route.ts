@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import { deleteThreadCheckpoint } from "@/lib/agent/checkpointer";
 import { deleteThread, listThreads } from "@/lib/db/threads";
-import { isDatabaseEnabled } from "@/lib/db/pool";
 import { isChatAuthorized } from "@/lib/auth";
+import { isPersistenceRequested } from "@/lib/persistence";
 import { getOrCreateUserId, withSessionCookie } from "@/lib/session";
 
 export const runtime = "nodejs";
@@ -20,12 +21,23 @@ export async function GET(request: Request) {
     );
   }
 
+  if (!isPersistenceRequested(request)) {
+    return withSessionCookie(
+      NextResponse.json({
+        threads: [],
+        persistence: "local",
+      }),
+      userId,
+      isNew
+    );
+  }
+
   const threads = await listThreads(userId);
 
   return withSessionCookie(
     NextResponse.json({
       threads,
-      persistence: isDatabaseEnabled() ? "postgres" : "local",
+      persistence: "postgres",
     }),
     userId,
     isNew
@@ -63,7 +75,22 @@ export async function DELETE(request: Request) {
     );
   }
 
+  if (!isPersistenceRequested(request)) {
+    return withSessionCookie(
+      NextResponse.json({ deleted: false }),
+      userId,
+      isNew
+    );
+  }
+
   const deleted = await deleteThread(userId, threadId);
+  if (deleted) {
+    try {
+      await deleteThreadCheckpoint(threadId);
+    } catch {
+      /* checkpoint 清理失败不影响会话列表 */
+    }
+  }
 
   return withSessionCookie(
     NextResponse.json({ deleted }),

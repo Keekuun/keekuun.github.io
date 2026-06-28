@@ -1,4 +1,6 @@
 import type { Citation } from "@/lib/citations";
+import { classifyIntent, INTENT_LABELS } from "@/lib/agent/router";
+import { suggestFollowUps } from "@/lib/agent/follow-ups";
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -47,7 +49,13 @@ export function createDemoAgentStream(
         );
       };
       try {
+        const intent = classifyIntent(message);
         send({ type: "meta", threadId, demo: true });
+        send({
+          type: "route",
+          intent,
+          label: INTENT_LABELS[intent],
+        });
         await sleep(200);
         send({ type: "tool_start", name: "search_blog" });
         await sleep(300);
@@ -58,6 +66,10 @@ export function createDemoAgentStream(
           send({ type: "token", content });
           await sleep(10);
         }
+        send({
+          type: "suggestions",
+          items: suggestFollowUps(intent, message),
+        });
         send({ type: "done" });
       } finally {
         controller.close();
@@ -66,11 +78,15 @@ export function createDemoAgentStream(
   });
 }
 
-export function createDemoRagStream(query: string): ReadableStream<Uint8Array> {
+export function createDemoRagStream(
+  query: string,
+  options?: { regenerate?: boolean; multiTurn?: boolean }
+): ReadableStream<Uint8Array> {
   const encoder = new TextEncoder();
   const citations = demoCitations();
+  const intent = classifyIntent(query);
   const reply =
-    `【演示模式 · RAG】关于「${query}」：\n\n` +
+    `【演示模式 · RAG${options?.regenerate ? " · 重新生成" : ""}】关于「${query}」：\n\n` +
     "这是固定检索链的模拟流式回答。配置 API Key 与向量库后将检索真实博客段落。";
 
   return new ReadableStream({
@@ -81,12 +97,27 @@ export function createDemoRagStream(query: string): ReadableStream<Uint8Array> {
         );
       };
       try {
+        send({ type: "route", intent, label: "固定检索链" });
+        if (options?.regenerate) {
+          send({ type: "meta", regenerate: true });
+        }
+        send({
+          type: "retrieve",
+          hitCount: citations.length,
+          reranked: true,
+          usedHyde: Boolean(options?.multiTurn),
+          multiTurn: Boolean(options?.multiTurn),
+        });
         send({ type: "citations", items: citations });
         await sleep(100);
         for (const content of reply) {
           send({ type: "token", content });
           await sleep(10);
         }
+        send({
+          type: "suggestions",
+          items: suggestFollowUps(intent, query),
+        });
         send({ type: "done" });
       } finally {
         controller.close();

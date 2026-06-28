@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start --port 3010",
     "index:blog": "node scripts/index-blog.mjs",
-    "eval": "node scripts/run-eval.mjs"
+    "eval": "node scripts/run-eval.mjs",
+    "setup-env": "node scripts/setup-env.mjs",
+    "check-env": "node scripts/check-env.mjs"
   },
   "dependencies": {
     "@langchain/core": "^0.3.79",
@@ -17,6 +19,7 @@
     "@langchain/langgraph-checkpoint": "^0.0.18",
     "@langchain/langgraph-checkpoint-postgres": "^0.1.2",
     "@langchain/openai": "^0.6.16",
+    "@tanstack/react-virtual": "^3.14.3",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
     "@upstash/vector": "^1.2.3",

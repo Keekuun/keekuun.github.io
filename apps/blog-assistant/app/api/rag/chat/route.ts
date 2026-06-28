@@ -4,12 +4,30 @@ import {
   checkAnonymousChatLimit,
   rateLimitHeaders,
 } from "@/lib/rate-limit";
-import { searchBlog, streamAnswerWithContext } from "@/lib/vector";
 import { isDemoMode } from "@/lib/demo-mode";
 import { createDemoRagStream } from "@/lib/demo-stream";
+import { streamRagPipeline } from "@/lib/rag/stream";
+import {
+  trimRagHistory,
+  type RagHistoryMessage,
+} from "@/lib/rag/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
+
+function parseHistory(raw: unknown): RagHistoryMessage[] {
+  if (!Array.isArray(raw)) return [];
+  const parsed: RagHistoryMessage[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const role = (item as { role?: unknown }).role;
+    const content = (item as { content?: unknown }).content;
+    if (role !== "user" && role !== "assistant") continue;
+    if (typeof content !== "string" || !content.trim()) continue;
+    parsed.push({ role, content: content.trim() });
+  }
+  return trimRagHistory(parsed);
+}
 
 export async function POST(request: Request) {
   if (!isChatAuthorized(request)) {
@@ -27,7 +45,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: { query?: string };
+  let body: { query?: string; regenerate?: boolean; history?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -39,9 +57,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "请提供 query" }, { status: 400 });
   }
 
+  const history = parseHistory(body.history);
+
   try {
     if (isDemoMode()) {
-      const stream = createDemoRagStream(query);
+      const stream = createDemoRagStream(query, {
+        regenerate: Boolean(body.regenerate),
+        multiTurn: history.length > 0,
+      });
       return new Response(stream, {
         headers: {
           "Content-Type": "text/event-stream",
@@ -52,16 +75,11 @@ export async function POST(request: Request) {
       });
     }
 
-    const hits = await searchBlog(query, 6);
-    if (hits.length === 0) {
-      return NextResponse.json({
-        query,
-        hits: [],
-        answer: "没有在知识库中找到相关内容。请先确认已运行索引脚本。",
-      });
-    }
+    const stream = await streamRagPipeline(query, {
+      regenerate: Boolean(body.regenerate),
+      history,
+    });
 
-    const stream = await streamAnswerWithContext(query, hits);
     return new Response(stream, {
       headers: {
         "Content-Type": "text/event-stream",
