@@ -6,6 +6,7 @@
 > 博客首页：https://blog.zkkysqs.top/  
 > AI 笔记站：https://ai.zkkysqs.top/  
 > 3D 笔记站：https://3d.zkkysqs.top/  
+> 主站旧 `/ai/*`、`/3d/*` 链接需在 Cloudflare 配 301，见 [infra/cloudflare/blog-migration-redirects.md](infra/cloudflare/blog-migration-redirects.md)。  
 > 本地开发：`pnpm install` → `pnpm docs:dev`；构建：`pnpm docs:build`。
 
 ### 博客知识库检索（RAG · Upstash + DeepSeek）
