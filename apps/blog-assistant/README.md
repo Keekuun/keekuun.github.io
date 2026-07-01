@@ -1,6 +1,6 @@
 # 博客 AI 助手（blog-assistant）
 
-[19 收官实战](../../docs/ai/19-blog-ai-assistant-capstone.md) 配套应用：LangGraph ReAct Agent + 本站博客向量检索 + SSE 流式 UI。
+[19 收官实战](https://ai.zkkysqs.top/19-blog-ai-assistant-capstone) 配套应用：LangGraph ReAct Agent + 本站博客向量检索 + SSE 流式 UI。
 
 ## 能力
 

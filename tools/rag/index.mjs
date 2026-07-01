@@ -48,11 +48,19 @@ function requireEnv(name) {
 }
 
 async function collectMarkdownFiles() {
-  return fg(["docs/**/*.md", "!docs/.vuepress/**"], {
-    cwd: REPO_ROOT,
-    absolute: true,
-    onlyFiles: true,
-  });
+  return fg(
+    [
+      "docs/**/*.md",
+      "!docs/.vuepress/**",
+      "!docs/ai/**",
+      "!docs/3d/**",
+    ],
+    {
+      cwd: REPO_ROOT,
+      absolute: true,
+      onlyFiles: true,
+    }
+  );
 }
 
 function resolveAbsolutePaths(relativePaths) {

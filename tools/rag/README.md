@@ -1,6 +1,6 @@
 # 博客 RAG 索引（Upstash Vector）
 
-将 `docs/**/*.md` 分块、向量化并写入 Upstash Vector，供 `apps/kb-search` 检索。
+将 `docs/**/*.md` 分块、向量化并写入 Upstash Vector，供 `apps/kb-search` 检索。已迁至独立站点的 `docs/ai/**`、`docs/3d/**` 不在索引范围内。
 
 ## AI 服务说明
 

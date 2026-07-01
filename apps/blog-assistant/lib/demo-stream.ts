@@ -7,22 +7,22 @@ function sleep(ms: number) {
 }
 
 function demoCitations(): Citation[] {
-  const base =
-    process.env.NEXT_PUBLIC_BLOG_BASE_URL || "https://blog.zkkysqs.top";
+  const aiLab =
+    process.env.NEXT_PUBLIC_AI_LAB_URL || "https://ai.zkkysqs.top";
   return [
     {
       index: 1,
       title: "RAG 进阶：生产级优化",
-      url: `${base}/ai/11-advanced-rag-patterns.html`,
-      path: "docs/ai/11-advanced-rag-patterns.md",
+      url: `${aiLab}/11-advanced-rag-patterns`,
+      path: "ai-lab/11-advanced-rag-patterns",
       heading: "",
       preview: "（演示）Agentic RAG、HyDE、重排序…",
     },
     {
       index: 2,
       title: "收官实战：博客 AI 助手",
-      url: `${base}/ai/19-blog-ai-assistant-capstone.html`,
-      path: "docs/ai/19-blog-ai-assistant-capstone.md",
+      url: `${aiLab}/19-blog-ai-assistant-capstone`,
+      path: "ai-lab/19-blog-ai-assistant-capstone",
       heading: "",
       preview: "（演示）LangGraph + RAG + SSE UI…",
     },
