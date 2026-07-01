@@ -1,5 +1,6 @@
 const blogAssistantUrl = (process.env.BLOG_ASSISTANT_WIDGET_URL || '').replace(/\/$/, '');
 const aiLabUrl = 'https://ai.zkkysqs.top';
+const threeDLabUrl = 'https://3d.zkkysqs.top';
 
 module.exports = [
   {
@@ -11,6 +12,11 @@ module.exports = [
     text: 'AI Lab',
     icon: 'reco-blog',
     link: aiLabUrl,
+  },
+  {
+    text: '3D Lab',
+    icon: 'reco-api',
+    link: threeDLabUrl,
   },
   ...(blogAssistantUrl
     ? [
