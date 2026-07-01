@@ -4,6 +4,7 @@
 [![Open in GitHub](https://img.shields.io/github/last-commit/Keekuun/keekuun.github.io)](https://github.com/Keekuun/keekuun.github.io)
 
 > 博客首页：https://blog.zkkysqs.top/  
+> AI 笔记站：https://ai.zkkysqs.top/  
 > 本地开发：`pnpm install` → `pnpm docs:dev`；构建：`pnpm docs:build`。
 
 ### 博客知识库检索（RAG · Upstash + DeepSeek）

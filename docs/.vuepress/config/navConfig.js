@@ -1,10 +1,16 @@
 const blogAssistantUrl = (process.env.BLOG_ASSISTANT_WIDGET_URL || '').replace(/\/$/, '');
+const aiLabUrl = 'https://ai.zkkysqs.top';
 
 module.exports = [
   {
     text: 'AI 检索',
     icon: 'reco-search',
     link: 'https://keekuun-blog-search.vercel.app/',
+  },
+  {
+    text: 'AI Lab',
+    icon: 'reco-blog',
+    link: aiLabUrl,
   },
   ...(blogAssistantUrl
     ? [
@@ -80,20 +86,21 @@ module.exports = [
   {
     text: 'AI',
     icon: 'reco-message',
-    link: '/categories/AI/',
+    link: aiLabUrl,
     items: [
+      { text: 'AI Lab 首页', link: aiLabUrl },
       { text: 'Hello Agents', link: 'https://hello-agents.datawhale.cc/' },
-      { text: 'GitHub AI 库', link: '/ai/github-ai.html' },
-      { text: 'Skills 入门指南', link: '/ai/skills-guide.html' },
+      { text: 'GitHub AI 库', link: `${aiLabUrl}/github-ai` },
+      { text: 'Skills 入门指南', link: `${aiLabUrl}/skills-guide` },
       {
         text: '框架深挖',
         items: [
-          { text: 'AI 系列总索引', link: '/ai/README.html' },
-          { text: 'Mastra 生态速览 (27)', link: '/ai/27-mastra-typescript-agent-framework.html' },
-          { text: 'LangChain.js 专系列', link: '/ai/langchain/' },
-          { text: 'LangGraph.js 专系列', link: '/ai/langgraph/' },
-          { text: 'Mastra.js 专系列', link: '/ai/mastra/' },
-          { text: 'Agent 学习路线图', link: '/ai/ai-agent-learning-roadmap.html' },
+          { text: 'AI 系列总索引', link: aiLabUrl },
+          { text: 'Mastra 生态速览 (27)', link: `${aiLabUrl}/27-mastra-typescript-agent-framework` },
+          { text: 'LangChain.js 专系列', link: `${aiLabUrl}/langchain/` },
+          { text: 'LangGraph.js 专系列', link: `${aiLabUrl}/langgraph/` },
+          { text: 'Mastra.js 专系列', link: `${aiLabUrl}/mastra/` },
+          { text: 'Agent 学习路线图', link: `${aiLabUrl}/ai-agent-learning-roadmap` },
         ],
       },
     ],
